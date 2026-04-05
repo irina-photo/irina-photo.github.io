@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Музей Ирины · Анимация света</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0800;overflow:hidden;font-family:Georgia,serif;transition:background 0.5s ease}
+#hall{position:absolute;top:0;left:0;display:flex;height:100vh;transition:transform 0.7s cubic-bezier(.4,0,.2,1)}
+.wall{width:100vw;height:100vh;flex-shrink:0;position:relative;display:flex;align-items:center;justify-content:center;gap:30px;flex-wrap:wrap;padding:50px}
+.wall-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;transition:opacity 0.5s ease;filter:brightness(0.5) contrast(1.1)}
+.wall-floor{position:absolute;bottom:0;left:0;width:100%;height:28%;background:linear-gradient(to bottom,rgba(0,0,0,0.3),rgba(0,0,0,0.5));transition:background 0.5s ease}
+.strip{position:absolute;top:60%;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(200,152,74,0.3),rgba(200,152,74,0.5),rgba(200,152,74,0.3),transparent);z-index:1}
+.fw{position:relative;cursor:pointer;transition:all 0.4s;z-index:2;margin:10px}
+.fw:hover{transform:scale(1.05) translateY(-2px)}
+.fo{padding:15px;background:rgba(245,240,232,0.95);box-shadow:
+  0 0 0 2px #b8962a,
+  0 0 0 4px #e8c84a,
+  0 0 0 6px #8a6a1a,
+  0 25px 50px rgba(0,0,0,0.9),
+  0 15px 30px rgba(0,0,0,0.7),
+  0 8px 16px rgba(0,0,0,0.5),
+  -2px -2px 8px rgba(0,0,0,0.3),
+  2px 2px 8px rgba(0,0,0,0.3),
+  inset 0 0 25px rgba(200,152,74,0.15),
+  inset 0 0 15px rgba(255,215,0,0.1);
+border-radius:2px;transform:translateZ(10px)}
+.fo img{display:block;object-fit:cover;width:180px;height:135px;border-radius:1px;filter:brightness(1.05) contrast(1.02)}
+.pl{position:absolute;bottom:-25px;left:50%;transform:translateX(-50%);background:rgba(42,31,10,0.85);border:1px solid #6B4F10;padding:3px 12px;white-space:nowrap;font-size:9px;letter-spacing:1px;color:#c8a84a;font-style:italic;border-radius:3px;text-shadow:1px 1px 2px rgba(0,0,0,0.6)}
+/* АНИМИРОВАННЫЕ СВЕТИЛЬНИКИ */
+.corner-light{position:fixed;z-index:5;transition:all 0.3s ease}
+/* САМИ СВЕТИЛЬНИКИ */
+.corner-light img{position:relative;object-fit:contain;filter:brightness(1.4) contrast(1.3) drop-shadow(0 4px 12px rgba(0,0,0,0.8));transition:all 0.3s ease;z-index:2}
+.corner-light:hover img{transform:scale(1.1);filter:brightness(1.5) contrast(1.4) drop-shadow(0 6px 16px rgba(0,0,0,0.9))}
+/* РАСПОЛОЖЕНИЕ */
+#light-top-right{top:20px;right:80px}
+#light-top-left{top:20px;left:20px}
+#light-bottom-left{bottom:20px;left:20px}
+#light-bottom-right{bottom:20px;right:80px}
+/* РАЗМЕРЫ */
+#light-top-right img, #light-top-left img{width:80px;height:120px}
+#light-bottom-left img, #light-bottom-right img{width:100px;height:150px}
+/* ПРАВЫЙ ВЕРХНИЙ ФОНАРЬ - РАЗВЕРНУТ ВЛЕВО */
+#light-top-right img{transform:scaleX(-1)}
+#light-top-right:hover img{transform:scaleX(-1) scale(1.1)}
+/* АККУРАТНЫЕ СВЕТОВЫЕ ЛУЧИ */
+.light-beam{position:fixed;background:radial-gradient(ellipse,rgba(255,255,255,0.2),rgba(255,255,255,0.08),rgba(255,255,255,0),transparent);filter:blur(30px);opacity:0.7;z-index:3;pointer-events:none}
+#beam-top-right{top:50px;right:110px;width:320px;height:400px}
+#beam-top-left{top:50px;left:50px;width:320px;height:400px}
+#beam-bottom-left{bottom:50px;left:50px;width:360px;height:450px}
+#beam-bottom-right{bottom:50px;right:110px;width:360px;height:450px}
+/* АНИМАЦИЯ СВЕТА НА СТЕНЫ - НОВАЯ! */
+.wall-light{position:fixed;z-index:4;pointer-events:none;opacity:0.6}
+/* Свет на стены от верхних фонарей */
+#wall-light-top-right{top:0;right:0;width:300px;height:400px;background:linear-gradient(135deg,rgba(255,255,255,0.15),rgba(255,255,255,0.05),transparent);filter:blur(40px)}
+#wall-light-top-left{top:0;left:0;width:300px;height:400px;background:linear-gradient(225deg,rgba(255,255,255,0.15),rgba(255,255,255,0.05),transparent);filter:blur(40px)}
+/* Свет на стены от нижних фонарей */
+#wall-light-bottom-left{bottom:0;left:0;width:350px;height:450px;background:linear-gradient(315deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04),transparent);filter:blur(45px)}
+#wall-light-bottom-right{bottom:0;right:0;width:350px;height:450px;background:linear-gradient(45deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04),transparent);filter:blur(45px)}
+/* АНИМАЦИЯ МЕРЦАНИЯ ФОНАРЕЙ */
+@keyframes light-glow{
+  0%,100%{opacity:0.7}
+  50%{opacity:1}
+}
+.corner-light{animation:light-glow 4s ease-in-out infinite}
+/* АНИМАЦИЯ ПУЛЬСАЦИИ СВЕТА НА СТЕНЫ */
+@keyframes wall-light-pulse{
+  0%,100%{opacity:0.4;transform:scale(1)}
+  25%{opacity:0.6;transform:scale(1.05)}
+  50%{opacity:0.8;transform:scale(1.1)}
+  75%{opacity:0.6;transform:scale(1.05)}
+}
+.wall-light{animation:wall-light-pulse 6s ease-in-out infinite}
+/* Разная скорость анимации для каждого фонаря */
+#wall-light-top-right{animation-delay:0s}
+#wall-light-top-left{animation-delay:1.5s}
+#wall-light-bottom-left{animation-delay:3s}
+#wall-light-bottom-right{animation-delay:4.5s}
+#nav{display:none}
+.gal-arrow{position:fixed;top:50vh;transform:translateY(-50%);z-index:120;font-size:58px;line-height:1;color:rgba(232,213,160,0.78);cursor:pointer;user-select:none;padding:10px 8px;opacity:0.26;transition:opacity 0.2s,transform 0.2s;text-shadow:0 10px 30px rgba(0,0,0,0.65)}
+.gal-arrow:hover{opacity:0.85;transform:translateY(-50%) scale(1.06)}
+#gal-prev{left:2px}
+#gal-next{right:2px}
+@media (max-width: 700px), (max-height: 520px){
+  .gal-arrow{font-size:50px;opacity:0.22;padding:12px 6px}
+  #gal-prev{left:0}
+  #gal-next{right:0}
+}
+#info{position:fixed;top:20px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:4px;opacity:0.5;color:#e8d5a0;text-transform:uppercase;text-shadow:2px 2px 4px rgba(0,0,0,0.8)}
+#title{position:fixed;top:16px;left:24px;font-size:13px;letter-spacing:2px;opacity:0.7;font-style:italic;color:#e8d5a0;text-shadow:2px 2px 4px rgba(0,0,0,0.8)}
+#thumbs-btn{position:fixed;right:102px;bottom:26px;z-index:2000;background:rgba(200,160,40,0.18);border:1px solid rgba(200,160,40,0.42);color:rgba(255,245,210,0.94);border-radius:16px;padding:10px 14px;font-family:Georgia;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(8px);box-shadow:0 18px 46px rgba(0,0,0,0.62)}
+#thumbs-btn:hover{background:rgba(200,160,40,0.24)}
+@media (max-width: 700px), (max-height: 520px){
+  #thumbs-btn{right:82px;bottom:18px;padding:9px 12px}
+}
+#hint{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);font-size:10px;opacity:0.4;letter-spacing:3px;color:#e8d5a0;text-shadow:2px 2px 4px rgba(0,0,0,0.8)}
+#lb{display:none;position:fixed;inset:0;background-image:url('rooms/lightbox_wall.jpg');background-size:cover;background-position:center calc(100% + 28px);background-repeat:no-repeat;background-color:#2b2114;z-index:999;align-items:center;justify-content:center;flex-direction:column}
+#lb::before{content:'';position:absolute;inset:0;z-index:0;background-image:url('rooms/lightbox_wall.jpg');background-size:contain;background-position:center bottom;background-repeat:no-repeat;opacity:1;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,1) 18%,rgba(0,0,0,1) 82%,rgba(0,0,0,0) 100%);mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,1) 18%,rgba(0,0,0,1) 82%,rgba(0,0,0,0) 100%)}
+#lb::after{content:'';position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(0,0,0,0.10),rgba(0,0,0,0.10)),repeating-linear-gradient(135deg,rgba(255,255,255,0.014) 0px,rgba(255,255,255,0.014) 1px,transparent 1px,transparent 9px);background-size:cover,auto;opacity:1;pointer-events:none}
+#lb>*{position:relative;z-index:1}
+#lb.on{display:flex}
+#lb.wall-template #lbt{display:none}
+#lb.wall-template #lbplate{display:none}
+#lb.wall-template .lbf{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);padding:18px;background:rgba(245,240,232,0.98);border-radius:3px;box-shadow:0 0 0 2px #b8962a,0 0 0 5px #e8c84a,0 0 0 8px #8a6a1a,0 34px 110px rgba(0,0,0,0.72)}
+#lb.wall-template #lbi{max-width:76vw;max-height:55vh;object-fit:contain;display:block;border-radius:2px;filter:brightness(1.05) contrast(1.02);box-shadow:none}
+#lb.zoom.wall-template .lbf{padding:0;background:transparent;box-shadow:none}
+#lb.zoom.wall-template #lbi{width:96vw !important;height:auto !important;max-width:none !important;max-height:86vh !important;filter:brightness(1.02) contrast(1.01)}
+#lb.wall-template .lbf{cursor:zoom-in}
+#lb.zoom.wall-template .lbf{cursor:zoom-out}
+#lbzprev,#lbznext{position:fixed;top:50%;transform:translateY(-50%);z-index:7;font-size:60px;line-height:1;color:rgba(255,245,210,0.95);cursor:pointer;user-select:none;opacity:0;pointer-events:none;padding:10px 12px;text-shadow:0 10px 30px rgba(0,0,0,0.85)}
+#lbzprev{left:10px}
+#lbznext{right:10px}
+#lb.wall-template #lbzprev,#lb.wall-template #lbznext{display:block}
+#lb.wall-template.show-arrows #lbzprev,#lb.wall-template.show-arrows #lbznext{opacity:0.92;pointer-events:auto}
+@media (max-width: 700px), (max-height: 520px){
+  #lbzprev,#lbznext{font-size:54px;padding:12px 10px}
+  #lbzprev{left:6px}
+  #lbznext{right:6px}
+}
+#lbside-left,#lbside-right{position:fixed;top:0;bottom:0;width:22vw;pointer-events:auto;cursor:pointer;z-index:2;opacity:1}
+#lbside-left{left:0;background:transparent}
+#lbside-right{right:0;background:transparent}
+#lb.wall-template #lbside-left,#lb.wall-template #lbside-right{display:block}
+#lb:not(.wall-template) #lbside-left,#lb:not(.wall-template) #lbside-right{display:none}
+#lbt{display:none}
+#lbplate{margin-top:18px;text-align:center;display:inline-block;padding:10px 16px 9px;border-radius:10px;border:1px solid rgba(255,224,170,0.20);background-image:linear-gradient(180deg,rgba(140,92,46,0.92),rgba(92,54,22,0.92)),repeating-linear-gradient(135deg,rgba(255,255,255,0.045) 0px,rgba(255,255,255,0.045) 1px,transparent 1px,transparent 10px);box-shadow:0 16px 38px rgba(0,0,0,0.62),inset 0 1px 0 rgba(255,255,255,0.12),inset 0 -1px 0 rgba(0,0,0,0.35)}
+#lbc{margin:0;font-size:14px;font-style:italic;letter-spacing:0.8px;color:rgba(255,245,210,0.95);text-shadow:0 2px 10px rgba(0,0,0,0.75)}
+#lba{margin-top:6px;font-size:10px;opacity:0.92;letter-spacing:2.5px;color:rgba(232,213,160,0.90);text-shadow:0 2px 10px rgba(0,0,0,0.65)}
+#lbplate-thumbs{margin-top:10px;background:rgba(0,0,0,0.16);border:1px solid rgba(232,213,160,0.22);color:rgba(255,245,210,0.92);border-radius:12px;padding:6px 12px;font-family:Georgia;font-size:11px;cursor:pointer;white-space:nowrap;letter-spacing:2px;text-transform:uppercase}
+#lbplate-thumbs:hover{background:rgba(0,0,0,0.26)}
+#lbjump{position:fixed;right:22px;bottom:142px;top:auto;z-index:2001;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:14px;background-image:linear-gradient(180deg,rgba(140,92,46,0.92),rgba(92,54,22,0.92)),repeating-linear-gradient(135deg,rgba(255,255,255,0.045) 0px,rgba(255,255,255,0.045) 1px,transparent 1px,transparent 10px);border:1px solid rgba(255,224,170,0.20);box-shadow:0 16px 38px rgba(0,0,0,0.62),inset 0 1px 0 rgba(255,255,255,0.12),inset 0 -1px 0 rgba(0,0,0,0.35);backdrop-filter:blur(2px);max-width:calc(100vw - 44px)}
+#lbjlabel,#lbjnum,#lbjgo{display:none}
+#lbjlabel{font-size:10px;letter-spacing:2px;color:rgba(232,213,160,0.85);text-transform:uppercase;opacity:0.9;white-space:nowrap}
+#lbjnum{width:72px;background:rgba(0,0,0,0.25);border:1px solid rgba(232,213,160,0.25);color:rgba(255,245,210,0.95);border-radius:10px;padding:4px 8px;font-family:Georgia;font-size:12px;outline:none}
+#lbjgo{background:rgba(200,160,40,0.22);border:1px solid rgba(200,160,40,0.45);color:rgba(255,245,210,0.95);border-radius:10px;padding:4px 10px;font-family:Georgia;font-size:11px;cursor:pointer}
+#lbjump{display:none}
+#lbjump{display:none !important}
+#lbjthumbs{display:none !important}
+#lbjgo:hover{background:rgba(200,160,40,0.32)}
+#lbjthumbs{background:rgba(0,0,0,0.18);border:1px solid rgba(232,213,160,0.22);color:rgba(255,245,210,0.92);border-radius:10px;padding:4px 10px;font-family:Georgia;font-size:11px;cursor:pointer;white-space:nowrap}
+#lbjthumbs:hover{background:rgba(0,0,0,0.28)}
+#lbthumbs{position:fixed;inset:0;z-index:20;display:none;pointer-events:none}
+#lb.show-thumbs #lbthumbs{display:block;pointer-events:auto}
+#lbthumbs-bg{position:absolute;inset:0;background:rgba(20,14,4,0.72);backdrop-filter:blur(10px)}
+#lbthumbs-panel{position:absolute;inset:64px 22px 22px 22px;border:1px solid rgba(232,213,160,0.18);border-radius:16px;background:rgba(25,18,8,0.35);box-shadow:0 24px 90px rgba(0,0,0,0.72);display:flex;flex-direction:column;overflow:hidden}
+#lbthumbs-top{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid rgba(232,213,160,0.12)}
+#lbthumbs-title{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(232,213,160,0.9)}
+#lbthumbs-close{background:rgba(200,160,40,0.18);border:1px solid rgba(200,160,40,0.35);color:rgba(255,245,210,0.95);border-radius:12px;padding:6px 10px;font-family:Georgia;font-size:11px;cursor:pointer}
+#lbthumbs-close:hover{background:rgba(200,160,40,0.28)}
+#lbthumbs-grid{flex:1;overflow:auto;padding:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;align-content:start;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y}
+.lbthumb{position:relative;border-radius:10px;overflow:hidden;background:rgba(0,0,0,0.18);border:1px solid rgba(232,213,160,0.10);cursor:pointer;aspect-ratio:4/3;height:84px}
+.lbthumb:hover{border-color:rgba(232,213,160,0.28)}
+.lbthumb.active{border-color:rgba(232,213,160,0.75);box-shadow:0 0 0 2px rgba(200,160,40,0.35)}
+.lbthumb img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(1.03) contrast(1.02)}
+.lbthumb-badge{position:absolute;left:8px;bottom:8px;font-size:10px;letter-spacing:1px;color:rgba(255,245,210,0.95);background:rgba(0,0,0,0.38);border:1px solid rgba(255,245,210,0.18);padding:3px 6px;border-radius:10px}
+@media (max-width: 700px){
+  #lbthumbs-panel{inset:58px 10px 10px 10px}
+  #lbthumbs-grid{grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+  .lbthumb{height:72px}
+}
+@media (max-width: 700px), (max-height: 520px){
+  #lbjump{right:12px;bottom:118px;padding:7px 10px;border-radius:13px}
+  #thumbs-btn{right:12px;bottom:18px;padding:9px 12px}
+}
+#lbx{position:fixed;top:14px;right:22px;z-index:6;font-size:28px;cursor:pointer;opacity:0.7;color:#fff;background:#c8a84a;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+#lbx:hover{opacity:1;transform:scale(1.1)}
+.lbarrow{position:fixed;top:50%;transform:translateY(-50%);z-index:7;font-size:66px;line-height:1;color:rgba(255,245,210,0.94);cursor:pointer;user-select:none;opacity:0.16;transition:opacity 0.18s,transform 0.18s;text-shadow:0 10px 34px rgba(0,0,0,0.85);pointer-events:auto}
+.lbarrow:hover{opacity:0.55;transform:translateY(-50%) scale(1.04)}
+#lbprev{left:12px;display:block}
+#lbnext{right:12px;display:block}
+#lb.wall-template #lbprev,#lb.wall-template #lbnext{display:block}
+#lb:not(.wall-template) #lbprev,#lb:not(.wall-template) #lbnext{display:none}
+#lb.wall-template #lbprev{left:10px !important;right:auto !important;top:50% !important;bottom:auto !important;transform:translateY(-50%) !important}
+#lb.wall-template #lbnext{right:10px !important;left:auto !important;top:50% !important;bottom:auto !important;transform:translateY(-50%) !important}
+@media (max-width: 700px), (max-height: 520px){
+  #lb.wall-template #lbprev{left:6px !important;font-size:56px !important;padding:4px 8px !important}
+  #lb.wall-template #lbnext{right:6px !important;font-size:56px !important;padding:4px 8px !important}
+}
+ #lb.on{display:flex}
+ #lb.wall-template #lbt{display:none}
+ #lb.wall-template #lbplate{display:none}
+ #lb.wall-template .lbf{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);padding:18px;background:rgba(245,240,232,0.98);border-radius:3px;box-shadow:0 0 0 2px #b8962a,0 0 0 5px #e8c84a,0 0 0 8px #8a6a1a,0 34px 110px rgba(0,0,0,0.72)}
+ #lb.wall-template #lbi{max-width:76vw;max-height:55vh;object-fit:contain;display:block;border-radius:2px;filter:brightness(1.05) contrast(1.02);box-shadow:none}
+ #lb.zoom.wall-template .lbf{padding:0;background:transparent;box-shadow:none}
+ #lb.zoom.wall-template #lbi{width:96vw !important;height:auto !important;max-width:none !important;max-height:86vh !important;filter:brightness(1.02) contrast(1.01)}
+ #lb.wall-template .lbf{cursor:zoom-in}
+ #lb.zoom.wall-template .lbf{cursor:zoom-out}
+ #lbzprev,#lbznext{position:fixed;top:50%;transform:translateY(-50%);z-index:7;font-size:60px;line-height:1;color:rgba(255,245,210,0.95);cursor:pointer;user-select:none;opacity:0;pointer-events:none;padding:10px 12px;text-shadow:0 10px 30px rgba(0,0,0,0.85)}
+ #lbzprev{left:10px}
+ #lbznext{right:10px}
+ #lb.wall-template #lbzprev,#lb.wall-template #lbznext{display:block}
+ #lb.wall-template.show-arrows #lbzprev,#lb.wall-template.show-arrows #lbznext{opacity:0.92;pointer-events:auto}
+ @media (max-width: 700px), (max-height: 520px){
+   #lbzprev,#lbznext{font-size:54px;padding:12px 10px}
+   #lbzprev{left:6px}
+   #lbznext{right:6px}
+ }
+ #lbside-left,#lbside-right{position:fixed;top:0;bottom:0;width:22vw;pointer-events:auto;cursor:pointer;z-index:2;opacity:1}
+ #lbside-left{left:0;background:transparent}
+ #lbside-right{right:0;background:transparent}
+ #lb.wall-template #lbside-left,#lb.wall-template #lbside-right{display:block}
+ #lb:not(.wall-template) #lbside-left,#lb:not(.wall-template) #lbside-right{display:none}
+ #lbt{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:1001;font-size:11px;letter-spacing:6px;text-transform:uppercase;color:rgba(232,213,160,0.92);text-shadow:2px 2px 6px rgba(0,0,0,0.9);pointer-events:none;white-space:nowrap}
+ #lbplate{margin-top:18px;text-align:center;display:inline-block;padding:10px 16px 9px;border-radius:7px;border:1px solid rgba(255,255,255,0.14);background:linear-gradient(180deg,rgba(235,235,240,0.96),rgba(150,150,162,0.92) 58%,rgba(220,220,225,0.9));box-shadow:0 14px 34px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.35),inset 0 -1px 0 rgba(0,0,0,0.25)}
+ #lbc{margin:0;font-size:14px;font-style:italic;letter-spacing:0.8px;color:rgba(20,14,4,0.92);text-shadow:0 1px 0 rgba(255,255,255,0.35)}
+ #lba{margin-top:6px;font-size:10px;opacity:0.9;letter-spacing:2.5px;color:rgba(35,24,6,0.85)}
+ #lbjump{position:fixed;right:22px;bottom:140px;top:auto;z-index:2001;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:14px;background-image:linear-gradient(180deg,rgba(140,92,46,0.92),rgba(92,54,22,0.92)),repeating-linear-gradient(135deg,rgba(255,255,255,0.045) 0px,rgba(255,255,255,0.045) 1px,transparent 1px,transparent 10px);border:1px solid rgba(255,224,170,0.20);box-shadow:0 16px 38px rgba(0,0,0,0.62),inset 0 1px 0 rgba(255,255,255,0.12),inset 0 -1px 0 rgba(0,0,0,0.35);backdrop-filter:blur(2px);max-width:calc(100vw - 44px)}
+ #lbjlabel{font-size:10px;letter-spacing:2px;color:rgba(232,213,160,0.85);text-transform:uppercase;opacity:0.9;white-space:nowrap}
+ #lbjnum{width:72px;background:rgba(0,0,0,0.25);border:1px solid rgba(232,213,160,0.25);color:rgba(255,245,210,0.95);border-radius:10px;padding:4px 8px;font-family:Georgia;font-size:12px;outline:none}
+ #lbjgo{background:rgba(200,160,40,0.22);border:1px solid rgba(200,160,40,0.45);color:rgba(255,245,210,0.95);border-radius:10px;padding:4px 10px;font-family:Georgia;font-size:11px;cursor:pointer}
+ #lbjgo:hover{background:rgba(200,160,40,0.32)}
+ #lbjthumbs{background:rgba(0,0,0,0.18);border:1px solid rgba(232,213,160,0.22);color:rgba(255,245,210,0.92);border-radius:10px;padding:4px 10px;font-family:Georgia;font-size:11px;cursor:pointer;white-space:nowrap}
+ #lbjthumbs:hover{background:rgba(0,0,0,0.28)}
+ #lbthumbs{position:fixed;inset:0;z-index:20;display:none;pointer-events:none}
+ #lb.show-thumbs #lbthumbs{display:block;pointer-events:auto}
+ #lbthumbs-bg{position:absolute;inset:0;background:rgba(20,14,4,0.72);backdrop-filter:blur(10px)}
+ #lbthumbs-panel{position:absolute;inset:64px 22px 22px 22px;border:1px solid rgba(232,213,160,0.18);border-radius:16px;background:rgba(25,18,8,0.35);box-shadow:0 24px 90px rgba(0,0,0,0.72);display:flex;flex-direction:column;overflow:hidden}
+ #lbthumbs-top{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid rgba(232,213,160,0.12)}
+ #lbthumbs-title{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(232,213,160,0.9)}
+ #lbthumbs-close{background:rgba(200,160,40,0.18);border:1px solid rgba(200,160,40,0.35);color:rgba(255,245,210,0.95);border-radius:12px;padding:6px 10px;font-family:Georgia;font-size:11px;cursor:pointer}
+ #lbthumbs-close:hover{background:rgba(200,160,40,0.28)}
+ #lbthumbs-actions{display:flex;align-items:center;gap:8px}
+ .lbthumbs-btn{background:rgba(0,0,0,0.16);border:1px solid rgba(232,213,160,0.18);color:rgba(255,245,210,0.95);border-radius:12px;padding:6px 10px;font-family:Georgia;font-size:11px;cursor:pointer;white-space:nowrap}
+ .lbthumbs-btn:hover{background:rgba(0,0,0,0.26)}
+ .lbthumbs-btn.on{background:rgba(200,160,40,0.22);border-color:rgba(200,160,40,0.42)}
+ #lbthumbs-grid{flex:1;overflow:auto;padding:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;align-content:start;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y}
+ .lbthumb{position:relative;border-radius:10px;overflow:hidden;background:rgba(0,0,0,0.18);border:1px solid rgba(232,213,160,0.10);cursor:pointer;aspect-ratio:4/3;height:84px}
+ .lbthumb:hover{border-color:rgba(232,213,160,0.28)}
+ .lbthumb.active{border-color:rgba(232,213,160,0.75);box-shadow:0 0 0 2px rgba(200,160,40,0.35)}
+ .lbthumb.marked{border-color:rgba(240,110,70,0.85);box-shadow:0 0 0 2px rgba(240,110,70,0.30)}
+ .lbthumb.missing{opacity:0.35;filter:grayscale(0.55)}
+ #lbthumbs-similar{display:none;flex:1;overflow:auto;padding:12px;border-top:1px solid rgba(232,213,160,0.14)}
+ #lbthumbs-similar.on{display:block}
+ #lbthumbs-similar .simgrp{display:flex;flex-wrap:wrap;gap:8px;padding:8px;border:1px solid rgba(232,213,160,0.14);border-radius:12px;background:rgba(0,0,0,0.10);margin-bottom:10px}
+ #lbthumbs-similar .simgrp-title{width:100%;font-family:Georgia;font-size:12px;letter-spacing:1px;color:rgba(255,245,210,0.92)}
+ #lbthumbs-similar .simthumb{width:92px;height:70px;border-radius:10px;overflow:hidden;border:1px solid rgba(232,213,160,0.10);cursor:pointer;position:relative;background:rgba(0,0,0,0.18)}
+ #lbthumbs-similar .simthumb:hover{border-color:rgba(232,213,160,0.28)}
+ #lbthumbs-similar .simthumb img{width:100%;height:100%;object-fit:cover;display:block}
+ #lbthumbs-similar .simthumb b{position:absolute;left:6px;bottom:6px;font-size:10px;letter-spacing:1px;color:rgba(255,245,210,0.95);background:rgba(0,0,0,0.38);border:1px solid rgba(255,245,210,0.18);padding:2px 5px;border-radius:10px}
+ .lbthumb img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(1.03) contrast(1.02)}
+ .lbthumb-badge{position:absolute;left:8px;bottom:8px;font-size:10px;letter-spacing:1px;color:rgba(255,245,210,0.95);background:rgba(0,0,0,0.38);border:1px solid rgba(255,245,210,0.18);padding:3px 6px;border-radius:10px}
+ @media (max-width: 700px){
+   #lbthumbs-panel{inset:58px 10px 10px 10px}
+   #lbthumbs-grid{grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+   .lbthumb{height:72px}
+ }
+ @media (max-width: 700px), (max-height: 520px){
+   #lbjump{right:12px;bottom:118px;padding:7px 10px;border-radius:13px}
+   #thumbs-btn{right:12px;bottom:18px;padding:9px 12px}
+ }
+ #lbx{position:fixed;top:14px;right:22px;z-index:6;font-size:28px;cursor:pointer;opacity:0.7;color:#fff;background:#c8a84a;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+ #lbx:hover{opacity:1;transform:scale(1.1)}
+ .lbarrow{position:fixed;top:50%;transform:translateY(-50%);z-index:7;font-size:66px;line-height:1;color:rgba(255,245,210,0.94);cursor:pointer;user-select:none;opacity:0.16;transition:opacity 0.18s,transform 0.18s;text-shadow:0 10px 34px rgba(0,0,0,0.85);pointer-events:auto}
+ .lbarrow:hover{opacity:0.55;transform:translateY(-50%) scale(1.04)}
+ #lbprev{left:12px;display:block}
+ #lbnext{right:12px;display:block}
+ #lb.wall-template #lbprev,#lb.wall-template #lbnext{display:block}
+ #lb:not(.wall-template) #lbprev,#lb:not(.wall-template) #lbnext{display:none}
+ #lb.wall-template #lbprev{left:10px !important;right:auto !important;top:50% !important;bottom:auto !important;transform:translateY(-50%) !important}
+ #lb.wall-template #lbnext{right:10px !important;left:auto !important;top:50% !important;bottom:auto !important;transform:translateY(-50%) !important}
+ @media (max-width: 700px), (max-height: 520px){
+   #lb.wall-template #lbprev{left:6px !important;font-size:56px !important;padding:4px 8px !important}
+   #lb.wall-template #lbnext{right:6px !important;font-size:56px !important;padding:4px 8px !important}
+  }
+#lb-controls{display:none}
+#room-selector{position:fixed;top:20px;right:20px;z-index:100;display:flex;flex-direction:column;gap:8px}
+.room-btn{width:35px;height:35px;border-radius:50%;cursor:pointer;border:2px solid #8B6914;transition:all 0.2s;background-size:cover;background-position:center;filter:brightness(0.9)}
+.room-btn:hover{transform:scale(1.1);border-color:#c8a84a;filter:brightness(1.1)}
+.room-btn.active{border-width:3px;border-color:#D4AF37;filter:brightness(1.3)}
+#brightness-control{position:fixed;bottom:20px;left:200px;z-index:100;background:rgba(200,160,40,0.12);padding:15px;border-radius:12px;border:1px solid #8B6914;transition:all 0.2s}
+#brightness-control:hover{background:rgba(200,160,40,0.2);transform:scale(1.02)}
+#brightness-slider{width:120px;height:4px;background:linear-gradient(to right,#333,#fff);border-radius:2px;outline:none;cursor:pointer;display:block;margin-bottom:8px}
+#brightness-slider::-webkit-slider-thumb{width:16px;height:16px;background:#c8a84a;border-radius:50%;cursor:pointer;border:2px solid #8B6914}
+#brightness-slider::-moz-range-thumb{width:16px;height:16px;background:#c8a84a;border-radius:50%;cursor:pointer;border:2px solid #8B6914}
+#brightness-label{color:#c8a84a;font-size:9px;letter-spacing:1px;text-transform:uppercase;text-align:center;margin-bottom:6px}
+ #auto-btn{background:rgba(200,160,40,0.2);color:#c8a84a;border:1px solid #8B6914;padding:4px 10px;font-family:Georgia;font-size:9px;letter-spacing:1px;cursor:pointer;border-radius:15px;transition:all 0.2s;text-transform:uppercase;width:100%;display:block}
+ #auto-btn:hover{background:rgba(200,160,40,0.35);transform:scale(1.02)}
+</style></head><body>
+<div id="title">Свет и тишина</div>
+<div id="info">Зал 1 · Комната 1</div>
+<div id="thumbs-btn" onclick="openThumbsFromGallery()">Миниатюры</div>
+<div id="hall"></div>
+<!-- АНИМИРОВАННЫЕ СВЕТИЛЬНИКИ -->
+<div class="corner-light" id="light-top-right"><img src=""/></div>
+<div class="corner-light" id="light-top-left"><img src=""/></div>
+<div class="corner-light" id="light-bottom-left"><img src=""/></div>
+<div class="corner-light" id="light-bottom-right"><img src=""/></div>
+<!-- СВЕТОВЫЕ ЛУЧИ -->
+<div class="light-beam" id="beam-top-right"></div>
+<div class="light-beam" id="beam-top-left"></div>
+<div class="light-beam" id="beam-bottom-left"></div>
+<div class="light-beam" id="beam-bottom-right"></div>
+<!-- АНИМАЦИЯ СВЕТА НА СТЕНЫ -->
+<div class="wall-light" id="wall-light-top-right"></div>
+<div class="wall-light" id="wall-light-top-left"></div>
+<div class="wall-light" id="wall-light-bottom-left"></div>
+<div class="wall-light" id="wall-light-bottom-right"></div>
+<div id="nav">
+  <button class="nb" onclick="go(-1)">← Назад</button>
+  <button class="nb" onclick="go(1)">Вперёд →</button>
+</div>
+<div id="gal-prev" class="gal-arrow" onclick="go(-1)">‹</div>
+<div id="gal-next" class="gal-arrow" onclick="go(1)">›</div>
+<div id="hint">← → клавиши · нажми на картину чтобы открыть</div>
+<div id="brightness-control">
+  <div id="brightness-label">Яркость зала</div>
+  <input type="range" id="brightness-slider" min="20" max="100" value="50">
+  <button id="auto-btn" onclick="setAutoBrightness()">АВТО</button>
+</div>
+<div id="room-selector" id="room-buttons"></div>
+<div id="lb" class="wall-template" onclick="closeLb()">
+  <div id="lbt">Музей великолепных работ · Летопись света</div>
+  <div id="lbx">✕</div>
+  <div id="lbside-left" onclick="event.stopPropagation();navigateLb(-1)"></div>
+  <div id="lbside-right" onclick="event.stopPropagation();navigateLb(1)"></div>
+  <div id="lbzprev" onclick="event.stopPropagation();navigateLb(-1)">‹</div>
+  <div id="lbznext" onclick="event.stopPropagation();navigateLb(1)">›</div>
+  <div id="lbprev" class="lbarrow" onclick="event.stopPropagation();navigateLb(-1)">‹</div>
+  <div id="lbnext" class="lbarrow" onclick="event.stopPropagation();navigateLb(1)">›</div>
+  <div id="lbthumbs" onclick="event.stopPropagation()">
+    <div id="lbthumbs-bg" onclick="closeLbThumbs()"></div>
+    <div id="lbthumbs-panel">
+      <div id="lbthumbs-top">
+        <div id="lbthumbs-title">Миниатюры</div>
+        <div id="lbthumbs-actions">
+          <button type="button" id="lbthumbs-select" class="lbthumbs-btn" onclick="event.preventDefault();toggleLbThumbsSelect()">Выбор</button>
+          <button type="button" id="lbthumbs-copy" class="lbthumbs-btn" onclick="event.preventDefault();copyLbThumbsMarks()">Скопировать</button>
+          <button type="button" id="lbthumbs-trash" class="lbthumbs-btn" onclick="event.preventDefault();copyLbThumbsTrashCommand()">В корзину</button>
+          <button type="button" id="lbthumbs-undo" class="lbthumbs-btn" onclick="event.preventDefault();copyLbThumbsUndoCommand()">Вернуть</button>
+          <button type="button" id="lbthumbs-download" class="lbthumbs-btn" onclick="event.preventDefault();downloadLbThumbSelected()">Скачать</button>
+          <button type="button" id="lbthumbs-refresh" class="lbthumbs-btn" onclick="event.preventDefault();refreshLbThumbs()">Обновить</button>
+          <button type="button" id="lbthumbs-similarbtn" class="lbthumbs-btn" onclick="event.preventDefault();toggleLbThumbsSimilar()">Похожие</button>
+          <button type="button" id="lbthumbs-clear" class="lbthumbs-btn" onclick="event.preventDefault();clearLbThumbsMarks()">Очистить</button>
+          <button type="button" id="lbthumbs-close" onclick="event.preventDefault();closeLbThumbs()">Закрыть</button>
+        </div>
+      </div>
+      <div id="lbthumbs-grid"></div>
+      <div id="lbthumbs-similar"></div>
+    </div>
+  </div>
+  <div class="lbf" onclick="event.stopPropagation();toggleLbZoom()"><img id="lbi" src=""/></div>
+  <div id="lbplate" onclick="event.stopPropagation()">
+    <div id="lbc"></div>
+    <div id="lba">Фотохудожник Ирина · Мастер игры света</div>
+    <button type="button" id="lbplate-thumbs" onclick="event.preventDefault();toggleLbThumbs()">Миниатюры</button>
+  </div>
+</div>
+<script>
+var PH=[
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-001.jpg',cat:'Закат над озером'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-002.jpg',cat:'Утренний туман'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-003.jpg',cat:'Лесная дорога'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-004.jpg',cat:'Горный ручей'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-005.jpg',cat:'Цветущее поле'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-006.jpg',cat:'Старый мост'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-007.jpg',cat:'Берёзовая роща'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-008.jpg',cat:'Осенний парк'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-009.jpg',cat:'Зимний лес'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-010.jpg',cat:'Весенний луг'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-011.jpg',cat:'Речная долина'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-012.jpg',cat:'Солнечная поляна'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-013.jpg',cat:'Тени деревьев'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-014.jpg',cat:'Золотая осень'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-015.jpg',cat:'Первый снег'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-016.jpg',cat:'Летний день'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-017.jpg',cat:'Вечерний свет'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-018.jpg',cat:'Утренняя роса'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-019.jpg',cat:'Дождливый день'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-020.jpg',cat:'Ясное небо'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-021.jpg',cat:'Облачный закат'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-022.jpg',cat:'Тихое утро'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-023.jpg',cat:'Теплый вечер'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-024.jpg',cat:'Прохладный день'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-025.jpg',cat:'Солнечный луч'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-026.jpg',cat:'Лесная тишина'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-027.jpg',cat:'Полевые цветы'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-028.jpg',cat:'Речные камни'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-029.jpg',cat:'Горные вершины'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-030.jpg',cat:'Долина рек'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-031.jpg',cat:'Зеленые холмы'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-032.jpg',cat:'Синее небо'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-033.jpg',cat:'Белые облака'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-034.jpg',cat:'Золотое солнце'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-035.jpg',cat:'Красный закат'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-036.jpg',cat:'Спокойная вода'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-037.jpg',cat:'Ветреный день'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-038.jpg',cat:'Тихий вечер'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-039.jpg',cat:'Яркий полдень'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-040.jpg',cat:'Мягкий рассвет'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-041.jpg',cat:'Осенние листья'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-042.jpg',cat:'Весенние почки'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-043.jpg',cat:'Летние травы'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-044.jpg',cat:'Зимные узоры'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-045.jpg',cat:'Вечерние тени'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-046.jpg',cat:'Утренние лучи'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-047.jpg',cat:'Дневное солнце'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-048.jpg',cat:'Вечерняя заря'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-049.jpg',cat:'Ночные звезды'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-050.jpg',cat:'Рассветные тени'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-051.jpg',cat:'Лесная просека'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-052.jpg',cat:'Полевая тропа'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-053.jpg',cat:'Речной берег'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-054.jpg',cat:'Горная тропинка'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-055.jpg',cat:'Луговая дорога'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-056.jpg',cat:'Озерный пейзаж'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-057.jpg',cat:'Морской берег'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-058.jpg',cat:'Речной изгиб'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-059.jpg',cat:'Овражный склон'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-060.jpg',cat:'Холмистый пейзаж'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-061.jpg',cat:'Луговая равнина'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-062.jpg',cat:'Лесная поляна'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-063.jpg',cat:'Полевое простор'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-064.jpg',cat:'Горное плато'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-065.jpg',cat:'Речная пойма'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-066.jpg',cat:'Осенний букет'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-067.jpg',cat:'Весенний сад'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-068.jpg',cat:'Летний луг'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-069.jpg',cat:'Зимный узор'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-070.jpg',cat:'Годовой круг'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-071.jpg',cat:'Времена года'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-072.jpg',cat:'Природа жизнь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-073.jpg',cat:'Красота земли'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-074.jpg',cat:'Гармония мира'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-075.jpg',cat:'Тишина природы'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-076.jpg',cat:'Свет и тень'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-077.jpg',cat:'День и ночь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-078.jpg',cat:'Утро и вечер'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-079.jpg',cat:'Лето и зима'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-080.jpg',cat:'Весна и осень'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-081.jpg',cat:'Живая вода'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-082.jpg',cat:'Чистый воздух'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-083.jpg',cat:'Зеленая трава'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-084.jpg',cat:'Синее небо'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-085.jpg',cat:'Золотое солнце'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-086.jpg',cat:'Белые облака'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-087.jpg',cat:'Серые тени'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-088.jpg',cat:'Яркие краски'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-089.jpg',cat:'Мягкие тона'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-090.jpg',cat:'Глубокие цвета'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-091.jpg',cat:'Прозрачный свет'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-092.jpg',cat:'Теплые лучи'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-093.jpg',cat:'Холодный ветер'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-094.jpg',cat:'Спокойная гладь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-095.jpg',cat:'Бурный поток'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-096.jpg',cat:'Тихая заводь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-097.jpg',cat:'Быстрая река'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-098.jpg',cat:'Глубокое озеро'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-099.jpg',cat:'Мелководье'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-100.jpg',cat:'Горный поток'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-101.jpg',cat:'Речной порог'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-102.jpg',cat:'Водопад'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-103.jpg',cat:'Ключ'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-104.jpg',cat:'Родник'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-105.jpg',cat:'Источник'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-106.jpg',cat:'Лесной ручей'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-107.jpg',cat:'Полевой ручеек'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-108.jpg',cat:'Горный ручей'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-109.jpg',cat:'Подземный источник'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-110.jpg',cat:'Весенний поток'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-111.jpg',cat:'Летний ручей'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-112.jpg',cat:'Осенний поток'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-113.jpg',cat:'Зимный ключ'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-114.jpg',cat:'Весенний родник'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-115.jpg',cat:'Круговорот воды'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-116.jpg',cat:'Деревья giants'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-117.jpg',cat:'Старые деревья'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-118.jpg',cat:'Молодые деревья'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-119.jpg',cat:'Высокие деревья'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-120.jpg',cat:'Низкие деревья'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-121.jpg',cat:'Толстые стволы'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-122.jpg',cat:'Тонкие ветки'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-123.jpg',cat:'Густые кроны'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-124.jpg',cat:'Редкие листья'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-125.jpg',cat:'Осенние цвета'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-126.jpg',cat:'Весенние почки'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-127.jpg',cat:'Летние листья'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-128.jpg',cat:'Зимные ветки'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-129.jpg',cat:'Осенние плоды'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-130.jpg',cat:'Годовой цикл'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-131.jpg',cat:'Лесная жизнь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-132.jpg',cat:'Полевая жизнь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-133.jpg',cat:'Речная жизнь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-134.jpg',cat:'Горная жизнь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-135.jpg',cat:'Озерная жизнь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-136.jpg',cat:'Природа пробуждение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-137.jpg',cat:'Природа засыпание'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-138.jpg',cat:'Природа дыхание'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-139.jpg',cat:'Природа пульс'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-140.jpg',cat:'Природа гармония'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-141.jpg',cat:'Свет игры'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-142.jpg',cat:'Тени танец'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-143.jpg',cat:'Цвета перелив'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-144.jpg',cat:'Формы линии'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-145.jpg',cat:'Пространство глубина'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-146.jpg',cat:'Время течение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-147.jpg',cat:'Мгновение ловля'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-148.jpg',cat:'Вечность поиск'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-149.jpg',cat:'Бесконечность чувств'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-150.jpg',cat:'Гармония обретение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-151.jpg',cat:'Тишина наполнение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-152.jpg',cat:'Спокойствие обретение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-153.jpg',cat:'Умиротворение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-154.jpg',cat:'Созерцание'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-155.jpg',cat:'Размышление'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-156.jpg',cat:'Вдохновение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-157.jpg',cat:'Творчество'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-158.jpg',cat:'Эмоции'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-159.jpg',cat:'Чувства'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-160.jpg',cat:'Переживания'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-161.jpg',cat:'Воспоминания'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-162.jpg',cat:'Мечты'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-163.jpg',cat:'Надежды'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-164.jpg',cat:'Ожидания'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-165.jpg',cat:'Предвкушение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-166.jpg',cat:'Счастье момент'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-167.jpg',cat:'Радость чувство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-168.jpg',cat:'Грусть отголосок'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-169.jpg',cat:'Ностальгия'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-170.jpg',cat:'Воспоминание'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-171.jpg',cat:'Прошлое отражение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-172.jpg',cat:'Настоящее ощущение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-173.jpg',cat:'Будущее предчувствие'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-174.jpg',cat:'Время остановка'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-175.jpg',cat:'Мгновение вечность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-176.jpg',cat:'Жизнь красота'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-177.jpg',cat:'Мир гармония'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-178.jpg',cat:'Вселенная бесконечность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-179.jpg',cat:'Природа мудрость'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-180.jpg',cat:'Искусство выражение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-181.jpg',cat:'Фотография момент'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-182.jpg',cat:'Искусство жизнь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-183.jpg',cat:'Творчество полет'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-184.jpg',cat:'Вдохновение источник'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-185.jpg',cat:'Красота спасение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-186.jpg',cat:'Свет победа'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-187.jpg',cat:'Тьма покой'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-188.jpg',cat:'День ясность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-189.jpg',cat:'Ночь тайна'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-190.jpg',cat:'Утро надежда'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-191.jpg',cat:'Вечер грусть'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-192.jpg',cat:'Полдень пик'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-193.jpg',cat:'Рассвет начало'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-194.jpg',cat:'Закат завершение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-195.jpg',cat:'Сумерки переход'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-196.jpg',cat:'Полночь тайна'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-197.jpg',cat:'Предрассветный час'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-198.jpg',cat:'Утренняя заря'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-199.jpg',cat:'Вечерняя заря'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-200.jpg',cat:'Золотой час'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-201.jpg',cat:'Синий час'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-202.jpg',cat:'Розовый час'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-203.jpg',cat:'Оранжевый час'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-204.jpg',cat:'Фиолетовый час'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-205.jpg',cat:'Зеленый час'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-206.jpg',cat:'Цвета природы'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-207.jpg',cat:'Оттенки времени'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-208.jpg',cat:'Настроения свет'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-209.jpg',cat:'Эмоции цвет'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-210.jpg',cat:'Чувства тон'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-211.jpg',cat:'Нюансы детали'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-212.jpg',cat:'Простота сложность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-213.jpg',cat:'Минимализм богатство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-214.jpg',cat:'Пустота наполненность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-215.jpg',cat:'Тишина звук'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-216.jpg',cat:'Движение покой'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-217.jpg',cat:'Быстрота медлительность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-218.jpg',cat:'Мгновение вечность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-219.jpg',cat:'Текучесть стабильность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-220.jpg',cat:'Изменность постоянство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-221.jpg',cat:'Контраст гармония'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-222.jpg',cat:'Противопоставление единство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-223.jpg',cat:'Различие сходство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-224.jpg',cat:'Уникальность повторение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-225.jpg',cat:'Индивидуальность общность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-226.jpg',cat:'Природа человек'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-227.jpg',cat:'Космос земля'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-228.jpg',cat:'Вселенная частичка'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-229.jpg',cat:'Бесконечность конечность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-230.jpg',cat:'Вечность мгновение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-231.jpg',cat:'Жизнь смерть'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-232.jpg',cat:'Рождение увядание'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-233.jpg',cat:'Рост упадок'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-234.jpg',cat:'Расцвет увядание'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-235.jpg',cat:'Начало конец'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-236.jpg',cat:'Путь дорога'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-237.jpg',cat:'Тропинка трасса'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-238.jpg',cat:'Маршрут след'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-239.jpg',cat:'Направление цель'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-240.jpg',cat:'Движение остановка'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-241.jpg',cat:'Путешествие возвращение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-242.jpg',cat:'Поиск находка'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-243.jpg',cat:'Искание обретение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-244.jpg',cat:'Вопрос ответ'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-245.jpg',cat:'Проблема решение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-246.jpg',cat:'Труд облегчение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-247.jpg',cat:'Награда достижение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-248.jpg',cat:'Успех победа'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-249.jpg',cat:'Триумф слав'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-250.jpg',cat:'Признание приз'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-251.jpg',cat:'Талант гениальность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-252.jpg',cat:'Мастерство искусство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-253.jpg',cat:'Опыт мудрость'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-254.jpg',cat:'Знание понимание'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-255.jpg',cat:'Ученичество учительство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-256.jpg',cat:'Развитие рост'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-257.jpg',cat:'Прогресс регресс'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-258.jpg',cat:'Движение стагнация'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-259.jpg',cat:'Эволюция революция'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-260.jpg',cat:'Преобразование сохранение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-261.jpg',cat:'Инновация традиция'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-262.jpg',cat:'Новизна классика'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-263.jpg',cat:'Современность вечность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-264.jpg',cat:'Модернизм архаика'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-265.jpg',cat:'Футуризм ретро'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-266.jpg',cat:'Стиль мода'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-267.jpg',cat:'Тренд классика'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-268.jpg',cat:'Элегантность простота'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-269.jpg',cat:'Роскошь минимализм'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-270.jpg',cat:'Богатство скромность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-271.jpg',cat:'Шик натуральность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-272.jpg',cat:'Искусственность естественность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-273.jpg',cat:'Синтетика органика'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-274.jpg',cat:'Технология природа'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-275.jpg',cat:'Цивилизация дикость'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-276.jpg',cat:'Город деревня'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-277.jpg',cat:'Мегаполис провинция'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-278.jpg',cat:'Столица периферия'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-279.jpg',cat:'Центр окраина'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-280.jpg',cat:'Публичное частное'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-281.jpg',cat:'Социум индивидуальность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-282.jpg',cat:'Общество одиночество'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-283.jpg',cat:'Коллектив личность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-284.jpg',cat:'Команда лидер'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-285.jpg',cat:'Группа индивид'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-286.jpg',cat:'Семья дом'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-287.jpg',cat:'Род очаг'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-288.jpg',cat:'Традиция новаторство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-289.jpg',cat:'Наследие открытие'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-290.jpg',cat:'Память забвение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-291.jpg',cat:'История будущее'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-292.jpg',cat:'Прошлое предсказание'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-293.jpg',cat:'Опыт прогноз'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-294.jpg',cat:'Урок вывод'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-295.jpg',cat:'Анализ синтез'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-296.jpg',cat:'Теория практика'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-297.jpg',cat:'Мысль дело'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-298.jpg',cat:'Идея реализация'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-299.jpg',cat:'Концепция воплощение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-300.jpg',cat:'План исполнение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-301.jpg',cat:'Мечта реальность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-302.jpg',cat:'Фантазия факт'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-303.jpg',cat:'Воображение действительность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-304.jpg',cat:'Гипотеза доказательство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-305.jpg',cat:'Предположение подтверждение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-306.jpg',cat:'Вера знание'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-307.jpg',cat:'Интуиция логика'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-308.jpg',cat:'Чувство разум'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-309.jpg',cat:'Эмоция расчет'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-310.jpg',cat:'Сердце ум'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-311.jpg',cat:'Душа тело'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-312.jpg',cat:'Дух материя'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-313.jpg',cat:'Сознание подсознание'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-314.jpg',cat:'Разум инстинкт'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-315.jpg',cat:'Воля рефлекс'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-316.jpg',cat:'Свобода ответственность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-317.jpg',cat:'Выбор последствие'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-318.jpg',cat:'Решение результат'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-319.jpg',cat:'Действие реакция'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-320.jpg',cat:'Причина следствие'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-321.jpg',cat:'Цель средство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-322.jpg',cat:'Метод результат'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-323.jpg',cat:'Процесс продукт'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-324.jpg',cat:'Усилие достижение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-325.jpg',cat:'Работа отдых'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-326.jpg',cat:'Нагрузка восстановление'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-327.jpg',cat:'Стресс расслабление'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-328.jpg',cat:'Напряжение разрядка'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-329.jpg',cat:'Концентрация отвлечение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-330.jpg',cat:'Фокус рассеивание'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-331.jpg',cat:'Внимание невнимание'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-332.jpg',cat:'Сосредоточенность отвлеченность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-333.jpg',cat:'Усердие лень'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-334.jpg',cat:'Энергия пассивность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-335.jpg',cat:'Активность бездействие'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-336.jpg',cat:'Движение статика'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-337.jpg',cat:'Динамика покой'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-338.jpg',cat:'Изменение стабильность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-339.jpg',cat:'Развитие застой'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-340.jpg',cat:'Рост деградация'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-341.jpg',cat:'Построение разрушение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-342.jpg',cat:'Созидание распад'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-343.jpg',cat:'Творчество копирование'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-344.jpg',cat:'Оригинальность заимствование'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-345.jpg',cat:'Уникальность типичность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-346.jpg',cat:'Гениальность талант'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-347.jpg',cat:'Способность одаренность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-348.jpg',cat:'Дар мастерство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-349.jpg',cat:'Скилл умение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-350.jpg',cat:'Компетенция квалификация'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-351.jpg',cat:'Профессионализм дилетантство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-352.jpg',cat:'Экспертность любительство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-353.jpg',cat:'Знание невежество'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-354.jpg',cat:'Компетентность некомпетентность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-355.jpg',cat:'Мастерство неумение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-356.jpg',cat:'Опыт неопытность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-357.jpg',cat:'Практика теория'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-358.jpg',cat:'Ремесло искусство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-359.jpg',cat:'Технология творчество'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-360.jpg',cat:'Метод вдохновение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-361.jpg',cat:'Наука искусство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-362.jpg',cat:'Логика интуиция'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-363.jpg',cat:'Анализ синтез'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-364.jpg',cat:'Дедукция индукция'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-365.jpg',cat:'Факт гипотеза'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-366.jpg',cat:'Доказательство предположение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-367.jpg',cat:'Уверенность сомнение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-368.jpg',cat:'Убеждение сомнение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-369.jpg',cat:'Вера неверие'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-370.jpg',cat:'Доверие недоверие'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-371.jpg',cat:'Оптимизм пессимизм'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-372.jpg',cat:'Радикализм умеренность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-373.jpg',cat:'Экстремизм центризм'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-374.jpg',cat:'Консерватизм прогрессивность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-375.jpg',cat:'Традиционализм новаторство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-376.jpg',cat:'Реализм идеализм'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-377.jpg',cat:'Прагматизм романтизм'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-378.jpg',cat:'Материализм спиритуализм'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-379.jpg',cat:'Рационализм иррационализм'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-380.jpg',cat:'Эмпиризм теоретизирование'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-381.jpg',cat:'Позитив негатив'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-382.jpg',cat:'Свет тьма'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-383.jpg',cat:'Добро зло'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-384.jpg',cat:'Красота уродство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-385.jpg',cat:'Гармония дисгармония'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-386.jpg',cat:'Порядок хаос'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-387.jpg',cat:'Система беспорядок'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-388.jpg',cat:'Структура аморфность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-389.jpg',cat:'Организация дезорганизация'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-390.jpg',cat:'Классификация смешение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-391.jpg',cat:'Категория непохожесть'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-392.jpg',cat:'Тип индивидуальность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-393.jpg',cat:'Общее частное'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-394.jpg',cat:'Абстрактное конкретное'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-395.jpg',cat:'Общее единичное'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-396.jpg',cat:'Универсальное частное'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-397.jpg',cat:'Глобальное локальное'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-398.jpg',cat:'Вселенное планетарное'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-399.jpg',cat:'Планетарное земное'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-400.jpg',cat:'Земное человеческое'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-401.jpg',cat:'Человеческое личное'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-402.jpg',cat:'Личное интимное'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-403.jpg',cat:'Интимное тайное'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-404.jpg',cat:'Тайное явное'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-405.jpg',cat:'Явное скрытое'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-406.jpg',cat:'Открытое закрытое'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-407.jpg',cat:'Доступное запретное'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-408.jpg',cat:'Свободное зависимое'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-409.jpg',cat:'Независимое подчиненное'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-410.jpg',cat:'Самостоятельное контролируемое'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-411.jpg',cat:'Автономное управляемое'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-412.jpg',cat:'Свободное несвободное'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-413.jpg',cat:'Освобожденное порабощенное'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-414.jpg',cat:'Независимое зависимое'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-415.jpg',cat:'Самодостаточное нуждающееся'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-416.jpg',cat:'Закат над озером'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-417.jpg',cat:'Утренний туман'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-418.jpg',cat:'Лесная дорога'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-419.jpg',cat:'Горный ручей'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-420.jpg',cat:'Цветущее поле'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-421.jpg',cat:'Старый мост'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-422.jpg',cat:'Берёзовая роща'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-423.jpg',cat:'Осенний парк'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-424.jpg',cat:'Зимний лес'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-425.jpg',cat:'Весенний луг'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-426.jpg',cat:'Речная долина'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-427.jpg',cat:'Солнечная поляна'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-428.jpg',cat:'Тени деревьев'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-429.jpg',cat:'Золотая осень'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-430.jpg',cat:'Первый снег'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-431.jpg',cat:'Летний день'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-432.jpg',cat:'Вечерний свет'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-433.jpg',cat:'Утренняя роса'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-434.jpg',cat:'Дождливый день'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-435.jpg',cat:'Ясное небо'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-436.jpg',cat:'Облачный закат'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-437.jpg',cat:'Тихое утро'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-438.jpg',cat:'Теплый вечер'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-439.jpg',cat:'Прохладный день'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-440.jpg',cat:'Солнечный луч'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-441.jpg',cat:'Лесная тишина'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-442.jpg',cat:'Полевые цветы'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-443.jpg',cat:'Речные камни'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-444.jpg',cat:'Горные вершины'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-445.jpg',cat:'Долина рек'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-446.jpg',cat:'Зеленые холмы'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-447.jpg',cat:'Синее небо'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-448.jpg',cat:'Белые облака'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-449.jpg',cat:'Золотое солнце'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-450.jpg',cat:'Красный закат'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-451.jpg',cat:'Спокойная вода'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-452.jpg',cat:'Ветреный день'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-453.jpg',cat:'Тихий вечер'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-454.jpg',cat:'Яркий полдень'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-455.jpg',cat:'Мягкий рассвет'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-456.jpg',cat:'Осенние листья'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-457.jpg',cat:'Весенние почки'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-458.jpg',cat:'Летние травы'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-459.jpg',cat:'Зимные узоры'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-460.jpg',cat:'Вечерние тени'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-461.jpg',cat:'Утренние лучи'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-462.jpg',cat:'Дневное солнце'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-463.jpg',cat:'Вечерняя заря'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-464.jpg',cat:'Ночные звезды'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-465.jpg',cat:'Рассветные тени'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-466.jpg',cat:'Лесная просека'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-467.jpg',cat:'Полевая тропа'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-468.jpg',cat:'Речной берег'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-469.jpg',cat:'Горная тропинка'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-470.jpg',cat:'Луговая дорога'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-471.jpg',cat:'Озерный пейзаж'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-472.jpg',cat:'Морской берег'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-473.jpg',cat:'Речной изгиб'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-474.jpg',cat:'Овражный склон'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-475.jpg',cat:'Холмистый пейзаж'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-476.jpg',cat:'Луговая равнина'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-477.jpg',cat:'Лесная поляна'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-478.jpg',cat:'Полевое простор'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-479.jpg',cat:'Горное плато'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-480.jpg',cat:'Речная пойма'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-481.jpg',cat:'Осенний букет'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-482.jpg',cat:'Весенний сад'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-483.jpg',cat:'Летний луг'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-484.jpg',cat:'Зимный узор'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-485.jpg',cat:'Годовой круг'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-486.jpg',cat:'Времена года'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-487.jpg',cat:'Природа жизнь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-488.jpg',cat:'Красота земли'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-489.jpg',cat:'Гармония мира'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-490.jpg',cat:'Тишина природы'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-491.jpg',cat:'Свет и тень'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-492.jpg',cat:'День и ночь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-493.jpg',cat:'Утро и вечер'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-494.jpg',cat:'Лето и зима'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-495.jpg',cat:'Весна и осень'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-496.jpg',cat:'Живая вода'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-497.jpg',cat:'Чистый воздух'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-498.jpg',cat:'Зеленая трава'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-499.jpg',cat:'Синее небо'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-500.jpg',cat:'Золотое солнце'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-501.jpg',cat:'Белые облака'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-502.jpg',cat:'Серые тени'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-503.jpg',cat:'Яркие краски'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-504.jpg',cat:'Мягкие тона'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-505.jpg',cat:'Глубокие цвета'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-506.jpg',cat:'Прозрачный свет'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-507.jpg',cat:'Теплые лучи'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-508.jpg',cat:'Холодный ветер'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-509.jpg',cat:'Спокойная гладь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-510.jpg',cat:'Бурный поток'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-511.jpg',cat:'Тихая заводь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-512.jpg',cat:'Быстрая река'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-513.jpg',cat:'Глубокое озеро'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-514.jpg',cat:'Мелководье'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-515.jpg',cat:'Горный поток'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-516.jpg',cat:'Речной порог'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-517.jpg',cat:'Водопад'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-518.jpg',cat:'Ключ'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-519.jpg',cat:'Родник'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-520.jpg',cat:'Источник'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-521.jpg',cat:'Лесной ручей'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-522.jpg',cat:'Полевой ручеек'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-523.jpg',cat:'Горный ручей'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-524.jpg',cat:'Подземный источник'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-525.jpg',cat:'Весенний поток'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-526.jpg',cat:'Летний ручей'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-527.jpg',cat:'Осенний поток'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-528.jpg',cat:'Зимный ключ'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-529.jpg',cat:'Весенний родник'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-530.jpg',cat:'Круговорот воды'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-531.jpg',cat:'Деревья giants'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-532.jpg',cat:'Старые деревья'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-533.jpg',cat:'Молодые деревья'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-534.jpg',cat:'Высокие деревья'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-535.jpg',cat:'Низкие деревья'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-536.jpg',cat:'Толстые стволы'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-537.jpg',cat:'Тонкие ветки'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-538.jpg',cat:'Густые кроны'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-539.jpg',cat:'Редкие листья'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-540.jpg',cat:'Осенние цвета'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-541.jpg',cat:'Весенние почки'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-542.jpg',cat:'Летние листья'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-543.jpg',cat:'Зимные ветки'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-544.jpg',cat:'Осенние плоды'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-545.jpg',cat:'Годовой цикл'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-546.jpg',cat:'Лесная жизнь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-547.jpg',cat:'Полевая жизнь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-548.jpg',cat:'Речная жизнь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-549.jpg',cat:'Горная жизнь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-550.jpg',cat:'Озерная жизнь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-551.jpg',cat:'Природа пробуждение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-552.jpg',cat:'Природа засыпание'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-553.jpg',cat:'Природа дыхание'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-554.jpg',cat:'Природа пульс'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-555.jpg',cat:'Природа гармония'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-556.jpg',cat:'Свет игры'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-557.jpg',cat:'Тени танец'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-558.jpg',cat:'Цвета перелив'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-559.jpg',cat:'Формы линии'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-560.jpg',cat:'Пространство глубина'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-561.jpg',cat:'Время течение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-562.jpg',cat:'Мгновение ловля'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-563.jpg',cat:'Вечность поиск'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-564.jpg',cat:'Бесконечность чувств'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-565.jpg',cat:'Гармония обретение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-566.jpg',cat:'Тишина наполнение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-567.jpg',cat:'Спокойствие обретение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-568.jpg',cat:'Умиротворение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-569.jpg',cat:'Созерцание'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-570.jpg',cat:'Размышление'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-571.jpg',cat:'Вдохновение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-572.jpg',cat:'Творчество'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-573.jpg',cat:'Эмоции'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-574.jpg',cat:'Чувства'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-575.jpg',cat:'Переживания'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-576.jpg',cat:'Воспоминания'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-577.jpg',cat:'Мечты'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-578.jpg',cat:'Надежды'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-579.jpg',cat:'Ожидания'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-580.jpg',cat:'Предвкушение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-581.jpg',cat:'Счастье момент'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-582.jpg',cat:'Радость чувство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-583.jpg',cat:'Грусть отголосок'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-584.jpg',cat:'Ностальгия'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-585.jpg',cat:'Воспоминание'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-586.jpg',cat:'Прошлое отражение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-587.jpg',cat:'Настоящее ощущение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-588.jpg',cat:'Будущее предчувствие'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-589.jpg',cat:'Время остановка'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-590.jpg',cat:'Мгновение вечность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-591.jpg',cat:'Жизнь красота'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-592.jpg',cat:'Мир гармония'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-593.jpg',cat:'Вселенная бесконечность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-594.jpg',cat:'Природа мудрость'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-595.jpg',cat:'Искусство выражение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-596.jpg',cat:'Фотография момент'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-597.jpg',cat:'Искусство жизнь'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-598.jpg',cat:'Творчество полет'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-599.jpg',cat:'Вдохновение источник'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-600.jpg',cat:'Красота спасение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-601.jpg',cat:'Свет победа'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-602.jpg',cat:'Тьма покой'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-603.jpg',cat:'День ясность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-604.jpg',cat:'Ночь тайна'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-605.jpg',cat:'Утро надежда'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-606.jpg',cat:'Вечер грусть'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-607.jpg',cat:'Полдень пик'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-608.jpg',cat:'Рассвет начало'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-609.jpg',cat:'Закат завершение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-610.jpg',cat:'Сумерки переход'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-611.jpg',cat:'Полночь тайна'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-612.jpg',cat:'Предрассветный час'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-613.jpg',cat:'Утренняя заря'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-614.jpg',cat:'Вечерняя заря'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-615.jpg',cat:'Золотой час'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-616.jpg',cat:'Синий час'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-617.jpg',cat:'Розовый час'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-618.jpg',cat:'Оранжевый час'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-619.jpg',cat:'Фиолетовый час'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-620.jpg',cat:'Зеленый час'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-621.jpg',cat:'Цвета природы'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-622.jpg',cat:'Оттенки времени'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-623.jpg',cat:'Настроения свет'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-624.jpg',cat:'Эмоции цвет'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-625.jpg',cat:'Чувства тон'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-626.jpg',cat:'Нюансы детали'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-627.jpg',cat:'Простота сложность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-628.jpg',cat:'Минимализм богатство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-629.jpg',cat:'Пустота наполненность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-630.jpg',cat:'Тишина звук'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-631.jpg',cat:'Движение покой'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-632.jpg',cat:'Быстрота медлительность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-633.jpg',cat:'Мгновение вечность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-634.jpg',cat:'Текучесть стабильность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-635.jpg',cat:'Изменность постоянство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-636.jpg',cat:'Контраст гармония'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-637.jpg',cat:'Противопоставление единство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-638.jpg',cat:'Различие сходство'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-639.jpg',cat:'Уникальность повторение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-640.jpg',cat:'Индивидуальность общность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-641.jpg',cat:'Природа человек'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-642.jpg',cat:'Космос земля'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-643.jpg',cat:'Вселенная частичка'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-644.jpg',cat:'Бесконечность конечность'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-645.jpg',cat:'Вечность мгновение'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-646.jpg',cat:'Жизнь смерть'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-647.jpg',cat:'Рождение увядание'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-648.jpg',cat:'Рост упадок'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-649.jpg',cat:'Расцвет увядание'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-650.jpg',cat:'Начало конец'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-651.jpg',cat:'Путь дорога'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-652.jpg',cat:'Тропинка трасса'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-653.jpg',cat:'Маршрут след'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-654.jpg',cat:'Направление цель'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-654.jpg',cat:'Направление цель'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-654.jpg',cat:'Направление цель'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-654.jpg',cat:'Направление цель'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-654.jpg',cat:'Направление цель'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-654.jpg',cat:'Направление цель'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-654.jpg',cat:'Направление цель'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-654.jpg',cat:'Направление цель'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-654.jpg',cat:'Направление цель'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-654.jpg',cat:'Направление цель'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-654.jpg',cat:'Направление цель'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-654.jpg',cat:'Направление цель'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-654.jpg',cat:'Направление цель'}
+];
+var ROOMS=['/Users/alexanderermolovich/Documents/Irina_Site/rooms/1.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/2.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/3.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/4.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/5.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/6.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/7.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/8.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/9.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/10.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/11.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/12.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/13.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/14.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/15.png'];
+var LIGHTS=['/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light1.png', '/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light2.png', '/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light3.png', '/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light4.png'];
+
+function toRelPath(p){
+  if(!p) return p;
+  if(p.indexOf('/images/')!==-1) return 'images/'+p.split('/images/')[1];
+  if(p.indexOf('/rooms/')!==-1) return 'rooms/'+p.split('/rooms/')[1];
+  if(p.indexOf('/museum_lights/')!==-1) return 'museum_lights/'+p.split('/museum_lights/')[1];
+  return p;
+}
+
+function labelFromPath(p){
+  var m=(p||'').match(/picture-(\d+)/i);
+  if(m && m[1]) return 'Фото №'+m[1];
+  var b=(p||'').split('/').pop()||'';
+  return b ? ('Фото · '+b) : 'Фото';
+}
+
+for(var i=0;i<PH.length;i++){
+  PH[i].p=toRelPath(PH[i].p);
+  PH[i].cat=labelFromPath(PH[i].p);
+}
+var PH_TOTAL=654;
+PH=PH.slice(0,PH_TOTAL);
+for(var i=0;i<PH.length;i++){
+  PH[i].p='images/picture-'+String(i+1).padStart(3,'0')+'.jpg';
+  PH[i].cat=labelFromPath(PH[i].p);
+}
+for(var i=0;i<ROOMS.length;i++) ROOMS[i]=toRelPath(ROOMS[i]);
+for(var i=0;i<LIGHTS.length;i++) LIGHTS[i]=toRelPath(LIGHTS[i]);
+
+var perWall=12,cur=0,walls=Math.ceil(PH.length/perWall),currentLb=0,currentRoom=0;
+var hall=document.getElementById('hall');
+var brightnessSlider=document.getElementById('brightness-slider');
+var currentBrightness=50;
+var defaultBrightness=50;
+
+// АНИМИРОВАННАЯ ВЕРСИЯ - СВЕТ НА СТЕНЫ
+console.log('=== АНИМИРОВАННАЯ ВЕРСИЯ - СВЕТ НА СТЕНЫ ===');
+console.log('Фотографий:', PH.length);
+console.log('Комнат:', ROOMS.length);
+console.log('Светильников:', LIGHTS.length);
+
+// Устанавливаем светильники
+var lightElements=document.querySelectorAll('.corner-light img');
+for(var i=0;i<Math.min(4,LIGHTS.length);i++){
+  lightElements[i].src=LIGHTS[i];
+  console.log('Светильник '+i+':', LIGHTS[i]);
+}
+
+// Создаем залы
+for(var w=0;w<walls;w++){
+  var wall=document.createElement('div');wall.className='wall';
+  var bg=document.createElement('div');bg.className='wall-bg';wall.appendChild(bg);
+  var fl=document.createElement('div');fl.className='wall-floor';wall.appendChild(fl);
+  var st=document.createElement('div');st.className='strip';wall.appendChild(st);
+  var sl=PH.slice(w*perWall,(w+1)*perWall);
+  for(var i=0;i<sl.length;i++){
+    var ph=sl[i];var idx=w*perWall+i;
+    var fw=document.createElement('div');fw.className='fw';
+    var fo=document.createElement('div');fo.className='fo';
+    var img=document.createElement('img');
+    img.src=ph.p;img.style.width='180px';img.style.height='135px';
+    fo.appendChild(img);fw.appendChild(fo);
+    var pl=document.createElement('div');pl.className='pl';pl.textContent=ph.cat;fw.appendChild(pl);
+    (function(n){fw.addEventListener('click',function(){openLb(n);});})(idx);
+    wall.appendChild(fw);
+  }
+  hall.appendChild(wall);
+}
+
+// Создаем кнопки комнат
+var roomSelector=document.getElementById('room-selector');
+for(var i=0;i<ROOMS.length;i++){
+  var btn=document.createElement('div');
+  btn.className='room-btn'+(i===0?' active':'');
+  btn.style.backgroundImage='url('+ROOMS[i]+')';
+  btn.title='Комната '+(i+1);
+  btn.onclick=function(roomIndex){return function(){setRoom(roomIndex);};}(i);
+  roomSelector.appendChild(btn);
+}
+
+// Функция автоматической яркости
+function setAutoBrightness(){
+  brightnessSlider.value=defaultBrightness;
+  updateBrightness(defaultBrightness);
+}
+
+// Функция обновления яркости
+function updateBrightness(value){
+  currentBrightness=value;
+  var brightnessPercent=value/100;
+  var walls=document.querySelectorAll('.wall-bg');
+  for(var i=0;i<walls.length;i++){
+    walls[i].style.filter='brightness('+(brightnessPercent*0.8)+') contrast(1.1)';
+  }
+  
+  // Обновляем яркость кнопок комнат
+  var btns=document.querySelectorAll('.room-btn');
+  for(var i=0;i<btns.length;i++){
+    var isActive=btns[i].classList.contains('active');
+    var btnBrightness=isActive ? (brightnessPercent*1.3) : (brightnessPercent*0.9);
+    btns[i].style.filter='brightness('+btnBrightness+')';
+  }
+  
+  // Обновляем яркость светильников
+  var lights=document.querySelectorAll('.corner-light img');
+  for(var i=0;i<lights.length;i++){
+    lights[i].style.filter='brightness('+(brightnessPercent*1.4)+') contrast(1.3) drop-shadow(0 4px 12px rgba(0,0,0,0.8))';
+  }
+  
+  // Обновляем яркость лучей
+  var beams=document.querySelectorAll('.light-beam');
+  for(var i=0;i<beams.length;i++){
+    beams[i].style.opacity=brightnessPercent*0.8;
+  }
+  
+  // Обновляем яркость света на стены
+  var wallLights=document.querySelectorAll('.wall-light');
+  for(var i=0;i<wallLights.length;i++){
+    wallLights[i].style.opacity=brightnessPercent*0.6;
+  }
+}
+
+// Слушатель ползунка яркости
+brightnessSlider.addEventListener('input',function(){
+  updateBrightness(this.value);
+});
+
+// Устанавливаем комнату для каждого зала
+function setRoomForWall(wallIndex, roomIndex){
+  var walls=document.querySelectorAll('.wall');
+  if(walls[wallIndex]){
+    var bg=walls[wallIndex].querySelector('.wall-bg');
+    bg.style.backgroundImage='url('+ROOMS[roomIndex]+')';
+    bg.style.filter='brightness('+(currentBrightness/100*0.8)+') contrast(1.1)';
+  }
+}
+
+// Обновленная функция навигации - меняет и зал, и комнату
+function go(d){
+  cur=Math.max(0,Math.min(walls-1,cur+d));
+  hall.style.transform='translateX(-'+(cur*100)+'vw)';
+  
+  // Меняем комнату для текущего зала
+  var roomIndex=cur%ROOMS.length;
+  setRoomForWall(cur, roomIndex);
+  
+  // Обновляем информацию
+  document.getElementById('info').textContent='Зал '+(cur+1)+' · Комната '+(roomIndex+1);
+  
+  // Обновляем активную кнопку комнаты
+  var btns=document.querySelectorAll('.room-btn');
+  for(var i=0;i<btns.length;i++){
+    btns[i].className='room-btn'+(i===roomIndex?' active':'');
+    var isActive=i===roomIndex;
+    var btnBrightness=isActive ? (currentBrightness/100*1.3) : (currentBrightness/100*0.9);
+    btns[i].style.filter='brightness('+btnBrightness+')';
+  }
+}
+
+// Функция ручной установки комнаты
+function setRoom(roomIndex){
+  currentRoom=roomIndex;
+  setRoomForWall(cur, roomIndex);
+  document.getElementById('info').textContent='Зал '+(cur+1)+' · Комната '+(roomIndex+1);
+  
+  // Обновляем активную кнопку
+  var btns=document.querySelectorAll('.room-btn');
+  for(var i=0;i<btns.length;i++){
+    btns[i].className='room-btn'+(i===roomIndex?' active':'');
+    var isActive=i===roomIndex;
+    var btnBrightness=isActive ? (currentBrightness/100*1.3) : (currentBrightness/100*0.9);
+    btns[i].style.filter='brightness('+btnBrightness+')';
+  }
+}
+
+// Инициализация - устанавливаем комнаты для всех залов
+for(var w=0;w<walls;w++){
+  var roomIndex=w%ROOMS.length;
+  setRoomForWall(w, roomIndex);
+}
+
+// Применяем начальную яркость
+updateBrightness(currentBrightness);
+
+// Модальное окно
+function openLb(i){
+  currentLb=i;updateLb();
+  document.getElementById('lb').classList.add('on');
+  document.getElementById('lb').classList.remove('zoom');
+  document.getElementById('lb').classList.remove('show-arrows');
+  document.getElementById('lb').classList.remove('show-thumbs');
+}
+function openThumbsFromGallery(){
+  openLb(currentLb||0);
+  openLbThumbs();
+}
+function closeLb(){
+  document.getElementById('lb').classList.remove('on');
+  document.getElementById('lb').classList.remove('zoom');
+  document.getElementById('lb').classList.remove('show-arrows');
+  document.getElementById('lb').classList.remove('show-thumbs');
+}
+function toggleLbZoom(){
+  var lb=document.getElementById('lb');
+  if(!lb) return;
+  lb.classList.toggle('zoom');
+  if(lb.classList.contains('zoom')) showZoomArrows();
+}
+var _lbArrowTimer=null;
+function showZoomArrows(){
+  var lb=document.getElementById('lb');
+  if(!lb||!lb.classList.contains('zoom')) return;
+  lb.classList.add('show-arrows');
+  if(_lbArrowTimer) clearTimeout(_lbArrowTimer);
+  _lbArrowTimer=setTimeout(function(){
+    var lb2=document.getElementById('lb');
+    if(lb2) lb2.classList.remove('show-arrows');
+  },1600);
+}
+function navigateLb(d){currentLb=(currentLb+d+PH.length)%PH.length;updateLb();}
+function applyLbJump(){
+  var inp=document.getElementById('lbjnum');
+  if(!inp) return;
+  var n=parseInt(inp.value,10);
+  if(!isFinite(n)) return;
+  n=Math.max(1,Math.min(PH.length,n));
+  currentLb=n-1;
+  updateLb();
+}
+var _lbThumbsBuilt=false;
+var _lbThumbObserver=null;
+var _lbThumbScrollTop=0;
+var _lbThumbsSelectMode=false;
+var _lbThumbsMarks=new Set();
+
+function _lbMarksKey(){return 'lbmarks_'+location.pathname;}
+function loadLbThumbsMarks(){
+  try{
+    var raw=localStorage.getItem(_lbMarksKey());
+    if(!raw){_lbThumbsMarks=new Set();return;}
+    var arr=JSON.parse(raw);
+    _lbThumbsMarks=new Set((arr||[]).map(function(x){return parseInt(x,10);}).filter(function(x){return isFinite(x);}));
+  }catch(e){_lbThumbsMarks=new Set();}
+}
+function saveLbThumbsMarks(){
+  try{localStorage.setItem(_lbMarksKey(), JSON.stringify(Array.from(_lbThumbsMarks).sort(function(a,b){return a-b;})));}catch(e){}
+}
+function setLbThumbMarked(i){
+  var grid=document.getElementById('lbthumbs-grid');
+  if(!grid) return;
+  var el=grid.querySelector('.lbthumb[data-i="'+i+'"]');
+  if(!el) return;
+  if(_lbThumbsMarks.has(i+1)) el.classList.add('marked');
+  else el.classList.remove('marked');
+}
+function refreshLbThumbsMarks(){
+  var grid=document.getElementById('lbthumbs-grid');
+  if(!grid) return;
+  for(var i=0;i<PH.length;i++) setLbThumbMarked(i);
+}
+
+function toggleLbThumbMarkByNum(n){
+  if(!isFinite(n)) return;
+  if(_lbThumbsMarks.has(n)) _lbThumbsMarks.delete(n);
+  else _lbThumbsMarks.add(n);
+  saveLbThumbsMarks();
+  refreshLbThumbsMarks();
+}
+function toggleLbThumbsSelect(){
+  _lbThumbsSelectMode=!_lbThumbsSelectMode;
+  var btn=document.getElementById('lbthumbs-select');
+  if(btn) btn.classList.toggle('on', _lbThumbsSelectMode);
+}
+function clearLbThumbsMarks(){
+  _lbThumbsMarks=new Set();
+  saveLbThumbsMarks();
+  refreshLbThumbsMarks();
+}
+function copyLbThumbsMarks(){
+  var arr=Array.from(_lbThumbsMarks).sort(function(a,b){return a-b;});
+  var txt=arr.join(',');
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt);
+  }else{
+    window.prompt('Список номеров для удаления/переноса:', txt);
+  }
+}
+
+function copyLbThumbsTrashCommand(){
+  var arr=Array.from(_lbThumbsMarks).sort(function(a,b){return a-b;});
+  if(!arr.length){
+    window.prompt('Нет отмеченных. Сначала включи «Выбор» и отметь фото.', '');
+    return;
+  }
+  var PROJECT_DIR='/Users/alexanderermolovich/Documents/Irina_Site';
+  var parts=[];
+  for(var i=0;i<arr.length;i++){
+    var n=String(arr[i]).padStart(3,'0');
+    parts.push('"'+PROJECT_DIR+'/images/picture-'+n+'.jpg"');
+  }
+  var cmd='mkdir -p "'+PROJECT_DIR+'/images_trash" && mv '+parts.join(' ')+' "'+PROJECT_DIR+'/images_trash/"';
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(cmd);
+  }
+  window.prompt('Скопируй и выполни в терминале (из папки проекта):', cmd);
+}
+
+function copyLbThumbsUndoCommand(){
+  var arr=Array.from(_lbThumbsMarks).sort(function(a,b){return a-b;});
+  if(!arr.length){
+    window.prompt('Нет отмеченных. Отметь фото (Выбор) которые нужно вернуть.', '');
+    return;
+  }
+  var PROJECT_DIR='/Users/alexanderermolovich/Documents/Irina_Site';
+  var parts=[];
+  for(var i=0;i<arr.length;i++){
+    var n=String(arr[i]).padStart(3,'0');
+    parts.push('"'+PROJECT_DIR+'/images_trash/picture-'+n+'.jpg"');
+  }
+  var cmd='mv '+parts.join(' ')+' "'+PROJECT_DIR+'/images/"';
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(cmd);
+  }
+  window.prompt('Скопируй и выполни в терминале (из папки проекта):', cmd);
+}
+
+function downloadLbThumbSelected(){
+  var arr=Array.from(_lbThumbsMarks).sort(function(a,b){return a-b;});
+  if(arr.length!==1){
+    window.prompt('Для скачивания отметь ровно 1 фото (в режиме «Выбор»).', arr.join(','));
+    return;
+  }
+  var num=arr[0];
+  var n=String(num).padStart(3,'0');
+  var url='images/picture-'+n+'.jpg';
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='picture-'+n+'.jpg';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+function refreshLbThumbs(){
+  var grid=document.getElementById('lbthumbs-grid');
+  if(grid) grid.innerHTML='';
+  var sim=document.getElementById('lbthumbs-similar');
+  if(sim){
+    sim.innerHTML='';
+    sim.classList.remove('on');
+  }
+  if(_lbThumbObserver){
+    try{_lbThumbObserver.disconnect();}catch(e){}
+    _lbThumbObserver=null;
+  }
+  _lbThumbsBuilt=false;
+  buildLbThumbs();
+  var tt=document.getElementById('lbthumbs-title');
+  if(tt) tt.textContent='Миниатюры · '+PH.length;
+  refreshLbThumbsMarks();
+  setLbThumbActive();
+}
+
+var _lbSimilarRunning=false;
+var _lbSimilarOpen=false;
+function toggleLbThumbsSimilar(){
+  var sim=document.getElementById('lbthumbs-similar');
+  var grid=document.getElementById('lbthumbs-grid');
+  if(!sim || !grid) return;
+  _lbSimilarOpen=!_lbSimilarOpen;
+  if(_lbSimilarOpen){
+    sim.classList.add('on');
+    grid.style.display='none';
+    if(!sim.innerHTML.trim()) findSimilarGroupsInBrowser();
+  }else{
+    sim.classList.remove('on');
+    grid.style.display='grid';
+  }
+}
+
+function _lbHamming64(a,b){
+  if(typeof a!=='bigint' || typeof b!=='bigint') return 999;
+  var x=a^b;
+  var c=0;
+  while(x){
+    x = x & (x-1n);
+    c++;
+  }
+  return c;
+}
+
+function _lbDHashFromImage(img){
+  var w=9,h=8;
+  var cv=document.createElement('canvas');
+  cv.width=w;cv.height=h;
+  var ctx=cv.getContext('2d',{willReadFrequently:true});
+  ctx.drawImage(img,0,0,w,h);
+  var d=ctx.getImageData(0,0,w,h).data;
+  var bits=0n;
+  for(var y=0;y<h;y++){
+    for(var x=0;x<w-1;x++){
+      var i=(y*w+x)*4;
+      var i2=(y*w+x+1)*4;
+      var g1=(d[i]*0.299+d[i+1]*0.587+d[i+2]*0.114);
+      var g2=(d[i2]*0.299+d[i2+1]*0.587+d[i2+2]*0.114);
+      bits = (bits<<1n) | (g1>g2 ? 1n : 0n);
+    }
+  }
+  return bits;
+}
+
+function findSimilarGroupsInBrowser(){
+  if(_lbSimilarRunning) return;
+  _lbSimilarRunning=true;
+  var sim=document.getElementById('lbthumbs-similar');
+  if(!sim){_lbSimilarRunning=false;return;}
+  sim.innerHTML='Ищу похожие… (это может занять 1-2 минуты)';
+
+  var maxPhotos=PH.length;
+  var hashes=new Array(maxPhotos);
+  var i=0;
+  function step(){
+    if(i>=maxPhotos){
+      buildSimilarGroups(hashes);
+      _lbSimilarRunning=false;
+      return;
+    }
+    var n=String(i+1).padStart(3,'0');
+    var url='images/picture-'+n+'.jpg';
+    var im=new Image();
+    im.onload=function(){
+      try{hashes[i]=_lbDHashFromImage(im);}catch(e){hashes[i]=null;}
+      i++;
+      if(i%40===0) sim.innerHTML='Ищу похожие… '+i+' / '+maxPhotos;
+      setTimeout(step,0);
+    };
+    im.onerror=function(){hashes[i]=null;i++;setTimeout(step,0);};
+    im.src=url+'?v='+(Date.now());
+  }
+
+  function buildSimilarGroups(h){
+    var threshold=6;
+    var used=new Array(h.length).fill(false);
+    var groups=[];
+    for(var a=0;a<h.length;a++){
+      if(used[a] || h[a]==null) continue;
+      var g=[a];
+      for(var b=a+1;b<h.length;b++){
+        if(used[b] || h[b]==null) continue;
+        if(_lbHamming64(h[a],h[b])<=threshold) g.push(b);
+      }
+      if(g.length>1){
+        for(var k=0;k<g.length;k++) used[g[k]]=true;
+        groups.push(g);
+      }
+    }
+    renderSimilarGroups(groups);
+  }
+
+  function renderSimilarGroups(groups){
+    sim.innerHTML='';
+    if(!groups.length){
+      sim.textContent='Похожих групп не найдено (по текущему порогу).';
+      return;
+    }
+    for(var gi=0;gi<groups.length;gi++){
+      var g=groups[gi];
+      var wrap=document.createElement('div');
+      wrap.className='simgrp';
+      var title=document.createElement('div');
+      title.className='simgrp-title';
+      title.textContent='Группа '+(gi+1)+' · '+g.length+' фото (клик по миниатюре = отметить/снять отметку)';
+      wrap.appendChild(title);
+      for(var k=0;k<g.length;k++){
+        var idx=g[k];
+        var num=idx+1;
+        var nn=String(num).padStart(3,'0');
+        var t=document.createElement('div');
+        t.className='simthumb';
+        t.setAttribute('data-num', String(num));
+        var img=document.createElement('img');
+        img.loading='lazy';
+        img.src='images/picture-'+nn+'.jpg?v='+Date.now();
+        var b=document.createElement('b');
+        b.textContent=nn;
+        t.appendChild(img);
+        t.appendChild(b);
+        if(_lbThumbsMarks.has(num)) t.classList.add('marked');
+        t.onclick=function(ev){
+          ev.preventDefault();
+          ev.stopPropagation();
+          var n=parseInt(this.getAttribute('data-num'),10);
+          if(isFinite(n)){
+            toggleLbThumbMarkByNum(n);
+            this.classList.toggle('marked', _lbThumbsMarks.has(n));
+          }
+        };
+        wrap.appendChild(t);
+      }
+      sim.appendChild(wrap);
+    }
+  }
+
+  step();
+}
+
+function buildLbThumbs(){
+  if(_lbThumbsBuilt) return;
+  var grid=document.getElementById('lbthumbs-grid');
+  if(!grid) return;
+  loadLbThumbsMarks();
+  var frag=document.createDocumentFragment();
+  for(var i=0;i<PH.length;i++){
+    var item=document.createElement('div');
+    item.className='lbthumb';
+    item.setAttribute('data-i',i);
+    var img=document.createElement('img');
+    img.alt='';
+    img.loading='lazy';
+    img.setAttribute('data-src',PH[i].p);
+    img.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
+    (function(it,im){
+      im.onerror=function(){
+        it.classList.add('missing');
+      };
+    })(item,img);
+    var badge=document.createElement('div');
+    badge.className='lbthumb-badge';
+    badge.textContent=(i+1);
+    item.appendChild(img);
+    item.appendChild(badge);
+    item.onclick=function(ev){
+      ev.stopPropagation();
+      var idx=parseInt(this.getAttribute('data-i'),10);
+      if(!isFinite(idx)) return;
+      if(_lbThumbsSelectMode){
+        var n=idx+1;
+        if(_lbThumbsMarks.has(n)) _lbThumbsMarks.delete(n);
+        else _lbThumbsMarks.add(n);
+        saveLbThumbsMarks();
+        setLbThumbMarked(idx);
+        return;
+      }
+      currentLb=idx;
+      updateLb();
+      closeLbThumbs();
+    };
+    frag.appendChild(item);
+  }
+  grid.appendChild(frag);
+  refreshLbThumbsMarks();
+  if('IntersectionObserver' in window){
+    _lbThumbObserver=new IntersectionObserver(function(entries){
+      for(var k=0;k<entries.length;k++){
+        var e=entries[k];
+        if(!e.isIntersecting) continue;
+        var im=e.target;
+        var ds=im.getAttribute('data-src');
+        if(ds && im.src && im.src.indexOf('data:image/gif')===0) im.src=ds;
+        if(_lbThumbObserver) _lbThumbObserver.unobserve(im);
+      }
+    },{root:grid,rootMargin:'220px 0px'});
+    var imgs=grid.querySelectorAll('img[data-src]');
+    for(var j=0;j<imgs.length;j++) _lbThumbObserver.observe(imgs[j]);
+  }else{
+    var imgs2=grid.querySelectorAll('img[data-src]');
+    for(var j2=0;j2<imgs2.length;j2++) imgs2[j2].src=imgs2[j2].getAttribute('data-src');
+  }
+  _lbThumbsBuilt=true;
+}
+function setLbThumbActive(){
+  var grid=document.getElementById('lbthumbs-grid');
+  if(!grid) return;
+  var prev=grid.querySelector('.lbthumb.active');
+  if(prev) prev.classList.remove('active');
+  var cur=grid.querySelector('.lbthumb[data-i="'+currentLb+'"]');
+  if(cur) cur.classList.add('active');
+}
+function openLbThumbs(){
+  var lb=document.getElementById('lb');
+  if(!lb) return;
+  buildLbThumbs();
+  var tt=document.getElementById('lbthumbs-title');
+  if(tt) tt.textContent='Миниатюры · '+PH.length;
+  var grid=document.getElementById('lbthumbs-grid');
+  if(grid) grid.scrollTop=_lbThumbScrollTop||0;
+  lb.classList.add('show-thumbs');
+  setLbThumbActive();
+  refreshLbThumbsMarks();
+  if(grid){
+    var cur=grid.querySelector('.lbthumb[data-i="'+currentLb+'"]');
+    if(cur) cur.scrollIntoView({block:'center'});
+  }
+}
+function closeLbThumbs(){
+  var lb=document.getElementById('lb');
+  var grid=document.getElementById('lbthumbs-grid');
+  if(grid) _lbThumbScrollTop=grid.scrollTop||0;
+  if(lb) lb.classList.remove('show-thumbs');
+}
+function toggleLbThumbs(){
+  var lb=document.getElementById('lb');
+  if(!lb||!lb.classList.contains('on')) return;
+  if(lb.classList.contains('show-thumbs')) closeLbThumbs();
+  else openLbThumbs();
+}
+function updateLb(){
+  var img=document.getElementById('lbi');
+  var inp=document.getElementById('lbjnum');
+  if(inp){
+    inp.max=PH.length;
+    inp.value=(currentLb+1);
+  }
+  var lbl=document.getElementById('lbjlabel');
+  if(lbl) lbl.textContent='Фото '+(currentLb+1)+'/'+PH.length;
+  setLbThumbActive();
+  img.onerror=function(){
+    document.getElementById('lbc').textContent='(фото не найдено) '+PH[currentLb].cat;
+  };
+  img.onload=function(){
+    document.getElementById('lbc').textContent=PH[currentLb].cat;
+  };
+  img.src=PH[currentLb].p;
+}
+
+// Клавиатура
+document.onkeydown=function(e){
+  var lb=document.getElementById('lb');
+  var lbOn=lb&&lb.classList.contains('on');
+  if(e.key==='Escape') closeLb();
+  if(lbOn){
+    if(e.key==='ArrowRight') return navigateLb(1);
+    if(e.key==='ArrowLeft') return navigateLb(-1);
+    return;
+  }
+  if(e.key==='ArrowRight') go(1);
+  if(e.key==='ArrowLeft') go(-1);
+};
+
+(function(){
+  var lb=document.getElementById('lb');
+  if(!lb) return;
+  lb.addEventListener('mousemove',function(){showZoomArrows();});
+  lb.addEventListener('touchstart',function(e){
+    if(!lb.classList.contains('on')) return;
+    showZoomArrows();
+    if(!e.touches||!e.touches[0]) return;
+    lb._tx=e.touches[0].clientX;
+    lb._ty=e.touches[0].clientY;
+  },{passive:true});
+  lb.addEventListener('touchend',function(e){
+    if(!lb.classList.contains('on')) return;
+    var t=e.changedTouches&&e.changedTouches[0];
+    if(!t||typeof lb._tx!=='number') return;
+    var dx=t.clientX-lb._tx;
+    var dy=t.clientY-lb._ty;
+    lb._tx=null;lb._ty=null;
+    if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)){
+      navigateLb(dx<0?1:-1);
+    }
+  },{passive:true});
+})();
+
+console.log('=== АНИМАЦИЯ СВЕТА НА СТЕНЫ ЗАВЕРШЕНА ===');
+</script></body></html>
