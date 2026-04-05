@@ -120,19 +120,13 @@ border-radius:2px;transform:translateZ(10px)}
 #lb.wall-template #lbside-left,#lb.wall-template #lbside-right{display:block}
 #lb:not(.wall-template) #lbside-left,#lb:not(.wall-template) #lbside-right{display:none}
 #lbt{display:none}
-#lbplate{margin-top:18px;text-align:center;display:inline-block;padding:10px 16px 9px;border-radius:10px;border:1px solid rgba(255,224,170,0.20);background-image:linear-gradient(180deg,rgba(140,92,46,0.92),rgba(92,54,22,0.92)),repeating-linear-gradient(135deg,rgba(255,255,255,0.045) 0px,rgba(255,255,255,0.045) 1px,transparent 1px,transparent 10px);box-shadow:0 16px 38px rgba(0,0,0,0.62),inset 0 1px 0 rgba(255,255,255,0.12),inset 0 -1px 0 rgba(0,0,0,0.35)}
-#lbc{margin:0;font-size:14px;font-style:italic;letter-spacing:0.8px;color:rgba(255,245,210,0.95);text-shadow:0 2px 10px rgba(0,0,0,0.75)}
-#lba{margin-top:6px;font-size:10px;opacity:0.92;letter-spacing:2.5px;color:rgba(232,213,160,0.90);text-shadow:0 2px 10px rgba(0,0,0,0.65)}
-#lbplate-thumbs{margin-top:10px;background:rgba(0,0,0,0.16);border:1px solid rgba(232,213,160,0.22);color:rgba(255,245,210,0.92);border-radius:12px;padding:6px 12px;font-family:Georgia;font-size:11px;cursor:pointer;white-space:nowrap;letter-spacing:2px;text-transform:uppercase}
-#lbplate-thumbs:hover{background:rgba(0,0,0,0.26)}
-#lbjump{position:fixed;right:22px;bottom:142px;top:auto;z-index:2001;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:14px;background-image:linear-gradient(180deg,rgba(140,92,46,0.92),rgba(92,54,22,0.92)),repeating-linear-gradient(135deg,rgba(255,255,255,0.045) 0px,rgba(255,255,255,0.045) 1px,transparent 1px,transparent 10px);border:1px solid rgba(255,224,170,0.20);box-shadow:0 16px 38px rgba(0,0,0,0.62),inset 0 1px 0 rgba(255,255,255,0.12),inset 0 -1px 0 rgba(0,0,0,0.35);backdrop-filter:blur(2px);max-width:calc(100vw - 44px)}
-#lbjlabel,#lbjnum,#lbjgo{display:none}
+#lbplate{margin-top:18px;text-align:center;display:inline-block;padding:10px 16px 9px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:linear-gradient(180deg,rgba(235,235,240,0.96),rgba(150,150,162,0.92) 58%,rgba(220,220,225,0.9));box-shadow:0 14px 34px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.35),inset 0 -1px 0 rgba(0,0,0,0.25)}
+#lbc{margin:0;font-size:14px;font-style:italic;letter-spacing:0.8px;color:rgba(20,14,4,0.92);text-shadow:0 1px 0 rgba(255,255,255,0.35)}
+#lba{margin-top:6px;font-size:10px;opacity:0.9;letter-spacing:2.5px;color:rgba(35,24,6,0.85)}
+#lbjump{position:fixed;right:22px;bottom:140px;top:auto;z-index:2001;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:14px;background-image:linear-gradient(180deg,rgba(140,92,46,0.92),rgba(92,54,22,0.92)),repeating-linear-gradient(135deg,rgba(255,255,255,0.045) 0px,rgba(255,255,255,0.045) 1px,transparent 1px,transparent 10px);border:1px solid rgba(255,224,170,0.20);box-shadow:0 16px 38px rgba(0,0,0,0.62),inset 0 1px 0 rgba(255,255,255,0.12),inset 0 -1px 0 rgba(0,0,0,0.35);backdrop-filter:blur(2px);max-width:calc(100vw - 44px)}
 #lbjlabel{font-size:10px;letter-spacing:2px;color:rgba(232,213,160,0.85);text-transform:uppercase;opacity:0.9;white-space:nowrap}
 #lbjnum{width:72px;background:rgba(0,0,0,0.25);border:1px solid rgba(232,213,160,0.25);color:rgba(255,245,210,0.95);border-radius:10px;padding:4px 8px;font-family:Georgia;font-size:12px;outline:none}
 #lbjgo{background:rgba(200,160,40,0.22);border:1px solid rgba(200,160,40,0.45);color:rgba(255,245,210,0.95);border-radius:10px;padding:4px 10px;font-family:Georgia;font-size:11px;cursor:pointer}
-#lbjump{display:none}
-#lbjump{display:none !important}
-#lbjthumbs{display:none !important}
 #lbjgo:hover{background:rgba(200,160,40,0.32)}
 #lbjthumbs{background:rgba(0,0,0,0.18);border:1px solid rgba(232,213,160,0.22);color:rgba(255,245,210,0.92);border-radius:10px;padding:4px 10px;font-family:Georgia;font-size:11px;cursor:pointer;white-space:nowrap}
 #lbjthumbs:hover{background:rgba(0,0,0,0.28)}
@@ -144,10 +138,24 @@ border-radius:2px;transform:translateZ(10px)}
 #lbthumbs-title{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(232,213,160,0.9)}
 #lbthumbs-close{background:rgba(200,160,40,0.18);border:1px solid rgba(200,160,40,0.35);color:rgba(255,245,210,0.95);border-radius:12px;padding:6px 10px;font-family:Georgia;font-size:11px;cursor:pointer}
 #lbthumbs-close:hover{background:rgba(200,160,40,0.28)}
+#lbthumbs-actions{display:flex;align-items:center;gap:8px}
+.lbthumbs-btn{background:rgba(0,0,0,0.16);border:1px solid rgba(232,213,160,0.18);color:rgba(255,245,210,0.95);border-radius:12px;padding:6px 10px;font-family:Georgia;font-size:11px;cursor:pointer;white-space:nowrap}
+.lbthumbs-btn:hover{background:rgba(0,0,0,0.26)}
+.lbthumbs-btn.on{background:rgba(200,160,40,0.22);border-color:rgba(200,160,40,0.42)}
 #lbthumbs-grid{flex:1;overflow:auto;padding:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;align-content:start;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y}
 .lbthumb{position:relative;border-radius:10px;overflow:hidden;background:rgba(0,0,0,0.18);border:1px solid rgba(232,213,160,0.10);cursor:pointer;aspect-ratio:4/3;height:84px}
 .lbthumb:hover{border-color:rgba(232,213,160,0.28)}
 .lbthumb.active{border-color:rgba(232,213,160,0.75);box-shadow:0 0 0 2px rgba(200,160,40,0.35)}
+.lbthumb.marked{border-color:rgba(240,110,70,0.85);box-shadow:0 0 0 2px rgba(240,110,70,0.30)}
+.lbthumb.missing{opacity:0.35;filter:grayscale(0.55)}
+#lbthumbs-similar{display:none;flex:1;overflow:auto;padding:12px;border-top:1px solid rgba(232,213,160,0.14)}
+#lbthumbs-similar.on{display:block}
+#lbthumbs-similar .simgrp{display:flex;flex-wrap:wrap;gap:8px;padding:8px;border:1px solid rgba(232,213,160,0.14);border-radius:12px;background:rgba(0,0,0,0.10);margin-bottom:10px}
+#lbthumbs-similar .simgrp-title{width:100%;font-family:Georgia;font-size:12px;letter-spacing:1px;color:rgba(255,245,210,0.92)}
+#lbthumbs-similar .simthumb{width:92px;height:70px;border-radius:10px;overflow:hidden;border:1px solid rgba(232,213,160,0.10);cursor:pointer;position:relative;background:rgba(0,0,0,0.18)}
+#lbthumbs-similar .simthumb:hover{border-color:rgba(232,213,160,0.28)}
+#lbthumbs-similar .simthumb img{width:100%;height:100%;object-fit:cover;display:block}
+#lbthumbs-similar .simthumb b{position:absolute;left:6px;bottom:6px;font-size:10px;letter-spacing:1px;color:rgba(255,245,210,0.95);background:rgba(0,0,0,0.38);border:1px solid rgba(255,245,210,0.18);padding:2px 5px;border-radius:10px}
 .lbthumb img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(1.03) contrast(1.02)}
 .lbthumb-badge{position:absolute;left:8px;bottom:8px;font-size:10px;letter-spacing:1px;color:rgba(255,245,210,0.95);background:rgba(0,0,0,0.38);border:1px solid rgba(255,245,210,0.18);padding:3px 6px;border-radius:10px}
 @media (max-width: 700px){
@@ -173,92 +181,6 @@ border-radius:2px;transform:translateZ(10px)}
   #lb.wall-template #lbprev{left:6px !important;font-size:56px !important;padding:4px 8px !important}
   #lb.wall-template #lbnext{right:6px !important;font-size:56px !important;padding:4px 8px !important}
 }
- #lb.on{display:flex}
- #lb.wall-template #lbt{display:none}
- #lb.wall-template #lbplate{display:none}
- #lb.wall-template .lbf{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);padding:18px;background:rgba(245,240,232,0.98);border-radius:3px;box-shadow:0 0 0 2px #b8962a,0 0 0 5px #e8c84a,0 0 0 8px #8a6a1a,0 34px 110px rgba(0,0,0,0.72)}
- #lb.wall-template #lbi{max-width:76vw;max-height:55vh;object-fit:contain;display:block;border-radius:2px;filter:brightness(1.05) contrast(1.02);box-shadow:none}
- #lb.zoom.wall-template .lbf{padding:0;background:transparent;box-shadow:none}
- #lb.zoom.wall-template #lbi{width:96vw !important;height:auto !important;max-width:none !important;max-height:86vh !important;filter:brightness(1.02) contrast(1.01)}
- #lb.wall-template .lbf{cursor:zoom-in}
- #lb.zoom.wall-template .lbf{cursor:zoom-out}
- #lbzprev,#lbznext{position:fixed;top:50%;transform:translateY(-50%);z-index:7;font-size:60px;line-height:1;color:rgba(255,245,210,0.95);cursor:pointer;user-select:none;opacity:0;pointer-events:none;padding:10px 12px;text-shadow:0 10px 30px rgba(0,0,0,0.85)}
- #lbzprev{left:10px}
- #lbznext{right:10px}
- #lb.wall-template #lbzprev,#lb.wall-template #lbznext{display:block}
- #lb.wall-template.show-arrows #lbzprev,#lb.wall-template.show-arrows #lbznext{opacity:0.92;pointer-events:auto}
- @media (max-width: 700px), (max-height: 520px){
-   #lbzprev,#lbznext{font-size:54px;padding:12px 10px}
-   #lbzprev{left:6px}
-   #lbznext{right:6px}
- }
- #lbside-left,#lbside-right{position:fixed;top:0;bottom:0;width:22vw;pointer-events:auto;cursor:pointer;z-index:2;opacity:1}
- #lbside-left{left:0;background:transparent}
- #lbside-right{right:0;background:transparent}
- #lb.wall-template #lbside-left,#lb.wall-template #lbside-right{display:block}
- #lb:not(.wall-template) #lbside-left,#lb:not(.wall-template) #lbside-right{display:none}
- #lbt{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:1001;font-size:11px;letter-spacing:6px;text-transform:uppercase;color:rgba(232,213,160,0.92);text-shadow:2px 2px 6px rgba(0,0,0,0.9);pointer-events:none;white-space:nowrap}
- #lbplate{margin-top:18px;text-align:center;display:inline-block;padding:10px 16px 9px;border-radius:7px;border:1px solid rgba(255,255,255,0.14);background:linear-gradient(180deg,rgba(235,235,240,0.96),rgba(150,150,162,0.92) 58%,rgba(220,220,225,0.9));box-shadow:0 14px 34px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.35),inset 0 -1px 0 rgba(0,0,0,0.25)}
- #lbc{margin:0;font-size:14px;font-style:italic;letter-spacing:0.8px;color:rgba(20,14,4,0.92);text-shadow:0 1px 0 rgba(255,255,255,0.35)}
- #lba{margin-top:6px;font-size:10px;opacity:0.9;letter-spacing:2.5px;color:rgba(35,24,6,0.85)}
- #lbjump{position:fixed;right:22px;bottom:140px;top:auto;z-index:2001;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:14px;background-image:linear-gradient(180deg,rgba(140,92,46,0.92),rgba(92,54,22,0.92)),repeating-linear-gradient(135deg,rgba(255,255,255,0.045) 0px,rgba(255,255,255,0.045) 1px,transparent 1px,transparent 10px);border:1px solid rgba(255,224,170,0.20);box-shadow:0 16px 38px rgba(0,0,0,0.62),inset 0 1px 0 rgba(255,255,255,0.12),inset 0 -1px 0 rgba(0,0,0,0.35);backdrop-filter:blur(2px);max-width:calc(100vw - 44px)}
- #lbjlabel{font-size:10px;letter-spacing:2px;color:rgba(232,213,160,0.85);text-transform:uppercase;opacity:0.9;white-space:nowrap}
- #lbjnum{width:72px;background:rgba(0,0,0,0.25);border:1px solid rgba(232,213,160,0.25);color:rgba(255,245,210,0.95);border-radius:10px;padding:4px 8px;font-family:Georgia;font-size:12px;outline:none}
- #lbjgo{background:rgba(200,160,40,0.22);border:1px solid rgba(200,160,40,0.45);color:rgba(255,245,210,0.95);border-radius:10px;padding:4px 10px;font-family:Georgia;font-size:11px;cursor:pointer}
- #lbjgo:hover{background:rgba(200,160,40,0.32)}
- #lbjthumbs{background:rgba(0,0,0,0.18);border:1px solid rgba(232,213,160,0.22);color:rgba(255,245,210,0.92);border-radius:10px;padding:4px 10px;font-family:Georgia;font-size:11px;cursor:pointer;white-space:nowrap}
- #lbjthumbs:hover{background:rgba(0,0,0,0.28)}
- #lbthumbs{position:fixed;inset:0;z-index:20;display:none;pointer-events:none}
- #lb.show-thumbs #lbthumbs{display:block;pointer-events:auto}
- #lbthumbs-bg{position:absolute;inset:0;background:rgba(20,14,4,0.72);backdrop-filter:blur(10px)}
- #lbthumbs-panel{position:absolute;inset:64px 22px 22px 22px;border:1px solid rgba(232,213,160,0.18);border-radius:16px;background:rgba(25,18,8,0.35);box-shadow:0 24px 90px rgba(0,0,0,0.72);display:flex;flex-direction:column;overflow:hidden}
- #lbthumbs-top{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid rgba(232,213,160,0.12)}
- #lbthumbs-title{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(232,213,160,0.9)}
- #lbthumbs-close{background:rgba(200,160,40,0.18);border:1px solid rgba(200,160,40,0.35);color:rgba(255,245,210,0.95);border-radius:12px;padding:6px 10px;font-family:Georgia;font-size:11px;cursor:pointer}
- #lbthumbs-close:hover{background:rgba(200,160,40,0.28)}
- #lbthumbs-actions{display:flex;align-items:center;gap:8px}
- .lbthumbs-btn{background:rgba(0,0,0,0.16);border:1px solid rgba(232,213,160,0.18);color:rgba(255,245,210,0.95);border-radius:12px;padding:6px 10px;font-family:Georgia;font-size:11px;cursor:pointer;white-space:nowrap}
- .lbthumbs-btn:hover{background:rgba(0,0,0,0.26)}
- .lbthumbs-btn.on{background:rgba(200,160,40,0.22);border-color:rgba(200,160,40,0.42)}
- #lbthumbs-grid{flex:1;overflow:auto;padding:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;align-content:start;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y}
- .lbthumb{position:relative;border-radius:10px;overflow:hidden;background:rgba(0,0,0,0.18);border:1px solid rgba(232,213,160,0.10);cursor:pointer;aspect-ratio:4/3;height:84px}
- .lbthumb:hover{border-color:rgba(232,213,160,0.28)}
- .lbthumb.active{border-color:rgba(232,213,160,0.75);box-shadow:0 0 0 2px rgba(200,160,40,0.35)}
- .lbthumb.marked{border-color:rgba(240,110,70,0.85);box-shadow:0 0 0 2px rgba(240,110,70,0.30)}
- .lbthumb.missing{opacity:0.35;filter:grayscale(0.55)}
- #lbthumbs-similar{display:none;flex:1;overflow:auto;padding:12px;border-top:1px solid rgba(232,213,160,0.14)}
- #lbthumbs-similar.on{display:block}
- #lbthumbs-similar .simgrp{display:flex;flex-wrap:wrap;gap:8px;padding:8px;border:1px solid rgba(232,213,160,0.14);border-radius:12px;background:rgba(0,0,0,0.10);margin-bottom:10px}
- #lbthumbs-similar .simgrp-title{width:100%;font-family:Georgia;font-size:12px;letter-spacing:1px;color:rgba(255,245,210,0.92)}
- #lbthumbs-similar .simthumb{width:92px;height:70px;border-radius:10px;overflow:hidden;border:1px solid rgba(232,213,160,0.10);cursor:pointer;position:relative;background:rgba(0,0,0,0.18)}
- #lbthumbs-similar .simthumb:hover{border-color:rgba(232,213,160,0.28)}
- #lbthumbs-similar .simthumb img{width:100%;height:100%;object-fit:cover;display:block}
- #lbthumbs-similar .simthumb b{position:absolute;left:6px;bottom:6px;font-size:10px;letter-spacing:1px;color:rgba(255,245,210,0.95);background:rgba(0,0,0,0.38);border:1px solid rgba(255,245,210,0.18);padding:2px 5px;border-radius:10px}
- .lbthumb img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(1.03) contrast(1.02)}
- .lbthumb-badge{position:absolute;left:8px;bottom:8px;font-size:10px;letter-spacing:1px;color:rgba(255,245,210,0.95);background:rgba(0,0,0,0.38);border:1px solid rgba(255,245,210,0.18);padding:3px 6px;border-radius:10px}
- @media (max-width: 700px){
-   #lbthumbs-panel{inset:58px 10px 10px 10px}
-   #lbthumbs-grid{grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
-   .lbthumb{height:72px}
- }
- @media (max-width: 700px), (max-height: 520px){
-   #lbjump{right:12px;bottom:118px;padding:7px 10px;border-radius:13px}
-   #thumbs-btn{right:12px;bottom:18px;padding:9px 12px}
- }
- #lbx{position:fixed;top:14px;right:22px;z-index:6;font-size:28px;cursor:pointer;opacity:0.7;color:#fff;background:#c8a84a;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
- #lbx:hover{opacity:1;transform:scale(1.1)}
- .lbarrow{position:fixed;top:50%;transform:translateY(-50%);z-index:7;font-size:66px;line-height:1;color:rgba(255,245,210,0.94);cursor:pointer;user-select:none;opacity:0.16;transition:opacity 0.18s,transform 0.18s;text-shadow:0 10px 34px rgba(0,0,0,0.85);pointer-events:auto}
- .lbarrow:hover{opacity:0.55;transform:translateY(-50%) scale(1.04)}
- #lbprev{left:12px;display:block}
- #lbnext{right:12px;display:block}
- #lb.wall-template #lbprev,#lb.wall-template #lbnext{display:block}
- #lb:not(.wall-template) #lbprev,#lb:not(.wall-template) #lbnext{display:none}
- #lb.wall-template #lbprev{left:10px !important;right:auto !important;top:50% !important;bottom:auto !important;transform:translateY(-50%) !important}
- #lb.wall-template #lbnext{right:10px !important;left:auto !important;top:50% !important;bottom:auto !important;transform:translateY(-50%) !important}
- @media (max-width: 700px), (max-height: 520px){
-   #lb.wall-template #lbprev{left:6px !important;font-size:56px !important;padding:4px 8px !important}
-   #lb.wall-template #lbnext{right:6px !important;font-size:56px !important;padding:4px 8px !important}
-  }
 #lb-controls{display:none}
 #room-selector{position:fixed;top:20px;right:20px;z-index:100;display:flex;flex-direction:column;gap:8px}
 .room-btn{width:35px;height:35px;border-radius:50%;cursor:pointer;border:2px solid #8B6914;transition:all 0.2s;background-size:cover;background-position:center;filter:brightness(0.9)}
@@ -272,9 +194,20 @@ border-radius:2px;transform:translateZ(10px)}
 #brightness-label{color:#c8a84a;font-size:9px;letter-spacing:1px;text-transform:uppercase;text-align:center;margin-bottom:6px}
  #auto-btn{background:rgba(200,160,40,0.2);color:#c8a84a;border:1px solid #8B6914;padding:4px 10px;font-family:Georgia;font-size:9px;letter-spacing:1px;cursor:pointer;border-radius:15px;transition:all 0.2s;text-transform:uppercase;width:100%;display:block}
  #auto-btn:hover{background:rgba(200,160,40,0.35);transform:scale(1.02)}
+#admin-panel{position:fixed;top:16px;right:22px;z-index:2500;display:none;gap:10px;align-items:center}
+#admin-panel a{display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:14px;background:rgba(0,0,0,0.22);border:1px solid rgba(232,213,160,0.22);color:rgba(255,245,210,0.95);font-family:Georgia;font-size:11px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;backdrop-filter:blur(8px)}
+#admin-panel a:hover{background:rgba(0,0,0,0.30);border-color:rgba(200,160,40,0.42)}
+@media (max-width: 700px), (max-height: 520px){
+  #admin-panel{top:12px;right:12px;gap:8px}
+  #admin-panel a{padding:7px 10px;border-radius:13px;font-size:10px}
+}
 </style></head><body>
 <div id="title">Свет и тишина</div>
 <div id="info">Зал 1 · Комната 1</div>
+<div id="admin-panel">
+  <a id="admin-upload" href="https://github.com/irina-photo/irina-photo.github.io/upload/main/images" target="_blank" rel="noopener noreferrer">Загрузить фото</a>
+  <a id="admin-captions" href="https://github.com/irina-photo/irina-photo.github.io/edit/main/captions.json" target="_blank" rel="noopener noreferrer">Подписи</a>
+</div>
 <div id="thumbs-btn" onclick="openThumbsFromGallery()">Миниатюры</div>
 <div id="hall"></div>
 <!-- АНИМИРОВАННЫЕ СВЕТИЛЬНИКИ -->
@@ -298,7 +231,7 @@ border-radius:2px;transform:translateZ(10px)}
 </div>
 <div id="gal-prev" class="gal-arrow" onclick="go(-1)">‹</div>
 <div id="gal-next" class="gal-arrow" onclick="go(1)">›</div>
-<div id="hint">← → клавиши · нажми на картину чтобы открыть</div>
+<div id="hint">← → клавиши · нажми на картинку чтобы открыть</div>
 <div id="brightness-control">
   <div id="brightness-label">Яркость зала</div>
   <input type="range" id="brightness-slider" min="20" max="100" value="50">
@@ -387,7 +320,7 @@ var PH=[
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-041.jpg',cat:'Осенние листья'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-042.jpg',cat:'Весенние почки'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-043.jpg',cat:'Летние травы'},
-{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-044.jpg',cat:'Зимные узоры'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-044.jpg',cat:'Зимние узоры'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-045.jpg',cat:'Вечерние тени'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-046.jpg',cat:'Утренние лучи'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-047.jpg',cat:'Дневное солнце'},
@@ -412,7 +345,7 @@ var PH=[
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-066.jpg',cat:'Осенний букет'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-067.jpg',cat:'Весенний сад'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-068.jpg',cat:'Летний луг'},
-{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-069.jpg',cat:'Зимный узор'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-069.jpg',cat:'Зимний узор'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-070.jpg',cat:'Годовой круг'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-071.jpg',cat:'Времена года'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-072.jpg',cat:'Природа жизнь'},
@@ -456,7 +389,7 @@ var PH=[
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-110.jpg',cat:'Весенний поток'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-111.jpg',cat:'Летний ручей'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-112.jpg',cat:'Осенний поток'},
-{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-113.jpg',cat:'Зимный ключ'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-113.jpg',cat:'Зимний ключ'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-114.jpg',cat:'Весенний родник'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-115.jpg',cat:'Круговорот воды'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-116.jpg',cat:'Деревья giants'},
@@ -471,7 +404,7 @@ var PH=[
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-125.jpg',cat:'Осенние цвета'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-126.jpg',cat:'Весенние почки'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-127.jpg',cat:'Летние листья'},
-{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-128.jpg',cat:'Зимные ветки'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-128.jpg',cat:'Зимние ветки'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-129.jpg',cat:'Осенние плоды'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-130.jpg',cat:'Годовой цикл'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-131.jpg',cat:'Лесная жизнь'},
@@ -802,7 +735,7 @@ var PH=[
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-456.jpg',cat:'Осенние листья'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-457.jpg',cat:'Весенние почки'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-458.jpg',cat:'Летние травы'},
-{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-459.jpg',cat:'Зимные узоры'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-459.jpg',cat:'Зимние узоры'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-460.jpg',cat:'Вечерние тени'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-461.jpg',cat:'Утренние лучи'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-462.jpg',cat:'Дневное солнце'},
@@ -827,7 +760,7 @@ var PH=[
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-481.jpg',cat:'Осенний букет'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-482.jpg',cat:'Весенний сад'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-483.jpg',cat:'Летний луг'},
-{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-484.jpg',cat:'Зимный узор'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-484.jpg',cat:'Зимний узор'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-485.jpg',cat:'Годовой круг'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-486.jpg',cat:'Времена года'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-487.jpg',cat:'Природа жизнь'},
@@ -871,7 +804,7 @@ var PH=[
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-525.jpg',cat:'Весенний поток'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-526.jpg',cat:'Летний ручей'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-527.jpg',cat:'Осенний поток'},
-{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-528.jpg',cat:'Зимный ключ'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-528.jpg',cat:'Зимний ключ'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-529.jpg',cat:'Весенний родник'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-530.jpg',cat:'Круговорот воды'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-531.jpg',cat:'Деревья giants'},
@@ -886,7 +819,7 @@ var PH=[
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-540.jpg',cat:'Осенние цвета'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-541.jpg',cat:'Весенние почки'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-542.jpg',cat:'Летние листья'},
-{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-543.jpg',cat:'Зимные ветки'},
+{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-543.jpg',cat:'Зимние ветки'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-544.jpg',cat:'Осенние плоды'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-545.jpg',cat:'Годовой цикл'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-546.jpg',cat:'Лесная жизнь'},
@@ -1008,9 +941,14 @@ var PH=[
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-654.jpg',cat:'Направление цель'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-654.jpg',cat:'Направление цель'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-654.jpg',cat:'Направление цель'},
-{p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-654.jpg',cat:'Направление цель'},
 {p:'/Users/alexanderermolovich/Documents/Irina_Site/images/picture-654.jpg',cat:'Направление цель'}
 ];
+var PH_TOTAL=654;
+PH=PH.slice(0,PH_TOTAL);
+for(var i=0;i<PH.length;i++){
+  PH[i].p='images/picture-'+String(i+1).padStart(3,'0')+'.jpg';
+  PH[i].cat=labelFromPath(PH[i].p);
+}
 var ROOMS=['/Users/alexanderermolovich/Documents/Irina_Site/rooms/1.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/2.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/3.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/4.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/5.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/6.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/7.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/8.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/9.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/10.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/11.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/12.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/13.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/14.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/15.png'];
 var LIGHTS=['/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light1.png', '/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light2.png', '/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light3.png', '/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light4.png'];
 
