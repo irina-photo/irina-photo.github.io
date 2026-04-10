@@ -171,6 +171,7 @@ border-radius:2px;transform:translateZ(10px)}
 #lbx:hover{opacity:1;transform:scale(1.1)}
 .lbarrow{position:fixed;top:50%;transform:translateY(-50%);z-index:7;font-size:66px;line-height:1;color:rgba(255,245,210,0.94);cursor:pointer;user-select:none;opacity:0.16;transition:opacity 0.18s,transform 0.18s;text-shadow:0 10px 34px rgba(0,0,0,0.85);pointer-events:auto}
 .lbarrow:hover{opacity:0.55;transform:translateY(-50%) scale(1.04)}
+#lb.zoom .lbarrow{opacity:0;pointer-events:none}
 #lbprev{left:12px;display:block}
 #lbnext{right:12px;display:block}
 #lb.wall-template #lbprev,#lb.wall-template #lbnext{display:block}
@@ -986,15 +987,20 @@ var brightnessSlider=document.getElementById('brightness-slider');
 var currentBrightness=50;
 var defaultBrightness=50;
 
-// АНИМИРОВАННАЯ ВЕРСИЯ - СВЕТ НА СТЕНЫ
-console.log('=== АНИМИРОВАННАЯ ВЕРСИЯ - СВЕТ НА СТЕНЫ ===');
-console.log('Фотографий:', PH.length);
-console.log('Комнат:', ROOMS.length);
-console.log('Светильников:', LIGHTS.length);
+ // Админ-панель: показываем только при ?admin=1
+ (function(){
+   try{
+     var qs=new URLSearchParams(location.search||'');
+     var ADMIN_KEY='самурайка';
+     var isAdmin=(qs.get('admin')==='1' && qs.get('key')===ADMIN_KEY);
+     var panel=document.getElementById('admin-panel');
+     if(panel) panel.style.display=isAdmin?'flex':'none';
+   }catch(e){}
+ })();
 
-// Устанавливаем светильники
-var lightElements=document.querySelectorAll('.corner-light img');
-for(var i=0;i<Math.min(4,LIGHTS.length);i++){
+ // Устанавливаем светильники
+ var lightElements=document.querySelectorAll('.corner-light img');
+ for(var i=0;i<Math.min(4,LIGHTS.length);i++){
   lightElements[i].src=LIGHTS[i];
   console.log('Светильник '+i+':', LIGHTS[i]);
 }
