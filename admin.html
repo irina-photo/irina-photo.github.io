@@ -280,7 +280,65 @@ async function startUpload(){
 
   document.getElementById('upload-btn').disabled=false;
   await loadStats();
-  showMsg('Загрузка завершена! Сайт обновится автоматически.');
+
+  // Собираем новые файлы
+  const newFiles = queue.filter(q=>q.status==='ok').map((q,idx)=>{
+    const ext = q.file.name.split('.').pop().toLowerCase();
+    // номер уже в qs-тексте, но проще пересчитать
+    return null; // заполним ниже
+  });
+
+  await updateGallery(t);
+  showMsg('Загрузка завершена! Фото добавлены в галерею.');
+}
+
+async function updateGallery(t){
+  try {
+    showMsg('Обновляю галерею...');
+    // Получаем index.html
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/index.html`,
+      {headers:{'Authorization':'token '+t}});
+    if(!r.ok) throw new Error('Не могу получить index.html');
+    const data = await r.json();
+    const sha = data.sha;
+    let html = atob(data.content.replace(/\n/g,''));
+
+    // Получаем список всех фото в images/
+    const r2 = await fetch(`https://api.github.com/repos/${REPO}/contents/images`,
+      {headers:{'Authorization':'token '+t}});
+    if(!r2.ok) throw new Error('Не могу получить список фото');
+    const files = await r2.json();
+    const jpgs = files
+      .filter(f=>f.name.match(/picture-\d+\.(jpg|jpeg|png)/i))
+      .sort((a,b)=>a.name.localeCompare(b.name));
+
+    // Строим новый PH массив
+    const phLines = jpgs.map(f=>`{p:'images/${f.name}',cat:''}`).join(',\n');
+    const newPH = `var PH=[\n${phLines}\n];`;
+
+    // Заменяем старый PH массив
+    html = html.replace(/var PH=\[[\s\S]*?\];/, newPH);
+
+    // Пушим обновлённый index.html
+    const b64 = btoa(unescape(encodeURIComponent(html)));
+    const resp = await fetch(`https://api.github.com/repos/${REPO}/contents/index.html`,{
+      method:'PUT',
+      headers:{'Authorization':'token '+t,'Content-Type':'application/json'},
+      body: JSON.stringify({
+        message: 'Обновлена галерея — добавлены новые фото',
+        content: b64,
+        sha: sha,
+        branch: BRANCH
+      })
+    });
+    if(resp.ok){
+      showMsg('✅ Галерея обновлена! Сайт обновится через 1-2 мин.');
+    } else {
+      throw new Error('Ошибка обновления');
+    }
+  } catch(e){
+    showMsg('⚠️ Фото загружены, но галерею обновить не удалось: '+e.message,'err');
+  }
 }
 
 function toBase64(file){
