@@ -257,7 +257,14 @@ async function startUpload(){
       if(resp.ok){
         queue[i].status='ok';
         document.getElementById('qs'+i).className='qitem-status ok';
-        document.getElementById('qs'+i).textContent='✅ готово';
+        document.getElementById('qs'+i).textContent='✅ '+filename;
+        // Показываем превью загруженного фото
+        const preview = document.createElement('div');
+        preview.style='margin-top:10px;padding:10px;background:rgba(0,0,0,0.3);border-radius:8px;display:flex;gap:12px;align-items:center';
+        preview.innerHTML=`<img src="https://raw.githubusercontent.com/irina-photo/irina-photo.github.io/main/images/${filename}" style="width:80px;height:60px;object-fit:cover;border-radius:4px;border:1px solid #C8961E">
+          <div><div style="color:#5cba6a;font-size:13px">✅ Загружено как <b>${filename}</b></div>
+          <a href="https://irina-photo.github.io/" target="_blank" style="color:#C8961E;font-size:12px;margin-top:4px;display:inline-block">Посмотреть на сайте →</a></div>`;
+        document.getElementById('queue').appendChild(preview);
       } else {
         const err = await resp.json();
         throw new Error(err.message||resp.status);
