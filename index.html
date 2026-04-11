@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>Музей Ирины · Анимация света</title>
+<html><head><meta charset="utf-8"><title>ÐÑÐ·ÐµÐ¹ ÐÑÐ¸Ð½Ñ Â· ÐÐ½Ð¸Ð¼Ð°ÑÐ¸Ñ ÑÐ²ÐµÑÐ°</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0800;overflow:hidden;font-family:Georgia,serif;transition:background 0.5s ease}
@@ -24,43 +24,43 @@ body{background:#0a0800;overflow:hidden;font-family:Georgia,serif;transition:bac
 border-radius:2px;transform:translateZ(10px)}
 .fo img{display:block;object-fit:cover;width:180px;height:135px;border-radius:1px;filter:brightness(1.05) contrast(1.02)}
 .pl{position:absolute;bottom:-25px;left:50%;transform:translateX(-50%);background:rgba(42,31,10,0.85);border:1px solid #6B4F10;padding:3px 12px;white-space:nowrap;font-size:9px;letter-spacing:1px;color:#c8a84a;font-style:italic;border-radius:3px;text-shadow:1px 1px 2px rgba(0,0,0,0.6)}
-/* АНИМИРОВАННЫЕ СВЕТИЛЬНИКИ */
+/* ÐÐÐÐÐÐ ÐÐÐÐÐÐ«Ð Ð¡ÐÐÐ¢ÐÐÐ¬ÐÐÐÐ */
 .corner-light{position:fixed;z-index:5;transition:all 0.3s ease}
-/* САМИ СВЕТИЛЬНИКИ */
+/* Ð¡ÐÐÐ Ð¡ÐÐÐ¢ÐÐÐ¬ÐÐÐÐ */
 .corner-light img{position:relative;object-fit:contain;filter:brightness(1.4) contrast(1.3) drop-shadow(0 4px 12px rgba(0,0,0,0.8));transition:all 0.3s ease;z-index:2}
 .corner-light:hover img{transform:scale(1.1);filter:brightness(1.5) contrast(1.4) drop-shadow(0 6px 16px rgba(0,0,0,0.9))}
-/* РАСПОЛОЖЕНИЕ */
+/* Ð ÐÐ¡ÐÐÐÐÐÐÐÐÐ */
 #light-top-right{top:20px;right:80px}
 #light-top-left{top:20px;left:20px}
 #light-bottom-left{bottom:20px;left:20px}
 #light-bottom-right{bottom:20px;right:80px}
-/* РАЗМЕРЫ */
+/* Ð ÐÐÐÐÐ Ð« */
 #light-top-right img, #light-top-left img{width:80px;height:120px}
 #light-bottom-left img, #light-bottom-right img{width:100px;height:150px}
-/* ПРАВЫЙ ВЕРХНИЙ ФОНАРЬ - РАЗВЕРНУТ ВЛЕВО */
+/* ÐÐ ÐÐÐ«Ð ÐÐÐ Ð¥ÐÐÐ Ð¤ÐÐÐÐ Ð¬ - Ð ÐÐÐÐÐ ÐÐ£Ð¢ ÐÐÐÐÐ */
 #light-top-right img{transform:scaleX(-1)}
 #light-top-right:hover img{transform:scaleX(-1) scale(1.1)}
-/* АККУРАТНЫЕ СВЕТОВЫЕ ЛУЧИ */
+/* ÐÐÐÐ£Ð ÐÐ¢ÐÐ«Ð Ð¡ÐÐÐ¢ÐÐÐ«Ð ÐÐ£Ð§Ð */
 .light-beam{position:fixed;background:radial-gradient(ellipse,rgba(255,255,255,0.2),rgba(255,255,255,0.08),rgba(255,255,255,0),transparent);filter:blur(30px);opacity:0.7;z-index:3;pointer-events:none}
 #beam-top-right{top:50px;right:110px;width:320px;height:400px}
 #beam-top-left{top:50px;left:50px;width:320px;height:400px}
 #beam-bottom-left{bottom:50px;left:50px;width:360px;height:450px}
 #beam-bottom-right{bottom:50px;right:110px;width:360px;height:450px}
-/* АНИМАЦИЯ СВЕТА НА СТЕНЫ - НОВАЯ! */
+/* ÐÐÐÐÐÐ¦ÐÐ¯ Ð¡ÐÐÐ¢Ð ÐÐ Ð¡Ð¢ÐÐÐ« - ÐÐÐÐÐ¯! */
 .wall-light{position:fixed;z-index:4;pointer-events:none;opacity:0.6}
-/* Свет на стены от верхних фонарей */
+/* Ð¡Ð²ÐµÑ Ð½Ð° ÑÑÐµÐ½Ñ Ð¾Ñ Ð²ÐµÑÑÐ½Ð¸Ñ ÑÐ¾Ð½Ð°ÑÐµÐ¹ */
 #wall-light-top-right{top:0;right:0;width:300px;height:400px;background:linear-gradient(135deg,rgba(255,255,255,0.15),rgba(255,255,255,0.05),transparent);filter:blur(40px)}
 #wall-light-top-left{top:0;left:0;width:300px;height:400px;background:linear-gradient(225deg,rgba(255,255,255,0.15),rgba(255,255,255,0.05),transparent);filter:blur(40px)}
-/* Свет на стены от нижних фонарей */
+/* Ð¡Ð²ÐµÑ Ð½Ð° ÑÑÐµÐ½Ñ Ð¾Ñ Ð½Ð¸Ð¶Ð½Ð¸Ñ ÑÐ¾Ð½Ð°ÑÐµÐ¹ */
 #wall-light-bottom-left{bottom:0;left:0;width:350px;height:450px;background:linear-gradient(315deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04),transparent);filter:blur(45px)}
 #wall-light-bottom-right{bottom:0;right:0;width:350px;height:450px;background:linear-gradient(45deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04),transparent);filter:blur(45px)}
-/* АНИМАЦИЯ МЕРЦАНИЯ ФОНАРЕЙ */
+/* ÐÐÐÐÐÐ¦ÐÐ¯ ÐÐÐ Ð¦ÐÐÐÐ¯ Ð¤ÐÐÐÐ ÐÐ */
 @keyframes light-glow{
   0%,100%{opacity:0.7}
   50%{opacity:1}
 }
 .corner-light{animation:light-glow 4s ease-in-out infinite}
-/* АНИМАЦИЯ ПУЛЬСАЦИИ СВЕТА НА СТЕНЫ */
+/* ÐÐÐÐÐÐ¦ÐÐ¯ ÐÐ£ÐÐ¬Ð¡ÐÐ¦ÐÐ Ð¡ÐÐÐ¢Ð ÐÐ Ð¡Ð¢ÐÐÐ« */
 @keyframes wall-light-pulse{
   0%,100%{opacity:0.4;transform:scale(1)}
   25%{opacity:0.6;transform:scale(1.05)}
@@ -68,7 +68,7 @@ border-radius:2px;transform:translateZ(10px)}
   75%{opacity:0.6;transform:scale(1.05)}
 }
 .wall-light{animation:wall-light-pulse 6s ease-in-out infinite}
-/* Разная скорость анимации для каждого фонаря */
+/* Ð Ð°Ð·Ð½Ð°Ñ ÑÐºÐ¾ÑÐ¾ÑÑÑ Ð°Ð½Ð¸Ð¼Ð°ÑÐ¸Ð¸ Ð´Ð»Ñ ÐºÐ°Ð¶Ð´Ð¾Ð³Ð¾ ÑÐ¾Ð½Ð°ÑÑ */
 #wall-light-top-right{animation-delay:0s}
 #wall-light-top-left{animation-delay:1.5s}
 #wall-light-bottom-left{animation-delay:3s}
@@ -203,66 +203,66 @@ border-radius:2px;transform:translateZ(10px)}
   #admin-panel a{padding:7px 10px;border-radius:13px;font-size:10px}
 }
 </style></head><body>
-<div id="title">Свет и тишина</div>
-<div id="info">Зал 1 · Комната 1</div>
+<div id="title">Ð¡Ð²ÐµÑ Ð¸ ÑÐ¸ÑÐ¸Ð½Ð°</div>
+<div id="info">ÐÐ°Ð» 1 Â· ÐÐ¾Ð¼Ð½Ð°ÑÐ° 1</div>
 <div id="admin-panel">
-  <a id="admin-upload" href="https://github.com/irina-photo/irina-photo.github.io/upload/main/images" target="_blank" rel="noopener noreferrer">Загрузить фото</a>
-  <a id="admin-captions" href="https://github.com/irina-photo/irina-photo.github.io/edit/main/captions.json" target="_blank" rel="noopener noreferrer">Подписи</a>
+  <a id="admin-upload" href="https://github.com/irina-photo/irina-photo.github.io/upload/main/images" target="_blank" rel="noopener noreferrer">ÐÐ°Ð³ÑÑÐ·Ð¸ÑÑ ÑÐ¾ÑÐ¾</a>
+  <a id="admin-captions" href="https://github.com/irina-photo/irina-photo.github.io/edit/main/captions.json" target="_blank" rel="noopener noreferrer">ÐÐ¾Ð´Ð¿Ð¸ÑÐ¸</a>
 </div>
-<div id="thumbs-btn" onclick="openThumbsFromGallery()">Миниатюры</div>
+<div id="thumbs-btn" onclick="openThumbsFromGallery()">ÐÐ¸Ð½Ð¸Ð°ÑÑÑÑ</div>
 <div id="hall"></div>
-<!-- АНИМИРОВАННЫЕ СВЕТИЛЬНИКИ -->
+<!-- ÐÐÐÐÐÐ ÐÐÐÐÐÐ«Ð Ð¡ÐÐÐ¢ÐÐÐ¬ÐÐÐÐ -->
 <div class="corner-light" id="light-top-right"><img src=""/></div>
 <div class="corner-light" id="light-top-left"><img src=""/></div>
 <div class="corner-light" id="light-bottom-left"><img src=""/></div>
 <div class="corner-light" id="light-bottom-right"><img src=""/></div>
-<!-- СВЕТОВЫЕ ЛУЧИ -->
+<!-- Ð¡ÐÐÐ¢ÐÐÐ«Ð ÐÐ£Ð§Ð -->
 <div class="light-beam" id="beam-top-right"></div>
 <div class="light-beam" id="beam-top-left"></div>
 <div class="light-beam" id="beam-bottom-left"></div>
 <div class="light-beam" id="beam-bottom-right"></div>
-<!-- АНИМАЦИЯ СВЕТА НА СТЕНЫ -->
+<!-- ÐÐÐÐÐÐ¦ÐÐ¯ Ð¡ÐÐÐ¢Ð ÐÐ Ð¡Ð¢ÐÐÐ« -->
 <div class="wall-light" id="wall-light-top-right"></div>
 <div class="wall-light" id="wall-light-top-left"></div>
 <div class="wall-light" id="wall-light-bottom-left"></div>
 <div class="wall-light" id="wall-light-bottom-right"></div>
 <div id="nav">
-  <button class="nb" onclick="go(-1)">← Назад</button>
-  <button class="nb" onclick="go(1)">Вперёд →</button>
+  <button class="nb" onclick="go(-1)">â ÐÐ°Ð·Ð°Ð´</button>
+  <button class="nb" onclick="go(1)">ÐÐ¿ÐµÑÑÐ´ â</button>
 </div>
-<div id="gal-prev" class="gal-arrow" onclick="go(-1)">‹</div>
-<div id="gal-next" class="gal-arrow" onclick="go(1)">›</div>
-<div id="hint">← → клавиши · нажми на картинку чтобы открыть</div>
+<div id="gal-prev" class="gal-arrow" onclick="go(-1)">â¹</div>
+<div id="gal-next" class="gal-arrow" onclick="go(1)">âº</div>
+<div id="hint">â â ÐºÐ»Ð°Ð²Ð¸ÑÐ¸ Â· Ð½Ð°Ð¶Ð¼Ð¸ Ð½Ð° ÐºÐ°ÑÑÐ¸Ð½ÐºÑ ÑÑÐ¾Ð±Ñ Ð¾ÑÐºÑÑÑÑ</div>
 <div id="brightness-control">
-  <div id="brightness-label">Яркость зала</div>
+  <div id="brightness-label">Ð¯ÑÐºÐ¾ÑÑÑ Ð·Ð°Ð»Ð°</div>
   <input type="range" id="brightness-slider" min="20" max="100" value="50">
-  <button id="auto-btn" onclick="setAutoBrightness()">АВТО</button>
+  <button id="auto-btn" onclick="setAutoBrightness()">ÐÐÐ¢Ð</button>
 </div>
 <div id="room-selector" id="room-buttons"></div>
 <div id="lb" class="wall-template" onclick="closeLb()">
-  <div id="lbt">Музей великолепных работ · Летопись света</div>
-  <div id="lbx">✕</div>
+  <div id="lbt">ÐÑÐ·ÐµÐ¹ Ð²ÐµÐ»Ð¸ÐºÐ¾Ð»ÐµÐ¿Ð½ÑÑ ÑÐ°Ð±Ð¾Ñ Â· ÐÐµÑÐ¾Ð¿Ð¸ÑÑ ÑÐ²ÐµÑÐ°</div>
+  <div id="lbx">â</div>
   <div id="lbside-left" onclick="event.stopPropagation();navigateLb(-1)"></div>
   <div id="lbside-right" onclick="event.stopPropagation();navigateLb(1)"></div>
-  <div id="lbzprev" onclick="event.stopPropagation();navigateLb(-1)">‹</div>
-  <div id="lbznext" onclick="event.stopPropagation();navigateLb(1)">›</div>
-  <div id="lbprev" class="lbarrow" onclick="event.stopPropagation();navigateLb(-1)">‹</div>
-  <div id="lbnext" class="lbarrow" onclick="event.stopPropagation();navigateLb(1)">›</div>
+  <div id="lbzprev" onclick="event.stopPropagation();navigateLb(-1)">â¹</div>
+  <div id="lbznext" onclick="event.stopPropagation();navigateLb(1)">âº</div>
+  <div id="lbprev" class="lbarrow" onclick="event.stopPropagation();navigateLb(-1)">â¹</div>
+  <div id="lbnext" class="lbarrow" onclick="event.stopPropagation();navigateLb(1)">âº</div>
   <div id="lbthumbs" onclick="event.stopPropagation()">
     <div id="lbthumbs-bg" onclick="closeLbThumbs()"></div>
     <div id="lbthumbs-panel">
       <div id="lbthumbs-top">
-        <div id="lbthumbs-title">Миниатюры</div>
+        <div id="lbthumbs-title">ÐÐ¸Ð½Ð¸Ð°ÑÑÑÑ</div>
         <div id="lbthumbs-actions">
-          <button type="button" id="lbthumbs-similarbtn" class="lbthumbs-btn" onclick="event.preventDefault();toggleLbThumbsSimilar()">Похожие</button>
-          <button type="button" id="lbthumbs-select" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();toggleLbThumbsSelect()">Выбор</button>
-          <button type="button" id="lbthumbs-copy" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();copyLbThumbsMarks()">Скопировать</button>
-          <button type="button" id="lbthumbs-trash" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();copyLbThumbsTrashCommand()">В корзину</button>
-          <button type="button" id="lbthumbs-undo" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();copyLbThumbsUndoCommand()">Вернуть</button>
-          <button type="button" id="lbthumbs-download" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();downloadLbThumbSelected()">Скачать</button>
-          <button type="button" id="lbthumbs-refresh" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();refreshLbThumbs()">Обновить</button>
-          <button type="button" id="lbthumbs-clear" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();clearLbThumbsMarks()">Очистить</button>
-          <button type="button" id="lbthumbs-close" onclick="event.preventDefault();closeLbThumbs()">Закрыть</button>
+          <button type="button" id="lbthumbs-similarbtn" class="lbthumbs-btn" onclick="event.preventDefault();toggleLbThumbsSimilar()">ÐÐ¾ÑÐ¾Ð¶Ð¸Ðµ</button>
+          <button type="button" id="lbthumbs-select" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();toggleLbThumbsSelect()">ÐÑÐ±Ð¾Ñ</button>
+          <button type="button" id="lbthumbs-copy" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();copyLbThumbsMarks()">Ð¡ÐºÐ¾Ð¿Ð¸ÑÐ¾Ð²Ð°ÑÑ</button>
+          <button type="button" id="lbthumbs-trash" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();copyLbThumbsTrashCommand()">Ð ÐºÐ¾ÑÐ·Ð¸Ð½Ñ</button>
+          <button type="button" id="lbthumbs-undo" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();copyLbThumbsUndoCommand()">ÐÐµÑÐ½ÑÑÑ</button>
+          <button type="button" id="lbthumbs-download" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();downloadLbThumbSelected()">Ð¡ÐºÐ°ÑÐ°ÑÑ</button>
+          <button type="button" id="lbthumbs-refresh" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();refreshLbThumbs()">ÐÐ±Ð½Ð¾Ð²Ð¸ÑÑ</button>
+          <button type="button" id="lbthumbs-clear" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();clearLbThumbsMarks()">ÐÑÐ¸ÑÑÐ¸ÑÑ</button>
+          <button type="button" id="lbthumbs-close" onclick="event.preventDefault();closeLbThumbs()">ÐÐ°ÐºÑÑÑÑ</button>
         </div>
       </div>
       <div id="lbthumbs-grid"></div>
@@ -272,677 +272,671 @@ border-radius:2px;transform:translateZ(10px)}
   <div class="lbf" onclick="event.stopPropagation();toggleLbZoom()"><img id="lbi" src=""/></div>
   <div id="lbplate" onclick="event.stopPropagation()">
     <div id="lbc"></div>
-    <div id="lba">Фотохудожник Ирина · Мастер игры света</div>
-    <button type="button" id="lbplate-thumbs" onclick="event.preventDefault();toggleLbThumbs()">Миниатюры</button>
+    <div id="lba">Ð¤Ð¾ÑÐ¾ÑÑÐ´Ð¾Ð¶Ð½Ð¸Ðº ÐÑÐ¸Ð½Ð° Â· ÐÐ°ÑÑÐµÑ Ð¸Ð³ÑÑ ÑÐ²ÐµÑÐ°</div>
+    <button type="button" id="lbplate-thumbs" onclick="event.preventDefault();toggleLbThumbs()">ÐÐ¸Ð½Ð¸Ð°ÑÑÑÑ</button>
   </div>
 </div>
 <script>
 var PH=[
-{p:'images/picture-001.jpg',cat:'Закат над озером'},
-{p:'images/picture-002.jpg',cat:'Утренний туман'},
-{p:'images/picture-003.jpg',cat:'Лесная дорога'},
-{p:'images/picture-004.jpg',cat:'Горный ручей'},
-{p:'images/picture-005.jpg',cat:'Цветущее поле'},
-{p:'images/picture-006.jpg',cat:'Старый мост'},
-{p:'images/picture-007.jpg',cat:'Берёзовая роща'},
-{p:'images/picture-008.jpg',cat:'Осенний парк'},
-{p:'images/picture-009.jpg',cat:'Зимний лес'},
-{p:'images/picture-010.jpg',cat:'Весенний луг'},
-{p:'images/picture-011.jpg',cat:'Речная долина'},
-{p:'images/picture-012.jpg',cat:'Солнечная поляна'},
-{p:'images/picture-013.jpg',cat:'Тени деревьев'},
-{p:'images/picture-014.jpg',cat:'Золотая осень'},
-{p:'images/picture-015.jpg',cat:'Первый снег'},
-{p:'images/picture-016.jpg',cat:'Летний день'},
-{p:'images/picture-017.jpg',cat:'Вечерний свет'},
-{p:'images/picture-018.jpg',cat:'Утренняя роса'},
-{p:'images/picture-019.jpg',cat:'Дождливый день'},
-{p:'images/picture-020.jpg',cat:'Ясное небо'},
-{p:'images/picture-021.jpg',cat:'Облачный закат'},
-{p:'images/picture-022.jpg',cat:'Тихое утро'},
-{p:'images/picture-023.jpg',cat:'Теплый вечер'},
-{p:'images/picture-024.jpg',cat:'Прохладный день'},
-{p:'images/picture-025.jpg',cat:'Солнечный луч'},
-{p:'images/picture-026.jpg',cat:'Лесная тишина'},
-{p:'images/picture-027.jpg',cat:'Полевые цветы'},
-{p:'images/picture-028.jpg',cat:'Речные камни'},
-{p:'images/picture-029.jpg',cat:'Горные вершины'},
-{p:'images/picture-030.jpg',cat:'Долина рек'},
-{p:'images/picture-031.jpg',cat:'Зеленые холмы'},
-{p:'images/picture-032.jpg',cat:'Синее небо'},
-{p:'images/picture-033.jpg',cat:'Белые облака'},
-{p:'images/picture-034.jpg',cat:'Золотое солнце'},
-{p:'images/picture-035.jpg',cat:'Красный закат'},
-{p:'images/picture-036.jpg',cat:'Спокойная вода'},
-{p:'images/picture-037.jpg',cat:'Ветреный день'},
-{p:'images/picture-038.jpg',cat:'Тихий вечер'},
-{p:'images/picture-039.jpg',cat:'Яркий полдень'},
-{p:'images/picture-040.jpg',cat:'Мягкий рассвет'},
-{p:'images/picture-041.jpg',cat:'Осенние листья'},
-{p:'images/picture-042.jpg',cat:'Весенние почки'},
-{p:'images/picture-043.jpg',cat:'Летние травы'},
-{p:'images/picture-044.jpg',cat:'Зимние узоры'},
-{p:'images/picture-045.jpg',cat:'Вечерние тени'},
-{p:'images/picture-046.jpg',cat:'Утренние лучи'},
-{p:'images/picture-047.jpg',cat:'Дневное солнце'},
-{p:'images/picture-048.jpg',cat:'Вечерняя заря'},
-{p:'images/picture-049.jpg',cat:'Ночные звезды'},
-{p:'images/picture-050.jpg',cat:'Рассветные тени'},
-{p:'images/picture-051.jpg',cat:'Лесная просека'},
-{p:'images/picture-052.jpg',cat:'Полевая тропа'},
-{p:'images/picture-053.jpg',cat:'Речной берег'},
-{p:'images/picture-054.jpg',cat:'Горная тропинка'},
-{p:'images/picture-055.jpg',cat:'Луговая дорога'},
-{p:'images/picture-056.jpg',cat:'Озерный пейзаж'},
-{p:'images/picture-057.jpg',cat:'Морской берег'},
-{p:'images/picture-058.jpg',cat:'Речной изгиб'},
-{p:'images/picture-059.jpg',cat:'Овражный склон'},
-{p:'images/picture-060.jpg',cat:'Холмистый пейзаж'},
-{p:'images/picture-061.jpg',cat:'Луговая равнина'},
-{p:'images/picture-062.jpg',cat:'Лесная поляна'},
-{p:'images/picture-063.jpg',cat:'Полевое простор'},
-{p:'images/picture-064.jpg',cat:'Горное плато'},
-{p:'images/picture-065.jpg',cat:'Речная пойма'},
-{p:'images/picture-066.jpg',cat:'Осенний букет'},
-{p:'images/picture-067.jpg',cat:'Весенний сад'},
-{p:'images/picture-068.jpg',cat:'Летний луг'},
-{p:'images/picture-069.jpg',cat:'Зимний узор'},
-{p:'images/picture-070.jpg',cat:'Годовой круг'},
-{p:'images/picture-071.jpg',cat:'Времена года'},
-{p:'images/picture-072.jpg',cat:'Природа жизнь'},
-{p:'images/picture-073.jpg',cat:'Красота земли'},
-{p:'images/picture-074.jpg',cat:'Гармония мира'},
-{p:'images/picture-075.jpg',cat:'Тишина природы'},
-{p:'images/picture-076.jpg',cat:'Свет и тень'},
-{p:'images/picture-077.jpg',cat:'День и ночь'},
-{p:'images/picture-078.jpg',cat:'Утро и вечер'},
-{p:'images/picture-079.jpg',cat:'Лето и зима'},
-{p:'images/picture-080.jpg',cat:'Весна и осень'},
-{p:'images/picture-081.jpg',cat:'Живая вода'},
-{p:'images/picture-082.jpg',cat:'Чистый воздух'},
-{p:'images/picture-083.jpg',cat:'Зеленая трава'},
-{p:'images/picture-084.jpg',cat:'Синее небо'},
-{p:'images/picture-085.jpg',cat:'Золотое солнце'},
-{p:'images/picture-086.jpg',cat:'Белые облака'},
-{p:'images/picture-087.jpg',cat:'Серые тени'},
-{p:'images/picture-088.jpg',cat:'Яркие краски'},
-{p:'images/picture-089.jpg',cat:'Мягкие тона'},
-{p:'images/picture-090.jpg',cat:'Глубокие цвета'},
-{p:'images/picture-091.jpg',cat:'Прозрачный свет'},
-{p:'images/picture-092.jpg',cat:'Теплые лучи'},
-{p:'images/picture-093.jpg',cat:'Холодный ветер'},
-{p:'images/picture-094.jpg',cat:'Спокойная гладь'},
-{p:'images/picture-095.jpg',cat:'Бурный поток'},
-{p:'images/picture-096.jpg',cat:'Тихая заводь'},
-{p:'images/picture-097.jpg',cat:'Быстрая река'},
-{p:'images/picture-098.jpg',cat:'Глубокое озеро'},
-{p:'images/picture-099.jpg',cat:'Мелководье'},
-{p:'images/picture-100.jpg',cat:'Горный поток'},
-{p:'images/picture-101.jpg',cat:'Речной порог'},
-{p:'images/picture-102.jpg',cat:'Водопад'},
-{p:'images/picture-103.jpg',cat:'Ключ'},
-{p:'images/picture-104.jpg',cat:'Родник'},
-{p:'images/picture-105.jpg',cat:'Источник'},
-{p:'images/picture-106.jpg',cat:'Лесной ручей'},
-{p:'images/picture-107.jpg',cat:'Полевой ручеек'},
-{p:'images/picture-108.jpg',cat:'Горный ручей'},
-{p:'images/picture-109.jpg',cat:'Подземный источник'},
-{p:'images/picture-110.jpg',cat:'Весенний поток'},
-{p:'images/picture-111.jpg',cat:'Летний ручей'},
-{p:'images/picture-112.jpg',cat:'Осенний поток'},
-{p:'images/picture-113.jpg',cat:'Зимний ключ'},
-{p:'images/picture-114.jpg',cat:'Весенний родник'},
-{p:'images/picture-115.jpg',cat:'Круговорот воды'},
-{p:'images/picture-116.jpg',cat:'Деревья giants'},
-{p:'images/picture-117.jpg',cat:'Старые деревья'},
-{p:'images/picture-118.jpg',cat:'Молодые деревья'},
-{p:'images/picture-119.jpg',cat:'Высокие деревья'},
-{p:'images/picture-120.jpg',cat:'Низкие деревья'},
-{p:'images/picture-121.jpg',cat:'Толстые стволы'},
-{p:'images/picture-122.jpg',cat:'Тонкие ветки'},
-{p:'images/picture-123.jpg',cat:'Густые кроны'},
-{p:'images/picture-124.jpg',cat:'Редкие листья'},
-{p:'images/picture-125.jpg',cat:'Осенние цвета'},
-{p:'images/picture-126.jpg',cat:'Весенние почки'},
-{p:'images/picture-127.jpg',cat:'Летние листья'},
-{p:'images/picture-128.jpg',cat:'Зимние ветки'},
-{p:'images/picture-129.jpg',cat:'Осенние плоды'},
-{p:'images/picture-130.jpg',cat:'Годовой цикл'},
-{p:'images/picture-131.jpg',cat:'Лесная жизнь'},
-{p:'images/picture-132.jpg',cat:'Полевая жизнь'},
-{p:'images/picture-133.jpg',cat:'Речная жизнь'},
-{p:'images/picture-134.jpg',cat:'Горная жизнь'},
-{p:'images/picture-135.jpg',cat:'Озерная жизнь'},
-{p:'images/picture-136.jpg',cat:'Природа пробуждение'},
-{p:'images/picture-137.jpg',cat:'Природа засыпание'},
-{p:'images/picture-138.jpg',cat:'Природа дыхание'},
-{p:'images/picture-139.jpg',cat:'Природа пульс'},
-{p:'images/picture-140.jpg',cat:'Природа гармония'},
-{p:'images/picture-141.jpg',cat:'Свет игры'},
-{p:'images/picture-142.jpg',cat:'Тени танец'},
-{p:'images/picture-143.jpg',cat:'Цвета перелив'},
-{p:'images/picture-144.jpg',cat:'Формы линии'},
-{p:'images/picture-145.jpg',cat:'Пространство глубина'},
-{p:'images/picture-146.jpg',cat:'Время течение'},
-{p:'images/picture-147.jpg',cat:'Мгновение ловля'},
-{p:'images/picture-148.jpg',cat:'Вечность поиск'},
-{p:'images/picture-149.jpg',cat:'Бесконечность чувств'},
-{p:'images/picture-150.jpg',cat:'Гармония обретение'},
-{p:'images/picture-151.jpg',cat:'Тишина наполнение'},
-{p:'images/picture-152.jpg',cat:'Спокойствие обретение'},
-{p:'images/picture-153.jpg',cat:'Умиротворение'},
-{p:'images/picture-154.jpg',cat:'Созерцание'},
-{p:'images/picture-155.jpg',cat:'Размышление'},
-{p:'images/picture-156.jpg',cat:'Вдохновение'},
-{p:'images/picture-157.jpg',cat:'Творчество'},
-{p:'images/picture-158.jpg',cat:'Эмоции'},
-{p:'images/picture-159.jpg',cat:'Чувства'},
-{p:'images/picture-160.jpg',cat:'Переживания'},
-{p:'images/picture-161.jpg',cat:'Воспоминания'},
-{p:'images/picture-162.jpg',cat:'Мечты'},
-{p:'images/picture-163.jpg',cat:'Надежды'},
-{p:'images/picture-164.jpg',cat:'Ожидания'},
-{p:'images/picture-165.jpg',cat:'Предвкушение'},
-{p:'images/picture-166.jpg',cat:'Счастье момент'},
-{p:'images/picture-167.jpg',cat:'Радость чувство'},
-{p:'images/picture-168.jpg',cat:'Грусть отголосок'},
-{p:'images/picture-169.jpg',cat:'Ностальгия'},
-{p:'images/picture-170.jpg',cat:'Воспоминание'},
-{p:'images/picture-171.jpg',cat:'Прошлое отражение'},
-{p:'images/picture-172.jpg',cat:'Настоящее ощущение'},
-{p:'images/picture-173.jpg',cat:'Будущее предчувствие'},
-{p:'images/picture-174.jpg',cat:'Время остановка'},
-{p:'images/picture-175.jpg',cat:'Мгновение вечность'},
-{p:'images/picture-176.jpg',cat:'Жизнь красота'},
-{p:'images/picture-177.jpg',cat:'Мир гармония'},
-{p:'images/picture-178.jpg',cat:'Вселенная бесконечность'},
-{p:'images/picture-179.jpg',cat:'Природа мудрость'},
-{p:'images/picture-180.jpg',cat:'Искусство выражение'},
-{p:'images/picture-181.jpg',cat:'Фотография момент'},
-{p:'images/picture-182.jpg',cat:'Искусство жизнь'},
-{p:'images/picture-183.jpg',cat:'Творчество полет'},
-{p:'images/picture-184.jpg',cat:'Вдохновение источник'},
-{p:'images/picture-185.jpg',cat:'Красота спасение'},
-{p:'images/picture-186.jpg',cat:'Свет победа'},
-{p:'images/picture-187.jpg',cat:'Тьма покой'},
-{p:'images/picture-188.jpg',cat:'День ясность'},
-{p:'images/picture-189.jpg',cat:'Ночь тайна'},
-{p:'images/picture-190.jpg',cat:'Утро надежда'},
-{p:'images/picture-191.jpg',cat:'Вечер грусть'},
-{p:'images/picture-192.jpg',cat:'Полдень пик'},
-{p:'images/picture-193.jpg',cat:'Рассвет начало'},
-{p:'images/picture-194.jpg',cat:'Закат завершение'},
-{p:'images/picture-195.jpg',cat:'Сумерки переход'},
-{p:'images/picture-196.jpg',cat:'Полночь тайна'},
-{p:'images/picture-197.jpg',cat:'Предрассветный час'},
-{p:'images/picture-198.jpg',cat:'Утренняя заря'},
-{p:'images/picture-199.jpg',cat:'Вечерняя заря'},
-{p:'images/picture-200.jpg',cat:'Золотой час'},
-{p:'images/picture-201.jpg',cat:'Синий час'},
-{p:'images/picture-202.jpg',cat:'Розовый час'},
-{p:'images/picture-203.jpg',cat:'Оранжевый час'},
-{p:'images/picture-204.jpg',cat:'Фиолетовый час'},
-{p:'images/picture-205.jpg',cat:'Зеленый час'},
-{p:'images/picture-206.jpg',cat:'Цвета природы'},
-{p:'images/picture-207.jpg',cat:'Оттенки времени'},
-{p:'images/picture-208.jpg',cat:'Настроения свет'},
-{p:'images/picture-209.jpg',cat:'Эмоции цвет'},
-{p:'images/picture-210.jpg',cat:'Чувства тон'},
-{p:'images/picture-211.jpg',cat:'Нюансы детали'},
-{p:'images/picture-212.jpg',cat:'Простота сложность'},
-{p:'images/picture-213.jpg',cat:'Минимализм богатство'},
-{p:'images/picture-214.jpg',cat:'Пустота наполненность'},
-{p:'images/picture-215.jpg',cat:'Тишина звук'},
-{p:'images/picture-216.jpg',cat:'Движение покой'},
-{p:'images/picture-217.jpg',cat:'Быстрота медлительность'},
-{p:'images/picture-218.jpg',cat:'Мгновение вечность'},
-{p:'images/picture-219.jpg',cat:'Текучесть стабильность'},
-{p:'images/picture-220.jpg',cat:'Изменность постоянство'},
-{p:'images/picture-221.jpg',cat:'Контраст гармония'},
-{p:'images/picture-222.jpg',cat:'Противопоставление единство'},
-{p:'images/picture-223.jpg',cat:'Различие сходство'},
-{p:'images/picture-224.jpg',cat:'Уникальность повторение'},
-{p:'images/picture-225.jpg',cat:'Индивидуальность общность'},
-{p:'images/picture-226.jpg',cat:'Природа человек'},
-{p:'images/picture-227.jpg',cat:'Космос земля'},
-{p:'images/picture-228.jpg',cat:'Вселенная частичка'},
-{p:'images/picture-229.jpg',cat:'Бесконечность конечность'},
-{p:'images/picture-230.jpg',cat:'Вечность мгновение'},
-{p:'images/picture-231.jpg',cat:'Жизнь смерть'},
-{p:'images/picture-232.jpg',cat:'Рождение увядание'},
-{p:'images/picture-233.jpg',cat:'Рост упадок'},
-{p:'images/picture-234.jpg',cat:'Расцвет увядание'},
-{p:'images/picture-235.jpg',cat:'Начало конец'},
-{p:'images/picture-236.jpg',cat:'Путь дорога'},
-{p:'images/picture-237.jpg',cat:'Тропинка трасса'},
-{p:'images/picture-238.jpg',cat:'Маршрут след'},
-{p:'images/picture-239.jpg',cat:'Направление цель'},
-{p:'images/picture-240.jpg',cat:'Движение остановка'},
-{p:'images/picture-241.jpg',cat:'Путешествие возвращение'},
-{p:'images/picture-242.jpg',cat:'Поиск находка'},
-{p:'images/picture-243.jpg',cat:'Искание обретение'},
-{p:'images/picture-244.jpg',cat:'Вопрос ответ'},
-{p:'images/picture-245.jpg',cat:'Проблема решение'},
-{p:'images/picture-246.jpg',cat:'Труд облегчение'},
-{p:'images/picture-247.jpg',cat:'Награда достижение'},
-{p:'images/picture-248.jpg',cat:'Успех победа'},
-{p:'images/picture-249.jpg',cat:'Триумф слав'},
-{p:'images/picture-250.jpg',cat:'Признание приз'},
-{p:'images/picture-251.jpg',cat:'Талант гениальность'},
-{p:'images/picture-252.jpg',cat:'Мастерство искусство'},
-{p:'images/picture-253.jpg',cat:'Опыт мудрость'},
-{p:'images/picture-254.jpg',cat:'Знание понимание'},
-{p:'images/picture-255.jpg',cat:'Ученичество учительство'},
-{p:'images/picture-256.jpg',cat:'Развитие рост'},
-{p:'images/picture-257.jpg',cat:'Прогресс регресс'},
-{p:'images/picture-258.jpg',cat:'Движение стагнация'},
-{p:'images/picture-259.jpg',cat:'Эволюция революция'},
-{p:'images/picture-260.jpg',cat:'Преобразование сохранение'},
-{p:'images/picture-261.jpg',cat:'Инновация традиция'},
-{p:'images/picture-262.jpg',cat:'Новизна классика'},
-{p:'images/picture-263.jpg',cat:'Современность вечность'},
-{p:'images/picture-264.jpg',cat:'Модернизм архаика'},
-{p:'images/picture-265.jpg',cat:'Футуризм ретро'},
-{p:'images/picture-266.jpg',cat:'Стиль мода'},
-{p:'images/picture-267.jpg',cat:'Тренд классика'},
-{p:'images/picture-268.jpg',cat:'Элегантность простота'},
-{p:'images/picture-269.jpg',cat:'Роскошь минимализм'},
-{p:'images/picture-270.jpg',cat:'Богатство скромность'},
-{p:'images/picture-271.jpg',cat:'Шик натуральность'},
-{p:'images/picture-272.jpg',cat:'Искусственность естественность'},
-{p:'images/picture-273.jpg',cat:'Синтетика органика'},
-{p:'images/picture-274.jpg',cat:'Технология природа'},
-{p:'images/picture-275.jpg',cat:'Цивилизация дикость'},
-{p:'images/picture-276.jpg',cat:'Город деревня'},
-{p:'images/picture-277.jpg',cat:'Мегаполис провинция'},
-{p:'images/picture-278.jpg',cat:'Столица периферия'},
-{p:'images/picture-279.jpg',cat:'Центр окраина'},
-{p:'images/picture-280.jpg',cat:'Публичное частное'},
-{p:'images/picture-281.jpg',cat:'Социум индивидуальность'},
-{p:'images/picture-282.jpg',cat:'Общество одиночество'},
-{p:'images/picture-283.jpg',cat:'Коллектив личность'},
-{p:'images/picture-284.jpg',cat:'Команда лидер'},
-{p:'images/picture-285.jpg',cat:'Группа индивид'},
-{p:'images/picture-286.jpg',cat:'Семья дом'},
-{p:'images/picture-287.jpg',cat:'Род очаг'},
-{p:'images/picture-288.jpg',cat:'Традиция новаторство'},
-{p:'images/picture-289.jpg',cat:'Наследие открытие'},
-{p:'images/picture-290.jpg',cat:'Память забвение'},
-{p:'images/picture-291.jpg',cat:'История будущее'},
-{p:'images/picture-292.jpg',cat:'Прошлое предсказание'},
-{p:'images/picture-293.jpg',cat:'Опыт прогноз'},
-{p:'images/picture-294.jpg',cat:'Урок вывод'},
-{p:'images/picture-295.jpg',cat:'Анализ синтез'},
-{p:'images/picture-296.jpg',cat:'Теория практика'},
-{p:'images/picture-297.jpg',cat:'Мысль дело'},
-{p:'images/picture-298.jpg',cat:'Идея реализация'},
-{p:'images/picture-299.jpg',cat:'Концепция воплощение'},
-{p:'images/picture-300.jpg',cat:'План исполнение'},
-{p:'images/picture-301.jpg',cat:'Мечта реальность'},
-{p:'images/picture-302.jpg',cat:'Фантазия факт'},
-{p:'images/picture-303.jpg',cat:'Воображение действительность'},
-{p:'images/picture-304.jpg',cat:'Гипотеза доказательство'},
-{p:'images/picture-305.jpg',cat:'Предположение подтверждение'},
-{p:'images/picture-306.jpg',cat:'Вера знание'},
-{p:'images/picture-307.jpg',cat:'Интуиция логика'},
-{p:'images/picture-308.jpg',cat:'Чувство разум'},
-{p:'images/picture-309.jpg',cat:'Эмоция расчет'},
-{p:'images/picture-310.jpg',cat:'Сердце ум'},
-{p:'images/picture-311.jpg',cat:'Душа тело'},
-{p:'images/picture-312.jpg',cat:'Дух материя'},
-{p:'images/picture-313.jpg',cat:'Сознание подсознание'},
-{p:'images/picture-314.jpg',cat:'Разум инстинкт'},
-{p:'images/picture-315.jpg',cat:'Воля рефлекс'},
-{p:'images/picture-316.jpg',cat:'Свобода ответственность'},
-{p:'images/picture-317.jpg',cat:'Выбор последствие'},
-{p:'images/picture-318.jpg',cat:'Решение результат'},
-{p:'images/picture-319.jpg',cat:'Действие реакция'},
-{p:'images/picture-320.jpg',cat:'Причина следствие'},
-{p:'images/picture-321.jpg',cat:'Цель средство'},
-{p:'images/picture-322.jpg',cat:'Метод результат'},
-{p:'images/picture-323.jpg',cat:'Процесс продукт'},
-{p:'images/picture-324.jpg',cat:'Усилие достижение'},
-{p:'images/picture-325.jpg',cat:'Работа отдых'},
-{p:'images/picture-326.jpg',cat:'Нагрузка восстановление'},
-{p:'images/picture-327.jpg',cat:'Стресс расслабление'},
-{p:'images/picture-328.jpg',cat:'Напряжение разрядка'},
-{p:'images/picture-329.jpg',cat:'Концентрация отвлечение'},
-{p:'images/picture-330.jpg',cat:'Фокус рассеивание'},
-{p:'images/picture-331.jpg',cat:'Внимание невнимание'},
-{p:'images/picture-332.jpg',cat:'Сосредоточенность отвлеченность'},
-{p:'images/picture-333.jpg',cat:'Усердие лень'},
-{p:'images/picture-334.jpg',cat:'Энергия пассивность'},
-{p:'images/picture-335.jpg',cat:'Активность бездействие'},
-{p:'images/picture-336.jpg',cat:'Движение статика'},
-{p:'images/picture-337.jpg',cat:'Динамика покой'},
-{p:'images/picture-338.jpg',cat:'Изменение стабильность'},
-{p:'images/picture-339.jpg',cat:'Развитие застой'},
-{p:'images/picture-340.jpg',cat:'Рост деградация'},
-{p:'images/picture-341.jpg',cat:'Построение разрушение'},
-{p:'images/picture-342.jpg',cat:'Созидание распад'},
-{p:'images/picture-343.jpg',cat:'Творчество копирование'},
-{p:'images/picture-344.jpg',cat:'Оригинальность заимствование'},
-{p:'images/picture-345.jpg',cat:'Уникальность типичность'},
-{p:'images/picture-346.jpg',cat:'Гениальность талант'},
-{p:'images/picture-347.jpg',cat:'Способность одаренность'},
-{p:'images/picture-348.jpg',cat:'Дар мастерство'},
-{p:'images/picture-349.jpg',cat:'Скилл умение'},
-{p:'images/picture-350.jpg',cat:'Компетенция квалификация'},
-{p:'images/picture-351.jpg',cat:'Профессионализм дилетантство'},
-{p:'images/picture-352.jpg',cat:'Экспертность любительство'},
-{p:'images/picture-353.jpg',cat:'Знание невежество'},
-{p:'images/picture-354.jpg',cat:'Компетентность некомпетентность'},
-{p:'images/picture-355.jpg',cat:'Мастерство неумение'},
-{p:'images/picture-356.jpg',cat:'Опыт неопытность'},
-{p:'images/picture-357.jpg',cat:'Практика теория'},
-{p:'images/picture-358.jpg',cat:'Ремесло искусство'},
-{p:'images/picture-359.jpg',cat:'Технология творчество'},
-{p:'images/picture-360.jpg',cat:'Метод вдохновение'},
-{p:'images/picture-361.jpg',cat:'Наука искусство'},
-{p:'images/picture-362.jpg',cat:'Логика интуиция'},
-{p:'images/picture-363.jpg',cat:'Анализ синтез'},
-{p:'images/picture-364.jpg',cat:'Дедукция индукция'},
-{p:'images/picture-365.jpg',cat:'Факт гипотеза'},
-{p:'images/picture-366.jpg',cat:'Доказательство предположение'},
-{p:'images/picture-367.jpg',cat:'Уверенность сомнение'},
-{p:'images/picture-368.jpg',cat:'Убеждение сомнение'},
-{p:'images/picture-369.jpg',cat:'Вера неверие'},
-{p:'images/picture-370.jpg',cat:'Доверие недоверие'},
-{p:'images/picture-371.jpg',cat:'Оптимизм пессимизм'},
-{p:'images/picture-372.jpg',cat:'Радикализм умеренность'},
-{p:'images/picture-373.jpg',cat:'Экстремизм центризм'},
-{p:'images/picture-374.jpg',cat:'Консерватизм прогрессивность'},
-{p:'images/picture-375.jpg',cat:'Традиционализм новаторство'},
-{p:'images/picture-376.jpg',cat:'Реализм идеализм'},
-{p:'images/picture-377.jpg',cat:'Прагматизм романтизм'},
-{p:'images/picture-378.jpg',cat:'Материализм спиритуализм'},
-{p:'images/picture-379.jpg',cat:'Рационализм иррационализм'},
-{p:'images/picture-380.jpg',cat:'Эмпиризм теоретизирование'},
-{p:'images/picture-381.jpg',cat:'Позитив негатив'},
-{p:'images/picture-382.jpg',cat:'Свет тьма'},
-{p:'images/picture-383.jpg',cat:'Добро зло'},
-{p:'images/picture-384.jpg',cat:'Красота уродство'},
-{p:'images/picture-385.jpg',cat:'Гармония дисгармония'},
-{p:'images/picture-386.jpg',cat:'Порядок хаос'},
-{p:'images/picture-387.jpg',cat:'Система беспорядок'},
-{p:'images/picture-388.jpg',cat:'Структура аморфность'},
-{p:'images/picture-389.jpg',cat:'Организация дезорганизация'},
-{p:'images/picture-390.jpg',cat:'Классификация смешение'},
-{p:'images/picture-391.jpg',cat:'Категория непохожесть'},
-{p:'images/picture-392.jpg',cat:'Тип индивидуальность'},
-{p:'images/picture-393.jpg',cat:'Общее частное'},
-{p:'images/picture-394.jpg',cat:'Абстрактное конкретное'},
-{p:'images/picture-395.jpg',cat:'Общее единичное'},
-{p:'images/picture-396.jpg',cat:'Универсальное частное'},
-{p:'images/picture-397.jpg',cat:'Глобальное локальное'},
-{p:'images/picture-398.jpg',cat:'Вселенное планетарное'},
-{p:'images/picture-399.jpg',cat:'Планетарное земное'},
-{p:'images/picture-400.jpg',cat:'Земное человеческое'},
-{p:'images/picture-401.jpg',cat:'Человеческое личное'},
-{p:'images/picture-402.jpg',cat:'Личное интимное'},
-{p:'images/picture-403.jpg',cat:'Интимное тайное'},
-{p:'images/picture-404.jpg',cat:'Тайное явное'},
-{p:'images/picture-405.jpg',cat:'Явное скрытое'},
-{p:'images/picture-406.jpg',cat:'Открытое закрытое'},
-{p:'images/picture-407.jpg',cat:'Доступное запретное'},
-{p:'images/picture-408.jpg',cat:'Свободное зависимое'},
-{p:'images/picture-409.jpg',cat:'Независимое подчиненное'},
-{p:'images/picture-410.jpg',cat:'Самостоятельное контролируемое'},
-{p:'images/picture-411.jpg',cat:'Автономное управляемое'},
-{p:'images/picture-412.jpg',cat:'Свободное несвободное'},
-{p:'images/picture-413.jpg',cat:'Освобожденное порабощенное'},
-{p:'images/picture-414.jpg',cat:'Независимое зависимое'},
-{p:'images/picture-415.jpg',cat:'Самодостаточное нуждающееся'},
-{p:'images/picture-416.jpg',cat:'Закат над озером'},
-{p:'images/picture-417.jpg',cat:'Утренний туман'},
-{p:'images/picture-418.jpg',cat:'Лесная дорога'},
-{p:'images/picture-419.jpg',cat:'Горный ручей'},
-{p:'images/picture-420.jpg',cat:'Цветущее поле'},
-{p:'images/picture-421.jpg',cat:'Старый мост'},
-{p:'images/picture-422.jpg',cat:'Берёзовая роща'},
-{p:'images/picture-423.jpg',cat:'Осенний парк'},
-{p:'images/picture-424.jpg',cat:'Зимний лес'},
-{p:'images/picture-425.jpg',cat:'Весенний луг'},
-{p:'images/picture-426.jpg',cat:'Речная долина'},
-{p:'images/picture-427.jpg',cat:'Солнечная поляна'},
-{p:'images/picture-428.jpg',cat:'Тени деревьев'},
-{p:'images/picture-429.jpg',cat:'Золотая осень'},
-{p:'images/picture-430.jpg',cat:'Первый снег'},
-{p:'images/picture-431.jpg',cat:'Летний день'},
-{p:'images/picture-432.jpg',cat:'Вечерний свет'},
-{p:'images/picture-433.jpg',cat:'Утренняя роса'},
-{p:'images/picture-434.jpg',cat:'Дождливый день'},
-{p:'images/picture-435.jpg',cat:'Ясное небо'},
-{p:'images/picture-436.jpg',cat:'Облачный закат'},
-{p:'images/picture-437.jpg',cat:'Тихое утро'},
-{p:'images/picture-438.jpg',cat:'Теплый вечер'},
-{p:'images/picture-439.jpg',cat:'Прохладный день'},
-{p:'images/picture-440.jpg',cat:'Солнечный луч'},
-{p:'images/picture-441.jpg',cat:'Лесная тишина'},
-{p:'images/picture-442.jpg',cat:'Полевые цветы'},
-{p:'images/picture-443.jpg',cat:'Речные камни'},
-{p:'images/picture-444.jpg',cat:'Горные вершины'},
-{p:'images/picture-445.jpg',cat:'Долина рек'},
-{p:'images/picture-446.jpg',cat:'Зеленые холмы'},
-{p:'images/picture-447.jpg',cat:'Синее небо'},
-{p:'images/picture-448.jpg',cat:'Белые облака'},
-{p:'images/picture-449.jpg',cat:'Золотое солнце'},
-{p:'images/picture-450.jpg',cat:'Красный закат'},
-{p:'images/picture-451.jpg',cat:'Спокойная вода'},
-{p:'images/picture-452.jpg',cat:'Ветреный день'},
-{p:'images/picture-453.jpg',cat:'Тихий вечер'},
-{p:'images/picture-454.jpg',cat:'Яркий полдень'},
-{p:'images/picture-455.jpg',cat:'Мягкий рассвет'},
-{p:'images/picture-456.jpg',cat:'Осенние листья'},
-{p:'images/picture-457.jpg',cat:'Весенние почки'},
-{p:'images/picture-458.jpg',cat:'Летние травы'},
-{p:'images/picture-459.jpg',cat:'Зимние узоры'},
-{p:'images/picture-460.jpg',cat:'Вечерние тени'},
-{p:'images/picture-461.jpg',cat:'Утренние лучи'},
-{p:'images/picture-462.jpg',cat:'Дневное солнце'},
-{p:'images/picture-463.jpg',cat:'Вечерняя заря'},
-{p:'images/picture-464.jpg',cat:'Ночные звезды'},
-{p:'images/picture-465.jpg',cat:'Рассветные тени'},
-{p:'images/picture-466.jpg',cat:'Лесная просека'},
-{p:'images/picture-467.jpg',cat:'Полевая тропа'},
-{p:'images/picture-468.jpg',cat:'Речной берег'},
-{p:'images/picture-469.jpg',cat:'Горная тропинка'},
-{p:'images/picture-470.jpg',cat:'Луговая дорога'},
-{p:'images/picture-471.jpg',cat:'Озерный пейзаж'},
-{p:'images/picture-472.jpg',cat:'Морской берег'},
-{p:'images/picture-473.jpg',cat:'Речной изгиб'},
-{p:'images/picture-474.jpg',cat:'Овражный склон'},
-{p:'images/picture-475.jpg',cat:'Холмистый пейзаж'},
-{p:'images/picture-476.jpg',cat:'Луговая равнина'},
-{p:'images/picture-477.jpg',cat:'Лесная поляна'},
-{p:'images/picture-478.jpg',cat:'Полевое простор'},
-{p:'images/picture-479.jpg',cat:'Горное плато'},
-{p:'images/picture-480.jpg',cat:'Речная пойма'},
-{p:'images/picture-481.jpg',cat:'Осенний букет'},
-{p:'images/picture-482.jpg',cat:'Весенний сад'},
-{p:'images/picture-483.jpg',cat:'Летний луг'},
-{p:'images/picture-484.jpg',cat:'Зимний узор'},
-{p:'images/picture-485.jpg',cat:'Годовой круг'},
-{p:'images/picture-486.jpg',cat:'Времена года'},
-{p:'images/picture-487.jpg',cat:'Природа жизнь'},
-{p:'images/picture-488.jpg',cat:'Красота земли'},
-{p:'images/picture-489.jpg',cat:'Гармония мира'},
-{p:'images/picture-490.jpg',cat:'Тишина природы'},
-{p:'images/picture-491.jpg',cat:'Свет и тень'},
-{p:'images/picture-492.jpg',cat:'День и ночь'},
-{p:'images/picture-493.jpg',cat:'Утро и вечер'},
-{p:'images/picture-494.jpg',cat:'Лето и зима'},
-{p:'images/picture-495.jpg',cat:'Весна и осень'},
-{p:'images/picture-496.jpg',cat:'Живая вода'},
-{p:'images/picture-497.jpg',cat:'Чистый воздух'},
-{p:'images/picture-498.jpg',cat:'Зеленая трава'},
-{p:'images/picture-499.jpg',cat:'Синее небо'},
-{p:'images/picture-500.jpg',cat:'Золотое солнце'},
-{p:'images/picture-501.jpg',cat:'Белые облака'},
-{p:'images/picture-502.jpg',cat:'Серые тени'},
-{p:'images/picture-503.jpg',cat:'Яркие краски'},
-{p:'images/picture-504.jpg',cat:'Мягкие тона'},
-{p:'images/picture-505.jpg',cat:'Глубокие цвета'},
-{p:'images/picture-506.jpg',cat:'Прозрачный свет'},
-{p:'images/picture-507.jpg',cat:'Теплые лучи'},
-{p:'images/picture-508.jpg',cat:'Холодный ветер'},
-{p:'images/picture-509.jpg',cat:'Спокойная гладь'},
-{p:'images/picture-510.jpg',cat:'Бурный поток'},
-{p:'images/picture-511.jpg',cat:'Тихая заводь'},
-{p:'images/picture-512.jpg',cat:'Быстрая река'},
-{p:'images/picture-513.jpg',cat:'Глубокое озеро'},
-{p:'images/picture-514.jpg',cat:'Мелководье'},
-{p:'images/picture-515.jpg',cat:'Горный поток'},
-{p:'images/picture-516.jpg',cat:'Речной порог'},
-{p:'images/picture-517.jpg',cat:'Водопад'},
-{p:'images/picture-518.jpg',cat:'Ключ'},
-{p:'images/picture-519.jpg',cat:'Родник'},
-{p:'images/picture-520.jpg',cat:'Источник'},
-{p:'images/picture-521.jpg',cat:'Лесной ручей'},
-{p:'images/picture-522.jpg',cat:'Полевой ручеек'},
-{p:'images/picture-523.jpg',cat:'Горный ручей'},
-{p:'images/picture-524.jpg',cat:'Подземный источник'},
-{p:'images/picture-525.jpg',cat:'Весенний поток'},
-{p:'images/picture-526.jpg',cat:'Летний ручей'},
-{p:'images/picture-527.jpg',cat:'Осенний поток'},
-{p:'images/picture-528.jpg',cat:'Зимний ключ'},
-{p:'images/picture-529.jpg',cat:'Весенний родник'},
-{p:'images/picture-530.jpg',cat:'Круговорот воды'},
-{p:'images/picture-531.jpg',cat:'Деревья giants'},
-{p:'images/picture-532.jpg',cat:'Старые деревья'},
-{p:'images/picture-533.jpg',cat:'Молодые деревья'},
-{p:'images/picture-534.jpg',cat:'Высокие деревья'},
-{p:'images/picture-535.jpg',cat:'Низкие деревья'},
-{p:'images/picture-536.jpg',cat:'Толстые стволы'},
-{p:'images/picture-537.jpg',cat:'Тонкие ветки'},
-{p:'images/picture-538.jpg',cat:'Густые кроны'},
-{p:'images/picture-539.jpg',cat:'Редкие листья'},
-{p:'images/picture-540.jpg',cat:'Осенние цвета'},
-{p:'images/picture-541.jpg',cat:'Весенние почки'},
-{p:'images/picture-542.jpg',cat:'Летние листья'},
-{p:'images/picture-543.jpg',cat:'Зимние ветки'},
-{p:'images/picture-544.jpg',cat:'Осенние плоды'},
-{p:'images/picture-545.jpg',cat:'Годовой цикл'},
-{p:'images/picture-546.jpg',cat:'Лесная жизнь'},
-{p:'images/picture-547.jpg',cat:'Полевая жизнь'},
-{p:'images/picture-548.jpg',cat:'Речная жизнь'},
-{p:'images/picture-549.jpg',cat:'Горная жизнь'},
-{p:'images/picture-550.jpg',cat:'Озерная жизнь'},
-{p:'images/picture-551.jpg',cat:'Природа пробуждение'},
-{p:'images/picture-552.jpg',cat:'Природа засыпание'},
-{p:'images/picture-553.jpg',cat:'Природа дыхание'},
-{p:'images/picture-554.jpg',cat:'Природа пульс'},
-{p:'images/picture-555.jpg',cat:'Природа гармония'},
-{p:'images/picture-556.jpg',cat:'Свет игры'},
-{p:'images/picture-557.jpg',cat:'Тени танец'},
-{p:'images/picture-558.jpg',cat:'Цвета перелив'},
-{p:'images/picture-559.jpg',cat:'Формы линии'},
-{p:'images/picture-560.jpg',cat:'Пространство глубина'},
-{p:'images/picture-561.jpg',cat:'Время течение'},
-{p:'images/picture-562.jpg',cat:'Мгновение ловля'},
-{p:'images/picture-563.jpg',cat:'Вечность поиск'},
-{p:'images/picture-564.jpg',cat:'Бесконечность чувств'},
-{p:'images/picture-565.jpg',cat:'Гармония обретение'},
-{p:'images/picture-566.jpg',cat:'Тишина наполнение'},
-{p:'images/picture-567.jpg',cat:'Спокойствие обретение'},
-{p:'images/picture-568.jpg',cat:'Умиротворение'},
-{p:'images/picture-569.jpg',cat:'Созерцание'},
-{p:'images/picture-570.jpg',cat:'Размышление'},
-{p:'images/picture-571.jpg',cat:'Вдохновение'},
-{p:'images/picture-572.jpg',cat:'Творчество'},
-{p:'images/picture-573.jpg',cat:'Эмоции'},
-{p:'images/picture-574.jpg',cat:'Чувства'},
-{p:'images/picture-575.jpg',cat:'Переживания'},
-{p:'images/picture-576.jpg',cat:'Воспоминания'},
-{p:'images/picture-577.jpg',cat:'Мечты'},
-{p:'images/picture-578.jpg',cat:'Надежды'},
-{p:'images/picture-579.jpg',cat:'Ожидания'},
-{p:'images/picture-580.jpg',cat:'Предвкушение'},
-{p:'images/picture-581.jpg',cat:'Счастье момент'},
-{p:'images/picture-582.jpg',cat:'Радость чувство'},
-{p:'images/picture-583.jpg',cat:'Грусть отголосок'},
-{p:'images/picture-584.jpg',cat:'Ностальгия'},
-{p:'images/picture-585.jpg',cat:'Воспоминание'},
-{p:'images/picture-586.jpg',cat:'Прошлое отражение'},
-{p:'images/picture-587.jpg',cat:'Настоящее ощущение'},
-{p:'images/picture-588.jpg',cat:'Будущее предчувствие'},
-{p:'images/picture-589.jpg',cat:'Время остановка'},
-{p:'images/picture-590.jpg',cat:'Мгновение вечность'},
-{p:'images/picture-591.jpg',cat:'Жизнь красота'},
-{p:'images/picture-592.jpg',cat:'Мир гармония'},
-{p:'images/picture-593.jpg',cat:'Вселенная бесконечность'},
-{p:'images/picture-594.jpg',cat:'Природа мудрость'},
-{p:'images/picture-595.jpg',cat:'Искусство выражение'},
-{p:'images/picture-596.jpg',cat:'Фотография момент'},
-{p:'images/picture-597.jpg',cat:'Искусство жизнь'},
-{p:'images/picture-598.jpg',cat:'Творчество полет'},
-{p:'images/picture-599.jpg',cat:'Вдохновение источник'},
-{p:'images/picture-600.jpg',cat:'Красота спасение'},
-{p:'images/picture-601.jpg',cat:'Свет победа'},
-{p:'images/picture-602.jpg',cat:'Тьма покой'},
-{p:'images/picture-603.jpg',cat:'День ясность'},
-{p:'images/picture-604.jpg',cat:'Ночь тайна'},
-{p:'images/picture-605.jpg',cat:'Утро надежда'},
-{p:'images/picture-606.jpg',cat:'Вечер грусть'},
-{p:'images/picture-607.jpg',cat:'Полдень пик'},
-{p:'images/picture-608.jpg',cat:'Рассвет начало'},
-{p:'images/picture-609.jpg',cat:'Закат завершение'},
-{p:'images/picture-610.jpg',cat:'Сумерки переход'},
-{p:'images/picture-611.jpg',cat:'Полночь тайна'},
-{p:'images/picture-612.jpg',cat:'Предрассветный час'},
-{p:'images/picture-613.jpg',cat:'Утренняя заря'},
-{p:'images/picture-614.jpg',cat:'Вечерняя заря'},
-{p:'images/picture-615.jpg',cat:'Золотой час'},
-{p:'images/picture-616.jpg',cat:'Синий час'},
-{p:'images/picture-617.jpg',cat:'Розовый час'},
-{p:'images/picture-618.jpg',cat:'Оранжевый час'},
-{p:'images/picture-619.jpg',cat:'Фиолетовый час'},
-{p:'images/picture-620.jpg',cat:'Зеленый час'},
-{p:'images/picture-621.jpg',cat:'Цвета природы'},
-{p:'images/picture-622.jpg',cat:'Оттенки времени'},
-{p:'images/picture-623.jpg',cat:'Настроения свет'},
-{p:'images/picture-624.jpg',cat:'Эмоции цвет'},
-{p:'images/picture-625.jpg',cat:'Чувства тон'},
-{p:'images/picture-626.jpg',cat:'Нюансы детали'},
-{p:'images/picture-627.jpg',cat:'Простота сложность'},
-{p:'images/picture-628.jpg',cat:'Минимализм богатство'},
-{p:'images/picture-629.jpg',cat:'Пустота наполненность'},
-{p:'images/picture-630.jpg',cat:'Тишина звук'},
-{p:'images/picture-631.jpg',cat:'Движение покой'},
-{p:'images/picture-632.jpg',cat:'Быстрота медлительность'},
-{p:'images/picture-633.jpg',cat:'Мгновение вечность'},
-{p:'images/picture-634.jpg',cat:'Текучесть стабильность'},
-{p:'images/picture-635.jpg',cat:'Изменность постоянство'},
-{p:'images/picture-636.jpg',cat:'Контраст гармония'},
-{p:'images/picture-637.jpg',cat:'Противопоставление единство'},
-{p:'images/picture-638.jpg',cat:'Различие сходство'},
-{p:'images/picture-639.jpg',cat:'Уникальность повторение'},
-{p:'images/picture-640.jpg',cat:'Индивидуальность общность'},
-{p:'images/picture-641.jpg',cat:'Природа человек'},
-{p:'images/picture-642.jpg',cat:'Космос земля'},
-{p:'images/picture-643.jpg',cat:'Вселенная частичка'},
-{p:'images/picture-644.jpg',cat:'Бесконечность конечность'},
-{p:'images/picture-645.jpg',cat:'Вечность мгновение'},
-{p:'images/picture-646.jpg',cat:'Жизнь смерть'},
-{p:'images/picture-647.jpg',cat:'Рождение увядание'},
-{p:'images/picture-648.jpg',cat:'Рост упадок'},
-{p:'images/picture-649.jpg',cat:'Расцвет увядание'},
-{p:'images/picture-650.jpg',cat:'Начало конец'},
-{p:'images/picture-651.jpg',cat:'Путь дорога'},
-{p:'images/picture-652.jpg',cat:'Тропинка трасса'},
-{p:'images/picture-653.jpg',cat:'Маршрут след'},
-{p:'images/picture-654.jpg',cat:'Направление цель'},
-{p:'images/picture-654.jpg',cat:'Направление цель'},
-{p:'images/picture-654.jpg',cat:'Направление цель'},
-{p:'images/picture-654.jpg',cat:'Направление цель'},
-{p:'images/picture-654.jpg',cat:'Направление цель'},
-{p:'images/picture-654.jpg',cat:'Направление цель'},
-{p:'images/picture-654.jpg',cat:'Направление цель'},
-{p:'images/picture-654.jpg',cat:'Направление цель'},
-{p:'images/picture-654.jpg',cat:'Направление цель'},
-{p:'images/picture-654.jpg',cat:'Направление цель'},
-{p:'images/picture-654.jpg',cat:'Направление цель'},
-{p:'images/picture-654.jpg',cat:'Направление цель'}
+{p:'images/picture-001.jpg',cat:''},
+{p:'images/picture-002.jpg',cat:''},
+{p:'images/picture-003.jpg',cat:''},
+{p:'images/picture-004.jpg',cat:''},
+{p:'images/picture-005.jpg',cat:''},
+{p:'images/picture-006.jpg',cat:''},
+{p:'images/picture-007.jpg',cat:''},
+{p:'images/picture-008.jpg',cat:''},
+{p:'images/picture-009.jpg',cat:''},
+{p:'images/picture-010.jpg',cat:''},
+{p:'images/picture-011.jpg',cat:''},
+{p:'images/picture-012.jpg',cat:''},
+{p:'images/picture-013.jpg',cat:''},
+{p:'images/picture-014.jpg',cat:''},
+{p:'images/picture-015.jpg',cat:''},
+{p:'images/picture-016.jpg',cat:''},
+{p:'images/picture-017.jpg',cat:''},
+{p:'images/picture-018.jpg',cat:''},
+{p:'images/picture-019.jpg',cat:''},
+{p:'images/picture-020.jpg',cat:''},
+{p:'images/picture-021.jpg',cat:''},
+{p:'images/picture-022.jpg',cat:''},
+{p:'images/picture-023.jpg',cat:''},
+{p:'images/picture-024.jpg',cat:''},
+{p:'images/picture-025.jpg',cat:''},
+{p:'images/picture-026.jpg',cat:''},
+{p:'images/picture-027.jpg',cat:''},
+{p:'images/picture-028.jpg',cat:''},
+{p:'images/picture-029.jpg',cat:''},
+{p:'images/picture-030.jpg',cat:''},
+{p:'images/picture-031.jpg',cat:''},
+{p:'images/picture-032.jpg',cat:''},
+{p:'images/picture-033.jpg',cat:''},
+{p:'images/picture-034.jpg',cat:''},
+{p:'images/picture-035.jpg',cat:''},
+{p:'images/picture-036.jpg',cat:''},
+{p:'images/picture-037.jpg',cat:''},
+{p:'images/picture-038.jpg',cat:''},
+{p:'images/picture-039.jpg',cat:''},
+{p:'images/picture-040.jpg',cat:''},
+{p:'images/picture-041.jpg',cat:''},
+{p:'images/picture-042.jpg',cat:''},
+{p:'images/picture-043.jpg',cat:''},
+{p:'images/picture-044.jpg',cat:''},
+{p:'images/picture-045.jpg',cat:''},
+{p:'images/picture-046.jpg',cat:''},
+{p:'images/picture-047.jpg',cat:''},
+{p:'images/picture-048.jpg',cat:''},
+{p:'images/picture-049.jpg',cat:''},
+{p:'images/picture-050.jpg',cat:''},
+{p:'images/picture-051.jpg',cat:''},
+{p:'images/picture-052.jpg',cat:''},
+{p:'images/picture-053.jpg',cat:''},
+{p:'images/picture-054.jpg',cat:''},
+{p:'images/picture-055.jpg',cat:''},
+{p:'images/picture-056.jpg',cat:''},
+{p:'images/picture-057.jpg',cat:''},
+{p:'images/picture-058.jpg',cat:''},
+{p:'images/picture-059.jpg',cat:''},
+{p:'images/picture-060.jpg',cat:''},
+{p:'images/picture-061.jpg',cat:''},
+{p:'images/picture-062.jpg',cat:''},
+{p:'images/picture-063.jpg',cat:''},
+{p:'images/picture-064.jpg',cat:''},
+{p:'images/picture-065.jpg',cat:''},
+{p:'images/picture-066.jpg',cat:''},
+{p:'images/picture-067.jpg',cat:''},
+{p:'images/picture-068.jpg',cat:''},
+{p:'images/picture-069.jpg',cat:''},
+{p:'images/picture-070.jpg',cat:''},
+{p:'images/picture-071.jpg',cat:''},
+{p:'images/picture-072.jpg',cat:''},
+{p:'images/picture-073.jpg',cat:''},
+{p:'images/picture-074.jpg',cat:''},
+{p:'images/picture-075.jpg',cat:''},
+{p:'images/picture-076.jpg',cat:''},
+{p:'images/picture-077.jpg',cat:''},
+{p:'images/picture-078.jpg',cat:''},
+{p:'images/picture-079.jpg',cat:''},
+{p:'images/picture-080.jpg',cat:''},
+{p:'images/picture-081.jpg',cat:''},
+{p:'images/picture-082.jpg',cat:''},
+{p:'images/picture-083.jpg',cat:''},
+{p:'images/picture-084.jpg',cat:''},
+{p:'images/picture-085.jpg',cat:''},
+{p:'images/picture-086.jpg',cat:''},
+{p:'images/picture-087.jpg',cat:''},
+{p:'images/picture-088.jpg',cat:''},
+{p:'images/picture-089.jpg',cat:''},
+{p:'images/picture-090.jpg',cat:''},
+{p:'images/picture-091.jpg',cat:''},
+{p:'images/picture-092.jpg',cat:''},
+{p:'images/picture-093.jpg',cat:''},
+{p:'images/picture-094.jpg',cat:''},
+{p:'images/picture-095.jpg',cat:''},
+{p:'images/picture-096.jpg',cat:''},
+{p:'images/picture-097.jpg',cat:''},
+{p:'images/picture-098.jpg',cat:''},
+{p:'images/picture-099.jpg',cat:''},
+{p:'images/picture-100.jpg',cat:''},
+{p:'images/picture-101.jpg',cat:''},
+{p:'images/picture-102.jpg',cat:''},
+{p:'images/picture-103.jpg',cat:''},
+{p:'images/picture-104.jpg',cat:''},
+{p:'images/picture-105.jpg',cat:''},
+{p:'images/picture-106.jpg',cat:''},
+{p:'images/picture-107.jpg',cat:''},
+{p:'images/picture-108.jpg',cat:''},
+{p:'images/picture-109.jpg',cat:''},
+{p:'images/picture-110.jpg',cat:''},
+{p:'images/picture-111.jpg',cat:''},
+{p:'images/picture-112.jpg',cat:''},
+{p:'images/picture-113.jpg',cat:''},
+{p:'images/picture-114.jpg',cat:''},
+{p:'images/picture-115.jpg',cat:''},
+{p:'images/picture-116.jpg',cat:''},
+{p:'images/picture-117.jpg',cat:''},
+{p:'images/picture-118.jpg',cat:''},
+{p:'images/picture-119.jpg',cat:''},
+{p:'images/picture-120.jpg',cat:''},
+{p:'images/picture-121.jpg',cat:''},
+{p:'images/picture-122.jpg',cat:''},
+{p:'images/picture-123.jpg',cat:''},
+{p:'images/picture-124.jpg',cat:''},
+{p:'images/picture-125.jpg',cat:''},
+{p:'images/picture-126.jpg',cat:''},
+{p:'images/picture-127.jpg',cat:''},
+{p:'images/picture-128.jpg',cat:''},
+{p:'images/picture-129.jpg',cat:''},
+{p:'images/picture-130.jpg',cat:''},
+{p:'images/picture-131.jpg',cat:''},
+{p:'images/picture-132.jpg',cat:''},
+{p:'images/picture-133.jpg',cat:''},
+{p:'images/picture-134.jpg',cat:''},
+{p:'images/picture-135.jpg',cat:''},
+{p:'images/picture-136.jpg',cat:''},
+{p:'images/picture-137.jpg',cat:''},
+{p:'images/picture-138.jpg',cat:''},
+{p:'images/picture-139.jpg',cat:''},
+{p:'images/picture-140.jpg',cat:''},
+{p:'images/picture-141.jpg',cat:''},
+{p:'images/picture-142.jpg',cat:''},
+{p:'images/picture-143.jpg',cat:''},
+{p:'images/picture-144.jpg',cat:''},
+{p:'images/picture-145.jpg',cat:''},
+{p:'images/picture-146.jpg',cat:''},
+{p:'images/picture-147.jpg',cat:''},
+{p:'images/picture-148.jpg',cat:''},
+{p:'images/picture-149.jpg',cat:''},
+{p:'images/picture-150.jpg',cat:''},
+{p:'images/picture-151.jpg',cat:''},
+{p:'images/picture-152.jpg',cat:''},
+{p:'images/picture-153.jpg',cat:''},
+{p:'images/picture-154.jpg',cat:''},
+{p:'images/picture-155.jpg',cat:''},
+{p:'images/picture-156.jpg',cat:''},
+{p:'images/picture-157.jpg',cat:''},
+{p:'images/picture-158.jpg',cat:''},
+{p:'images/picture-159.jpg',cat:''},
+{p:'images/picture-160.jpg',cat:''},
+{p:'images/picture-161.jpg',cat:''},
+{p:'images/picture-162.jpg',cat:''},
+{p:'images/picture-163.jpg',cat:''},
+{p:'images/picture-164.jpg',cat:''},
+{p:'images/picture-165.jpg',cat:''},
+{p:'images/picture-166.jpg',cat:''},
+{p:'images/picture-167.jpg',cat:''},
+{p:'images/picture-168.jpg',cat:''},
+{p:'images/picture-169.jpg',cat:''},
+{p:'images/picture-170.jpg',cat:''},
+{p:'images/picture-171.jpg',cat:''},
+{p:'images/picture-172.jpg',cat:''},
+{p:'images/picture-173.jpg',cat:''},
+{p:'images/picture-174.jpg',cat:''},
+{p:'images/picture-175.jpg',cat:''},
+{p:'images/picture-176.jpg',cat:''},
+{p:'images/picture-177.jpg',cat:''},
+{p:'images/picture-178.jpg',cat:''},
+{p:'images/picture-179.jpg',cat:''},
+{p:'images/picture-180.jpg',cat:''},
+{p:'images/picture-181.jpg',cat:''},
+{p:'images/picture-182.jpg',cat:''},
+{p:'images/picture-183.jpg',cat:''},
+{p:'images/picture-184.jpg',cat:''},
+{p:'images/picture-185.jpg',cat:''},
+{p:'images/picture-186.jpg',cat:''},
+{p:'images/picture-187.jpg',cat:''},
+{p:'images/picture-188.jpg',cat:''},
+{p:'images/picture-189.jpg',cat:''},
+{p:'images/picture-190.jpg',cat:''},
+{p:'images/picture-191.jpg',cat:''},
+{p:'images/picture-192.jpg',cat:''},
+{p:'images/picture-193.jpg',cat:''},
+{p:'images/picture-194.jpg',cat:''},
+{p:'images/picture-195.jpg',cat:''},
+{p:'images/picture-196.jpg',cat:''},
+{p:'images/picture-197.jpg',cat:''},
+{p:'images/picture-198.jpg',cat:''},
+{p:'images/picture-199.jpg',cat:''},
+{p:'images/picture-200.jpg',cat:''},
+{p:'images/picture-201.jpg',cat:''},
+{p:'images/picture-202.jpg',cat:''},
+{p:'images/picture-203.jpg',cat:''},
+{p:'images/picture-204.jpg',cat:''},
+{p:'images/picture-205.jpg',cat:''},
+{p:'images/picture-206.jpg',cat:''},
+{p:'images/picture-207.jpg',cat:''},
+{p:'images/picture-208.jpg',cat:''},
+{p:'images/picture-209.jpg',cat:''},
+{p:'images/picture-210.jpg',cat:''},
+{p:'images/picture-211.jpg',cat:''},
+{p:'images/picture-212.jpg',cat:''},
+{p:'images/picture-213.jpg',cat:''},
+{p:'images/picture-214.jpg',cat:''},
+{p:'images/picture-215.jpg',cat:''},
+{p:'images/picture-216.jpg',cat:''},
+{p:'images/picture-217.jpg',cat:''},
+{p:'images/picture-218.jpg',cat:''},
+{p:'images/picture-219.jpg',cat:''},
+{p:'images/picture-220.jpg',cat:''},
+{p:'images/picture-221.jpg',cat:''},
+{p:'images/picture-222.jpg',cat:''},
+{p:'images/picture-223.jpg',cat:''},
+{p:'images/picture-224.jpg',cat:''},
+{p:'images/picture-225.jpg',cat:''},
+{p:'images/picture-226.jpg',cat:''},
+{p:'images/picture-227.jpg',cat:''},
+{p:'images/picture-228.jpg',cat:''},
+{p:'images/picture-229.jpg',cat:''},
+{p:'images/picture-230.jpg',cat:''},
+{p:'images/picture-231.jpg',cat:''},
+{p:'images/picture-232.jpg',cat:''},
+{p:'images/picture-233.jpg',cat:''},
+{p:'images/picture-234.jpg',cat:''},
+{p:'images/picture-235.jpg',cat:''},
+{p:'images/picture-236.jpg',cat:''},
+{p:'images/picture-237.jpg',cat:''},
+{p:'images/picture-238.jpg',cat:''},
+{p:'images/picture-239.jpg',cat:''},
+{p:'images/picture-240.jpg',cat:''},
+{p:'images/picture-241.jpg',cat:''},
+{p:'images/picture-242.jpg',cat:''},
+{p:'images/picture-243.jpg',cat:''},
+{p:'images/picture-244.jpg',cat:''},
+{p:'images/picture-245.jpg',cat:''},
+{p:'images/picture-246.jpg',cat:''},
+{p:'images/picture-247.jpg',cat:''},
+{p:'images/picture-248.jpg',cat:''},
+{p:'images/picture-249.jpg',cat:''},
+{p:'images/picture-250.jpg',cat:''},
+{p:'images/picture-251.jpg',cat:''},
+{p:'images/picture-252.jpg',cat:''},
+{p:'images/picture-253.jpg',cat:''},
+{p:'images/picture-254.jpg',cat:''},
+{p:'images/picture-255.jpg',cat:''},
+{p:'images/picture-256.jpg',cat:''},
+{p:'images/picture-257.jpg',cat:''},
+{p:'images/picture-258.jpg',cat:''},
+{p:'images/picture-259.jpg',cat:''},
+{p:'images/picture-260.jpg',cat:''},
+{p:'images/picture-261.jpg',cat:''},
+{p:'images/picture-262.jpg',cat:''},
+{p:'images/picture-263.jpg',cat:''},
+{p:'images/picture-264.jpg',cat:''},
+{p:'images/picture-265.jpg',cat:''},
+{p:'images/picture-266.jpg',cat:''},
+{p:'images/picture-267.jpg',cat:''},
+{p:'images/picture-268.jpg',cat:''},
+{p:'images/picture-269.jpg',cat:''},
+{p:'images/picture-270.jpg',cat:''},
+{p:'images/picture-271.jpg',cat:''},
+{p:'images/picture-272.jpg',cat:''},
+{p:'images/picture-273.jpg',cat:''},
+{p:'images/picture-274.jpg',cat:''},
+{p:'images/picture-275.jpg',cat:''},
+{p:'images/picture-276.jpg',cat:''},
+{p:'images/picture-277.jpg',cat:''},
+{p:'images/picture-278.jpg',cat:''},
+{p:'images/picture-279.jpg',cat:''},
+{p:'images/picture-280.jpg',cat:''},
+{p:'images/picture-281.jpg',cat:''},
+{p:'images/picture-282.jpg',cat:''},
+{p:'images/picture-283.jpg',cat:''},
+{p:'images/picture-284.jpg',cat:''},
+{p:'images/picture-285.jpg',cat:''},
+{p:'images/picture-286.jpg',cat:''},
+{p:'images/picture-287.jpg',cat:''},
+{p:'images/picture-288.jpg',cat:''},
+{p:'images/picture-289.jpg',cat:''},
+{p:'images/picture-290.jpg',cat:''},
+{p:'images/picture-291.jpg',cat:''},
+{p:'images/picture-292.jpg',cat:''},
+{p:'images/picture-293.jpg',cat:''},
+{p:'images/picture-294.jpg',cat:''},
+{p:'images/picture-295.jpg',cat:''},
+{p:'images/picture-296.jpg',cat:''},
+{p:'images/picture-297.jpg',cat:''},
+{p:'images/picture-298.jpg',cat:''},
+{p:'images/picture-299.jpg',cat:''},
+{p:'images/picture-300.jpg',cat:''},
+{p:'images/picture-301.jpg',cat:''},
+{p:'images/picture-302.jpg',cat:''},
+{p:'images/picture-303.jpg',cat:''},
+{p:'images/picture-304.jpg',cat:''},
+{p:'images/picture-305.jpg',cat:''},
+{p:'images/picture-306.jpg',cat:''},
+{p:'images/picture-307.jpg',cat:''},
+{p:'images/picture-308.jpg',cat:''},
+{p:'images/picture-309.jpg',cat:''},
+{p:'images/picture-310.jpg',cat:''},
+{p:'images/picture-311.jpg',cat:''},
+{p:'images/picture-312.jpg',cat:''},
+{p:'images/picture-313.jpg',cat:''},
+{p:'images/picture-314.jpg',cat:''},
+{p:'images/picture-315.jpg',cat:''},
+{p:'images/picture-316.jpg',cat:''},
+{p:'images/picture-317.jpg',cat:''},
+{p:'images/picture-318.jpg',cat:''},
+{p:'images/picture-319.jpg',cat:''},
+{p:'images/picture-320.jpg',cat:''},
+{p:'images/picture-321.jpg',cat:''},
+{p:'images/picture-322.jpg',cat:''},
+{p:'images/picture-323.jpg',cat:''},
+{p:'images/picture-324.jpg',cat:''},
+{p:'images/picture-325.jpg',cat:''},
+{p:'images/picture-326.jpg',cat:''},
+{p:'images/picture-327.jpg',cat:''},
+{p:'images/picture-328.jpg',cat:''},
+{p:'images/picture-329.jpg',cat:''},
+{p:'images/picture-330.jpg',cat:''},
+{p:'images/picture-331.jpg',cat:''},
+{p:'images/picture-332.jpg',cat:''},
+{p:'images/picture-333.jpg',cat:''},
+{p:'images/picture-334.jpg',cat:''},
+{p:'images/picture-335.jpg',cat:''},
+{p:'images/picture-336.jpg',cat:''},
+{p:'images/picture-337.jpg',cat:''},
+{p:'images/picture-338.jpg',cat:''},
+{p:'images/picture-339.jpg',cat:''},
+{p:'images/picture-340.jpg',cat:''},
+{p:'images/picture-341.jpg',cat:''},
+{p:'images/picture-342.jpg',cat:''},
+{p:'images/picture-343.jpg',cat:''},
+{p:'images/picture-344.jpg',cat:''},
+{p:'images/picture-345.jpg',cat:''},
+{p:'images/picture-346.jpg',cat:''},
+{p:'images/picture-347.jpg',cat:''},
+{p:'images/picture-348.jpg',cat:''},
+{p:'images/picture-349.jpg',cat:''},
+{p:'images/picture-350.jpg',cat:''},
+{p:'images/picture-351.jpg',cat:''},
+{p:'images/picture-352.jpg',cat:''},
+{p:'images/picture-353.jpg',cat:''},
+{p:'images/picture-354.jpg',cat:''},
+{p:'images/picture-355.jpg',cat:''},
+{p:'images/picture-356.jpg',cat:''},
+{p:'images/picture-357.jpg',cat:''},
+{p:'images/picture-358.jpg',cat:''},
+{p:'images/picture-359.jpg',cat:''},
+{p:'images/picture-360.jpg',cat:''},
+{p:'images/picture-361.jpg',cat:''},
+{p:'images/picture-362.jpg',cat:''},
+{p:'images/picture-363.jpg',cat:''},
+{p:'images/picture-364.jpg',cat:''},
+{p:'images/picture-365.jpg',cat:''},
+{p:'images/picture-366.jpg',cat:''},
+{p:'images/picture-367.jpg',cat:''},
+{p:'images/picture-368.jpg',cat:''},
+{p:'images/picture-369.jpg',cat:''},
+{p:'images/picture-370.jpg',cat:''},
+{p:'images/picture-371.jpg',cat:''},
+{p:'images/picture-372.jpg',cat:''},
+{p:'images/picture-373.jpg',cat:''},
+{p:'images/picture-374.jpg',cat:''},
+{p:'images/picture-375.jpg',cat:''},
+{p:'images/picture-376.jpg',cat:''},
+{p:'images/picture-377.jpg',cat:''},
+{p:'images/picture-378.jpg',cat:''},
+{p:'images/picture-379.jpg',cat:''},
+{p:'images/picture-380.jpg',cat:''},
+{p:'images/picture-381.jpg',cat:''},
+{p:'images/picture-382.jpg',cat:''},
+{p:'images/picture-383.jpg',cat:''},
+{p:'images/picture-384.jpg',cat:''},
+{p:'images/picture-385.jpg',cat:''},
+{p:'images/picture-386.jpg',cat:''},
+{p:'images/picture-387.jpg',cat:''},
+{p:'images/picture-388.jpg',cat:''},
+{p:'images/picture-389.jpg',cat:''},
+{p:'images/picture-390.jpg',cat:''},
+{p:'images/picture-391.jpg',cat:''},
+{p:'images/picture-392.jpg',cat:''},
+{p:'images/picture-393.jpg',cat:''},
+{p:'images/picture-394.jpg',cat:''},
+{p:'images/picture-395.jpg',cat:''},
+{p:'images/picture-396.jpg',cat:''},
+{p:'images/picture-397.jpg',cat:''},
+{p:'images/picture-398.jpg',cat:''},
+{p:'images/picture-399.jpg',cat:''},
+{p:'images/picture-400.jpg',cat:''},
+{p:'images/picture-401.jpg',cat:''},
+{p:'images/picture-402.jpg',cat:''},
+{p:'images/picture-403.jpg',cat:''},
+{p:'images/picture-404.jpg',cat:''},
+{p:'images/picture-405.jpg',cat:''},
+{p:'images/picture-406.jpg',cat:''},
+{p:'images/picture-407.jpg',cat:''},
+{p:'images/picture-408.jpg',cat:''},
+{p:'images/picture-409.jpg',cat:''},
+{p:'images/picture-410.jpg',cat:''},
+{p:'images/picture-411.jpg',cat:''},
+{p:'images/picture-412.jpg',cat:''},
+{p:'images/picture-413.jpg',cat:''},
+{p:'images/picture-414.jpg',cat:''},
+{p:'images/picture-415.jpg',cat:''},
+{p:'images/picture-416.jpg',cat:''},
+{p:'images/picture-417.jpg',cat:''},
+{p:'images/picture-418.jpg',cat:''},
+{p:'images/picture-419.jpg',cat:''},
+{p:'images/picture-420.jpg',cat:''},
+{p:'images/picture-421.jpg',cat:''},
+{p:'images/picture-422.jpg',cat:''},
+{p:'images/picture-423.jpg',cat:''},
+{p:'images/picture-424.jpg',cat:''},
+{p:'images/picture-425.jpg',cat:''},
+{p:'images/picture-426.jpg',cat:''},
+{p:'images/picture-427.jpg',cat:''},
+{p:'images/picture-428.jpg',cat:''},
+{p:'images/picture-429.jpg',cat:''},
+{p:'images/picture-430.jpg',cat:''},
+{p:'images/picture-431.jpg',cat:''},
+{p:'images/picture-432.jpg',cat:''},
+{p:'images/picture-433.jpg',cat:''},
+{p:'images/picture-434.jpg',cat:''},
+{p:'images/picture-435.jpg',cat:''},
+{p:'images/picture-436.jpg',cat:''},
+{p:'images/picture-437.jpg',cat:''},
+{p:'images/picture-438.jpg',cat:''},
+{p:'images/picture-439.jpg',cat:''},
+{p:'images/picture-440.jpg',cat:''},
+{p:'images/picture-441.jpg',cat:''},
+{p:'images/picture-442.jpg',cat:''},
+{p:'images/picture-443.jpg',cat:''},
+{p:'images/picture-444.jpg',cat:''},
+{p:'images/picture-445.jpg',cat:''},
+{p:'images/picture-446.jpg',cat:''},
+{p:'images/picture-447.jpg',cat:''},
+{p:'images/picture-448.jpg',cat:''},
+{p:'images/picture-449.jpg',cat:''},
+{p:'images/picture-450.jpg',cat:''},
+{p:'images/picture-451.jpg',cat:''},
+{p:'images/picture-452.jpg',cat:''},
+{p:'images/picture-453.jpg',cat:''},
+{p:'images/picture-454.jpg',cat:''},
+{p:'images/picture-455.jpg',cat:''},
+{p:'images/picture-456.jpg',cat:''},
+{p:'images/picture-457.jpg',cat:''},
+{p:'images/picture-458.jpg',cat:''},
+{p:'images/picture-459.jpg',cat:''},
+{p:'images/picture-460.jpg',cat:''},
+{p:'images/picture-461.jpg',cat:''},
+{p:'images/picture-462.jpg',cat:''},
+{p:'images/picture-463.jpg',cat:''},
+{p:'images/picture-464.jpg',cat:''},
+{p:'images/picture-465.jpg',cat:''},
+{p:'images/picture-466.jpg',cat:''},
+{p:'images/picture-467.jpg',cat:''},
+{p:'images/picture-468.jpg',cat:''},
+{p:'images/picture-469.jpg',cat:''},
+{p:'images/picture-470.jpg',cat:''},
+{p:'images/picture-471.jpg',cat:''},
+{p:'images/picture-472.jpg',cat:''},
+{p:'images/picture-473.jpg',cat:''},
+{p:'images/picture-474.jpg',cat:''},
+{p:'images/picture-475.jpg',cat:''},
+{p:'images/picture-476.jpg',cat:''},
+{p:'images/picture-477.jpg',cat:''},
+{p:'images/picture-478.jpg',cat:''},
+{p:'images/picture-479.jpg',cat:''},
+{p:'images/picture-480.jpg',cat:''},
+{p:'images/picture-481.jpg',cat:''},
+{p:'images/picture-482.jpg',cat:''},
+{p:'images/picture-483.jpg',cat:''},
+{p:'images/picture-484.jpg',cat:''},
+{p:'images/picture-485.jpg',cat:''},
+{p:'images/picture-486.jpg',cat:''},
+{p:'images/picture-487.jpg',cat:''},
+{p:'images/picture-488.jpg',cat:''},
+{p:'images/picture-489.jpg',cat:''},
+{p:'images/picture-490.jpg',cat:''},
+{p:'images/picture-491.jpg',cat:''},
+{p:'images/picture-492.jpg',cat:''},
+{p:'images/picture-493.jpg',cat:''},
+{p:'images/picture-494.jpg',cat:''},
+{p:'images/picture-495.jpg',cat:''},
+{p:'images/picture-496.jpg',cat:''},
+{p:'images/picture-497.jpg',cat:''},
+{p:'images/picture-498.jpg',cat:''},
+{p:'images/picture-499.jpg',cat:''},
+{p:'images/picture-500.jpg',cat:''},
+{p:'images/picture-501.jpg',cat:''},
+{p:'images/picture-502.jpg',cat:''},
+{p:'images/picture-503.jpg',cat:''},
+{p:'images/picture-504.jpg',cat:''},
+{p:'images/picture-505.jpg',cat:''},
+{p:'images/picture-506.jpg',cat:''},
+{p:'images/picture-507.jpg',cat:''},
+{p:'images/picture-508.jpg',cat:''},
+{p:'images/picture-509.jpg',cat:''},
+{p:'images/picture-510.jpg',cat:''},
+{p:'images/picture-511.jpg',cat:''},
+{p:'images/picture-512.jpg',cat:''},
+{p:'images/picture-513.jpg',cat:''},
+{p:'images/picture-514.jpg',cat:''},
+{p:'images/picture-515.jpg',cat:''},
+{p:'images/picture-516.jpg',cat:''},
+{p:'images/picture-517.jpg',cat:''},
+{p:'images/picture-518.jpg',cat:''},
+{p:'images/picture-519.jpg',cat:''},
+{p:'images/picture-520.jpg',cat:''},
+{p:'images/picture-521.jpg',cat:''},
+{p:'images/picture-522.jpg',cat:''},
+{p:'images/picture-523.jpg',cat:''},
+{p:'images/picture-524.jpg',cat:''},
+{p:'images/picture-525.jpg',cat:''},
+{p:'images/picture-526.jpg',cat:''},
+{p:'images/picture-527.jpg',cat:''},
+{p:'images/picture-528.jpg',cat:''},
+{p:'images/picture-529.jpg',cat:''},
+{p:'images/picture-530.jpg',cat:''},
+{p:'images/picture-531.jpg',cat:''},
+{p:'images/picture-532.jpg',cat:''},
+{p:'images/picture-533.jpg',cat:''},
+{p:'images/picture-534.jpg',cat:''},
+{p:'images/picture-535.jpg',cat:''},
+{p:'images/picture-536.jpg',cat:''},
+{p:'images/picture-537.jpg',cat:''},
+{p:'images/picture-538.jpg',cat:''},
+{p:'images/picture-539.jpg',cat:''},
+{p:'images/picture-540.jpg',cat:''},
+{p:'images/picture-541.jpg',cat:''},
+{p:'images/picture-542.jpg',cat:''},
+{p:'images/picture-543.jpg',cat:''},
+{p:'images/picture-544.jpg',cat:''},
+{p:'images/picture-545.jpg',cat:''},
+{p:'images/picture-546.jpg',cat:''},
+{p:'images/picture-547.jpg',cat:''},
+{p:'images/picture-548.jpg',cat:''},
+{p:'images/picture-549.jpg',cat:''},
+{p:'images/picture-550.jpg',cat:''},
+{p:'images/picture-551.jpg',cat:''},
+{p:'images/picture-552.jpg',cat:''},
+{p:'images/picture-553.jpg',cat:''},
+{p:'images/picture-554.jpg',cat:''},
+{p:'images/picture-555.jpg',cat:''},
+{p:'images/picture-556.jpg',cat:''},
+{p:'images/picture-557.jpg',cat:''},
+{p:'images/picture-558.jpg',cat:''},
+{p:'images/picture-559.jpg',cat:''},
+{p:'images/picture-560.jpg',cat:''},
+{p:'images/picture-561.jpg',cat:''},
+{p:'images/picture-562.jpg',cat:''},
+{p:'images/picture-563.jpg',cat:''},
+{p:'images/picture-564.jpg',cat:''},
+{p:'images/picture-565.jpg',cat:''},
+{p:'images/picture-566.jpg',cat:''},
+{p:'images/picture-567.jpg',cat:''},
+{p:'images/picture-568.jpg',cat:''},
+{p:'images/picture-569.jpg',cat:''},
+{p:'images/picture-570.jpg',cat:''},
+{p:'images/picture-571.jpg',cat:''},
+{p:'images/picture-572.jpg',cat:''},
+{p:'images/picture-573.jpg',cat:''},
+{p:'images/picture-574.jpg',cat:''},
+{p:'images/picture-575.jpg',cat:''},
+{p:'images/picture-576.jpg',cat:''},
+{p:'images/picture-577.jpg',cat:''},
+{p:'images/picture-578.jpg',cat:''},
+{p:'images/picture-579.jpg',cat:''},
+{p:'images/picture-580.jpg',cat:''},
+{p:'images/picture-581.jpg',cat:''},
+{p:'images/picture-582.jpg',cat:''},
+{p:'images/picture-583.jpg',cat:''},
+{p:'images/picture-584.jpg',cat:''},
+{p:'images/picture-585.jpg',cat:''},
+{p:'images/picture-586.jpg',cat:''},
+{p:'images/picture-587.jpg',cat:''},
+{p:'images/picture-588.jpg',cat:''},
+{p:'images/picture-589.jpg',cat:''},
+{p:'images/picture-590.jpg',cat:''},
+{p:'images/picture-591.jpg',cat:''},
+{p:'images/picture-592.jpg',cat:''},
+{p:'images/picture-593.jpg',cat:''},
+{p:'images/picture-594.jpg',cat:''},
+{p:'images/picture-595.jpg',cat:''},
+{p:'images/picture-596.jpg',cat:''},
+{p:'images/picture-597.jpg',cat:''},
+{p:'images/picture-598.jpg',cat:''},
+{p:'images/picture-599.jpg',cat:''},
+{p:'images/picture-600.jpg',cat:''},
+{p:'images/picture-601.jpg',cat:''},
+{p:'images/picture-602.jpg',cat:''},
+{p:'images/picture-603.jpg',cat:''},
+{p:'images/picture-604.jpg',cat:''},
+{p:'images/picture-605.jpg',cat:''},
+{p:'images/picture-606.jpg',cat:''},
+{p:'images/picture-607.jpg',cat:''},
+{p:'images/picture-608.jpg',cat:''},
+{p:'images/picture-609.jpg',cat:''},
+{p:'images/picture-610.jpg',cat:''},
+{p:'images/picture-611.jpg',cat:''},
+{p:'images/picture-612.jpg',cat:''},
+{p:'images/picture-613.jpg',cat:''},
+{p:'images/picture-614.jpg',cat:''},
+{p:'images/picture-615.jpg',cat:''},
+{p:'images/picture-616.jpg',cat:''},
+{p:'images/picture-617.jpg',cat:''},
+{p:'images/picture-618.jpg',cat:''},
+{p:'images/picture-619.jpg',cat:''},
+{p:'images/picture-620.jpg',cat:''},
+{p:'images/picture-621.jpg',cat:''},
+{p:'images/picture-622.jpg',cat:''},
+{p:'images/picture-623.jpg',cat:''},
+{p:'images/picture-624.jpg',cat:''},
+{p:'images/picture-625.jpg',cat:''},
+{p:'images/picture-626.jpg',cat:''},
+{p:'images/picture-627.jpg',cat:''},
+{p:'images/picture-628.jpg',cat:''},
+{p:'images/picture-629.jpg',cat:''},
+{p:'images/picture-630.jpg',cat:''},
+{p:'images/picture-631.jpg',cat:''},
+{p:'images/picture-632.jpg',cat:''},
+{p:'images/picture-633.jpg',cat:''},
+{p:'images/picture-634.jpg',cat:''},
+{p:'images/picture-635.jpg',cat:''},
+{p:'images/picture-636.jpg',cat:''},
+{p:'images/picture-637.jpg',cat:''},
+{p:'images/picture-638.jpg',cat:''},
+{p:'images/picture-639.jpg',cat:''},
+{p:'images/picture-640.jpg',cat:''},
+{p:'images/picture-641.jpg',cat:''},
+{p:'images/picture-642.jpg',cat:''},
+{p:'images/picture-643.jpg',cat:''},
+{p:'images/picture-644.jpg',cat:''},
+{p:'images/picture-645.jpg',cat:''},
+{p:'images/picture-646.jpg',cat:''},
+{p:'images/picture-647.jpg',cat:''},
+{p:'images/picture-648.jpg',cat:''},
+{p:'images/picture-649.jpg',cat:''},
+{p:'images/picture-650.jpg',cat:''},
+{p:'images/picture-651.jpg',cat:''},
+{p:'images/picture-652.jpg',cat:''},
+{p:'images/picture-653.jpg',cat:''},
+{p:'images/picture-654.jpg',cat:''},
+{p:'images/picture-655.jpg',cat:''},
+{p:'images/picture-656.jpg',cat:''},
+{p:'images/picture-657.jpg',cat:''},
+{p:'images/picture-658.jpg',cat:''},
+{p:'images/picture-659.jpg',cat:''}
 ];
 var PH_TOTAL=654;
 PH=PH.slice(0,PH_TOTAL);
@@ -963,9 +957,9 @@ function toRelPath(p){
 
 function labelFromPath(p){
   var m=(p||'').match(/picture-(\d+)/i);
-  if(m && m[1]) return 'Фото №'+m[1];
+  if(m && m[1]) return 'Ð¤Ð¾ÑÐ¾ â'+m[1];
   var b=(p||'').split('/').pop()||'';
-  return b ? ('Фото · '+b) : 'Фото';
+  return b ? ('Ð¤Ð¾ÑÐ¾ Â· '+b) : 'Ð¤Ð¾ÑÐ¾';
 }
 
 for(var i=0;i<PH.length;i++){
@@ -987,25 +981,25 @@ var brightnessSlider=document.getElementById('brightness-slider');
 var currentBrightness=50;
 var defaultBrightness=50;
 
- // Админ-панель: показываем только при ?admin=1
+ // ÐÐ´Ð¼Ð¸Ð½-Ð¿Ð°Ð½ÐµÐ»Ñ: Ð¿Ð¾ÐºÐ°Ð·ÑÐ²Ð°ÐµÐ¼ ÑÐ¾Ð»ÑÐºÐ¾ Ð¿ÑÐ¸ ?admin=1
  (function(){
    try{
      var qs=new URLSearchParams(location.search||'');
-     var ADMIN_KEY='самурайка';
+     var ADMIN_KEY='ÑÐ°Ð¼ÑÑÐ°Ð¹ÐºÐ°';
      var isAdmin=(qs.get('admin')==='1' && qs.get('key')===ADMIN_KEY);
      var panel=document.getElementById('admin-panel');
      if(panel) panel.style.display=isAdmin?'flex':'none';
    }catch(e){}
  })();
 
- // Устанавливаем светильники
+ // Ð£ÑÑÐ°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ ÑÐ²ÐµÑÐ¸Ð»ÑÐ½Ð¸ÐºÐ¸
  var lightElements=document.querySelectorAll('.corner-light img');
  for(var i=0;i<Math.min(4,LIGHTS.length);i++){
   lightElements[i].src=LIGHTS[i];
-  console.log('Светильник '+i+':', LIGHTS[i]);
+  console.log('Ð¡Ð²ÐµÑÐ¸Ð»ÑÐ½Ð¸Ðº '+i+':', LIGHTS[i]);
 }
 
-// Создаем залы
+// Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ Ð·Ð°Ð»Ñ
 for(var w=0;w<walls;w++){
   var wall=document.createElement('div');wall.className='wall';
   var bg=document.createElement('div');bg.className='wall-bg';wall.appendChild(bg);
@@ -1026,24 +1020,24 @@ for(var w=0;w<walls;w++){
   hall.appendChild(wall);
 }
 
-// Создаем кнопки комнат
+// Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ ÐºÐ½Ð¾Ð¿ÐºÐ¸ ÐºÐ¾Ð¼Ð½Ð°Ñ
 var roomSelector=document.getElementById('room-selector');
 for(var i=0;i<ROOMS.length;i++){
   var btn=document.createElement('div');
   btn.className='room-btn'+(i===0?' active':'');
   btn.style.backgroundImage='url('+ROOMS[i]+')';
-  btn.title='Комната '+(i+1);
+  btn.title='ÐÐ¾Ð¼Ð½Ð°ÑÐ° '+(i+1);
   btn.onclick=function(roomIndex){return function(){setRoom(roomIndex);};}(i);
   roomSelector.appendChild(btn);
 }
 
-// Функция автоматической яркости
+// Ð¤ÑÐ½ÐºÑÐ¸Ñ Ð°Ð²ÑÐ¾Ð¼Ð°ÑÐ¸ÑÐµÑÐºÐ¾Ð¹ ÑÑÐºÐ¾ÑÑÐ¸
 function setAutoBrightness(){
   brightnessSlider.value=defaultBrightness;
   updateBrightness(defaultBrightness);
 }
 
-// Функция обновления яркости
+// Ð¤ÑÐ½ÐºÑÐ¸Ñ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ ÑÑÐºÐ¾ÑÑÐ¸
 function updateBrightness(value){
   currentBrightness=value;
   var brightnessPercent=value/100;
@@ -1052,7 +1046,7 @@ function updateBrightness(value){
     walls[i].style.filter='brightness('+(brightnessPercent*0.8)+') contrast(1.1)';
   }
   
-  // Обновляем яркость кнопок комнат
+  // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ ÑÑÐºÐ¾ÑÑÑ ÐºÐ½Ð¾Ð¿Ð¾Ðº ÐºÐ¾Ð¼Ð½Ð°Ñ
   var btns=document.querySelectorAll('.room-btn');
   for(var i=0;i<btns.length;i++){
     var isActive=btns[i].classList.contains('active');
@@ -1060,31 +1054,31 @@ function updateBrightness(value){
     btns[i].style.filter='brightness('+btnBrightness+')';
   }
   
-  // Обновляем яркость светильников
+  // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ ÑÑÐºÐ¾ÑÑÑ ÑÐ²ÐµÑÐ¸Ð»ÑÐ½Ð¸ÐºÐ¾Ð²
   var lights=document.querySelectorAll('.corner-light img');
   for(var i=0;i<lights.length;i++){
     lights[i].style.filter='brightness('+(brightnessPercent*1.4)+') contrast(1.3) drop-shadow(0 4px 12px rgba(0,0,0,0.8))';
   }
   
-  // Обновляем яркость лучей
+  // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ ÑÑÐºÐ¾ÑÑÑ Ð»ÑÑÐµÐ¹
   var beams=document.querySelectorAll('.light-beam');
   for(var i=0;i<beams.length;i++){
     beams[i].style.opacity=brightnessPercent*0.8;
   }
   
-  // Обновляем яркость света на стены
+  // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ ÑÑÐºÐ¾ÑÑÑ ÑÐ²ÐµÑÐ° Ð½Ð° ÑÑÐµÐ½Ñ
   var wallLights=document.querySelectorAll('.wall-light');
   for(var i=0;i<wallLights.length;i++){
     wallLights[i].style.opacity=brightnessPercent*0.6;
   }
 }
 
-// Слушатель ползунка яркости
+// Ð¡Ð»ÑÑÐ°ÑÐµÐ»Ñ Ð¿Ð¾Ð»Ð·ÑÐ½ÐºÐ° ÑÑÐºÐ¾ÑÑÐ¸
 brightnessSlider.addEventListener('input',function(){
   updateBrightness(this.value);
 });
 
-// Устанавливаем комнату для каждого зала
+// Ð£ÑÑÐ°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ ÐºÐ¾Ð¼Ð½Ð°ÑÑ Ð´Ð»Ñ ÐºÐ°Ð¶Ð´Ð¾Ð³Ð¾ Ð·Ð°Ð»Ð°
 function setRoomForWall(wallIndex, roomIndex){
   var walls=document.querySelectorAll('.wall');
   if(walls[wallIndex]){
@@ -1094,19 +1088,19 @@ function setRoomForWall(wallIndex, roomIndex){
   }
 }
 
-// Обновленная функция навигации - меняет и зал, и комнату
+// ÐÐ±Ð½Ð¾Ð²Ð»ÐµÐ½Ð½Ð°Ñ ÑÑÐ½ÐºÑÐ¸Ñ Ð½Ð°Ð²Ð¸Ð³Ð°ÑÐ¸Ð¸ - Ð¼ÐµÐ½ÑÐµÑ Ð¸ Ð·Ð°Ð», Ð¸ ÐºÐ¾Ð¼Ð½Ð°ÑÑ
 function go(d){
   cur=Math.max(0,Math.min(walls-1,cur+d));
   hall.style.transform='translateX(-'+(cur*100)+'vw)';
   
-  // Меняем комнату для текущего зала
+  // ÐÐµÐ½ÑÐµÐ¼ ÐºÐ¾Ð¼Ð½Ð°ÑÑ Ð´Ð»Ñ ÑÐµÐºÑÑÐµÐ³Ð¾ Ð·Ð°Ð»Ð°
   var roomIndex=cur%ROOMS.length;
   setRoomForWall(cur, roomIndex);
   
-  // Обновляем информацию
-  document.getElementById('info').textContent='Зал '+(cur+1)+' · Комната '+(roomIndex+1);
+  // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¸Ð½ÑÐ¾ÑÐ¼Ð°ÑÐ¸Ñ
+  document.getElementById('info').textContent='ÐÐ°Ð» '+(cur+1)+' Â· ÐÐ¾Ð¼Ð½Ð°ÑÐ° '+(roomIndex+1);
   
-  // Обновляем активную кнопку комнаты
+  // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð°ÐºÑÐ¸Ð²Ð½ÑÑ ÐºÐ½Ð¾Ð¿ÐºÑ ÐºÐ¾Ð¼Ð½Ð°ÑÑ
   var btns=document.querySelectorAll('.room-btn');
   for(var i=0;i<btns.length;i++){
     btns[i].className='room-btn'+(i===roomIndex?' active':'');
@@ -1116,13 +1110,13 @@ function go(d){
   }
 }
 
-// Функция ручной установки комнаты
+// Ð¤ÑÐ½ÐºÑÐ¸Ñ ÑÑÑÐ½Ð¾Ð¹ ÑÑÑÐ°Ð½Ð¾Ð²ÐºÐ¸ ÐºÐ¾Ð¼Ð½Ð°ÑÑ
 function setRoom(roomIndex){
   currentRoom=roomIndex;
   setRoomForWall(cur, roomIndex);
-  document.getElementById('info').textContent='Зал '+(cur+1)+' · Комната '+(roomIndex+1);
+  document.getElementById('info').textContent='ÐÐ°Ð» '+(cur+1)+' Â· ÐÐ¾Ð¼Ð½Ð°ÑÐ° '+(roomIndex+1);
   
-  // Обновляем активную кнопку
+  // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð°ÐºÑÐ¸Ð²Ð½ÑÑ ÐºÐ½Ð¾Ð¿ÐºÑ
   var btns=document.querySelectorAll('.room-btn');
   for(var i=0;i<btns.length;i++){
     btns[i].className='room-btn'+(i===roomIndex?' active':'');
@@ -1132,16 +1126,16 @@ function setRoom(roomIndex){
   }
 }
 
-// Инициализация - устанавливаем комнаты для всех залов
+// ÐÐ½Ð¸ÑÐ¸Ð°Ð»Ð¸Ð·Ð°ÑÐ¸Ñ - ÑÑÑÐ°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ ÐºÐ¾Ð¼Ð½Ð°ÑÑ Ð´Ð»Ñ Ð²ÑÐµÑ Ð·Ð°Ð»Ð¾Ð²
 for(var w=0;w<walls;w++){
   var roomIndex=w%ROOMS.length;
   setRoomForWall(w, roomIndex);
 }
 
-// Применяем начальную яркость
+// ÐÑÐ¸Ð¼ÐµÐ½ÑÐµÐ¼ Ð½Ð°ÑÐ°Ð»ÑÐ½ÑÑ ÑÑÐºÐ¾ÑÑÑ
 updateBrightness(currentBrightness);
 
-// Модальное окно
+// ÐÐ¾Ð´Ð°Ð»ÑÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾
 function openLb(i){
   currentLb=i;updateLb();
   document.getElementById('lb').classList.add('on');
@@ -1241,14 +1235,14 @@ function copyLbThumbsMarks(){
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(txt);
   }else{
-    window.prompt('Список номеров для удаления/переноса:', txt);
+    window.prompt('Ð¡Ð¿Ð¸ÑÐ¾Ðº Ð½Ð¾Ð¼ÐµÑÐ¾Ð² Ð´Ð»Ñ ÑÐ´Ð°Ð»ÐµÐ½Ð¸Ñ/Ð¿ÐµÑÐµÐ½Ð¾ÑÐ°:', txt);
   }
 }
 
 function copyLbThumbsTrashCommand(){
   var arr=Array.from(_lbThumbsMarks).sort(function(a,b){return a-b;});
   if(!arr.length){
-    window.prompt('Нет отмеченных. Сначала включи «Выбор» и отметь фото.', '');
+    window.prompt('ÐÐµÑ Ð¾ÑÐ¼ÐµÑÐµÐ½Ð½ÑÑ. Ð¡Ð½Ð°ÑÐ°Ð»Ð° Ð²ÐºÐ»ÑÑÐ¸ Â«ÐÑÐ±Ð¾ÑÂ» Ð¸ Ð¾ÑÐ¼ÐµÑÑ ÑÐ¾ÑÐ¾.', '');
     return;
   }
   var PROJECT_DIR='';
@@ -1261,13 +1255,13 @@ function copyLbThumbsTrashCommand(){
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(cmd);
   }
-  window.prompt('Скопируй и выполни в терминале (из папки проекта):', cmd);
+  window.prompt('Ð¡ÐºÐ¾Ð¿Ð¸ÑÑÐ¹ Ð¸ Ð²ÑÐ¿Ð¾Ð»Ð½Ð¸ Ð² ÑÐµÑÐ¼Ð¸Ð½Ð°Ð»Ðµ (Ð¸Ð· Ð¿Ð°Ð¿ÐºÐ¸ Ð¿ÑÐ¾ÐµÐºÑÐ°):', cmd);
 }
 
 function copyLbThumbsUndoCommand(){
   var arr=Array.from(_lbThumbsMarks).sort(function(a,b){return a-b;});
   if(!arr.length){
-    window.prompt('Нет отмеченных. Отметь фото (Выбор) которые нужно вернуть.', '');
+    window.prompt('ÐÐµÑ Ð¾ÑÐ¼ÐµÑÐµÐ½Ð½ÑÑ. ÐÑÐ¼ÐµÑÑ ÑÐ¾ÑÐ¾ (ÐÑÐ±Ð¾Ñ) ÐºÐ¾ÑÐ¾ÑÑÐµ Ð½ÑÐ¶Ð½Ð¾ Ð²ÐµÑÐ½ÑÑÑ.', '');
     return;
   }
   var PROJECT_DIR='';
@@ -1280,13 +1274,13 @@ function copyLbThumbsUndoCommand(){
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(cmd);
   }
-  window.prompt('Скопируй и выполни в терминале (из папки проекта):', cmd);
+  window.prompt('Ð¡ÐºÐ¾Ð¿Ð¸ÑÑÐ¹ Ð¸ Ð²ÑÐ¿Ð¾Ð»Ð½Ð¸ Ð² ÑÐµÑÐ¼Ð¸Ð½Ð°Ð»Ðµ (Ð¸Ð· Ð¿Ð°Ð¿ÐºÐ¸ Ð¿ÑÐ¾ÐµÐºÑÐ°):', cmd);
 }
 
 function downloadLbThumbSelected(){
   var arr=Array.from(_lbThumbsMarks).sort(function(a,b){return a-b;});
   if(arr.length!==1){
-    window.prompt('Для скачивания отметь ровно 1 фото (в режиме «Выбор»).', arr.join(','));
+    window.prompt('ÐÐ»Ñ ÑÐºÐ°ÑÐ¸Ð²Ð°Ð½Ð¸Ñ Ð¾ÑÐ¼ÐµÑÑ ÑÐ¾Ð²Ð½Ð¾ 1 ÑÐ¾ÑÐ¾ (Ð² ÑÐµÐ¶Ð¸Ð¼Ðµ Â«ÐÑÐ±Ð¾ÑÂ»).', arr.join(','));
     return;
   }
   var num=arr[0];
@@ -1315,7 +1309,7 @@ function refreshLbThumbs(){
   _lbThumbsBuilt=false;
   buildLbThumbs();
   var tt=document.getElementById('lbthumbs-title');
-  if(tt) tt.textContent='Миниатюры · '+PH.length;
+  if(tt) tt.textContent='ÐÐ¸Ð½Ð¸Ð°ÑÑÑÑ Â· '+PH.length;
   refreshLbThumbsMarks();
   setLbThumbActive();
 }
@@ -1373,7 +1367,7 @@ function findSimilarGroupsInBrowser(){
   _lbSimilarRunning=true;
   var sim=document.getElementById('lbthumbs-similar');
   if(!sim){_lbSimilarRunning=false;return;}
-  sim.innerHTML='Ищу похожие… (это может занять 1-2 минуты)';
+  sim.innerHTML='ÐÑÑ Ð¿Ð¾ÑÐ¾Ð¶Ð¸Ðµâ¦ (ÑÑÐ¾ Ð¼Ð¾Ð¶ÐµÑ Ð·Ð°Ð½ÑÑÑ 1-2 Ð¼Ð¸Ð½ÑÑÑ)';
 
   var maxPhotos=PH.length;
   var hashes=new Array(maxPhotos);
@@ -1390,7 +1384,7 @@ function findSimilarGroupsInBrowser(){
     im.onload=function(){
       try{hashes[i]=_lbDHashFromImage(im);}catch(e){hashes[i]=null;}
       i++;
-      if(i%40===0) sim.innerHTML='Ищу похожие… '+i+' / '+maxPhotos;
+      if(i%40===0) sim.innerHTML='ÐÑÑ Ð¿Ð¾ÑÐ¾Ð¶Ð¸Ðµâ¦ '+i+' / '+maxPhotos;
       setTimeout(step,0);
     };
     im.onerror=function(){hashes[i]=null;i++;setTimeout(step,0);};
@@ -1419,7 +1413,7 @@ function findSimilarGroupsInBrowser(){
   function renderSimilarGroups(groups){
     sim.innerHTML='';
     if(!groups.length){
-      sim.textContent='Похожих групп не найдено (по текущему порогу).';
+      sim.textContent='ÐÐ¾ÑÐ¾Ð¶Ð¸Ñ Ð³ÑÑÐ¿Ð¿ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾ (Ð¿Ð¾ ÑÐµÐºÑÑÐµÐ¼Ñ Ð¿Ð¾ÑÐ¾Ð³Ñ).';
       return;
     }
     for(var gi=0;gi<groups.length;gi++){
@@ -1428,7 +1422,7 @@ function findSimilarGroupsInBrowser(){
       wrap.className='simgrp';
       var title=document.createElement('div');
       title.className='simgrp-title';
-      title.textContent='Группа '+(gi+1)+' · '+g.length+' фото (клик по миниатюре = отметить/снять отметку)';
+      title.textContent='ÐÑÑÐ¿Ð¿Ð° '+(gi+1)+' Â· '+g.length+' ÑÐ¾ÑÐ¾ (ÐºÐ»Ð¸Ðº Ð¿Ð¾ Ð¼Ð¸Ð½Ð¸Ð°ÑÑÑÐµ = Ð¾ÑÐ¼ÐµÑÐ¸ÑÑ/ÑÐ½ÑÑÑ Ð¾ÑÐ¼ÐµÑÐºÑ)';
       wrap.appendChild(title);
       for(var k=0;k<g.length;k++){
         var idx=g[k];
@@ -1540,7 +1534,7 @@ function openLbThumbs(){
   if(!lb) return;
   buildLbThumbs();
   var tt=document.getElementById('lbthumbs-title');
-  if(tt) tt.textContent='Миниатюры · '+PH.length;
+  if(tt) tt.textContent='ÐÐ¸Ð½Ð¸Ð°ÑÑÑÑ Â· '+PH.length;
   var grid=document.getElementById('lbthumbs-grid');
   if(grid) grid.scrollTop=_lbThumbScrollTop||0;
   lb.classList.add('show-thumbs');
@@ -1571,10 +1565,10 @@ function updateLb(){
     inp.value=(currentLb+1);
   }
   var lbl=document.getElementById('lbjlabel');
-  if(lbl) lbl.textContent='Фото '+(currentLb+1)+'/'+PH.length;
+  if(lbl) lbl.textContent='Ð¤Ð¾ÑÐ¾ '+(currentLb+1)+'/'+PH.length;
   setLbThumbActive();
   img.onerror=function(){
-    document.getElementById('lbc').textContent='(фото не найдено) '+PH[currentLb].cat;
+    document.getElementById('lbc').textContent='(ÑÐ¾ÑÐ¾ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾) '+PH[currentLb].cat;
   };
   img.onload=function(){
     document.getElementById('lbc').textContent=PH[currentLb].cat;
@@ -1582,7 +1576,7 @@ function updateLb(){
   img.src=PH[currentLb].p;
 }
 
-// Клавиатура
+// ÐÐ»Ð°Ð²Ð¸Ð°ÑÑÑÐ°
 document.onkeydown=function(e){
   var lb=document.getElementById('lb');
   var lbOn=lb&&lb.classList.contains('on');
@@ -1620,5 +1614,5 @@ document.onkeydown=function(e){
   },{passive:true});
 })();
 
-console.log('=== АНИМАЦИЯ СВЕТА НА СТЕНЫ ЗАВЕРШЕНА ===');
+console.log('=== ÐÐÐÐÐÐ¦ÐÐ¯ Ð¡ÐÐÐ¢Ð ÐÐ Ð¡Ð¢ÐÐÐ« ÐÐÐÐÐ Ð¨ÐÐÐ ===');
 </script></body></html>
