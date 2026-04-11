@@ -950,8 +950,8 @@ for(var i=0;i<PH.length;i++){
   PH[i].p='images/picture-'+String(i+1).padStart(3,'0')+'.jpg';
   PH[i].cat=labelFromPath(PH[i].p);
 }
-var ROOMS=['/Users/alexanderermolovich/Documents/Irina_Site/rooms/1.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/2.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/3.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/4.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/5.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/6.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/7.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/8.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/9.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/10.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/11.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/12.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/13.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/14.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/15.png'];
-var LIGHTS=['/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light1.png', '/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light2.png', '/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light3.png', '/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light4.png'];
+var ROOMS=['rooms/1.png', 'rooms/2.png', 'rooms/3.png', 'rooms/4.png', 'rooms/5.png', 'rooms/6.png', 'rooms/7.png', 'rooms/8.png', 'rooms/9.png', 'rooms/10.png', 'rooms/11.png', 'rooms/12.png', 'rooms/13.png', 'rooms/14.png', 'rooms/15.png'];
+var LIGHTS=['museum_lights/light1.png', 'museum_lights/light2.png', 'museum_lights/light3.png', 'museum_lights/light4.png'];
 
 function toRelPath(p){
   if(!p) return p;
@@ -1251,7 +1251,7 @@ function copyLbThumbsTrashCommand(){
     window.prompt('Нет отмеченных. Сначала включи «Выбор» и отметь фото.', '');
     return;
   }
-  var PROJECT_DIR='/Users/alexanderermolovich/Documents/Irina_Site';
+  var PROJECT_DIR='';
   var parts=[];
   for(var i=0;i<arr.length;i++){
     var n=String(arr[i]).padStart(3,'0');
@@ -1270,7 +1270,7 @@ function copyLbThumbsUndoCommand(){
     window.prompt('Нет отмеченных. Отметь фото (Выбор) которые нужно вернуть.', '');
     return;
   }
-  var PROJECT_DIR='/Users/alexanderermolovich/Documents/Irina_Site';
+  var PROJECT_DIR='';
   var parts=[];
   for(var i=0;i<arr.length;i++){
     var n=String(arr[i]).padStart(3,'0');
