@@ -112,6 +112,13 @@ p.subtitle{text-align:center;font-size:11px;opacity:0.5;letter-spacing:2px;margi
       <button class="btn" id="upload-btn" onclick="startUpload()">⬆ Загрузить на сайт</button>
     </div>
   </div>
+
+  <div class="section">
+    <h2>🔄 Обновление галереи</h2>
+    <p style="font-size:12px;opacity:0.5;margin-bottom:12px">Галерея обновляется автоматически после загрузки. Если фото не появились — нажми кнопку ниже. Новые фото появятся на сайте через 1–2 минуты после обновления.</p>
+    <button class="btn" onclick="manualUpdate()">🔄 Обновить галерею вручную</button>
+    <div id="update-log" style="margin-top:14px;font-size:12px;font-family:monospace;background:rgba(0,0,0,0.3);border-radius:8px;padding:12px;min-height:40px;color:#b8c8a0;display:none"></div>
+  </div>
 </div>
 
 <div id="msg"></div>
@@ -168,9 +175,11 @@ async function loadStats(){
       {headers:{'Authorization':'token '+t}});
     if(!r.ok) throw new Error('Ошибка');
     const files = await r.json();
-    const jpgs = files.filter(f=>f.name.endsWith('.jpg')||f.name.endsWith('.jpeg')||f.name.endsWith('.png'));
+    const jpgs = files.filter(f=>f.name.match(/\.(jpg|jpeg|png|webp)$/i));
+    const pictureJpgs = files.filter(f=>f.name.match(/picture-\d+\.(jpg|jpeg|png)/i));
     document.getElementById('stat-count').textContent = jpgs.length;
-    document.getElementById('stat-next').textContent = jpgs.length + 1;
+    document.getElementById('stat-next').textContent = pictureJpgs.length + 1;
+    nextNumBase = pictureJpgs.length + 1;
   } catch(e){
     document.getElementById('stat-count').textContent='—';
   }
@@ -178,6 +187,8 @@ async function loadStats(){
 
 // Queue
 let queue = [];
+let nextNumBase = 1; // will be updated from GitHub
+
 function onDrop(e){
   e.preventDefault();
   document.getElementById('dropzone').classList.remove('drag');
@@ -186,7 +197,7 @@ function onDrop(e){
 function onFiles(files){
   for(const f of files){
     if(!f.type.startsWith('image/')) continue;
-    queue.push({file:f, status:'waiting'});
+    queue.push({file:f, status:'waiting', customName:''});
   }
   renderQueue();
 }
@@ -195,20 +206,27 @@ function renderQueue(){
   if(!queue.length){ el.innerHTML=''; document.getElementById('upload-btn-row').style.display='none'; return; }
   document.getElementById('upload-btn-row').style.display='flex';
   document.getElementById('stats').textContent = `${queue.length} файл(ов)`;
-  el.innerHTML = queue.map((q,i)=>`
+  el.innerHTML = queue.map((q,i)=>{
+    const ext = q.file.name.split('.').pop().toLowerCase();
+    const autoName = 'picture-'+String(nextNumBase+i).padStart(3,'0')+'.'+ext;
+    return `
     <div class="qitem" id="qi${i}">
       <img src="${URL.createObjectURL(q.file)}">
       <div style="flex:1">
-        <div style="display:flex;justify-content:space-between">
-          <span class="qitem-name">${q.file.name}</span>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+          <input id="qname${i}" type="text" value="${q.customName||autoName}"
+            placeholder="${autoName}"
+            style="flex:1;background:#2b1f0a;border:1px solid rgba(200,150,30,0.3);color:#e8d5a0;padding:4px 8px;border-radius:4px;font-size:12px;outline:none"
+            title="Можно изменить имя файла">
           <span class="qitem-status ${q.status==='ok'?'ok':q.status==='err'?'err':''}" id="qs${i}">
             ${q.status==='waiting'?'ожидание':q.status==='ok'?'✅ готово':q.status==='err'?'❌ ошибка':q.status}
           </span>
         </div>
-        <div class="qitem-size">${(q.file.size/1024/1024).toFixed(1)} МБ</div>
-        <div class="qitem-bar"><div class="qitem-fill" id="qb${i}"></div></div>
+        <div class="qitem-size" style="margin-top:4px">${(q.file.size/1024/1024).toFixed(1)} МБ · исходное имя: ${q.file.name}</div>
+        <div class="qitem-bar" style="margin-top:6px"><div class="qitem-fill" id="qb${i}"></div></div>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 function clearQueue(){ queue=[]; renderQueue(); }
 
@@ -226,6 +244,7 @@ async function startUpload(){
       const files = await r.json();
       const jpgs = files.filter(f=>f.name.match(/picture-\d+\.(jpg|jpeg|png)/i));
       nextNum = jpgs.length + 1;
+      nextNumBase = nextNum;
     }
   } catch(e){}
 
@@ -235,15 +254,26 @@ async function startUpload(){
     document.getElementById('qs'+i).textContent='загрузка...';
     document.getElementById('qb'+i).style.width='30%';
 
+    // Берём имя из поля ввода (пользователь мог изменить)
+    const inputName = document.getElementById('qname'+i) ? document.getElementById('qname'+i).value.trim() : '';
     const ext = q.file.name.split('.').pop().toLowerCase();
-    const num = String(nextNum++).padStart(3,'0');
-    const filename = `picture-${num}.${ext}`;
+    let filename;
+    if(inputName && inputName !== ''){
+      // Убираем опасные символы, оставляем только безопасные
+      let safe = inputName.replace(/[^a-zA-Z0-9а-яА-ЯёЁ._\-\s]/g,'').trim().replace(/\s+/g,'-');
+      if(!safe.match(/\.(jpg|jpeg|png|webp)$/i)) safe += '.'+ext;
+      filename = safe;
+    } else {
+      const num = String(nextNum).padStart(3,'0');
+      filename = `picture-${num}.${ext}`;
+    }
+    nextNum++;
 
     try {
       const b64 = await toBase64(q.file);
       document.getElementById('qb'+i).style.width='60%';
 
-      const resp = await fetch(`https://api.github.com/repos/${REPO}/contents/images/${filename}`,{
+      const resp = await fetch(`https://api.github.com/repos/${REPO}/contents/images/${encodeURIComponent(filename)}`,{
         method:'PUT',
         headers:{'Authorization':'token '+t,'Content-Type':'application/json'},
         body: JSON.stringify({
@@ -258,13 +288,6 @@ async function startUpload(){
         queue[i].status='ok';
         document.getElementById('qs'+i).className='qitem-status ok';
         document.getElementById('qs'+i).textContent='✅ '+filename;
-        // Показываем превью загруженного фото
-        const preview = document.createElement('div');
-        preview.style='margin-top:10px;padding:10px;background:rgba(0,0,0,0.3);border-radius:8px;display:flex;gap:12px;align-items:center';
-        preview.innerHTML=`<img src="https://raw.githubusercontent.com/irina-photo/irina-photo.github.io/main/images/${filename}" style="width:80px;height:60px;object-fit:cover;border-radius:4px;border:1px solid #C8961E">
-          <div><div style="color:#5cba6a;font-size:13px">✅ Загружено как <b>${filename}</b></div>
-          <a href="https://irina-photo.github.io/" target="_blank" style="color:#C8961E;font-size:12px;margin-top:4px;display:inline-block">Посмотреть на сайте →</a></div>`;
-        document.getElementById('queue').appendChild(preview);
       } else {
         const errData = await resp.json();
         const errMsg = errData.message || resp.status;
@@ -284,49 +307,89 @@ async function startUpload(){
 
   document.getElementById('upload-btn').disabled=false;
   await loadStats();
-
-  // Собираем новые файлы
-  const newFiles = queue.filter(q=>q.status==='ok').map((q,idx)=>{
-    const ext = q.file.name.split('.').pop().toLowerCase();
-    // номер уже в qs-тексте, но проще пересчитать
-    return null; // заполним ниже
-  });
-
   await updateGallery(t);
-  showMsg('Загрузка завершена! Фото добавлены в галерею.');
+}
+
+async function manualUpdate(){
+  const t = getToken();
+  if(!t){ showMsg('Сначала введи GitHub токен!','err'); return; }
+  await updateGallery(t);
+}
+
+function logUpdate(msg, isErr){
+  const el = document.getElementById('update-log');
+  if(!el) return;
+  el.style.display='block';
+  const time = new Date().toLocaleTimeString('ru-RU');
+  el.innerHTML = `<span style="opacity:0.5">[${time}]</span> <span style="color:${isErr?'#e05050':'#5cba6a'}">${msg}</span>`;
 }
 
 async function updateGallery(t){
   try {
+    logUpdate('Получаю список фото...');
     showMsg('Обновляю галерею...');
-    // Получаем список фото
+
+    // Получаем список ВСЕХ фото (не только picture-NNN)
     const r2 = await fetch(`https://api.github.com/repos/${REPO}/contents/images`,{headers:{'Authorization':'token '+t}});
-    if(!r2.ok) return;
+    if(!r2.ok){
+      const e=await r2.json();
+      logUpdate('❌ Не удалось получить список фото: '+(e.message||r2.status), true);
+      return;
+    }
     const files = await r2.json();
-    const jpgs = files.filter(f=>f.name.match(/picture-\d+\.(jpg|jpeg|png)/i)).sort((a,b)=>a.name.localeCompare(b.name));
+    if(!Array.isArray(files)){
+      logUpdate('❌ GitHub вернул неожиданный ответ: '+JSON.stringify(files).slice(0,80), true);
+      return;
+    }
+    const jpgs = files.filter(f=>f.name.match(/\.(jpg|jpeg|png|webp)$/i)).sort((a,b)=>a.name.localeCompare(b.name));
+    logUpdate(`Найдено ${jpgs.length} фото, обновляю index.html...`);
+
     const newPH = "var PH=[\n"+jpgs.map(f=>"{p:'images/"+f.name+"',cat:''}").join(',\n')+"\n];";
 
     // Получаем index.html как БИНАРНУЮ строку (не декодируем UTF-8 — это ключевое!)
     const r = await fetch(`https://api.github.com/repos/${REPO}/contents/index.html`,{headers:{'Authorization':'token '+t}});
-    if(!r.ok) return;
+    if(!r.ok){
+      const e=await r.json();
+      logUpdate('❌ Не удалось получить index.html: '+(e.message||r.status), true);
+      return;
+    }
     const data = await r.json();
-    const bin = atob(data.content.replace(/\n/g,''));
+    const bin = atob(data.content.replace(/[\r\n]/g,''));
 
     // Находим и заменяем ТОЛЬКО PH массив (он ASCII — безопасно для русского текста)
     const s = bin.indexOf('var PH=[');
-    const e = bin.indexOf('];', s) + 2;
-    if(s<0){ showMsg('⚠️ Ошибка структуры файла','err'); return; }
-    const newBin = bin.slice(0,s) + newPH + bin.slice(e);
+    const e2 = bin.indexOf('];', s) + 2;
+    if(s<0){
+      logUpdate('❌ Не найден массив PH в index.html. Файл повреждён?', true);
+      showMsg('⚠️ Ошибка структуры файла','err');
+      return;
+    }
+    const newBin = bin.slice(0,s) + newPH + bin.slice(e2);
 
     // Кодируем обратно — бинарная строка сохраняется без потерь
-    const b64 = btoa(newBin);
+    let b64;
+    try { b64 = btoa(newBin); }
+    catch(ex){
+      logUpdate('❌ Ошибка кодирования (btoa): '+ex.message, true);
+      return;
+    }
+
     const resp = await fetch(`https://api.github.com/repos/${REPO}/contents/index.html`,{
       method:'PUT', headers:{'Authorization':'token '+t,'Content-Type':'application/json'},
       body:JSON.stringify({message:'auto: gallery '+jpgs.length+' photos',content:b64,sha:data.sha,branch:BRANCH})
     });
-    if(resp.ok) showMsg('✅ Галерея обновлена! '+jpgs.length+' фото. Подождите 2 мин.');
-    else { const err=await resp.json(); showMsg('❌ '+err.message,'err'); }
-  } catch(ex){ showMsg('❌ '+ex.message,'err'); }
+    if(resp.ok){
+      logUpdate('✅ Галерея обновлена! '+jpgs.length+' фото. Подождите 1–2 минуты, затем открой сайт с Ctrl+Shift+R (Win) или Cmd+Shift+R (Mac)');
+      showMsg('✅ Галерея обновлена! '+jpgs.length+' фото');
+    } else {
+      const err=await resp.json();
+      logUpdate('❌ Ошибка сохранения: '+(err.message||resp.status), true);
+      showMsg('❌ '+(err.message||resp.status),'err');
+    }
+  } catch(ex){
+    logUpdate('❌ Исключение: '+ex.message, true);
+    showMsg('❌ '+ex.message,'err');
+  }
 }
 
 function toBase64(file){
