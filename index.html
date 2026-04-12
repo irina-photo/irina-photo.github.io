@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ·ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¹ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ· ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°</title>
+<html><head><meta charset="utf-8"><title>Музей Ирины · Анимация света</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0800;overflow:hidden;font-family:Georgia,serif;transition:background 0.5s ease}
@@ -24,43 +24,43 @@ body{background:#0a0800;overflow:hidden;font-family:Georgia,serif;transition:bac
 border-radius:2px;transform:translateZ(10px)}
 .fo img{display:block;object-fit:cover;width:180px;height:135px;border-radius:1px;filter:brightness(1.05) contrast(1.02)}
 .pl{position:absolute;bottom:-25px;left:50%;transform:translateX(-50%);background:rgba(42,31,10,0.85);border:1px solid #6B4F10;padding:3px 12px;white-space:nowrap;font-size:9px;letter-spacing:1px;color:#c8a84a;font-style:italic;border-radius:3px;text-shadow:1px 1px 2px rgba(0,0,0,0.6)}
-/* ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ«ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ */
+/* АНИМИРОВАННЫЕ СВЕТИЛЬНИКИ */
 .corner-light{position:fixed;z-index:5;transition:all 0.3s ease}
-/* ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ */
+/* САМИ СВЕТИЛЬНИКИ */
 .corner-light img{position:relative;object-fit:contain;filter:brightness(1.4) contrast(1.3) drop-shadow(0 4px 12px rgba(0,0,0,0.8));transition:all 0.3s ease;z-index:2}
 .corner-light:hover img{transform:scale(1.1);filter:brightness(1.5) contrast(1.4) drop-shadow(0 6px 16px rgba(0,0,0,0.9))}
-/* ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ */
+/* РАСПОЛОЖЕНИЕ */
 #light-top-right{top:20px;right:80px}
 #light-top-left{top:20px;left:20px}
 #light-bottom-left{bottom:20px;left:20px}
 #light-bottom-right{bottom:20px;right:80px}
-/* ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ« */
+/* РАЗМЕРЫ */
 #light-top-right img, #light-top-left img{width:80px;height:120px}
 #light-bottom-left img, #light-bottom-right img{width:100px;height:150px}
-/* ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ«ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¥ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¤ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¬ - ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ£ÃÂÃÂÃÂÃÂ¢ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ */
+/* ПРАВЫЙ ВЕРХНИЙ ФОНАРЬ - РАЗВЕРНУТ ВЛЕВО */
 #light-top-right img{transform:scaleX(-1)}
 #light-top-right:hover img{transform:scaleX(-1) scale(1.1)}
-/* ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ£ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ«ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ«ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ£ÃÂÃÂÃÂÃÂ§ÃÂÃÂÃÂÃÂ */
+/* АККУРАТНЫЕ СВЕТОВЫЕ ЛУЧИ */
 .light-beam{position:fixed;background:radial-gradient(ellipse,rgba(255,255,255,0.2),rgba(255,255,255,0.08),rgba(255,255,255,0),transparent);filter:blur(30px);opacity:0.7;z-index:3;pointer-events:none}
 #beam-top-right{top:50px;right:110px;width:320px;height:400px}
 #beam-top-left{top:50px;left:50px;width:320px;height:400px}
 #beam-bottom-left{bottom:50px;left:50px;width:360px;height:450px}
 #beam-bottom-right{bottom:50px;right:110px;width:360px;height:450px}
-/* ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¯ ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ« - ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¯! */
+/* АНИМАЦИЯ СВЕТА НА СТЕНЫ - НОВАЯ! */
 .wall-light{position:fixed;z-index:4;pointer-events:none;opacity:0.6}
-/* ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ° ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¹ */
+/* Свет на стены от верхних фонарей */
 #wall-light-top-right{top:0;right:0;width:300px;height:400px;background:linear-gradient(135deg,rgba(255,255,255,0.15),rgba(255,255,255,0.05),transparent);filter:blur(40px)}
 #wall-light-top-left{top:0;left:0;width:300px;height:400px;background:linear-gradient(225deg,rgba(255,255,255,0.15),rgba(255,255,255,0.05),transparent);filter:blur(40px)}
-/* ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ° ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¹ */
+/* Свет на стены от нижних фонарей */
 #wall-light-bottom-left{bottom:0;left:0;width:350px;height:450px;background:linear-gradient(315deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04),transparent);filter:blur(45px)}
 #wall-light-bottom-right{bottom:0;right:0;width:350px;height:450px;background:linear-gradient(45deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04),transparent);filter:blur(45px)}
-/* ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¯ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¯ ÃÂÃÂÃÂÃÂ¤ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ */
+/* АНИМАЦИЯ МЕРЦАНИЯ ФОНАРЕЙ */
 @keyframes light-glow{
   0%,100%{opacity:0.7}
   50%{opacity:1}
 }
 .corner-light{animation:light-glow 4s ease-in-out infinite}
-/* ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¯ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ£ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ« */
+/* АНИМАЦИЯ ПУЛЬСАЦИИ СВЕТА НА СТЕНЫ */
 @keyframes wall-light-pulse{
   0%,100%{opacity:0.4;transform:scale(1)}
   25%{opacity:0.6;transform:scale(1.05)}
@@ -68,7 +68,7 @@ border-radius:2px;transform:translateZ(10px)}
   75%{opacity:0.6;transform:scale(1.05)}
 }
 .wall-light{animation:wall-light-pulse 6s ease-in-out infinite}
-/* ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ·ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ¸ ÃÂÃÂÃÂÃÂ´ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂ´ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ³ÃÂÃÂÃÂÃÂ¾ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ */
+/* Разная скорость анимации для каждого фонаря */
 #wall-light-top-right{animation-delay:0s}
 #wall-light-top-left{animation-delay:1.5s}
 #wall-light-bottom-left{animation-delay:3s}
@@ -85,14 +85,14 @@ border-radius:2px;transform:translateZ(10px)}
 }
 #info{position:fixed;top:20px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:4px;opacity:0.5;color:#e8d5a0;text-transform:uppercase;text-shadow:2px 2px 4px rgba(0,0,0,0.8)}
 #title{position:fixed;top:16px;left:24px;font-size:13px;letter-spacing:2px;opacity:0.7;font-style:italic;color:#e8d5a0;text-shadow:2px 2px 4px rgba(0,0,0,0.8)}
-#thumbs-btn{position:fixed;right:20px;bottom:20px;z-index:2000;background:rgba(200,160,40,0.18);border:1px solid rgba(200,160,40,0.42);color:rgba(255,245,210,0.94);border-radius:16px;padding:10px 14px;font-family:Georgia;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(8px);box-shadow:0 18px 46px rgba(0,0,0,0.62)}
+#thumbs-btn{position:fixed;right:102px;bottom:26px;z-index:2000;background:rgba(200,160,40,0.18);border:1px solid rgba(200,160,40,0.42);color:rgba(255,245,210,0.94);border-radius:16px;padding:10px 14px;font-family:Georgia;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(8px);box-shadow:0 18px 46px rgba(0,0,0,0.62)}
 #thumbs-btn:hover{background:rgba(200,160,40,0.24)}
 @media (max-width: 700px), (max-height: 520px){
-  #thumbs-btn{right:12px;bottom:12px;padding:9px 12px}
+  #thumbs-btn{right:82px;bottom:18px;padding:9px 12px}
 }
 #hint{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);font-size:10px;opacity:0.4;letter-spacing:3px;color:#e8d5a0;text-shadow:2px 2px 4px rgba(0,0,0,0.8)}
 #lb{display:none;position:fixed;inset:0;background-image:url('rooms/lightbox_wall.jpg');background-size:cover;background-position:center calc(100% + 28px);background-repeat:no-repeat;background-color:#2b2114;z-index:999;align-items:center;justify-content:center;flex-direction:column}
-#lb::before{content:'';position:absolute;inset:0;z-index:0;background-image:url('rooms/lightbox_wall.jpg');background-size:contain;background-position:center bottom;background-repeat:no-repeat;opacity:1;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,1) 5%,rgba(0,0,0,1) 95%,rgba(0,0,0,0) 100%);mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,1) 5%,rgba(0,0,0,1) 95%,rgba(0,0,0,0) 100%)}
+#lb::before{content:'';position:absolute;inset:0;z-index:0;background-image:url('rooms/lightbox_wall.jpg');background-size:contain;background-position:center bottom;background-repeat:no-repeat;opacity:1;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,1) 18%,rgba(0,0,0,1) 82%,rgba(0,0,0,0) 100%);mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,1) 18%,rgba(0,0,0,1) 82%,rgba(0,0,0,0) 100%)}
 #lb::after{content:'';position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(0,0,0,0.10),rgba(0,0,0,0.10)),repeating-linear-gradient(135deg,rgba(255,255,255,0.014) 0px,rgba(255,255,255,0.014) 1px,transparent 1px,transparent 9px);background-size:cover,auto;opacity:1;pointer-events:none}
 #lb>*{position:relative;z-index:1}
 #lb.on{display:flex}
@@ -203,66 +203,66 @@ border-radius:2px;transform:translateZ(10px)}
   #admin-panel a{padding:7px 10px;border-radius:13px;font-size:10px}
 }
 </style></head><body>
-<div id="title">ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¸ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°</div>
-<div id="info">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ» 1 ÃÂÃÂÃÂÃÂ· ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ° 1</div>
+<div id="title">Свет и тишина</div>
+<div id="info">Зал 1 · Комната 1</div>
 <div id="admin-panel">
-  <a id="admin-upload" href="https://github.com/irina-photo/irina-photo.github.io/upload/main/images" target="_blank" rel="noopener noreferrer">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ³ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ·ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾</a>
-  <a id="admin-captions" href="https://github.com/irina-photo/irina-photo.github.io/edit/main/captions.json" target="_blank" rel="noopener noreferrer">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ´ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸</a>
+  <a id="admin-upload" href="https://github.com/irina-photo/irina-photo.github.io/upload/main/images" target="_blank" rel="noopener noreferrer">Загрузить фото</a>
+  <a id="admin-captions" href="https://github.com/irina-photo/irina-photo.github.io/edit/main/captions.json" target="_blank" rel="noopener noreferrer">Подписи</a>
 </div>
-<div id="thumbs-btn" onclick="openThumbsFromGallery()">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ</div>
+<div id="thumbs-btn" onclick="openThumbsFromGallery()">Миниатюры</div>
 <div id="hall"></div>
-<!-- ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ«ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ -->
+<!-- АНИМИРОВАННЫЕ СВЕТИЛЬНИКИ -->
 <div class="corner-light" id="light-top-right"><img src=""/></div>
 <div class="corner-light" id="light-top-left"><img src=""/></div>
 <div class="corner-light" id="light-bottom-left"><img src=""/></div>
 <div class="corner-light" id="light-bottom-right"><img src=""/></div>
-<!-- ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ«ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ£ÃÂÃÂÃÂÃÂ§ÃÂÃÂÃÂÃÂ -->
+<!-- СВЕТОВЫЕ ЛУЧИ -->
 <div class="light-beam" id="beam-top-right"></div>
 <div class="light-beam" id="beam-top-left"></div>
 <div class="light-beam" id="beam-bottom-left"></div>
 <div class="light-beam" id="beam-bottom-right"></div>
-<!-- ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¯ ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ« -->
+<!-- АНИМАЦИЯ СВЕТА НА СТЕНЫ -->
 <div class="wall-light" id="wall-light-top-right"></div>
 <div class="wall-light" id="wall-light-top-left"></div>
 <div class="wall-light" id="wall-light-bottom-left"></div>
 <div class="wall-light" id="wall-light-bottom-right"></div>
 <div id="nav">
-  <button class="nb" onclick="go(-1)">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ·ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ´</button>
-  <button class="nb" onclick="go(1)">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ´ ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ</button>
+  <button class="nb" onclick="go(-1)">← Назад</button>
+  <button class="nb" onclick="go(1)">Вперёд →</button>
 </div>
-<div id="gal-prev" class="gal-arrow" onclick="go(-1)">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¹</div>
-<div id="gal-next" class="gal-arrow" onclick="go(1)">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂº</div>
-<div id="hint">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ ÃÂÃÂÃÂÃÂ· ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ¸ ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ° ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ±ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ</div>
+<div id="gal-prev" class="gal-arrow" onclick="go(-1)">‹</div>
+<div id="gal-next" class="gal-arrow" onclick="go(1)">›</div>
+<div id="hint">← → клавиши · нажми на картинку чтобы открыть</div>
 <div id="brightness-control">
-  <div id="brightness-label">ÃÂÃÂÃÂÃÂ¯ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ·ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ°</div>
+  <div id="brightness-label">Яркость зала</div>
   <input type="range" id="brightness-slider" min="20" max="100" value="50">
-  <button id="auto-btn" onclick="setAutoBrightness()">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ</button>
+  <button id="auto-btn" onclick="setAutoBrightness()">АВТО</button>
 </div>
 <div id="room-selector" id="room-buttons"></div>
 <div id="lb" class="wall-template" onclick="closeLb()">
-  <div id="lbt">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ·ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¹ ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ±ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ· ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°</div>
-  <div id="lbx">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ</div>
+  <div id="lbt">Музей великолепных работ · Летопись света</div>
+  <div id="lbx">✕</div>
   <div id="lbside-left" onclick="event.stopPropagation();navigateLb(-1)"></div>
   <div id="lbside-right" onclick="event.stopPropagation();navigateLb(1)"></div>
-  <div id="lbzprev" onclick="event.stopPropagation();navigateLb(-1)">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¹</div>
-  <div id="lbznext" onclick="event.stopPropagation();navigateLb(1)">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂº</div>
-  <div id="lbprev" class="lbarrow" onclick="event.stopPropagation();navigateLb(-1)">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¹</div>
-  <div id="lbnext" class="lbarrow" onclick="event.stopPropagation();navigateLb(1)">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂº</div>
+  <div id="lbzprev" onclick="event.stopPropagation();navigateLb(-1)">‹</div>
+  <div id="lbznext" onclick="event.stopPropagation();navigateLb(1)">›</div>
+  <div id="lbprev" class="lbarrow" onclick="event.stopPropagation();navigateLb(-1)">‹</div>
+  <div id="lbnext" class="lbarrow" onclick="event.stopPropagation();navigateLb(1)">›</div>
   <div id="lbthumbs" onclick="event.stopPropagation()">
     <div id="lbthumbs-bg" onclick="closeLbThumbs()"></div>
     <div id="lbthumbs-panel">
       <div id="lbthumbs-top">
-        <div id="lbthumbs-title">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ</div>
+        <div id="lbthumbs-title">Миниатюры</div>
         <div id="lbthumbs-actions">
-          <button type="button" id="lbthumbs-similarbtn" class="lbthumbs-btn" onclick="event.preventDefault();toggleLbThumbsSimilar()">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂµ</button>
-          <button type="button" id="lbthumbs-select" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();toggleLbThumbsSelect()">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ</button>
-          <button type="button" id="lbthumbs-copy" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();copyLbThumbsMarks()">ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ</button>
-          <button type="button" id="lbthumbs-trash" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();copyLbThumbsTrashCommand()">ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ·ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ</button>
-          <button type="button" id="lbthumbs-undo" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();copyLbThumbsUndoCommand()">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ</button>
-          <button type="button" id="lbthumbs-download" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();downloadLbThumbSelected()">ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ</button>
-          <button type="button" id="lbthumbs-refresh" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();refreshLbThumbs()">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ</button>
-          <button type="button" id="lbthumbs-clear" class="lbthumbs-btn" style="display:none" onclick="event.preventDefault();clearLbThumbsMarks()">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ</button>
-          <button type="button" id="lbthumbs-close" onclick="event.preventDefault();closeLbThumbs()">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ</button>
+          <button type="button" id="lbthumbs-select" class="lbthumbs-btn" onclick="event.preventDefault();toggleLbThumbsSelect()">Выбор</button>
+          <button type="button" id="lbthumbs-copy" class="lbthumbs-btn" onclick="event.preventDefault();copyLbThumbsMarks()">Скопировать</button>
+          <button type="button" id="lbthumbs-trash" class="lbthumbs-btn" onclick="event.preventDefault();copyLbThumbsTrashCommand()">В корзину</button>
+          <button type="button" id="lbthumbs-undo" class="lbthumbs-btn" onclick="event.preventDefault();copyLbThumbsUndoCommand()">Вернуть</button>
+          <button type="button" id="lbthumbs-download" class="lbthumbs-btn" onclick="event.preventDefault();downloadLbThumbSelected()">Скачать</button>
+          <button type="button" id="lbthumbs-refresh" class="lbthumbs-btn" onclick="event.preventDefault();refreshLbThumbs()">Обновить</button>
+          <button type="button" id="lbthumbs-similarbtn" class="lbthumbs-btn" onclick="event.preventDefault();toggleLbThumbsSimilar()">Похожие</button>
+          <button type="button" id="lbthumbs-clear" class="lbthumbs-btn" onclick="event.preventDefault();clearLbThumbsMarks()">Очистить</button>
+          <button type="button" id="lbthumbs-close" onclick="event.preventDefault();closeLbThumbs()">Закрыть</button>
         </div>
       </div>
       <div id="lbthumbs-grid"></div>
@@ -272,8 +272,8 @@ border-radius:2px;transform:translateZ(10px)}
   <div class="lbf" onclick="event.stopPropagation();toggleLbZoom()"><img id="lbi" src=""/></div>
   <div id="lbplate" onclick="event.stopPropagation()">
     <div id="lbc"></div>
-    <div id="lba">ÃÂÃÂÃÂÃÂ¤ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ´ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂº ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ° ÃÂÃÂÃÂÃÂ· ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ³ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°</div>
-    <button type="button" id="lbplate-thumbs" onclick="event.preventDefault();toggleLbThumbs()">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ</button>
+    <div id="lba">Фотохудожник Ирина · Мастер игры света</div>
+    <button type="button" id="lbplate-thumbs" onclick="event.preventDefault();toggleLbThumbs()">Миниатюры</button>
   </div>
 </div>
 <script>
@@ -937,7 +937,8 @@ var PH=[
 {p:'images/picture-657.jpg',cat:''},
 {p:'images/picture-658.jpg',cat:''},
 {p:'images/picture-659.jpg',cat:''},
-{p:'images/picture-660.jpg',cat:''}
+{p:'images/picture-660.jpg',cat:''},
+{p:'images/picture-661.jpg',cat:''}
 ];
 var PH_TOTAL=654;
 PH=PH.slice(0,PH_TOTAL);
@@ -945,8 +946,8 @@ for(var i=0;i<PH.length;i++){
   PH[i].p='images/picture-'+String(i+1).padStart(3,'0')+'.jpg';
   PH[i].cat=labelFromPath(PH[i].p);
 }
-var ROOMS=['rooms/1.png', 'rooms/2.png', 'rooms/3.png', 'rooms/4.png', 'rooms/5.png', 'rooms/6.png', 'rooms/7.png', 'rooms/8.png', 'rooms/9.png', 'rooms/10.png', 'rooms/11.png', 'rooms/12.png', 'rooms/13.png', 'rooms/14.png', 'rooms/15.png'];
-var LIGHTS=['museum_lights/light1.png', 'museum_lights/light2.png', 'museum_lights/light3.png', 'museum_lights/light4.png'];
+var ROOMS=['/Users/alexanderermolovich/Documents/Irina_Site/rooms/1.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/2.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/3.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/4.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/5.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/6.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/7.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/8.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/9.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/10.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/11.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/12.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/13.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/14.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/15.png'];
+var LIGHTS=['/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light1.png', '/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light2.png', '/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light3.png', '/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light4.png'];
 
 function toRelPath(p){
   if(!p) return p;
@@ -958,9 +959,9 @@ function toRelPath(p){
 
 function labelFromPath(p){
   var m=(p||'').match(/picture-(\d+)/i);
-  if(m && m[1]) return 'ÃÂÃÂÃÂÃÂ¤ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ'+m[1];
+  if(m && m[1]) return 'Фото №'+m[1];
   var b=(p||'').split('/').pop()||'';
-  return b ? ('ÃÂÃÂÃÂÃÂ¤ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ ÃÂÃÂÃÂÃÂ· '+b) : 'ÃÂÃÂÃÂÃÂ¤ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾';
+  return b ? ('Фото · '+b) : 'Фото';
 }
 
 for(var i=0;i<PH.length;i++){
@@ -982,25 +983,25 @@ var brightnessSlider=document.getElementById('brightness-slider');
 var currentBrightness=50;
 var defaultBrightness=50;
 
- // ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ´ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ½-ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ: ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ·ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¼ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ ?admin=1
+ // Админ-панель: показываем только при ?admin=1
  (function(){
    try{
      var qs=new URLSearchParams(location.search||'');
-     var ADMIN_KEY='ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ¹ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ°';
+     var ADMIN_KEY='самурайка';
      var isAdmin=(qs.get('admin')==='1' && qs.get('key')===ADMIN_KEY);
      var panel=document.getElementById('admin-panel');
      if(panel) panel.style.display=isAdmin?'flex':'none';
    }catch(e){}
  })();
 
- // ÃÂÃÂÃÂÃÂ£ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¼ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¸
+ // Устанавливаем светильники
  var lightElements=document.querySelectorAll('.corner-light img');
  for(var i=0;i<Math.min(4,LIGHTS.length);i++){
   lightElements[i].src=LIGHTS[i];
-  console.log('ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂº '+i+':', LIGHTS[i]);
+  console.log('Светильник '+i+':', LIGHTS[i]);
 }
 
-// ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ·ÃÂÃÂÃÂÃÂ´ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¼ ÃÂÃÂÃÂÃÂ·ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ
+// Создаем залы
 for(var w=0;w<walls;w++){
   var wall=document.createElement('div');wall.className='wall';
   var bg=document.createElement('div');bg.className='wall-bg';wall.appendChild(bg);
@@ -1021,24 +1022,24 @@ for(var w=0;w<walls;w++){
   hall.appendChild(wall);
 }
 
-// ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ·ÃÂÃÂÃÂÃÂ´ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¼ ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¸ ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ
+// Создаем кнопки комнат
 var roomSelector=document.getElementById('room-selector');
 for(var i=0;i<ROOMS.length;i++){
   var btn=document.createElement('div');
   btn.className='room-btn'+(i===0?' active':'');
   btn.style.backgroundImage='url('+ROOMS[i]+')';
-  btn.title='ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ° '+(i+1);
+  btn.title='Комната '+(i+1);
   btn.onclick=function(roomIndex){return function(){setRoom(roomIndex);};}(i);
   roomSelector.appendChild(btn);
 }
 
-// ÃÂÃÂÃÂÃÂ¤ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¹ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸
+// Функция автоматической яркости
 function setAutoBrightness(){
   brightnessSlider.value=defaultBrightness;
   updateBrightness(defaultBrightness);
 }
 
-// ÃÂÃÂÃÂÃÂ¤ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ±ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸
+// Функция обновления яркости
 function updateBrightness(value){
   currentBrightness=value;
   var brightnessPercent=value/100;
@@ -1047,7 +1048,7 @@ function updateBrightness(value){
     walls[i].style.filter='brightness('+(brightnessPercent*0.8)+') contrast(1.1)';
   }
   
-  // ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¼ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂº ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ
+  // Обновляем яркость кнопок комнат
   var btns=document.querySelectorAll('.room-btn');
   for(var i=0;i<btns.length;i++){
     var isActive=btns[i].classList.contains('active');
@@ -1055,31 +1056,31 @@ function updateBrightness(value){
     btns[i].style.filter='brightness('+btnBrightness+')';
   }
   
-  // ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¼ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ²
+  // Обновляем яркость светильников
   var lights=document.querySelectorAll('.corner-light img');
   for(var i=0;i<lights.length;i++){
     lights[i].style.filter='brightness('+(brightnessPercent*1.4)+') contrast(1.3) drop-shadow(0 4px 12px rgba(0,0,0,0.8))';
   }
   
-  // ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¼ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¹
+  // Обновляем яркость лучей
   var beams=document.querySelectorAll('.light-beam');
   for(var i=0;i<beams.length;i++){
     beams[i].style.opacity=brightnessPercent*0.8;
   }
   
-  // ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¼ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ° ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ° ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ
+  // Обновляем яркость света на стены
   var wallLights=document.querySelectorAll('.wall-light');
   for(var i=0;i<wallLights.length;i++){
     wallLights[i].style.opacity=brightnessPercent*0.6;
   }
 }
 
-// ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ·ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ° ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸
+// Слушатель ползунка яркости
 brightnessSlider.addEventListener('input',function(){
   updateBrightness(this.value);
 });
 
-// ÃÂÃÂÃÂÃÂ£ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¼ ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ´ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂ´ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ³ÃÂÃÂÃÂÃÂ¾ ÃÂÃÂÃÂÃÂ·ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ°
+// Устанавливаем комнату для каждого зала
 function setRoomForWall(wallIndex, roomIndex){
   var walls=document.querySelectorAll('.wall');
   if(walls[wallIndex]){
@@ -1089,19 +1090,19 @@ function setRoomForWall(wallIndex, roomIndex){
   }
 }
 
-// ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ³ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ¸ - ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¸ ÃÂÃÂÃÂÃÂ·ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ», ÃÂÃÂÃÂÃÂ¸ ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ
+// Обновленная функция навигации - меняет и зал, и комнату
 function go(d){
   cur=Math.max(0,Math.min(walls-1,cur+d));
   hall.style.transform='translateX(-'+(cur*100)+'vw)';
   
-  // ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¼ ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ´ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ³ÃÂÃÂÃÂÃÂ¾ ÃÂÃÂÃÂÃÂ·ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ°
+  // Меняем комнату для текущего зала
   var roomIndex=cur%ROOMS.length;
   setRoomForWall(cur, roomIndex);
   
-  // ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¼ ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ
-  document.getElementById('info').textContent='ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ» '+(cur+1)+' ÃÂÃÂÃÂÃÂ· ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ° '+(roomIndex+1);
+  // Обновляем информацию
+  document.getElementById('info').textContent='Зал '+(cur+1)+' · Комната '+(roomIndex+1);
   
-  // ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¼ ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ
+  // Обновляем активную кнопку комнаты
   var btns=document.querySelectorAll('.room-btn');
   for(var i=0;i<btns.length;i++){
     btns[i].className='room-btn'+(i===roomIndex?' active':'');
@@ -1111,13 +1112,13 @@ function go(d){
   }
 }
 
-// ÃÂÃÂÃÂÃÂ¤ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¹ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¸ ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ
+// Функция ручной установки комнаты
 function setRoom(roomIndex){
   currentRoom=roomIndex;
   setRoomForWall(cur, roomIndex);
-  document.getElementById('info').textContent='ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ» '+(cur+1)+' ÃÂÃÂÃÂÃÂ· ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ° '+(roomIndex+1);
+  document.getElementById('info').textContent='Зал '+(cur+1)+' · Комната '+(roomIndex+1);
   
-  // ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¼ ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ
+  // Обновляем активную кнопку
   var btns=document.querySelectorAll('.room-btn');
   for(var i=0;i<btns.length;i++){
     btns[i].className='room-btn'+(i===roomIndex?' active':'');
@@ -1127,16 +1128,16 @@ function setRoom(roomIndex){
   }
 }
 
-// ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ·ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ - ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¼ ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ´ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ·ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ²
+// Инициализация - устанавливаем комнаты для всех залов
 for(var w=0;w<walls;w++){
   var roomIndex=w%ROOMS.length;
   setRoomForWall(w, roomIndex);
 }
 
-// ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¼ ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ
+// Применяем начальную яркость
 updateBrightness(currentBrightness);
 
-// ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ´ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂµ ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾
+// Модальное окно
 function openLb(i){
   currentLb=i;updateLb();
   document.getElementById('lb').classList.add('on');
@@ -1236,17 +1237,17 @@ function copyLbThumbsMarks(){
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(txt);
   }else{
-    window.prompt('ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂº ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ² ÃÂÃÂÃÂÃÂ´ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ´ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ/ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°:', txt);
+    window.prompt('Список номеров для удаления/переноса:', txt);
   }
 }
 
 function copyLbThumbsTrashCommand(){
   var arr=Array.from(_lbThumbsMarks).sort(function(a,b){return a-b;});
   if(!arr.length){
-    window.prompt('ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ. ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ° ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ ÃÂÃÂÃÂÃÂ«ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ» ÃÂÃÂÃÂÃÂ¸ ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾.', '');
+    window.prompt('Нет отмеченных. Сначала включи «Выбор» и отметь фото.', '');
     return;
   }
-  var PROJECT_DIR='';
+  var PROJECT_DIR='/Users/alexanderermolovich/Documents/Irina_Site';
   var parts=[];
   for(var i=0;i<arr.length;i++){
     var n=String(arr[i]).padStart(3,'0');
@@ -1256,16 +1257,16 @@ function copyLbThumbsTrashCommand(){
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(cmd);
   }
-  window.prompt('ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¹ ÃÂÃÂÃÂÃÂ¸ ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ ÃÂÃÂÃÂÃÂ² ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂµ (ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ· ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¸ ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°):', cmd);
+  window.prompt('Скопируй и выполни в терминале (из папки проекта):', cmd);
 }
 
 function copyLbThumbsUndoCommand(){
   var arr=Array.from(_lbThumbsMarks).sort(function(a,b){return a-b;});
   if(!arr.length){
-    window.prompt('ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ. ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ (ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ) ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµ ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ.', '');
+    window.prompt('Нет отмеченных. Отметь фото (Выбор) которые нужно вернуть.', '');
     return;
   }
-  var PROJECT_DIR='';
+  var PROJECT_DIR='/Users/alexanderermolovich/Documents/Irina_Site';
   var parts=[];
   for(var i=0;i<arr.length;i++){
     var n=String(arr[i]).padStart(3,'0');
@@ -1275,13 +1276,13 @@ function copyLbThumbsUndoCommand(){
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(cmd);
   }
-  window.prompt('ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¹ ÃÂÃÂÃÂÃÂ¸ ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ ÃÂÃÂÃÂÃÂ² ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂµ (ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ· ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ¸ ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°):', cmd);
+  window.prompt('Скопируй и выполни в терминале (из папки проекта):', cmd);
 }
 
 function downloadLbThumbSelected(){
   var arr=Array.from(_lbThumbsMarks).sort(function(a,b){return a-b;});
   if(arr.length!==1){
-    window.prompt('ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ 1 ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ (ÃÂÃÂÃÂÃÂ² ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂµ ÃÂÃÂÃÂÃÂ«ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ»).', arr.join(','));
+    window.prompt('Для скачивания отметь ровно 1 фото (в режиме «Выбор»).', arr.join(','));
     return;
   }
   var num=arr[0];
@@ -1310,7 +1311,7 @@ function refreshLbThumbs(){
   _lbThumbsBuilt=false;
   buildLbThumbs();
   var tt=document.getElementById('lbthumbs-title');
-  if(tt) tt.textContent='ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ· '+PH.length;
+  if(tt) tt.textContent='Миниатюры · '+PH.length;
   refreshLbThumbsMarks();
   setLbThumbActive();
 }
@@ -1368,7 +1369,7 @@ function findSimilarGroupsInBrowser(){
   _lbSimilarRunning=true;
   var sim=document.getElementById('lbthumbs-similar');
   if(!sim){_lbSimilarRunning=false;return;}
-  sim.innerHTML='ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂµÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¦ (ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ·ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ 1-2 ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ)';
+  sim.innerHTML='Ищу похожие… (это может занять 1-2 минуты)';
 
   var maxPhotos=PH.length;
   var hashes=new Array(maxPhotos);
@@ -1385,7 +1386,7 @@ function findSimilarGroupsInBrowser(){
     im.onload=function(){
       try{hashes[i]=_lbDHashFromImage(im);}catch(e){hashes[i]=null;}
       i++;
-      if(i%40===0) sim.innerHTML='ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂµÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¦ '+i+' / '+maxPhotos;
+      if(i%40===0) sim.innerHTML='Ищу похожие… '+i+' / '+maxPhotos;
       setTimeout(step,0);
     };
     im.onerror=function(){hashes[i]=null;i++;setTimeout(step,0);};
@@ -1414,7 +1415,7 @@ function findSimilarGroupsInBrowser(){
   function renderSimilarGroups(groups){
     sim.innerHTML='';
     if(!groups.length){
-      sim.textContent='ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ³ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¿ ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂµ ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ¹ÃÂÃÂÃÂÃÂ´ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾ (ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¾ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂ³ÃÂÃÂÃÂÃÂ).';
+      sim.textContent='Похожих групп не найдено (по текущему порогу).';
       return;
     }
     for(var gi=0;gi<groups.length;gi++){
@@ -1423,7 +1424,7 @@ function findSimilarGroupsInBrowser(){
       wrap.className='simgrp';
       var title=document.createElement('div');
       title.className='simgrp-title';
-      title.textContent='ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ° '+(gi+1)+' ÃÂÃÂÃÂÃÂ· '+g.length+' ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ (ÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂº ÃÂÃÂÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¾ ÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂµ = ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ/ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂºÃÂÃÂÃÂÃÂ)';
+      title.textContent='Группа '+(gi+1)+' · '+g.length+' фото (клик по миниатюре = отметить/снять отметку)';
       wrap.appendChild(title);
       for(var k=0;k<g.length;k++){
         var idx=g[k];
@@ -1535,7 +1536,7 @@ function openLbThumbs(){
   if(!lb) return;
   buildLbThumbs();
   var tt=document.getElementById('lbthumbs-title');
-  if(tt) tt.textContent='ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ· '+PH.length;
+  if(tt) tt.textContent='Миниатюры · '+PH.length;
   var grid=document.getElementById('lbthumbs-grid');
   if(grid) grid.scrollTop=_lbThumbScrollTop||0;
   lb.classList.add('show-thumbs');
@@ -1566,10 +1567,10 @@ function updateLb(){
     inp.value=(currentLb+1);
   }
   var lbl=document.getElementById('lbjlabel');
-  if(lbl) lbl.textContent='ÃÂÃÂÃÂÃÂ¤ÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ '+(currentLb+1)+'/'+PH.length;
+  if(lbl) lbl.textContent='Фото '+(currentLb+1)+'/'+PH.length;
   setLbThumbActive();
   img.onerror=function(){
-    document.getElementById('lbc').textContent='(ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂµ ÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ¹ÃÂÃÂÃÂÃÂ´ÃÂÃÂÃÂÃÂµÃÂÃÂÃÂÃÂ½ÃÂÃÂÃÂÃÂ¾) '+PH[currentLb].cat;
+    document.getElementById('lbc').textContent='(фото не найдено) '+PH[currentLb].cat;
   };
   img.onload=function(){
     document.getElementById('lbc').textContent=PH[currentLb].cat;
@@ -1577,7 +1578,7 @@ function updateLb(){
   img.src=PH[currentLb].p;
 }
 
-// ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ»ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂ²ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°
+// Клавиатура
 document.onkeydown=function(e){
   var lb=document.getElementById('lb');
   var lbOn=lb&&lb.classList.contains('on');
@@ -1615,5 +1616,5 @@ document.onkeydown=function(e){
   },{passive:true});
 })();
 
-console.log('=== ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¯ ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¡ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ« ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ÃÂÃÂÃÂÃÂ¨ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ===');
+console.log('=== АНИМАЦИЯ СВЕТА НА СТЕНЫ ЗАВЕРШЕНА ===');
 </script></body></html>
