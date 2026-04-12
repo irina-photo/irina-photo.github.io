@@ -205,10 +205,6 @@ border-radius:2px;transform:translateZ(10px)}
 </style></head><body>
 <div id="title">Свет и тишина</div>
 <div id="info">Зал 1 · Комната 1</div>
-<div id="admin-panel">
-  <a id="admin-upload" href="https://github.com/irina-photo/irina-photo.github.io/upload/main/images" target="_blank" rel="noopener noreferrer">Загрузить фото</a>
-  <a id="admin-captions" href="https://github.com/irina-photo/irina-photo.github.io/edit/main/captions.json" target="_blank" rel="noopener noreferrer">Подписи</a>
-</div>
 <div id="thumbs-btn" onclick="openThumbsFromGallery()">Миниатюры</div>
 <div id="hall"></div>
 <!-- АНИМИРОВАННЫЕ СВЕТИЛЬНИКИ -->
@@ -254,14 +250,6 @@ border-radius:2px;transform:translateZ(10px)}
       <div id="lbthumbs-top">
         <div id="lbthumbs-title">Миниатюры</div>
         <div id="lbthumbs-actions">
-          <button type="button" id="lbthumbs-select" class="lbthumbs-btn" onclick="event.preventDefault();toggleLbThumbsSelect()">Выбор</button>
-          <button type="button" id="lbthumbs-copy" class="lbthumbs-btn" onclick="event.preventDefault();copyLbThumbsMarks()">Скопировать</button>
-          <button type="button" id="lbthumbs-trash" class="lbthumbs-btn" onclick="event.preventDefault();copyLbThumbsTrashCommand()">В корзину</button>
-          <button type="button" id="lbthumbs-undo" class="lbthumbs-btn" onclick="event.preventDefault();copyLbThumbsUndoCommand()">Вернуть</button>
-          <button type="button" id="lbthumbs-download" class="lbthumbs-btn" onclick="event.preventDefault();downloadLbThumbSelected()">Скачать</button>
-          <button type="button" id="lbthumbs-refresh" class="lbthumbs-btn" onclick="event.preventDefault();refreshLbThumbs()">Обновить</button>
-          <button type="button" id="lbthumbs-similarbtn" class="lbthumbs-btn" onclick="event.preventDefault();toggleLbThumbsSimilar()">Похожие</button>
-          <button type="button" id="lbthumbs-clear" class="lbthumbs-btn" onclick="event.preventDefault();clearLbThumbsMarks()">Очистить</button>
           <button type="button" id="lbthumbs-close" onclick="event.preventDefault();closeLbThumbs()">Закрыть</button>
         </div>
       </div>
