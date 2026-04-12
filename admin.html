@@ -301,7 +301,9 @@ async function updateGallery(t){
     if(!r.ok) throw new Error('Не могу получить index.html');
     const data = await r.json();
     const sha = data.sha;
-    let html = atob(data.content.replace(/\n/g,''));
+    // Правильное декодирование UTF-8 (русский текст)
+    const bytes = Uint8Array.from(atob(data.content.replace(/\n/g,'')), c=>c.charCodeAt(0));
+    let html = new TextDecoder('utf-8').decode(bytes);
 
     // Получаем список всех фото в images/
     const r2 = await fetch(`https://api.github.com/repos/${REPO}/contents/images`,
@@ -320,7 +322,11 @@ async function updateGallery(t){
     html = html.replace(/var PH=\[[\s\S]*?\];/, newPH);
 
     // Пушим обновлённый index.html
-    const b64 = btoa(unescape(encodeURIComponent(html)));
+    // Правильное кодирование UTF-8 обратно в base64
+    const encoded = new TextEncoder().encode(html);
+    let binary = '';
+    encoded.forEach(b => binary += String.fromCharCode(b));
+    const b64 = btoa(binary);
     const resp = await fetch(`https://api.github.com/repos/${REPO}/contents/index.html`,{
       method:'PUT',
       headers:{'Authorization':'token '+t,'Content-Type':'application/json'},
