@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>Музей Ирины · Анимация света</title>
+<html><head><meta charset="utf-8"><title>ÐÑÐ·ÐµÐ¹ ÐÑÐ¸Ð½Ñ Â· ÐÐ½Ð¸Ð¼Ð°ÑÐ¸Ñ ÑÐ²ÐµÑÐ°</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0800;overflow:hidden;font-family:Georgia,serif;transition:background 0.5s ease}
@@ -24,43 +24,43 @@ body{background:#0a0800;overflow:hidden;font-family:Georgia,serif;transition:bac
 border-radius:2px;transform:translateZ(10px)}
 .fo img{display:block;object-fit:cover;width:180px;height:135px;border-radius:1px;filter:brightness(1.05) contrast(1.02)}
 .pl{position:absolute;bottom:-25px;left:50%;transform:translateX(-50%);background:rgba(42,31,10,0.85);border:1px solid #6B4F10;padding:3px 12px;white-space:nowrap;font-size:9px;letter-spacing:1px;color:#c8a84a;font-style:italic;border-radius:3px;text-shadow:1px 1px 2px rgba(0,0,0,0.6)}
-/* АНИМИРОВАННЫЕ СВЕТИЛЬНИКИ */
+/* ÐÐÐÐÐÐ ÐÐÐÐÐÐ«Ð Ð¡ÐÐÐ¢ÐÐÐ¬ÐÐÐÐ */
 .corner-light{position:fixed;z-index:5;transition:all 0.3s ease}
-/* САМИ СВЕТИЛЬНИКИ */
+/* Ð¡ÐÐÐ Ð¡ÐÐÐ¢ÐÐÐ¬ÐÐÐÐ */
 .corner-light img{position:relative;object-fit:contain;filter:brightness(1.4) contrast(1.3) drop-shadow(0 4px 12px rgba(0,0,0,0.8));transition:all 0.3s ease;z-index:2}
 .corner-light:hover img{transform:scale(1.1);filter:brightness(1.5) contrast(1.4) drop-shadow(0 6px 16px rgba(0,0,0,0.9))}
-/* РАСПОЛОЖЕНИЕ */
+/* Ð ÐÐ¡ÐÐÐÐÐÐÐÐÐ */
 #light-top-right{top:20px;right:80px}
 #light-top-left{top:20px;left:20px}
 #light-bottom-left{bottom:20px;left:20px}
 #light-bottom-right{bottom:20px;right:80px}
-/* РАЗМЕРЫ */
+/* Ð ÐÐÐÐÐ Ð« */
 #light-top-right img, #light-top-left img{width:80px;height:120px}
 #light-bottom-left img, #light-bottom-right img{width:100px;height:150px}
-/* ПРАВЫЙ ВЕРХНИЙ ФОНАРЬ - РАЗВЕРНУТ ВЛЕВО */
+/* ÐÐ ÐÐÐ«Ð ÐÐÐ Ð¥ÐÐÐ Ð¤ÐÐÐÐ Ð¬ - Ð ÐÐÐÐÐ ÐÐ£Ð¢ ÐÐÐÐÐ */
 #light-top-right img{transform:scaleX(-1)}
 #light-top-right:hover img{transform:scaleX(-1) scale(1.1)}
-/* АККУРАТНЫЕ СВЕТОВЫЕ ЛУЧИ */
+/* ÐÐÐÐ£Ð ÐÐ¢ÐÐ«Ð Ð¡ÐÐÐ¢ÐÐÐ«Ð ÐÐ£Ð§Ð */
 .light-beam{position:fixed;background:radial-gradient(ellipse,rgba(255,255,255,0.2),rgba(255,255,255,0.08),rgba(255,255,255,0),transparent);filter:blur(30px);opacity:0.7;z-index:3;pointer-events:none}
 #beam-top-right{top:50px;right:110px;width:320px;height:400px}
 #beam-top-left{top:50px;left:50px;width:320px;height:400px}
 #beam-bottom-left{bottom:50px;left:50px;width:360px;height:450px}
 #beam-bottom-right{bottom:50px;right:110px;width:360px;height:450px}
-/* АНИМАЦИЯ СВЕТА НА СТЕНЫ - НОВАЯ! */
+/* ÐÐÐÐÐÐ¦ÐÐ¯ Ð¡ÐÐÐ¢Ð ÐÐ Ð¡Ð¢ÐÐÐ« - ÐÐÐÐÐ¯! */
 .wall-light{position:fixed;z-index:4;pointer-events:none;opacity:0.6}
-/* Свет на стены от верхних фонарей */
+/* Ð¡Ð²ÐµÑ Ð½Ð° ÑÑÐµÐ½Ñ Ð¾Ñ Ð²ÐµÑÑÐ½Ð¸Ñ ÑÐ¾Ð½Ð°ÑÐµÐ¹ */
 #wall-light-top-right{top:0;right:0;width:300px;height:400px;background:linear-gradient(135deg,rgba(255,255,255,0.15),rgba(255,255,255,0.05),transparent);filter:blur(40px)}
 #wall-light-top-left{top:0;left:0;width:300px;height:400px;background:linear-gradient(225deg,rgba(255,255,255,0.15),rgba(255,255,255,0.05),transparent);filter:blur(40px)}
-/* Свет на стены от нижних фонарей */
+/* Ð¡Ð²ÐµÑ Ð½Ð° ÑÑÐµÐ½Ñ Ð¾Ñ Ð½Ð¸Ð¶Ð½Ð¸Ñ ÑÐ¾Ð½Ð°ÑÐµÐ¹ */
 #wall-light-bottom-left{bottom:0;left:0;width:350px;height:450px;background:linear-gradient(315deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04),transparent);filter:blur(45px)}
 #wall-light-bottom-right{bottom:0;right:0;width:350px;height:450px;background:linear-gradient(45deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04),transparent);filter:blur(45px)}
-/* АНИМАЦИЯ МЕРЦАНИЯ ФОНАРЕЙ */
+/* ÐÐÐÐÐÐ¦ÐÐ¯ ÐÐÐ Ð¦ÐÐÐÐ¯ Ð¤ÐÐÐÐ ÐÐ */
 @keyframes light-glow{
   0%,100%{opacity:0.7}
   50%{opacity:1}
 }
 .corner-light{animation:light-glow 4s ease-in-out infinite}
-/* АНИМАЦИЯ ПУЛЬСАЦИИ СВЕТА НА СТЕНЫ */
+/* ÐÐÐÐÐÐ¦ÐÐ¯ ÐÐ£ÐÐ¬Ð¡ÐÐ¦ÐÐ Ð¡ÐÐÐ¢Ð ÐÐ Ð¡Ð¢ÐÐÐ« */
 @keyframes wall-light-pulse{
   0%,100%{opacity:0.4;transform:scale(1)}
   25%{opacity:0.6;transform:scale(1.05)}
@@ -68,7 +68,7 @@ border-radius:2px;transform:translateZ(10px)}
   75%{opacity:0.6;transform:scale(1.05)}
 }
 .wall-light{animation:wall-light-pulse 6s ease-in-out infinite}
-/* Разная скорость анимации для каждого фонаря */
+/* Ð Ð°Ð·Ð½Ð°Ñ ÑÐºÐ¾ÑÐ¾ÑÑÑ Ð°Ð½Ð¸Ð¼Ð°ÑÐ¸Ð¸ Ð´Ð»Ñ ÐºÐ°Ð¶Ð´Ð¾Ð³Ð¾ ÑÐ¾Ð½Ð°ÑÑ */
 #wall-light-top-right{animation-delay:0s}
 #wall-light-top-left{animation-delay:1.5s}
 #wall-light-bottom-left{animation-delay:3s}
@@ -203,66 +203,66 @@ border-radius:2px;transform:translateZ(10px)}
   #admin-panel a{padding:7px 10px;border-radius:13px;font-size:10px}
 }
 </style></head><body>
-<div id="title">Свет и тишина</div>
-<div id="info">Зал 1 · Комната 1</div>
+<div id="title">Ð¡Ð²ÐµÑ Ð¸ ÑÐ¸ÑÐ¸Ð½Ð°</div>
+<div id="info">ÐÐ°Ð» 1 Â· ÐÐ¾Ð¼Ð½Ð°ÑÐ° 1</div>
 <div id="admin-panel">
-  <a id="admin-upload" href="https://github.com/irina-photo/irina-photo.github.io/upload/main/images" target="_blank" rel="noopener noreferrer">Загрузить фото</a>
-  <a id="admin-captions" href="https://github.com/irina-photo/irina-photo.github.io/edit/main/captions.json" target="_blank" rel="noopener noreferrer">Подписи</a>
+  <a id="admin-upload" href="https://github.com/irina-photo/irina-photo.github.io/upload/main/images" target="_blank" rel="noopener noreferrer">ÐÐ°Ð³ÑÑÐ·Ð¸ÑÑ ÑÐ¾ÑÐ¾</a>
+  <a id="admin-captions" href="https://github.com/irina-photo/irina-photo.github.io/edit/main/captions.json" target="_blank" rel="noopener noreferrer">ÐÐ¾Ð´Ð¿Ð¸ÑÐ¸</a>
 </div>
-<div id="thumbs-btn" onclick="openThumbsFromGallery()">Миниатюры</div>
+<div id="thumbs-btn" onclick="openThumbsFromGallery()">ÐÐ¸Ð½Ð¸Ð°ÑÑÑÑ</div>
 <div id="hall"></div>
-<!-- АНИМИРОВАННЫЕ СВЕТИЛЬНИКИ -->
+<!-- ÐÐÐÐÐÐ ÐÐÐÐÐÐ«Ð Ð¡ÐÐÐ¢ÐÐÐ¬ÐÐÐÐ -->
 <div class="corner-light" id="light-top-right"><img src=""/></div>
 <div class="corner-light" id="light-top-left"><img src=""/></div>
 <div class="corner-light" id="light-bottom-left"><img src=""/></div>
 <div class="corner-light" id="light-bottom-right"><img src=""/></div>
-<!-- СВЕТОВЫЕ ЛУЧИ -->
+<!-- Ð¡ÐÐÐ¢ÐÐÐ«Ð ÐÐ£Ð§Ð -->
 <div class="light-beam" id="beam-top-right"></div>
 <div class="light-beam" id="beam-top-left"></div>
 <div class="light-beam" id="beam-bottom-left"></div>
 <div class="light-beam" id="beam-bottom-right"></div>
-<!-- АНИМАЦИЯ СВЕТА НА СТЕНЫ -->
+<!-- ÐÐÐÐÐÐ¦ÐÐ¯ Ð¡ÐÐÐ¢Ð ÐÐ Ð¡Ð¢ÐÐÐ« -->
 <div class="wall-light" id="wall-light-top-right"></div>
 <div class="wall-light" id="wall-light-top-left"></div>
 <div class="wall-light" id="wall-light-bottom-left"></div>
 <div class="wall-light" id="wall-light-bottom-right"></div>
 <div id="nav">
-  <button class="nb" onclick="go(-1)">← Назад</button>
-  <button class="nb" onclick="go(1)">Вперёд →</button>
+  <button class="nb" onclick="go(-1)">â ÐÐ°Ð·Ð°Ð´</button>
+  <button class="nb" onclick="go(1)">ÐÐ¿ÐµÑÑÐ´ â</button>
 </div>
-<div id="gal-prev" class="gal-arrow" onclick="go(-1)">‹</div>
-<div id="gal-next" class="gal-arrow" onclick="go(1)">›</div>
-<div id="hint">← → клавиши · нажми на картинку чтобы открыть</div>
+<div id="gal-prev" class="gal-arrow" onclick="go(-1)">â¹</div>
+<div id="gal-next" class="gal-arrow" onclick="go(1)">âº</div>
+<div id="hint">â â ÐºÐ»Ð°Ð²Ð¸ÑÐ¸ Â· Ð½Ð°Ð¶Ð¼Ð¸ Ð½Ð° ÐºÐ°ÑÑÐ¸Ð½ÐºÑ ÑÑÐ¾Ð±Ñ Ð¾ÑÐºÑÑÑÑ</div>
 <div id="brightness-control">
-  <div id="brightness-label">Яркость зала</div>
+  <div id="brightness-label">Ð¯ÑÐºÐ¾ÑÑÑ Ð·Ð°Ð»Ð°</div>
   <input type="range" id="brightness-slider" min="20" max="100" value="50">
-  <button id="auto-btn" onclick="setAutoBrightness()">АВТО</button>
+  <button id="auto-btn" onclick="setAutoBrightness()">ÐÐÐ¢Ð</button>
 </div>
 <div id="room-selector" id="room-buttons"></div>
 <div id="lb" class="wall-template" onclick="closeLb()">
-  <div id="lbt">Музей великолепных работ · Летопись света</div>
-  <div id="lbx">✕</div>
+  <div id="lbt">ÐÑÐ·ÐµÐ¹ Ð²ÐµÐ»Ð¸ÐºÐ¾Ð»ÐµÐ¿Ð½ÑÑ ÑÐ°Ð±Ð¾Ñ Â· ÐÐµÑÐ¾Ð¿Ð¸ÑÑ ÑÐ²ÐµÑÐ°</div>
+  <div id="lbx">â</div>
   <div id="lbside-left" onclick="event.stopPropagation();navigateLb(-1)"></div>
   <div id="lbside-right" onclick="event.stopPropagation();navigateLb(1)"></div>
-  <div id="lbzprev" onclick="event.stopPropagation();navigateLb(-1)">‹</div>
-  <div id="lbznext" onclick="event.stopPropagation();navigateLb(1)">›</div>
-  <div id="lbprev" class="lbarrow" onclick="event.stopPropagation();navigateLb(-1)">‹</div>
-  <div id="lbnext" class="lbarrow" onclick="event.stopPropagation();navigateLb(1)">›</div>
+  <div id="lbzprev" onclick="event.stopPropagation();navigateLb(-1)">â¹</div>
+  <div id="lbznext" onclick="event.stopPropagation();navigateLb(1)">âº</div>
+  <div id="lbprev" class="lbarrow" onclick="event.stopPropagation();navigateLb(-1)">â¹</div>
+  <div id="lbnext" class="lbarrow" onclick="event.stopPropagation();navigateLb(1)">âº</div>
   <div id="lbthumbs" onclick="event.stopPropagation()">
     <div id="lbthumbs-bg" onclick="closeLbThumbs()"></div>
     <div id="lbthumbs-panel">
       <div id="lbthumbs-top">
-        <div id="lbthumbs-title">Миниатюры</div>
+        <div id="lbthumbs-title">ÐÐ¸Ð½Ð¸Ð°ÑÑÑÑ</div>
         <div id="lbthumbs-actions">
-          <button type="button" id="lbthumbs-select" class="lbthumbs-btn" onclick="event.preventDefault();toggleLbThumbsSelect()">Выбор</button>
-          <button type="button" id="lbthumbs-copy" class="lbthumbs-btn" onclick="event.preventDefault();copyLbThumbsMarks()">Скопировать</button>
-          <button type="button" id="lbthumbs-trash" class="lbthumbs-btn" onclick="event.preventDefault();copyLbThumbsTrashCommand()">В корзину</button>
-          <button type="button" id="lbthumbs-undo" class="lbthumbs-btn" onclick="event.preventDefault();copyLbThumbsUndoCommand()">Вернуть</button>
-          <button type="button" id="lbthumbs-download" class="lbthumbs-btn" onclick="event.preventDefault();downloadLbThumbSelected()">Скачать</button>
-          <button type="button" id="lbthumbs-refresh" class="lbthumbs-btn" onclick="event.preventDefault();refreshLbThumbs()">Обновить</button>
-          <button type="button" id="lbthumbs-similarbtn" class="lbthumbs-btn" onclick="event.preventDefault();toggleLbThumbsSimilar()">Похожие</button>
-          <button type="button" id="lbthumbs-clear" class="lbthumbs-btn" onclick="event.preventDefault();clearLbThumbsMarks()">Очистить</button>
-          <button type="button" id="lbthumbs-close" onclick="event.preventDefault();closeLbThumbs()">Закрыть</button>
+          <button type="button" id="lbthumbs-select" class="lbthumbs-btn" onclick="event.preventDefault();toggleLbThumbsSelect()">ÐÑÐ±Ð¾Ñ</button>
+          <button type="button" id="lbthumbs-copy" class="lbthumbs-btn" onclick="event.preventDefault();copyLbThumbsMarks()">Ð¡ÐºÐ¾Ð¿Ð¸ÑÐ¾Ð²Ð°ÑÑ</button>
+          <button type="button" id="lbthumbs-trash" class="lbthumbs-btn" onclick="event.preventDefault();copyLbThumbsTrashCommand()">Ð ÐºÐ¾ÑÐ·Ð¸Ð½Ñ</button>
+          <button type="button" id="lbthumbs-undo" class="lbthumbs-btn" onclick="event.preventDefault();copyLbThumbsUndoCommand()">ÐÐµÑÐ½ÑÑÑ</button>
+          <button type="button" id="lbthumbs-download" class="lbthumbs-btn" onclick="event.preventDefault();downloadLbThumbSelected()">Ð¡ÐºÐ°ÑÐ°ÑÑ</button>
+          <button type="button" id="lbthumbs-refresh" class="lbthumbs-btn" onclick="event.preventDefault();refreshLbThumbs()">ÐÐ±Ð½Ð¾Ð²Ð¸ÑÑ</button>
+          <button type="button" id="lbthumbs-similarbtn" class="lbthumbs-btn" onclick="event.preventDefault();toggleLbThumbsSimilar()">ÐÐ¾ÑÐ¾Ð¶Ð¸Ðµ</button>
+          <button type="button" id="lbthumbs-clear" class="lbthumbs-btn" onclick="event.preventDefault();clearLbThumbsMarks()">ÐÑÐ¸ÑÑÐ¸ÑÑ</button>
+          <button type="button" id="lbthumbs-close" onclick="event.preventDefault();closeLbThumbs()">ÐÐ°ÐºÑÑÑÑ</button>
         </div>
       </div>
       <div id="lbthumbs-grid"></div>
@@ -272,8 +272,8 @@ border-radius:2px;transform:translateZ(10px)}
   <div class="lbf" onclick="event.stopPropagation();toggleLbZoom()"><img id="lbi" src=""/></div>
   <div id="lbplate" onclick="event.stopPropagation()">
     <div id="lbc"></div>
-    <div id="lba">Фотохудожник Ирина · Мастер игры света</div>
-    <button type="button" id="lbplate-thumbs" onclick="event.preventDefault();toggleLbThumbs()">Миниатюры</button>
+    <div id="lba">Ð¤Ð¾ÑÐ¾ÑÑÐ´Ð¾Ð¶Ð½Ð¸Ðº ÐÑÐ¸Ð½Ð° Â· ÐÐ°ÑÑÐµÑ Ð¸Ð³ÑÑ ÑÐ²ÐµÑÐ°</div>
+    <button type="button" id="lbplate-thumbs" onclick="event.preventDefault();toggleLbThumbs()">ÐÐ¸Ð½Ð¸Ð°ÑÑÑÑ</button>
   </div>
 </div>
 <script>
@@ -959,9 +959,9 @@ function toRelPath(p){
 
 function labelFromPath(p){
   var m=(p||'').match(/picture-(\d+)/i);
-  if(m && m[1]) return 'Фото №'+m[1];
+  if(m && m[1]) return 'Ð¤Ð¾ÑÐ¾ â'+m[1];
   var b=(p||'').split('/').pop()||'';
-  return b ? ('Фото · '+b) : 'Фото';
+  return b ? ('Ð¤Ð¾ÑÐ¾ Â· '+b) : 'Ð¤Ð¾ÑÐ¾';
 }
 
 for(var i=0;i<PH.length;i++){
@@ -983,25 +983,25 @@ var brightnessSlider=document.getElementById('brightness-slider');
 var currentBrightness=50;
 var defaultBrightness=50;
 
- // Админ-панель: показываем только при ?admin=1
+ // ÐÐ´Ð¼Ð¸Ð½-Ð¿Ð°Ð½ÐµÐ»Ñ: Ð¿Ð¾ÐºÐ°Ð·ÑÐ²Ð°ÐµÐ¼ ÑÐ¾Ð»ÑÐºÐ¾ Ð¿ÑÐ¸ ?admin=1
  (function(){
    try{
      var qs=new URLSearchParams(location.search||'');
-     var ADMIN_KEY='самурайка';
+     var ADMIN_KEY='ÑÐ°Ð¼ÑÑÐ°Ð¹ÐºÐ°';
      var isAdmin=(qs.get('admin')==='1' && qs.get('key')===ADMIN_KEY);
      var panel=document.getElementById('admin-panel');
      if(panel) panel.style.display=isAdmin?'flex':'none';
    }catch(e){}
  })();
 
- // Устанавливаем светильники
+ // Ð£ÑÑÐ°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ ÑÐ²ÐµÑÐ¸Ð»ÑÐ½Ð¸ÐºÐ¸
  var lightElements=document.querySelectorAll('.corner-light img');
  for(var i=0;i<Math.min(4,LIGHTS.length);i++){
   lightElements[i].src=LIGHTS[i];
-  console.log('Светильник '+i+':', LIGHTS[i]);
+  console.log('Ð¡Ð²ÐµÑÐ¸Ð»ÑÐ½Ð¸Ðº '+i+':', LIGHTS[i]);
 }
 
-// Создаем залы
+// Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ Ð·Ð°Ð»Ñ
 for(var w=0;w<walls;w++){
   var wall=document.createElement('div');wall.className='wall';
   var bg=document.createElement('div');bg.className='wall-bg';wall.appendChild(bg);
@@ -1022,24 +1022,24 @@ for(var w=0;w<walls;w++){
   hall.appendChild(wall);
 }
 
-// Создаем кнопки комнат
+// Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ ÐºÐ½Ð¾Ð¿ÐºÐ¸ ÐºÐ¾Ð¼Ð½Ð°Ñ
 var roomSelector=document.getElementById('room-selector');
 for(var i=0;i<ROOMS.length;i++){
   var btn=document.createElement('div');
   btn.className='room-btn'+(i===0?' active':'');
   btn.style.backgroundImage='url('+ROOMS[i]+')';
-  btn.title='Комната '+(i+1);
+  btn.title='ÐÐ¾Ð¼Ð½Ð°ÑÐ° '+(i+1);
   btn.onclick=function(roomIndex){return function(){setRoom(roomIndex);};}(i);
   roomSelector.appendChild(btn);
 }
 
-// Функция автоматической яркости
+// Ð¤ÑÐ½ÐºÑÐ¸Ñ Ð°Ð²ÑÐ¾Ð¼Ð°ÑÐ¸ÑÐµÑÐºÐ¾Ð¹ ÑÑÐºÐ¾ÑÑÐ¸
 function setAutoBrightness(){
   brightnessSlider.value=defaultBrightness;
   updateBrightness(defaultBrightness);
 }
 
-// Функция обновления яркости
+// Ð¤ÑÐ½ÐºÑÐ¸Ñ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ ÑÑÐºÐ¾ÑÑÐ¸
 function updateBrightness(value){
   currentBrightness=value;
   var brightnessPercent=value/100;
@@ -1048,7 +1048,7 @@ function updateBrightness(value){
     walls[i].style.filter='brightness('+(brightnessPercent*0.8)+') contrast(1.1)';
   }
   
-  // Обновляем яркость кнопок комнат
+  // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ ÑÑÐºÐ¾ÑÑÑ ÐºÐ½Ð¾Ð¿Ð¾Ðº ÐºÐ¾Ð¼Ð½Ð°Ñ
   var btns=document.querySelectorAll('.room-btn');
   for(var i=0;i<btns.length;i++){
     var isActive=btns[i].classList.contains('active');
@@ -1056,31 +1056,31 @@ function updateBrightness(value){
     btns[i].style.filter='brightness('+btnBrightness+')';
   }
   
-  // Обновляем яркость светильников
+  // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ ÑÑÐºÐ¾ÑÑÑ ÑÐ²ÐµÑÐ¸Ð»ÑÐ½Ð¸ÐºÐ¾Ð²
   var lights=document.querySelectorAll('.corner-light img');
   for(var i=0;i<lights.length;i++){
     lights[i].style.filter='brightness('+(brightnessPercent*1.4)+') contrast(1.3) drop-shadow(0 4px 12px rgba(0,0,0,0.8))';
   }
   
-  // Обновляем яркость лучей
+  // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ ÑÑÐºÐ¾ÑÑÑ Ð»ÑÑÐµÐ¹
   var beams=document.querySelectorAll('.light-beam');
   for(var i=0;i<beams.length;i++){
     beams[i].style.opacity=brightnessPercent*0.8;
   }
   
-  // Обновляем яркость света на стены
+  // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ ÑÑÐºÐ¾ÑÑÑ ÑÐ²ÐµÑÐ° Ð½Ð° ÑÑÐµÐ½Ñ
   var wallLights=document.querySelectorAll('.wall-light');
   for(var i=0;i<wallLights.length;i++){
     wallLights[i].style.opacity=brightnessPercent*0.6;
   }
 }
 
-// Слушатель ползунка яркости
+// Ð¡Ð»ÑÑÐ°ÑÐµÐ»Ñ Ð¿Ð¾Ð»Ð·ÑÐ½ÐºÐ° ÑÑÐºÐ¾ÑÑÐ¸
 brightnessSlider.addEventListener('input',function(){
   updateBrightness(this.value);
 });
 
-// Устанавливаем комнату для каждого зала
+// Ð£ÑÑÐ°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ ÐºÐ¾Ð¼Ð½Ð°ÑÑ Ð´Ð»Ñ ÐºÐ°Ð¶Ð´Ð¾Ð³Ð¾ Ð·Ð°Ð»Ð°
 function setRoomForWall(wallIndex, roomIndex){
   var walls=document.querySelectorAll('.wall');
   if(walls[wallIndex]){
@@ -1090,19 +1090,19 @@ function setRoomForWall(wallIndex, roomIndex){
   }
 }
 
-// Обновленная функция навигации - меняет и зал, и комнату
+// ÐÐ±Ð½Ð¾Ð²Ð»ÐµÐ½Ð½Ð°Ñ ÑÑÐ½ÐºÑÐ¸Ñ Ð½Ð°Ð²Ð¸Ð³Ð°ÑÐ¸Ð¸ - Ð¼ÐµÐ½ÑÐµÑ Ð¸ Ð·Ð°Ð», Ð¸ ÐºÐ¾Ð¼Ð½Ð°ÑÑ
 function go(d){
   cur=Math.max(0,Math.min(walls-1,cur+d));
   hall.style.transform='translateX(-'+(cur*100)+'vw)';
   
-  // Меняем комнату для текущего зала
+  // ÐÐµÐ½ÑÐµÐ¼ ÐºÐ¾Ð¼Ð½Ð°ÑÑ Ð´Ð»Ñ ÑÐµÐºÑÑÐµÐ³Ð¾ Ð·Ð°Ð»Ð°
   var roomIndex=cur%ROOMS.length;
   setRoomForWall(cur, roomIndex);
   
-  // Обновляем информацию
-  document.getElementById('info').textContent='Зал '+(cur+1)+' · Комната '+(roomIndex+1);
+  // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¸Ð½ÑÐ¾ÑÐ¼Ð°ÑÐ¸Ñ
+  document.getElementById('info').textContent='ÐÐ°Ð» '+(cur+1)+' Â· ÐÐ¾Ð¼Ð½Ð°ÑÐ° '+(roomIndex+1);
   
-  // Обновляем активную кнопку комнаты
+  // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð°ÐºÑÐ¸Ð²Ð½ÑÑ ÐºÐ½Ð¾Ð¿ÐºÑ ÐºÐ¾Ð¼Ð½Ð°ÑÑ
   var btns=document.querySelectorAll('.room-btn');
   for(var i=0;i<btns.length;i++){
     btns[i].className='room-btn'+(i===roomIndex?' active':'');
@@ -1112,13 +1112,13 @@ function go(d){
   }
 }
 
-// Функция ручной установки комнаты
+// Ð¤ÑÐ½ÐºÑÐ¸Ñ ÑÑÑÐ½Ð¾Ð¹ ÑÑÑÐ°Ð½Ð¾Ð²ÐºÐ¸ ÐºÐ¾Ð¼Ð½Ð°ÑÑ
 function setRoom(roomIndex){
   currentRoom=roomIndex;
   setRoomForWall(cur, roomIndex);
-  document.getElementById('info').textContent='Зал '+(cur+1)+' · Комната '+(roomIndex+1);
+  document.getElementById('info').textContent='ÐÐ°Ð» '+(cur+1)+' Â· ÐÐ¾Ð¼Ð½Ð°ÑÐ° '+(roomIndex+1);
   
-  // Обновляем активную кнопку
+  // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð°ÐºÑÐ¸Ð²Ð½ÑÑ ÐºÐ½Ð¾Ð¿ÐºÑ
   var btns=document.querySelectorAll('.room-btn');
   for(var i=0;i<btns.length;i++){
     btns[i].className='room-btn'+(i===roomIndex?' active':'');
@@ -1128,16 +1128,16 @@ function setRoom(roomIndex){
   }
 }
 
-// Инициализация - устанавливаем комнаты для всех залов
+// ÐÐ½Ð¸ÑÐ¸Ð°Ð»Ð¸Ð·Ð°ÑÐ¸Ñ - ÑÑÑÐ°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ ÐºÐ¾Ð¼Ð½Ð°ÑÑ Ð´Ð»Ñ Ð²ÑÐµÑ Ð·Ð°Ð»Ð¾Ð²
 for(var w=0;w<walls;w++){
   var roomIndex=w%ROOMS.length;
   setRoomForWall(w, roomIndex);
 }
 
-// Применяем начальную яркость
+// ÐÑÐ¸Ð¼ÐµÐ½ÑÐµÐ¼ Ð½Ð°ÑÐ°Ð»ÑÐ½ÑÑ ÑÑÐºÐ¾ÑÑÑ
 updateBrightness(currentBrightness);
 
-// Модальное окно
+// ÐÐ¾Ð´Ð°Ð»ÑÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾
 function openLb(i){
   currentLb=i;updateLb();
   document.getElementById('lb').classList.add('on');
@@ -1237,14 +1237,14 @@ function copyLbThumbsMarks(){
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(txt);
   }else{
-    window.prompt('Список номеров для удаления/переноса:', txt);
+    window.prompt('Ð¡Ð¿Ð¸ÑÐ¾Ðº Ð½Ð¾Ð¼ÐµÑÐ¾Ð² Ð´Ð»Ñ ÑÐ´Ð°Ð»ÐµÐ½Ð¸Ñ/Ð¿ÐµÑÐµÐ½Ð¾ÑÐ°:', txt);
   }
 }
 
 function copyLbThumbsTrashCommand(){
   var arr=Array.from(_lbThumbsMarks).sort(function(a,b){return a-b;});
   if(!arr.length){
-    window.prompt('Нет отмеченных. Сначала включи «Выбор» и отметь фото.', '');
+    window.prompt('ÐÐµÑ Ð¾ÑÐ¼ÐµÑÐµÐ½Ð½ÑÑ. Ð¡Ð½Ð°ÑÐ°Ð»Ð° Ð²ÐºÐ»ÑÑÐ¸ Â«ÐÑÐ±Ð¾ÑÂ» Ð¸ Ð¾ÑÐ¼ÐµÑÑ ÑÐ¾ÑÐ¾.', '');
     return;
   }
   var PROJECT_DIR='/Users/alexanderermolovich/Documents/Irina_Site';
@@ -1257,13 +1257,13 @@ function copyLbThumbsTrashCommand(){
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(cmd);
   }
-  window.prompt('Скопируй и выполни в терминале (из папки проекта):', cmd);
+  window.prompt('Ð¡ÐºÐ¾Ð¿Ð¸ÑÑÐ¹ Ð¸ Ð²ÑÐ¿Ð¾Ð»Ð½Ð¸ Ð² ÑÐµÑÐ¼Ð¸Ð½Ð°Ð»Ðµ (Ð¸Ð· Ð¿Ð°Ð¿ÐºÐ¸ Ð¿ÑÐ¾ÐµÐºÑÐ°):', cmd);
 }
 
 function copyLbThumbsUndoCommand(){
   var arr=Array.from(_lbThumbsMarks).sort(function(a,b){return a-b;});
   if(!arr.length){
-    window.prompt('Нет отмеченных. Отметь фото (Выбор) которые нужно вернуть.', '');
+    window.prompt('ÐÐµÑ Ð¾ÑÐ¼ÐµÑÐµÐ½Ð½ÑÑ. ÐÑÐ¼ÐµÑÑ ÑÐ¾ÑÐ¾ (ÐÑÐ±Ð¾Ñ) ÐºÐ¾ÑÐ¾ÑÑÐµ Ð½ÑÐ¶Ð½Ð¾ Ð²ÐµÑÐ½ÑÑÑ.', '');
     return;
   }
   var PROJECT_DIR='/Users/alexanderermolovich/Documents/Irina_Site';
@@ -1276,13 +1276,13 @@ function copyLbThumbsUndoCommand(){
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(cmd);
   }
-  window.prompt('Скопируй и выполни в терминале (из папки проекта):', cmd);
+  window.prompt('Ð¡ÐºÐ¾Ð¿Ð¸ÑÑÐ¹ Ð¸ Ð²ÑÐ¿Ð¾Ð»Ð½Ð¸ Ð² ÑÐµÑÐ¼Ð¸Ð½Ð°Ð»Ðµ (Ð¸Ð· Ð¿Ð°Ð¿ÐºÐ¸ Ð¿ÑÐ¾ÐµÐºÑÐ°):', cmd);
 }
 
 function downloadLbThumbSelected(){
   var arr=Array.from(_lbThumbsMarks).sort(function(a,b){return a-b;});
   if(arr.length!==1){
-    window.prompt('Для скачивания отметь ровно 1 фото (в режиме «Выбор»).', arr.join(','));
+    window.prompt('ÐÐ»Ñ ÑÐºÐ°ÑÐ¸Ð²Ð°Ð½Ð¸Ñ Ð¾ÑÐ¼ÐµÑÑ ÑÐ¾Ð²Ð½Ð¾ 1 ÑÐ¾ÑÐ¾ (Ð² ÑÐµÐ¶Ð¸Ð¼Ðµ Â«ÐÑÐ±Ð¾ÑÂ»).', arr.join(','));
     return;
   }
   var num=arr[0];
@@ -1311,7 +1311,7 @@ function refreshLbThumbs(){
   _lbThumbsBuilt=false;
   buildLbThumbs();
   var tt=document.getElementById('lbthumbs-title');
-  if(tt) tt.textContent='Миниатюры · '+PH.length;
+  if(tt) tt.textContent='ÐÐ¸Ð½Ð¸Ð°ÑÑÑÑ Â· '+PH.length;
   refreshLbThumbsMarks();
   setLbThumbActive();
 }
@@ -1369,7 +1369,7 @@ function findSimilarGroupsInBrowser(){
   _lbSimilarRunning=true;
   var sim=document.getElementById('lbthumbs-similar');
   if(!sim){_lbSimilarRunning=false;return;}
-  sim.innerHTML='Ищу похожие… (это может занять 1-2 минуты)';
+  sim.innerHTML='ÐÑÑ Ð¿Ð¾ÑÐ¾Ð¶Ð¸Ðµâ¦ (ÑÑÐ¾ Ð¼Ð¾Ð¶ÐµÑ Ð·Ð°Ð½ÑÑÑ 1-2 Ð¼Ð¸Ð½ÑÑÑ)';
 
   var maxPhotos=PH.length;
   var hashes=new Array(maxPhotos);
@@ -1386,7 +1386,7 @@ function findSimilarGroupsInBrowser(){
     im.onload=function(){
       try{hashes[i]=_lbDHashFromImage(im);}catch(e){hashes[i]=null;}
       i++;
-      if(i%40===0) sim.innerHTML='Ищу похожие… '+i+' / '+maxPhotos;
+      if(i%40===0) sim.innerHTML='ÐÑÑ Ð¿Ð¾ÑÐ¾Ð¶Ð¸Ðµâ¦ '+i+' / '+maxPhotos;
       setTimeout(step,0);
     };
     im.onerror=function(){hashes[i]=null;i++;setTimeout(step,0);};
@@ -1415,7 +1415,7 @@ function findSimilarGroupsInBrowser(){
   function renderSimilarGroups(groups){
     sim.innerHTML='';
     if(!groups.length){
-      sim.textContent='Похожих групп не найдено (по текущему порогу).';
+      sim.textContent='ÐÐ¾ÑÐ¾Ð¶Ð¸Ñ Ð³ÑÑÐ¿Ð¿ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾ (Ð¿Ð¾ ÑÐµÐºÑÑÐµÐ¼Ñ Ð¿Ð¾ÑÐ¾Ð³Ñ).';
       return;
     }
     for(var gi=0;gi<groups.length;gi++){
@@ -1424,7 +1424,7 @@ function findSimilarGroupsInBrowser(){
       wrap.className='simgrp';
       var title=document.createElement('div');
       title.className='simgrp-title';
-      title.textContent='Группа '+(gi+1)+' · '+g.length+' фото (клик по миниатюре = отметить/снять отметку)';
+      title.textContent='ÐÑÑÐ¿Ð¿Ð° '+(gi+1)+' Â· '+g.length+' ÑÐ¾ÑÐ¾ (ÐºÐ»Ð¸Ðº Ð¿Ð¾ Ð¼Ð¸Ð½Ð¸Ð°ÑÑÑÐµ = Ð¾ÑÐ¼ÐµÑÐ¸ÑÑ/ÑÐ½ÑÑÑ Ð¾ÑÐ¼ÐµÑÐºÑ)';
       wrap.appendChild(title);
       for(var k=0;k<g.length;k++){
         var idx=g[k];
@@ -1536,7 +1536,7 @@ function openLbThumbs(){
   if(!lb) return;
   buildLbThumbs();
   var tt=document.getElementById('lbthumbs-title');
-  if(tt) tt.textContent='Миниатюры · '+PH.length;
+  if(tt) tt.textContent='ÐÐ¸Ð½Ð¸Ð°ÑÑÑÑ Â· '+PH.length;
   var grid=document.getElementById('lbthumbs-grid');
   if(grid) grid.scrollTop=_lbThumbScrollTop||0;
   lb.classList.add('show-thumbs');
@@ -1567,10 +1567,10 @@ function updateLb(){
     inp.value=(currentLb+1);
   }
   var lbl=document.getElementById('lbjlabel');
-  if(lbl) lbl.textContent='Фото '+(currentLb+1)+'/'+PH.length;
+  if(lbl) lbl.textContent='Ð¤Ð¾ÑÐ¾ '+(currentLb+1)+'/'+PH.length;
   setLbThumbActive();
   img.onerror=function(){
-    document.getElementById('lbc').textContent='(фото не найдено) '+PH[currentLb].cat;
+    document.getElementById('lbc').textContent='(ÑÐ¾ÑÐ¾ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾) '+PH[currentLb].cat;
   };
   img.onload=function(){
     document.getElementById('lbc').textContent=PH[currentLb].cat;
@@ -1578,7 +1578,7 @@ function updateLb(){
   img.src=PH[currentLb].p;
 }
 
-// Клавиатура
+// ÐÐ»Ð°Ð²Ð¸Ð°ÑÑÑÐ°
 document.onkeydown=function(e){
   var lb=document.getElementById('lb');
   var lbOn=lb&&lb.classList.contains('on');
@@ -1616,5 +1616,5 @@ document.onkeydown=function(e){
   },{passive:true});
 })();
 
-console.log('=== АНИМАЦИЯ СВЕТА НА СТЕНЫ ЗАВЕРШЕНА ===');
+console.log('=== ÐÐÐÐÐÐ¦ÐÐ¯ Ð¡ÐÐÐ¢Ð ÐÐ Ð¡Ð¢ÐÐÐ« ÐÐÐÐÐ Ð¨ÐÐÐ ===');
 </script></body></html>
