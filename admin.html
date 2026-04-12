@@ -266,14 +266,18 @@ async function startUpload(){
           <a href="https://irina-photo.github.io/" target="_blank" style="color:#C8961E;font-size:12px;margin-top:4px;display:inline-block">Посмотреть на сайте →</a></div>`;
         document.getElementById('queue').appendChild(preview);
       } else {
-        const err = await resp.json();
-        throw new Error(err.message||resp.status);
+        const errData = await resp.json();
+        const errMsg = errData.message || resp.status;
+        document.getElementById('qs'+i).className='qitem-status err';
+        document.getElementById('qs'+i).textContent='❌ '+errMsg;
+        showMsg('❌ Ошибка загрузки фото: '+errMsg, 'err');
+        throw new Error(errMsg);
       }
     } catch(e){
       queue[i].status='err';
       document.getElementById('qs'+i).className='qitem-status err';
-      document.getElementById('qs'+i).textContent='❌ ошибка';
-      console.error(e);
+      document.getElementById('qs'+i).textContent='❌ '+e.message;
+      showMsg('❌ '+e.message, 'err');
     }
     await new Promise(r=>setTimeout(r,800));
   }
