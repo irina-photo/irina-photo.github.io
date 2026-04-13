@@ -939,11 +939,10 @@ var PH=[
 ];
 var PH_TOTAL=PH.length;
 for(var i=0;i<PH.length;i++){
-  PH[i].p='images/picture-'+String(i+1).padStart(3,'0')+'.jpg';
   PH[i].cat=labelFromPath(PH[i].p);
 }
-var ROOMS=['/Users/alexanderermolovich/Documents/Irina_Site/rooms/1.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/2.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/3.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/4.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/5.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/6.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/7.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/8.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/9.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/10.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/11.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/12.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/13.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/14.png', '/Users/alexanderermolovich/Documents/Irina_Site/rooms/15.png'];
-var LIGHTS=['/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light1.png', '/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light2.png', '/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light3.png', '/Users/alexanderermolovich/Documents/Irina_Site/museum_lights/light4.png'];
+var ROOMS=['rooms/1.png','rooms/2.png','rooms/3.png','rooms/4.png','rooms/5.png','rooms/6.png','rooms/7.png','rooms/8.png','rooms/9.png','rooms/10.png','rooms/11.png','rooms/12.png','rooms/13.png','rooms/14.png','rooms/15.png'];
+var LIGHTS=['museum_lights/light1.png','museum_lights/light2.png','museum_lights/light3.png','museum_lights/light4.png'];
 
 function toRelPath(p){
   if(!p) return p;
@@ -964,13 +963,6 @@ for(var i=0;i<PH.length;i++){
   PH[i].p=toRelPath(PH[i].p);
   PH[i].cat=labelFromPath(PH[i].p);
 }
-var PH_TOTAL=PH.length;
-for(var i=0;i<PH.length;i++){
-  PH[i].p='images/picture-'+String(i+1).padStart(3,'0')+'.jpg';
-  PH[i].cat=labelFromPath(PH[i].p);
-}
-for(var i=0;i<ROOMS.length;i++) ROOMS[i]=toRelPath(ROOMS[i]);
-for(var i=0;i<LIGHTS.length;i++) LIGHTS[i]=toRelPath(LIGHTS[i]);
 
 var perWall=12,cur=0,walls=Math.ceil(PH.length/perWall),currentLb=0,currentRoom=0;
 var hall=document.getElementById('hall');
@@ -1114,13 +1106,12 @@ function goTo(n){
   }
 }
 
-// Функция ручной установки комнаты
+// Функция ручной установки комнаты — меняет ВСЕ залы
 function setRoom(roomIndex){
   currentRoom=roomIndex;
-  setRoomForWall(cur, roomIndex);
-  document.getElementById('info').textContent='Зал '+(cur+1)+' · Комната '+(roomIndex+1);
-  
-  // Обновляем активную кнопку
+  for(var w=0;w<walls;w++) setRoomForWall(w, roomIndex);
+  document.getElementById('info').textContent='Зал '+(cur+1)+' / '+walls;
+
   var btns=document.querySelectorAll('.room-btn');
   for(var i=0;i<btns.length;i++){
     btns[i].className='room-btn'+(i===roomIndex?' active':'');
