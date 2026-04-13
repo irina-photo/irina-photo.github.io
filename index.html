@@ -223,8 +223,13 @@ border-radius:2px;transform:translateZ(10px)}
 <div class="wall-light" id="wall-light-bottom-left"></div>
 <div class="wall-light" id="wall-light-bottom-right"></div>
 <div id="nav">
-  <button class="nb" onclick="go(-1)">← Назад</button>
-  <button class="nb" onclick="go(1)">Вперёд →</button>
+  <button class="nb" onclick="goTo(0)">⏮</button>
+  <button class="nb" onclick="go(-10)">⏪</button>
+  <button class="nb" onclick="go(-1)">←</button>
+  <button class="nb" id="nav-counter" style="background:none;border:1px solid rgba(200,160,40,0.3);cursor:default;min-width:80px"></button>
+  <button class="nb" onclick="go(1)">→</button>
+  <button class="nb" onclick="go(10)">⏩</button>
+  <button class="nb" onclick="goTo(walls-1)">⏭</button>
 </div>
 <div id="gal-prev" class="gal-arrow" onclick="go(-1)">‹</div>
 <div id="gal-next" class="gal-arrow" onclick="go(1)">›</div>
@@ -937,8 +942,7 @@ var PH=[
 {p:'images/picture-661.jpg',cat:''},
 {p:'images/picture-662.jpg',cat:''}
 ];
-var PH_TOTAL=654;
-PH=PH.slice(0,PH_TOTAL);
+var PH_TOTAL=PH.length;
 for(var i=0;i<PH.length;i++){
   PH[i].p='images/picture-'+String(i+1).padStart(3,'0')+'.jpg';
   PH[i].cat=labelFromPath(PH[i].p);
@@ -965,8 +969,7 @@ for(var i=0;i<PH.length;i++){
   PH[i].p=toRelPath(PH[i].p);
   PH[i].cat=labelFromPath(PH[i].p);
 }
-var PH_TOTAL=654;
-PH=PH.slice(0,PH_TOTAL);
+var PH_TOTAL=PH.length;
 for(var i=0;i<PH.length;i++){
   PH[i].p='images/picture-'+String(i+1).padStart(3,'0')+'.jpg';
   PH[i].cat=labelFromPath(PH[i].p);
@@ -1089,16 +1092,23 @@ function setRoomForWall(wallIndex, roomIndex){
 
 // Обновленная функция навигации - меняет и зал, и комнату
 function go(d){
-  cur=Math.max(0,Math.min(walls-1,cur+d));
+  goTo(Math.max(0,Math.min(walls-1,cur+d)));
+}
+function goTo(n){
+  cur=Math.max(0,Math.min(walls-1,n));
   hall.style.transform='translateX(-'+(cur*100)+'vw)';
-  
+
   // Меняем комнату для текущего зала
   var roomIndex=cur%ROOMS.length;
   setRoomForWall(cur, roomIndex);
-  
+
   // Обновляем информацию
-  document.getElementById('info').textContent='Зал '+(cur+1)+' · Комната '+(roomIndex+1);
-  
+  document.getElementById('info').textContent='Зал '+(cur+1)+' / '+walls;
+
+  // Счётчик в навигации
+  var nc=document.getElementById('nav-counter');
+  if(nc) nc.textContent=(cur+1)+' / '+walls;
+
   // Обновляем активную кнопку комнаты
   var btns=document.querySelectorAll('.room-btn');
   for(var i=0;i<btns.length;i++){
