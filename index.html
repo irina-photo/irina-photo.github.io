@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>Музей Ирины · Анимация света</title>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Музей Ирины · Анимация света</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0800;overflow:hidden;font-family:Georgia,serif;transition:background 0.5s ease}
@@ -202,6 +202,159 @@ border-radius:2px;transform:translateZ(10px)}
   #admin-panel{top:12px;right:12px;gap:8px}
   #admin-panel a{padding:7px 10px;border-radius:13px;font-size:10px}
 }
+/* ПРОСТОЙ РЕЖИМ — для TV, слабых устройств */
+body.simple-mode{overflow:auto;background:#1a1208}
+body.simple-mode #hall,body.simple-mode .corner-light,body.simple-mode .light-beam,body.simple-mode .wall-light,body.simple-mode #brightness-control,body.simple-mode #room-selector,body.simple-mode #nav,body.simple-mode .gal-arrow,body.simple-mode #hint,body.simple-mode #info{display:none}
+body.simple-mode #title{position:relative;padding:20px;text-align:center}
+body.simple-mode #thumbs-btn{display:none}
+body.simple-mode #simple-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;padding:20px;max-width:1400px;margin:0 auto}
+body.simple-mode #simple-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;border:2px solid #8B6914;cursor:pointer;transition:transform 0.2s}
+body.simple-mode #simple-grid img:hover{transform:scale(1.03);border-color:#D4AF37}
+body.simple-mode #simple-grid .sname{font-size:11px;text-align:center;color:#C8961E;opacity:0.6;margin-top:4px}
+#simple-grid{display:none}
+#mode-btn{position:fixed;left:20px;top:20px;z-index:2000;background:rgba(200,160,40,0.18);border:1px solid rgba(200,160,40,0.42);color:rgba(255,245,210,0.94);border-radius:16px;padding:10px 14px;font-family:Georgia;font-size:11px;letter-spacing:1px;cursor:pointer;backdrop-filter:blur(8px)}
+#mode-btn:hover{background:rgba(200,160,40,0.3)}
+#simple-count{text-align:center;color:#C8961E;opacity:0.5;font-size:12px;padding:8px;letter-spacing:2px}
+
+/* ============================================================
+   АДАПТИВНОСТЬ — только ДОБАВЛЕНО в конец, без изменений
+   в существующей верстке. !important нужен, чтобы перебить
+   inline-стили ширины/высоты, которые JS ставит на картины.
+   Покрытие: узкие телефоны, обычные телефоны, ландшафт,
+   планшеты, десктоп (без изменений), FullHD ТВ, 4K.
+   ============================================================ */
+
+html,body{max-width:100%}
+body{overflow-x:hidden}
+.wall img,#lbi,.lbthumb img,#simple-grid img{max-width:100%}
+
+/* ===== ТЕЛЕФОНЫ (<=600px) ===== */
+@media (max-width:600px){
+  .fo img{width:40vw !important;max-width:170px !important;height:auto !important;aspect-ratio:4/3;object-fit:cover}
+  .fo{padding:6px}
+  .fw{margin:4px}
+  .fw:hover{transform:none}
+  .pl{font-size:7px;padding:2px 6px;bottom:-14px;letter-spacing:0.5px;max-width:80vw;overflow:hidden;text-overflow:ellipsis}
+  .wall{gap:10px;padding:14px;align-content:center}
+  #light-top-right{top:6px;right:6px}
+  #light-top-left{top:6px;left:6px}
+  #light-bottom-left{bottom:6px;left:6px}
+  #light-bottom-right{bottom:6px;right:6px}
+  #light-top-right img,#light-top-left img{width:38px;height:auto}
+  #light-bottom-left img,#light-bottom-right img{width:46px;height:auto}
+  #beam-top-right,#beam-top-left{width:42vw;height:36vh;top:30px}
+  #beam-top-right{right:6px}
+  #beam-top-left{left:6px}
+  #beam-bottom-left,#beam-bottom-right{width:46vw;height:40vh;bottom:30px}
+  #beam-bottom-left{left:6px}
+  #beam-bottom-right{right:6px}
+  #wall-light-top-right,#wall-light-top-left{width:50vw;height:50vh}
+  #wall-light-bottom-left,#wall-light-bottom-right{width:55vw;height:55vh}
+  #title{top:8px;left:10px;font-size:10px;letter-spacing:1px;max-width:50vw}
+  #info{top:8px;font-size:9px;letter-spacing:2px}
+  #hint{display:none}
+  #thumbs-btn{right:8px;bottom:8px;padding:7px 10px;font-size:10px;letter-spacing:1px}
+  #mode-btn{left:8px;top:32px;padding:7px 10px;font-size:10px;letter-spacing:1px}
+  #brightness-control{bottom:8px;left:8px;padding:7px;max-width:42vw;transform:scale(0.82);transform-origin:bottom left}
+  #brightness-slider{width:82px}
+  #room-selector{top:42px;right:8px;gap:6px}
+  .room-btn{width:26px;height:26px}
+  .gal-arrow{top:50vh !important;width:44px;height:44px;padding:0 !important;font-size:30px;line-height:44px;text-align:center;background:rgba(0,0,0,0.55);border-radius:50%;opacity:0.75}
+  #gal-prev{left:6px}
+  #gal-next{right:58px}
+  #lb.wall-template .lbf{padding:10px !important;top:44% !important}
+  #lb.wall-template #lbi{max-width:92vw !important;max-height:58vh !important}
+  #lb.zoom.wall-template #lbi{width:98vw !important;max-height:82vh !important}
+  #lb.wall-template #lbprev,#lb.wall-template #lbnext{width:44px !important;height:44px !important;padding:0 !important;font-size:30px !important;line-height:44px !important;text-align:center !important;background:rgba(0,0,0,0.55) !important;border-radius:50% !important;opacity:0.82 !important}
+  #lb.wall-template #lbprev{left:6px !important}
+  #lb.wall-template #lbnext{right:6px !important}
+  #lbzprev,#lbznext{font-size:36px;padding:6px 8px;background:rgba(0,0,0,0.45);border-radius:50%}
+  #lbzprev{left:6px}
+  #lbznext{right:6px}
+  #lbjump{right:8px;bottom:96px;padding:6px 8px;gap:6px}
+  #lbjnum{width:52px;font-size:11px}
+  #lbjgo,#lbjthumbs{font-size:10px;padding:3px 8px}
+  #lbjlabel{font-size:9px;letter-spacing:1.5px}
+  body.simple-mode #simple-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;padding:10px}
+}
+
+/* ===== ОЧЕНЬ УЗКИЕ ТЕЛЕФОНЫ (<=400px) ===== */
+@media (max-width:400px){
+  .fo img{width:44vw !important;max-width:140px !important}
+  #light-top-right img,#light-top-left img{width:32px}
+  #light-bottom-left img,#light-bottom-right img{width:38px}
+  #brightness-control{transform:scale(0.72);transform-origin:bottom left}
+  #title{font-size:9px;max-width:42vw}
+  body.simple-mode #simple-grid{grid-template-columns:repeat(2,1fr);gap:6px}
+}
+
+/* ===== ЛАНДШАФТ / КОРОТКИЕ ЭКРАНЫ ===== */
+@media (max-height:520px) and (max-width:1100px){
+  .wall{padding:10px;gap:8px;align-content:center}
+  .fo{padding:5px}
+  .fo img{width:22vw !important;max-width:140px !important;height:auto !important;aspect-ratio:4/3;object-fit:cover}
+  .pl{font-size:7px;padding:2px 5px;bottom:-12px}
+  #light-top-right img,#light-top-left img{width:36px;height:auto}
+  #light-bottom-left img,#light-bottom-right img{width:44px;height:auto}
+  #title,#info{font-size:9px;top:4px}
+  #title{left:8px}
+  #hint{display:none}
+  #brightness-control{transform:scale(0.75);transform-origin:bottom left;left:8px;bottom:6px}
+  #thumbs-btn{right:6px;bottom:6px;padding:6px 9px;font-size:9px}
+  #mode-btn{left:8px;top:22px;padding:6px 9px;font-size:9px}
+  #room-selector{top:6px;right:52px;flex-direction:row}
+  .room-btn{width:24px;height:24px}
+  .gal-arrow{width:40px;height:40px;font-size:26px;line-height:40px;padding:0;background:rgba(0,0,0,0.5);border-radius:50%}
+  #gal-prev{left:4px}
+  #gal-next{right:46px}
+}
+
+/* ===== ПЛАНШЕТЫ (601-1024px) ===== */
+@media (min-width:601px) and (max-width:1024px){
+  .fo img{width:150px !important;height:112px !important}
+  .fw{margin:8px}
+  #light-top-right img,#light-top-left img{width:62px;height:auto}
+  #light-bottom-left img,#light-bottom-right img{width:78px;height:auto}
+  #beam-top-right,#beam-top-left{width:260px;height:320px}
+  #beam-bottom-left,#beam-bottom-right{width:290px;height:360px}
+  #brightness-control{left:12px;bottom:12px;transform:scale(0.92);transform-origin:bottom left}
+  #mode-btn{left:12px;top:54px}
+  #thumbs-btn{right:12px;bottom:12px}
+  body.simple-mode #simple-grid{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+}
+
+/* ===== FULL HD (>=1920px) ===== */
+@media (min-width:1920px){
+  .fo img{width:220px !important;height:165px !important}
+  .pl{font-size:11px;padding:4px 14px;bottom:-26px}
+  #light-top-right img,#light-top-left img{width:105px;height:auto}
+  #light-bottom-left img,#light-bottom-right img{width:135px;height:auto}
+  #beam-top-right,#beam-top-left{width:400px;height:500px}
+  #beam-bottom-left,#beam-bottom-right{width:440px;height:560px}
+  #wall-light-top-right,#wall-light-top-left{width:380px;height:500px}
+  #wall-light-bottom-left,#wall-light-bottom-right{width:440px;height:560px}
+  #title{font-size:15px;letter-spacing:3px}
+  #info{font-size:13px;letter-spacing:5px}
+  #hint{font-size:12px}
+  #thumbs-btn{font-size:13px;padding:11px 16px}
+  #mode-btn{font-size:13px;padding:11px 16px}
+  .gal-arrow{font-size:64px}
+  body.simple-mode #simple-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;max-width:1800px}
+}
+
+/* ===== 4K / UHD (>=2560px) ===== */
+@media (min-width:2560px){
+  .fo img{width:300px !important;height:225px !important}
+  .pl{font-size:14px;padding:6px 18px;bottom:-32px}
+  #light-top-right img,#light-top-left img{width:140px;height:auto}
+  #light-bottom-left img,#light-bottom-right img{width:180px;height:auto}
+  #title{font-size:20px}
+  #info{font-size:16px}
+  #hint{font-size:15px}
+  .gal-arrow{font-size:86px}
+  body.simple-mode #simple-grid{grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:22px;max-width:2400px}
+}
+
 </style></head><body>
 <div id="title">Свет и тишина</div>
 <div id="info">Зал 1 · Комната 1</div>
