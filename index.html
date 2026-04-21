@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Музей Ирины · Анимация света</title>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Таинственный фотограф</title><meta name="description" content="Таинственный фотограф"><meta property="og:title" content="Таинственный фотограф"><meta property="og:description" content="Таинственный фотограф">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0800;overflow:hidden;font-family:Georgia,serif;transition:background 0.5s ease}
@@ -46,7 +46,7 @@ border-radius:2px;transform:translateZ(10px)}
 #beam-top-left{top:50px;left:50px;width:320px;height:400px}
 #beam-bottom-left{bottom:50px;left:50px;width:360px;height:450px}
 #beam-bottom-right{bottom:50px;right:110px;width:360px;height:450px}
-/* АНИМАЦИЯ СВЕТА НА СТЕНЫ - НОВАЯ! */
+/* СВЕТ НА СТЕНЫ */
 .wall-light{position:fixed;z-index:4;pointer-events:none;opacity:0.6}
 /* Свет на стены от верхних фонарей */
 #wall-light-top-right{top:0;right:0;width:300px;height:400px;background:linear-gradient(135deg,rgba(255,255,255,0.15),rgba(255,255,255,0.05),transparent);filter:blur(40px)}
@@ -54,13 +54,13 @@ border-radius:2px;transform:translateZ(10px)}
 /* Свет на стены от нижних фонарей */
 #wall-light-bottom-left{bottom:0;left:0;width:350px;height:450px;background:linear-gradient(315deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04),transparent);filter:blur(45px)}
 #wall-light-bottom-right{bottom:0;right:0;width:350px;height:450px;background:linear-gradient(45deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04),transparent);filter:blur(45px)}
-/* АНИМАЦИЯ МЕРЦАНИЯ ФОНАРЕЙ */
+/* МЕРЦАНИЕ ФОНАРЕЙ */
 @keyframes light-glow{
   0%,100%{opacity:0.7}
   50%{opacity:1}
 }
 .corner-light{animation:light-glow 4s ease-in-out infinite}
-/* АНИМАЦИЯ ПУЛЬСАЦИИ СВЕТА НА СТЕНЫ */
+/* ПУЛЬСАЦИЯ СВЕТА НА СТЕНЫ */
 @keyframes wall-light-pulse{
   0%,100%{opacity:0.4;transform:scale(1)}
   25%{opacity:0.6;transform:scale(1.05)}
@@ -370,7 +370,7 @@ body{overflow-x:hidden}
 <div class="light-beam" id="beam-top-left"></div>
 <div class="light-beam" id="beam-bottom-left"></div>
 <div class="light-beam" id="beam-bottom-right"></div>
-<!-- АНИМАЦИЯ СВЕТА НА СТЕНЫ -->
+<!-- СВЕТ НА СТЕНЫ -->
 <div class="wall-light" id="wall-light-top-right"></div>
 <div class="wall-light" id="wall-light-top-left"></div>
 <div class="wall-light" id="wall-light-bottom-left"></div>
@@ -394,7 +394,7 @@ body{overflow-x:hidden}
 </div>
 <div id="room-selector" id="room-buttons"></div>
 <div id="lb" class="wall-template" onclick="closeLb()">
-  <div id="lbt">Музей великолепных работ · Летопись света</div>
+  <div id="lbt">Таинственный фотограф</div>
   <div id="lbx">✕</div>
   <div id="lbside-left" onclick="event.stopPropagation();navigateLb(-1)"></div>
   <div id="lbside-right" onclick="event.stopPropagation();navigateLb(1)"></div>
@@ -426,7 +426,7 @@ body{overflow-x:hidden}
   <div class="lbf" onclick="event.stopPropagation();toggleLbZoom()"><img id="lbi" src=""/></div>
   <div id="lbplate" onclick="event.stopPropagation()">
     <div id="lbc"></div>
-    <div id="lba">Фотохудожник Ирина · Мастер игры света</div>
+    <div id="lba">Таинственный фотограф</div>
     <button type="button" id="lbplate-thumbs" onclick="event.preventDefault();toggleLbThumbs()">Миниатюры</button>
   </div>
 </div>
@@ -1763,6 +1763,6 @@ document.onkeydown=function(e){
   },{passive:true});
 })();
 
-console.log('=== АНИМАЦИЯ СВЕТА НА СТЕНЫ ЗАВЕРШЕНА ===');
+console.log('=== СВЕТ НА СТЕНЫ ГОТОВ ===');
 </script></body></html>
 <!-- v2 -->
