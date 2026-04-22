@@ -65,8 +65,17 @@ p.subtitle{text-align:center;font-size:11px;opacity:0.5;letter-spacing:2px;margi
 .gcard:hover{border-color:#C8961E}
 .gcard img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
 .gcard .gname{font-size:10px;padding:4px 6px;opacity:0.6;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gcard .gcap{font-size:11px;padding:4px 8px 8px;min-height:22px;font-style:italic;color:#d8b870;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-top:1px solid rgba(200,150,30,0.1)}
+.gcard .gcap.empty{opacity:0.35;font-style:normal}
+.gcard .gedit{position:absolute;top:4px;left:4px;width:22px;height:22px;border-radius:50%;background:rgba(30,80,150,0.85);color:#fff;font-size:12px;line-height:22px;text-align:center;cursor:pointer;display:none}
+.gcard:hover .gedit{display:block}
 .gcard .gdel{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(200,50,50,0.85);color:#fff;font-size:14px;line-height:22px;text-align:center;cursor:pointer;display:none}
 .gcard:hover .gdel{display:block}
+
+/* CAPTION INPUT IN QUEUE */
+.qcap{margin-top:6px;background:#1a1208;border:1px solid rgba(200,150,30,0.3);color:#e8d5a0;padding:6px 10px;border-radius:6px;font-size:12px;width:100%;outline:none;font-family:Georgia}
+.qcap:focus{border-color:#C8961E}
+.qcap::placeholder{color:rgba(232,213,160,0.35);font-style:italic}
 
 /* LOG */
 #log{font-size:12px;font-family:monospace;background:rgba(0,0,0,0.3);border-radius:8px;padding:12px;min-height:60px;color:#b8c8a0;margin-top:12px;max-height:200px;overflow-y:auto;display:none}
@@ -216,6 +225,61 @@ function clearToken(){
   document.getElementById('token-status').textContent='Токен удалён';
 }
 
+// ==================== UTF-8 / PH HELPERS ====================
+// atob возвращает "binary string" (байты как коды символов 0..255).
+// Для русских подписей надо корректно декодировать как UTF-8.
+function binToStr(bin){
+  var bytes = new Uint8Array(bin.length);
+  for(var i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
+  return new TextDecoder('utf-8').decode(bytes);
+}
+function strToBin(str){
+  var bytes = new TextEncoder().encode(str);
+  var out = '';
+  for(var i=0;i<bytes.length;i++) out += String.fromCharCode(bytes[i]);
+  return out;
+}
+// Экранирование для JS-строки в одинарных кавычках
+function escJS(s){
+  return (s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/\r?\n/g,' ');
+}
+function unescJS(s){
+  return (s||'').replace(/\\(.)/g,'$1');
+}
+// Парсит весь блок PH из index.html (utf-8 строки)
+function parsePH(txt){
+  var s = txt.indexOf('var PH=[');
+  if(s<0) return null;
+  var e = txt.indexOf('];', s) + 2;
+  var block = txt.slice(s, e);
+  var entries = [];
+  var rx = /\{p:'((?:[^'\\]|\\.)*)',cat:'((?:[^'\\]|\\.)*)'\}/g;
+  var m;
+  while((m=rx.exec(block))!==null){
+    entries.push({p: unescJS(m[1]), cat: unescJS(m[2])});
+  }
+  return {start:s, end:e, entries:entries};
+}
+function serializePH(entries){
+  return 'var PH=[\n' + entries.map(function(en){
+    return "{p:'"+escJS(en.p)+"',cat:'"+escJS(en.cat)+"'}";
+  }).join(',\n') + '\n];';
+}
+// Получить {text, data} index.html как текст для редактирования
+async function fetchIndexText(){
+  var data = await ghGet('/repos/'+REPO+'/contents/index.html');
+  var bin = atob(data.content.replace(/[\r\n]/g,''));
+  var text = binToStr(bin);
+  return {text:text, sha:data.sha};
+}
+async function putIndexText(text, sha, message){
+  var bin = strToBin(text);
+  var b64 = btoa(bin);
+  return await ghPut('/repos/'+REPO+'/contents/index.html', {
+    message: message, content: b64, sha: sha, branch: BRANCH
+  });
+}
+
 // ==================== GITHUB API ====================
 function ghHeaders(){
   return {'Authorization':'token '+getToken(),'Content-Type':'application/json'};
@@ -241,6 +305,7 @@ async function ghDel(path, body){
 // ==================== INIT ====================
 let allImages = [];
 let currentPage = 0;
+let captionsMap = {}; // {filename: caption}
 
 async function init(){
   const t = getToken();
@@ -262,21 +327,32 @@ async function loadGallery(){
     document.getElementById('stat-total').textContent = allImages.length;
     document.getElementById('gallery-status').textContent = allImages.length+' файлов';
     log('Загружено: '+allImages.length+' фото');
+    // Подгружаем подписи из PH в index.html
+    try {
+      const idx = await fetchIndexText();
+      const ph = parsePH(idx.text);
+      captionsMap = {};
+      if(ph){
+        ph.entries.forEach(function(en){
+          var nm = en.p.replace(/^images\//,'');
+          captionsMap[nm] = en.cat;
+        });
+        document.getElementById('stat-gallery').textContent = ph.entries.length;
+      } else {
+        document.getElementById('stat-gallery').textContent = '?';
+      }
+    } catch(e){ log('Подписи не загружены: '+e.message, true); }
     currentPage = 0;
     renderGallery();
-    // Count PH entries
-    try {
-      const idx = await ghGet('/repos/'+REPO+'/contents/index.html');
-      const bin = atob(idx.content.replace(/[\r\n]/g,''));
-      const m = bin.match(/\{p:'images\//g);
-      document.getElementById('stat-gallery').textContent = m ? m.length : '?';
-    } catch(e){}
   } catch(e){
     document.getElementById('gallery-status').textContent = 'Ошибка: '+e.message;
     log('Ошибка: '+e.message, true);
   }
 }
 
+function escHtml(s){
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
 function renderGallery(){
   var grid = document.getElementById('gallery-grid');
   var start = currentPage * PER_PAGE;
@@ -284,9 +360,14 @@ function renderGallery(){
   grid.innerHTML = items.map(function(f, i){
     var idx = start + i;
     var src = 'https://raw.githubusercontent.com/'+REPO+'/'+BRANCH+'/images/'+f.name;
+    var cap = captionsMap[f.name] || '';
+    var capHtml = cap ? escHtml(cap) : '— без подписи —';
+    var capClass = cap ? '' : ' empty';
     return '<div class="gcard">' +
       '<img src="'+src+'" loading="lazy">' +
       '<div class="gname">'+f.name+'</div>' +
+      '<div class="gcap'+capClass+'" title="'+escHtml(cap||'Нет подписи')+'">'+capHtml+'</div>' +
+      '<div class="gedit" onclick="event.stopPropagation();editCaption('+idx+')" title="Изменить подпись">✎</div>' +
       '<div class="gdel" onclick="event.stopPropagation();deletePhoto('+idx+')" title="Удалить">&times;</div>' +
     '</div>';
   }).join('');
@@ -299,6 +380,44 @@ function renderGallery(){
     html += '<button class="btn small '+(p===currentPage?'active':'')+'" onclick="currentPage='+p+';renderGallery()">'+( p+1)+'</button>';
   }
   btns.innerHTML = html;
+}
+
+// ==================== CAPTIONS ====================
+async function editCaption(idx){
+  var img = allImages[idx];
+  if(!img) return;
+  if(!getToken()){ toast('Введи токен!','err'); return; }
+  var current = captionsMap[img.name] || '';
+  var neu = prompt('Подпись к фото «'+img.name+'»:\n(пусто = убрать подпись)', current);
+  if(neu === null) return; // отмена
+  neu = neu.trim();
+  if(neu === current){ toast('Подпись не изменилась'); return; }
+  log('Сохраняю подпись для '+img.name+'...');
+  try {
+    var idxFile = await fetchIndexText();
+    var ph = parsePH(idxFile.text);
+    if(!ph){ throw new Error('PH не найден в index.html'); }
+    var target = 'images/'+img.name;
+    var found = false;
+    for(var i=0;i<ph.entries.length;i++){
+      if(ph.entries[i].p === target){
+        ph.entries[i].cat = neu;
+        found = true;
+        break;
+      }
+    }
+    if(!found) throw new Error('Фото нет в PH — сначала нажми «Синхронизировать галерею»');
+    var newBlock = serializePH(ph.entries);
+    var newText = idxFile.text.slice(0, ph.start) + newBlock + idxFile.text.slice(ph.end);
+    await putIndexText(newText, idxFile.sha, 'caption: '+img.name+' → '+(neu?'«'+neu.slice(0,40)+'»':'(пусто)'));
+    captionsMap[img.name] = neu;
+    log('Подпись сохранена: '+img.name);
+    toast('Готово. Жди 1-2 мин, потом Cmd+Shift+R на сайте');
+    renderGallery();
+  } catch(e){
+    log('Ошибка подписи: '+e.message, true);
+    toast('Ошибка: '+e.message, 'err');
+  }
 }
 
 // ==================== DELETE ====================
@@ -334,7 +453,7 @@ function handleDrop(e){
 function addFiles(files){
   for(var i=0; i<files.length; i++){
     if(!files[i].type.startsWith('image/')) continue;
-    queue.push({file:files[i], status:'waiting', uploadedName:null});
+    queue.push({file:files[i], status:'waiting', uploadedName:null, caption:''});
   }
   renderQueue();
 }
@@ -355,6 +474,7 @@ function renderQueue(){
           '<span style="font-size:11px;color:'+col+'" id="qs'+i+'">'+txt+'</span>' +
         '</div>' +
         '<div style="font-size:11px;opacity:0.4;margin-top:2px">'+(q.file.size/1024/1024).toFixed(1)+' МБ</div>' +
+        '<input type="text" class="qcap" placeholder="Подпись (необязательно)" value="'+escHtml(q.caption||'')+'" oninput="queue['+i+'].caption=this.value">' +
         '<div class="qprog"><div class="qprog-fill" id="qb'+i+'"></div></div>' +
       '</div>' +
     '</div>';
@@ -376,7 +496,7 @@ async function startUpload(){
     if(mm) nextNum = Math.max(nextNum, parseInt(mm[1])+1);
   }
 
-  var uploadedNames = [];
+  var uploadedItems = []; // [{filename, caption}]
 
   for(var i=0; i<queue.length; i++){
     var q = queue[i];
@@ -401,7 +521,7 @@ async function startUpload(){
       if(qb) qb.style.width = '100%';
       q.status = 'ok';
       q.uploadedName = filename;
-      uploadedNames.push(filename);
+      uploadedItems.push({filename: filename, caption: (q.caption||'').trim()});
       if(qs){ qs.textContent = filename; qs.style.color = '#5cba6a'; }
       log('Загружено: '+filename);
     } catch(e){
@@ -415,54 +535,40 @@ async function startUpload(){
   btn.disabled = false;
   btn.innerHTML = 'Загрузить на сайт';
 
-  if(uploadedNames.length > 0){
-    log('Добавляю '+uploadedNames.length+' фото в галерею...');
-    await addToGallery(t, uploadedNames);
+  if(uploadedItems.length > 0){
+    log('Добавляю '+uploadedItems.length+' фото в галерею...');
+    await addToGallery(t, uploadedItems);
     await loadGallery();
   }
-  toast('Готово! '+uploadedNames.length+' фото');
+  toast('Готово! '+uploadedItems.length+' фото');
 }
 
 // ==================== SMART GALLERY UPDATE ====================
-// Берёт текущий PH из index.html и дописывает новые файлы
-// Не зависит от кэша GitHub API — мы точно знаем что загрузили
-async function addToGallery(t, newNames){
+// Принимает массив {filename, caption}. Корректно работает с русскими подписями.
+async function addToGallery(t, newItems){
   try {
     log('Обновляю галерею...');
-    var data = await ghGet('/repos/'+REPO+'/contents/index.html');
-    var bin = atob(data.content.replace(/[\r\n]/g,''));
+    var idxFile = await fetchIndexText();
+    var ph = parsePH(idxFile.text);
+    if(!ph){ log('Ошибка: PH не найден в index.html', true); return; }
 
-    var s = bin.indexOf('var PH=[');
-    var e = bin.indexOf('];', s) + 2;
-    if(s < 0){ log('Ошибка: PH не найден в index.html', true); return; }
-
-    // Собираем существующие имена
-    var block = bin.slice(s, e);
+    // Что уже есть
     var existing = {};
-    var rx = /\{p:'images\/([^']+)'/g;
-    var match;
-    while((match = rx.exec(block)) !== null){ existing[match[1]] = true; }
+    ph.entries.forEach(function(en){ existing[en.p] = true; });
 
     // Только реально новые
-    var toAdd = newNames.filter(function(f){ return !existing[f]; });
+    var toAdd = newItems.filter(function(it){ return !existing['images/'+it.filename]; });
     if(toAdd.length === 0){ log('Все фото уже в галерее'); return; }
 
-    // Дописываем к существующему PH
-    var inner = block.slice('var PH=[\n'.length, -2).trimEnd();
-    var addStr = toAdd.map(function(f){ return "{p:'images/"+f+"',cat:''}"; }).join(',\n');
-    var newInner = inner + (inner ? ',\n' : '') + addStr;
-    var total = (newInner.match(/\{p:/g)||[]).length;
-    var newPH = 'var PH=[\n' + newInner + '\n];';
-
-    var newBin = bin.slice(0, s) + newPH + bin.slice(e);
-    var b64 = btoa(newBin);
-
-    await ghPut('/repos/'+REPO+'/contents/index.html', {
-      message: 'gallery: '+total+' photos (+'+toAdd.length+')',
-      content: b64, sha: data.sha, branch: BRANCH
+    toAdd.forEach(function(it){
+      ph.entries.push({p:'images/'+it.filename, cat: it.caption||''});
     });
-    log('Галерея обновлена: '+total+' фото (+'+toAdd.length+'). Жди 1-2 мин, потом Cmd+Shift+R на сайте');
-    toast('Галерея: '+total+' фото');
+
+    var newBlock = serializePH(ph.entries);
+    var newText = idxFile.text.slice(0, ph.start) + newBlock + idxFile.text.slice(ph.end);
+    await putIndexText(newText, idxFile.sha, 'gallery: '+ph.entries.length+' photos (+'+toAdd.length+')');
+    log('Галерея обновлена: '+ph.entries.length+' фото (+'+toAdd.length+'). Жди 1-2 мин, потом Cmd+Shift+R на сайте');
+    toast('Галерея: '+ph.entries.length+' фото');
   } catch(e){
     log('Ошибка обновления: '+e.message, true);
     toast('Ошибка: '+e.message, 'err');
@@ -470,7 +576,7 @@ async function addToGallery(t, newNames){
 }
 
 // ==================== FULL SYNC ====================
-// Полная пересборка PH из папки images
+// Полная пересборка PH из папки images. Старые подписи НЕ удаляются.
 async function syncGallery(){
   if(!getToken()){ toast('Введи токен!','err'); return; }
   log('Полная синхронизация...');
@@ -480,21 +586,21 @@ async function syncGallery(){
     var jpgs = files.filter(function(f){ return /\.(jpg|jpeg|png|webp)$/i.test(f.name); })
                     .sort(function(a,b){ return a.name.localeCompare(b.name); });
 
-    var data = await ghGet('/repos/'+REPO+'/contents/index.html');
-    var bin = atob(data.content.replace(/[\r\n]/g,''));
-    var s = bin.indexOf('var PH=[');
-    var e = bin.indexOf('];', s) + 2;
-    if(s < 0){ log('PH не найден', true); return; }
+    var idxFile = await fetchIndexText();
+    var ph = parsePH(idxFile.text);
+    if(!ph){ log('PH не найден', true); return; }
+    // Сохраняем существующие подписи по имени файла
+    var oldCaps = {};
+    ph.entries.forEach(function(en){ oldCaps[en.p] = en.cat; });
 
-    var newPH = "var PH=[\n"+jpgs.map(function(f){ return "{p:'images/"+f.name+"',cat:''}"; }).join(',\n')+"\n];";
-    var newBin = bin.slice(0,s) + newPH + bin.slice(e);
-    var b64 = btoa(newBin);
-
-    await ghPut('/repos/'+REPO+'/contents/index.html', {
-      message: 'sync: '+jpgs.length+' photos',
-      content: b64, sha: data.sha, branch: BRANCH
+    var newEntries = jpgs.map(function(f){
+      var key = 'images/'+f.name;
+      return {p:key, cat: oldCaps[key] || ''};
     });
-    log('Синхронизация: '+jpgs.length+' фото. Жди 1-2 мин');
+    var newBlock = serializePH(newEntries);
+    var newText = idxFile.text.slice(0, ph.start) + newBlock + idxFile.text.slice(ph.end);
+    await putIndexText(newText, idxFile.sha, 'sync: '+jpgs.length+' photos');
+    log('Синхронизация: '+jpgs.length+' фото. Подписи сохранены. Жди 1-2 мин');
     toast('Синхронизировано: '+jpgs.length);
     document.getElementById('stat-gallery').textContent = jpgs.length;
     document.getElementById('gallery-status').textContent = 'Готово';

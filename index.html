@@ -123,6 +123,13 @@ border-radius:2px;transform:translateZ(10px)}
 #lbplate{margin-top:18px;text-align:center;display:inline-block;padding:10px 16px 9px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:linear-gradient(180deg,rgba(235,235,240,0.96),rgba(150,150,162,0.92) 58%,rgba(220,220,225,0.9));box-shadow:0 14px 34px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.35),inset 0 -1px 0 rgba(0,0,0,0.25)}
 #lbc{margin:0;font-size:14px;font-style:italic;letter-spacing:0.8px;color:rgba(20,14,4,0.92);text-shadow:0 1px 0 rgba(255,255,255,0.35)}
 #lba{margin-top:6px;font-size:10px;opacity:0.9;letter-spacing:2.5px;color:rgba(35,24,6,0.85)}
+/* Плавающая подпись под фото — видна только если текст задан */
+#lbcap{position:absolute;left:50%;top:calc(48% + 32vh);transform:translate(-50%,0);max-width:72vw;padding:10px 20px 9px;border-radius:10px;border:1px solid rgba(255,255,255,0.16);background:linear-gradient(180deg,rgba(235,235,240,0.96),rgba(150,150,162,0.92) 58%,rgba(220,220,225,0.9));box-shadow:0 14px 34px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.35),inset 0 -1px 0 rgba(0,0,0,0.25);font-size:14px;font-style:italic;letter-spacing:0.5px;color:rgba(20,14,4,0.92);text-align:center;z-index:4;display:none;pointer-events:none;text-shadow:0 1px 0 rgba(255,255,255,0.35)}
+#lbcap.on{display:inline-block}
+#lb.zoom #lbcap{display:none !important}
+@media (max-width: 700px), (max-height: 520px){
+  #lbcap{max-width:88vw;font-size:12px;padding:8px 14px;top:calc(44% + 30vh)}
+}
 #lbjump{position:fixed;right:22px;bottom:140px;top:auto;z-index:2001;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:14px;background-image:linear-gradient(180deg,rgba(140,92,46,0.92),rgba(92,54,22,0.92)),repeating-linear-gradient(135deg,rgba(255,255,255,0.045) 0px,rgba(255,255,255,0.045) 1px,transparent 1px,transparent 10px);border:1px solid rgba(255,224,170,0.20);box-shadow:0 16px 38px rgba(0,0,0,0.62),inset 0 1px 0 rgba(255,255,255,0.12),inset 0 -1px 0 rgba(0,0,0,0.35);backdrop-filter:blur(2px);max-width:calc(100vw - 44px)}
 #lbjlabel{font-size:10px;letter-spacing:2px;color:rgba(232,213,160,0.85);text-transform:uppercase;opacity:0.9;white-space:nowrap}
 #lbjnum{width:72px;background:rgba(0,0,0,0.25);border:1px solid rgba(232,213,160,0.25);color:rgba(255,245,210,0.95);border-radius:10px;padding:4px 8px;font-family:Georgia;font-size:12px;outline:none}
@@ -424,6 +431,7 @@ body{overflow-x:hidden}
     </div>
   </div>
   <div class="lbf" onclick="event.stopPropagation();toggleLbZoom()"><img id="lbi" src=""/></div>
+  <div id="lbcap"></div>
   <div id="lbplate" onclick="event.stopPropagation()">
     <div id="lbc"></div>
     <div id="lba">Таинственный фотограф</div>
@@ -1718,11 +1726,20 @@ function updateLb(){
   setLbThumbActive();
   img.onerror=function(){
     document.getElementById('lbc').textContent='(фото не найдено) '+PH[currentLb].cat;
+    setLbCaption(PH[currentLb].cat);
   };
   img.onload=function(){
     document.getElementById('lbc').textContent=PH[currentLb].cat;
+    setLbCaption(PH[currentLb].cat);
   };
   img.src=PH[currentLb].p;
+}
+function setLbCaption(text){
+  var cap=document.getElementById('lbcap');
+  if(!cap) return;
+  var t=(text||'').trim();
+  if(t){ cap.textContent=t; cap.classList.add('on'); }
+  else { cap.textContent=''; cap.classList.remove('on'); }
 }
 
 // Клавиатура
