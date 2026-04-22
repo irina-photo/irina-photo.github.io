@@ -171,15 +171,23 @@ p.subtitle{text-align:center;font-size:11px;opacity:0.5;letter-spacing:2px;margi
 <div id="toast"></div>
 
 <script>
-const PASS = 'samurayka';
+// Пароль хранится как SHA-256 хеш — в исходном коде plaintext нет.
+const PASS_HASH = 'd881916cdbdc1855b5c82f12fba3a7aef746fa45aee2def7c920222c79782665';
 const REPO = 'irina-photo/irina-photo.github.io';
 const BRANCH = 'main';
 const API = 'https://api.github.com';
 const PER_PAGE = 60;
 
 // ==================== LOGIN ====================
-function doLogin(){
-  if(document.getElementById('pwd').value === PASS){
+async function sha256Hex(s){
+  const buf = new TextEncoder().encode(s);
+  const hash = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+async function doLogin(){
+  const entered = document.getElementById('pwd').value;
+  const enteredHash = await sha256Hex(entered);
+  if(enteredHash === PASS_HASH){
     document.getElementById('login').style.display='none';
     document.getElementById('app').style.display='block';
     init();
