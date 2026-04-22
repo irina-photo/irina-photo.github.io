@@ -65,10 +65,10 @@ p.subtitle{text-align:center;font-size:11px;opacity:0.5;letter-spacing:2px;margi
 .gcard:hover{border-color:#C8961E}
 .gcard img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
 .gcard .gname{font-size:10px;padding:4px 6px;opacity:0.6;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.gcard .gcap{font-size:11px;padding:4px 8px 8px;min-height:22px;font-style:italic;color:#d8b870;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-top:1px solid rgba(200,150,30,0.1)}
-.gcard .gcap.empty{opacity:0.35;font-style:normal}
-.gcard .gedit{position:absolute;top:4px;left:4px;width:22px;height:22px;border-radius:50%;background:rgba(30,80,150,0.85);color:#fff;font-size:12px;line-height:22px;text-align:center;cursor:pointer;display:none}
-.gcard:hover .gedit{display:block}
+.gcard .gcap{font-size:12px;padding:8px 8px;min-height:36px;color:#e8d5a0;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-top:1px solid rgba(200,150,30,0.25);background:rgba(200,150,30,0.12);cursor:pointer;transition:background 0.2s;font-family:Georgia;line-height:1.3}
+.gcard .gcap:hover{background:rgba(200,150,30,0.28);color:#fff}
+.gcard .gcap::before{content:'✎  ';opacity:0.75}
+.gcard .gcap.empty{color:rgba(232,213,160,0.55);font-style:italic}
 .gcard .gdel{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(200,50,50,0.85);color:#fff;font-size:14px;line-height:22px;text-align:center;cursor:pointer;display:none}
 .gcard:hover .gdel{display:block}
 
@@ -95,6 +95,34 @@ p.subtitle{text-align:center;font-size:11px;opacity:0.5;letter-spacing:2px;margi
 /* SPINNER */
 .spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(200,150,30,0.3);border-top-color:#C8961E;border-radius:50%;animation:spin 0.6s linear infinite;vertical-align:middle;margin-right:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* POSTS (Творчество) */
+.post-form{background:rgba(0,0,0,0.25);border:1px solid rgba(200,150,30,0.25);border-radius:10px;padding:18px;margin-bottom:16px}
+.post-form label{display:block;font-size:11px;letter-spacing:2px;opacity:0.7;margin:10px 0 6px;text-transform:uppercase}
+.post-form input[type=text],.post-form input[type=date],.post-form textarea{width:100%;background:#1a1208;border:1px solid rgba(200,150,30,0.35);color:#e8d5a0;padding:10px 14px;border-radius:8px;font-size:14px;outline:none;font-family:Georgia,serif}
+.post-form input[type=text]:focus,.post-form input[type=date]:focus,.post-form textarea:focus{border-color:#C8961E}
+.post-form textarea{min-height:160px;resize:vertical;line-height:1.6}
+.post-form .hint{font-size:11px;opacity:0.45;margin-top:4px;font-style:italic}
+.post-form .form-btns{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+
+.post-images-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-top:10px}
+.pim{position:relative;border-radius:6px;overflow:hidden;border:1px solid rgba(200,150,30,0.25);background:#0e0a04}
+.pim img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.pim .pim-x{position:absolute;top:3px;right:3px;width:22px;height:22px;border-radius:50%;background:rgba(200,50,50,0.85);color:#fff;font-size:14px;line-height:22px;text-align:center;cursor:pointer}
+.pim .pim-st{position:absolute;bottom:0;left:0;right:0;font-size:10px;padding:3px 5px;background:rgba(0,0,0,0.65);text-align:center}
+.pim .pim-st.ok{color:#5cba6a}
+.pim .pim-st.err{color:#e05050}
+
+#posts-dropzone{border:2px dashed rgba(200,150,30,0.35);border-radius:10px;padding:22px;text-align:center;cursor:pointer;transition:all 0.2s;font-size:13px;opacity:0.75}
+#posts-dropzone:hover,#posts-dropzone.drag{border-color:#C8961E;background:rgba(200,150,30,0.08);opacity:1}
+
+.post-list-item{background:rgba(0,0,0,0.2);border:1px solid rgba(200,150,30,0.15);border-radius:8px;padding:14px 16px;margin-bottom:10px;transition:border-color 0.2s}
+.post-list-item:hover{border-color:rgba(200,150,30,0.35)}
+.post-list-item .pli-date{font-size:10px;letter-spacing:2px;color:#C8961E;opacity:0.8;text-transform:uppercase}
+.post-list-item .pli-title{font-size:16px;margin:4px 0 6px;color:#e8d5a0}
+.post-list-item .pli-snip{font-size:12px;opacity:0.55;line-height:1.5;margin-bottom:10px;max-height:40px;overflow:hidden}
+.post-list-item .pli-meta{font-size:11px;opacity:0.5;margin-bottom:10px}
+.post-list-item .pli-btns{display:flex;gap:6px}
 </style>
 </head>
 <body>
@@ -168,6 +196,58 @@ p.subtitle{text-align:center;font-size:11px;opacity:0.5;letter-spacing:2px;margi
     </div>
     <div id="gallery-grid"></div>
     <div class="page-btns" id="page-btns"></div>
+  </div>
+
+  <!-- TVORCHESTVO -->
+  <div class="section">
+    <h2>Творчество — записи и фото</h2>
+    <p style="font-size:12px;opacity:0.55;margin-bottom:12px">Здесь можно писать тексты и добавлять к ним фотографии, как писатель. Они появятся на странице <a href="tvorchestvo.html" target="_blank" style="color:#C8961E">«Творчество»</a>.</p>
+
+    <!-- FORM (новая или редактирование) -->
+    <div id="post-form-wrap" style="display:none">
+      <div class="post-form">
+        <div id="post-form-title" style="font-size:13px;letter-spacing:2px;color:#C8961E;text-transform:uppercase;margin-bottom:4px">Новая запись</div>
+
+        <label>Дата</label>
+        <input type="date" id="pf-date">
+
+        <label>Заголовок</label>
+        <input type="text" id="pf-title" placeholder="О чём эта запись…" maxlength="200">
+
+        <label>Текст</label>
+        <textarea id="pf-text" placeholder="Пиши свободно. Переносы строк сохраняются."></textarea>
+        <div class="hint">Можно писать абзацами. Пустая строка между ними = новый абзац.</div>
+
+        <label>Фотографии к записи</label>
+        <div id="posts-dropzone" onclick="document.getElementById('post-file-input').click()"
+             ondragover="event.preventDefault();this.classList.add('drag')"
+             ondragleave="this.classList.remove('drag')"
+             ondrop="handlePostDrop(event)">
+          <div>Нажми или перетащи фото сюда</div>
+          <div style="font-size:11px;opacity:0.5;margin-top:4px">JPG, PNG · можно несколько</div>
+        </div>
+        <input type="file" id="post-file-input" multiple accept="image/*" style="display:none" onchange="addPostImages(this.files);this.value=''">
+
+        <div id="pf-images" class="post-images-grid"></div>
+
+        <div class="form-btns">
+          <button class="btn" id="pf-save-btn" onclick="savePost()">Сохранить запись</button>
+          <button class="btn grey" onclick="cancelPostForm()">Отменить</button>
+          <span style="flex:1"></span>
+          <button class="btn grey small" id="pf-delete-btn" onclick="deleteCurrentPost()" style="display:none;background:rgba(200,50,50,0.3);color:#fff">Удалить запись</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIST -->
+    <div id="post-list-wrap">
+      <div style="display:flex;gap:8px;margin-bottom:10px;align-items:center;flex-wrap:wrap">
+        <button class="btn" onclick="newPost()">+ Новая запись</button>
+        <button class="btn grey small" onclick="loadPosts()">Обновить</button>
+        <span id="posts-status" style="font-size:11px;opacity:0.5;flex:1;text-align:right"></span>
+      </div>
+      <div id="post-list"></div>
+    </div>
   </div>
 
   <!-- LOG -->
@@ -312,6 +392,7 @@ async function init(){
   if(t){
     document.getElementById('token-status').textContent='Токен установлен';
     await loadGallery();
+    await loadPosts();
   } else {
     document.getElementById('token-status').textContent='Введи токен выше';
   }
@@ -361,13 +442,12 @@ function renderGallery(){
     var idx = start + i;
     var src = 'https://raw.githubusercontent.com/'+REPO+'/'+BRANCH+'/images/'+f.name;
     var cap = captionsMap[f.name] || '';
-    var capHtml = cap ? escHtml(cap) : '— без подписи —';
+    var capHtml = cap ? escHtml(cap) : 'Добавить подпись';
     var capClass = cap ? '' : ' empty';
     return '<div class="gcard">' +
       '<img src="'+src+'" loading="lazy">' +
       '<div class="gname">'+f.name+'</div>' +
-      '<div class="gcap'+capClass+'" title="'+escHtml(cap||'Нет подписи')+'">'+capHtml+'</div>' +
-      '<div class="gedit" onclick="event.stopPropagation();editCaption('+idx+')" title="Изменить подпись">✎</div>' +
+      '<div class="gcap'+capClass+'" title="Нажми чтобы подписать" onclick="editCaption('+idx+')">'+capHtml+'</div>' +
       '<div class="gdel" onclick="event.stopPropagation();deletePhoto('+idx+')" title="Удалить">&times;</div>' +
     '</div>';
   }).join('');
@@ -637,6 +717,307 @@ function toast(text, type){
   m.style.opacity = '1';
   clearTimeout(m._tid);
   m._tid = setTimeout(function(){ m.style.opacity='0'; setTimeout(function(){ m.style.display='none'; }, 300); }, 4000);
+}
+
+// ==================== TVORCHESTVO (POSTS) ====================
+var postsState = {
+  posts: [],
+  sha: null,
+  editingId: null,      // null = новая, иначе id существующей
+  formImages: []        // [{src, status, file?, filename?}] — для отображения в форме
+};
+
+function todayStr(){
+  var d = new Date();
+  var pad = function(n){ return n<10?'0'+n:n; };
+  return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+}
+function genPostId(){
+  return 'p'+Date.now()+Math.floor(Math.random()*1000);
+}
+function formatDateRu(d){
+  if(!d) return '';
+  try{
+    var parts = d.split('-');
+    if(parts.length!==3) return d;
+    var months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+    return parseInt(parts[2])+' '+months[parseInt(parts[1])-1]+' '+parts[0];
+  }catch(e){ return d; }
+}
+
+async function loadPosts(){
+  if(!getToken()){
+    document.getElementById('posts-status').textContent='Нужен токен';
+    return;
+  }
+  document.getElementById('posts-status').innerHTML='<span class="spinner"></span>Загружаю…';
+  try{
+    var data = await ghGet('/repos/'+REPO+'/contents/posts.json');
+    var bin = atob(data.content.replace(/[\r\n]/g,''));
+    var text = binToStr(bin);
+    var parsed = JSON.parse(text);
+    postsState.posts = parsed.posts || [];
+    postsState.sha = data.sha;
+    document.getElementById('posts-status').textContent = postsState.posts.length+' запис(ей)';
+    renderPostList();
+    log('Записи загружены: '+postsState.posts.length);
+  }catch(e){
+    // Если файла нет — создаём пустой
+    if(String(e.message).indexOf('Not Found')>=0 || String(e.message).indexOf('404')>=0){
+      postsState.posts = [];
+      postsState.sha = null;
+      document.getElementById('posts-status').textContent = '0 запис(ей)';
+      renderPostList();
+    } else {
+      document.getElementById('posts-status').textContent = 'Ошибка: '+e.message;
+      log('Ошибка загрузки записей: '+e.message, true);
+    }
+  }
+}
+
+function renderPostList(){
+  var el = document.getElementById('post-list');
+  var arr = postsState.posts.slice();
+  arr.sort(function(a,b){
+    return (b.date||'').localeCompare(a.date||'') || (b.id||'').localeCompare(a.id||'');
+  });
+  if(!arr.length){
+    el.innerHTML = '<div style="opacity:0.5;font-style:italic;padding:14px;text-align:center">Записей пока нет. Нажми «+ Новая запись».</div>';
+    return;
+  }
+  el.innerHTML = arr.map(function(p){
+    var snip = (p.text||'').slice(0,140).replace(/\s+/g,' ');
+    if((p.text||'').length>140) snip += '…';
+    var imgN = (p.images||[]).length;
+    return '<div class="post-list-item">'+
+      '<div class="pli-date">'+escHtml(formatDateRu(p.date))+'</div>'+
+      '<div class="pli-title">'+escHtml(p.title||'Без названия')+'</div>'+
+      '<div class="pli-snip">'+escHtml(snip)+'</div>'+
+      '<div class="pli-meta">'+(imgN?imgN+' фото · ':'')+'id: '+escHtml(p.id)+'</div>'+
+      '<div class="pli-btns">'+
+        '<button class="btn small" onclick="editPost(\''+escJS(p.id)+'\')">Редактировать</button>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+}
+
+function newPost(){
+  postsState.editingId = null;
+  postsState.formImages = [];
+  document.getElementById('post-form-title').textContent='Новая запись';
+  document.getElementById('pf-date').value = todayStr();
+  document.getElementById('pf-title').value = '';
+  document.getElementById('pf-text').value = '';
+  document.getElementById('pf-delete-btn').style.display='none';
+  document.getElementById('post-form-wrap').style.display='block';
+  document.getElementById('post-list-wrap').style.display='none';
+  renderFormImages();
+  window.scrollTo({top:document.getElementById('post-form-wrap').offsetTop-30,behavior:'smooth'});
+}
+
+function editPost(id){
+  var p = postsState.posts.find(function(x){return x.id===id;});
+  if(!p){ toast('Запись не найдена','err'); return; }
+  postsState.editingId = id;
+  postsState.formImages = (p.images||[]).map(function(src){
+    return {src: src, status:'existing'};
+  });
+  document.getElementById('post-form-title').textContent='Редактирование записи';
+  document.getElementById('pf-date').value = p.date||todayStr();
+  document.getElementById('pf-title').value = p.title||'';
+  document.getElementById('pf-text').value = p.text||'';
+  document.getElementById('pf-delete-btn').style.display='inline-flex';
+  document.getElementById('post-form-wrap').style.display='block';
+  document.getElementById('post-list-wrap').style.display='none';
+  renderFormImages();
+  window.scrollTo({top:document.getElementById('post-form-wrap').offsetTop-30,behavior:'smooth'});
+}
+
+function cancelPostForm(){
+  postsState.editingId = null;
+  postsState.formImages = [];
+  document.getElementById('post-form-wrap').style.display='none';
+  document.getElementById('post-list-wrap').style.display='block';
+}
+
+function handlePostDrop(e){
+  e.preventDefault();
+  document.getElementById('posts-dropzone').classList.remove('drag');
+  addPostImages(e.dataTransfer.files);
+}
+
+function addPostImages(files){
+  for(var i=0;i<files.length;i++){
+    if(!files[i].type.startsWith('image/')) continue;
+    var url = URL.createObjectURL(files[i]);
+    postsState.formImages.push({src: url, status:'new', file: files[i]});
+  }
+  renderFormImages();
+}
+
+function removeFormImage(idx){
+  postsState.formImages.splice(idx, 1);
+  renderFormImages();
+}
+
+function renderFormImages(){
+  var el = document.getElementById('pf-images');
+  if(!postsState.formImages.length){ el.innerHTML=''; return; }
+  el.innerHTML = postsState.formImages.map(function(im, i){
+    var st = im.status==='existing'?'':im.status==='new'?'<div class="pim-st">новое</div>':
+             im.status==='uploading'?'<div class="pim-st">загрузка…</div>':
+             im.status==='ok'?'<div class="pim-st ok">загружено</div>':
+             im.status==='err'?'<div class="pim-st err">ошибка</div>':'';
+    return '<div class="pim">'+
+      '<img src="'+escHtml(im.src)+'">'+
+      '<div class="pim-x" onclick="removeFormImage('+i+')">&times;</div>'+
+      st+
+    '</div>';
+  }).join('');
+}
+
+async function uploadOnePostImage(file, postId, seq){
+  var ext = file.name.split('.').pop().toLowerCase();
+  if(ext === 'jpeg') ext = 'jpg';
+  if(!/^(jpg|png|webp|gif)$/.test(ext)) ext = 'jpg';
+  var filename = postId+'-'+String(seq).padStart(2,'0')+'.'+ext;
+  var b64 = await fileToBase64(file);
+  await ghPut('/repos/'+REPO+'/contents/posts_images/'+filename, {
+    message: 'post image: '+filename,
+    content: b64,
+    branch: BRANCH
+  });
+  return 'posts_images/'+filename;
+}
+
+async function savePost(){
+  if(!getToken()){ toast('Введи токен!','err'); return; }
+  var date = document.getElementById('pf-date').value || todayStr();
+  var title = document.getElementById('pf-title').value.trim();
+  var text = document.getElementById('pf-text').value.trim();
+  if(!title && !text && !postsState.formImages.length){
+    toast('Запись пустая','err'); return;
+  }
+
+  var btn = document.getElementById('pf-save-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Сохраняю…';
+  log('Сохраняю запись…');
+
+  try{
+    // 1. id — генерим для новой
+    var id = postsState.editingId || genPostId();
+
+    // 2. Загружаем новые фото в posts_images/
+    var nextSeq = 1;
+    // считаем существующие в этой записи, чтобы не перезаписать
+    postsState.formImages.forEach(function(im){
+      if(im.status==='existing'){
+        var m = im.src.match(/-(\d+)\.[a-z]+$/);
+        if(m) nextSeq = Math.max(nextSeq, parseInt(m[1])+1);
+      }
+    });
+
+    for(var i=0;i<postsState.formImages.length;i++){
+      var im = postsState.formImages[i];
+      if(im.status==='new' && im.file){
+        im.status = 'uploading';
+        renderFormImages();
+        try{
+          var relPath = await uploadOnePostImage(im.file, id, nextSeq++);
+          im.status = 'ok';
+          im.src = 'https://raw.githubusercontent.com/'+REPO+'/'+BRANCH+'/'+relPath;
+          im.relPath = relPath;
+          renderFormImages();
+          log('Фото записи загружено: '+relPath);
+        }catch(e){
+          im.status = 'err';
+          renderFormImages();
+          log('Ошибка фото: '+e.message, true);
+          throw e;
+        }
+      }
+    }
+
+    // 3. Собираем массив путей изображений
+    var imagePaths = postsState.formImages.map(function(im){
+      if(im.status==='existing'){
+        // уже был путь в исходной записи — это относительный posts_images/xxx
+        return im.src;
+      } else if(im.status==='ok' && im.relPath){
+        return im.relPath;
+      } else if(im.relPath){
+        return im.relPath;
+      }
+      return null;
+    }).filter(function(x){ return !!x; });
+
+    // 4. Обновляем postsState.posts
+    var postObj = {
+      id: id,
+      date: date,
+      title: title,
+      text: text,
+      images: imagePaths
+    };
+    var existingIdx = postsState.posts.findIndex(function(p){return p.id===id;});
+    if(existingIdx>=0){
+      postsState.posts[existingIdx] = postObj;
+    } else {
+      postsState.posts.push(postObj);
+    }
+
+    // 5. Пишем posts.json
+    await writePostsJson('posts: '+(existingIdx>=0?'edit':'new')+' — '+(title||id).slice(0,60));
+
+    log('Запись сохранена: '+id);
+    toast('Готово! Жди 1-2 мин, потом обнови страницу «Творчество»');
+    cancelPostForm();
+    renderPostList();
+    document.getElementById('posts-status').textContent = postsState.posts.length+' запис(ей)';
+  }catch(e){
+    log('Ошибка сохранения: '+e.message, true);
+    toast('Ошибка: '+e.message, 'err');
+  }finally{
+    btn.disabled = false;
+    btn.innerHTML = 'Сохранить запись';
+  }
+}
+
+async function deleteCurrentPost(){
+  if(!postsState.editingId) return;
+  if(!confirm('Удалить эту запись? Это действие нельзя отменить.')) return;
+  var id = postsState.editingId;
+  log('Удаляю запись '+id+'…');
+  try{
+    // удаляем из массива
+    postsState.posts = postsState.posts.filter(function(p){return p.id!==id;});
+    // пишем posts.json
+    await writePostsJson('posts: delete '+id);
+    // Фото в posts_images/ оставляем — не будем рисковать удалять; если нужно, пользователь скажет.
+    log('Запись удалена: '+id);
+    toast('Запись удалена');
+    cancelPostForm();
+    renderPostList();
+    document.getElementById('posts-status').textContent = postsState.posts.length+' запис(ей)';
+  }catch(e){
+    log('Ошибка удаления: '+e.message, true);
+    toast('Ошибка: '+e.message, 'err');
+  }
+}
+
+async function writePostsJson(message){
+  var text = JSON.stringify({posts: postsState.posts}, null, 2) + '\n';
+  var bin = strToBin(text);
+  var b64 = btoa(bin);
+  var body = {
+    message: message,
+    content: b64,
+    branch: BRANCH
+  };
+  if(postsState.sha) body.sha = postsState.sha;
+  var res = await ghPut('/repos/'+REPO+'/contents/posts.json', body);
+  if(res && res.content && res.content.sha) postsState.sha = res.content.sha;
 }
 </script>
 </body>

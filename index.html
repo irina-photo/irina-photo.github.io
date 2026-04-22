@@ -85,6 +85,11 @@ border-radius:2px;transform:translateZ(10px)}
 }
 #info{position:fixed;top:20px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:4px;opacity:0.5;color:#e8d5a0;text-transform:uppercase;text-shadow:2px 2px 4px rgba(0,0,0,0.8)}
 #title{position:fixed;top:16px;left:24px;font-size:13px;letter-spacing:2px;opacity:0.7;font-style:italic;color:#e8d5a0;text-shadow:2px 2px 4px rgba(0,0,0,0.8)}
+#tvor-link{position:fixed;top:16px;right:24px;z-index:2000;font-family:Georgia,serif;font-size:12px;letter-spacing:3px;color:rgba(232,200,74,0.85);text-decoration:none;padding:8px 14px;border:1px solid rgba(200,160,40,0.42);border-radius:14px;background:rgba(20,14,6,0.55);backdrop-filter:blur(6px);text-transform:uppercase;text-shadow:2px 2px 4px rgba(0,0,0,0.8);transition:color 0.25s,background 0.25s,border-color 0.25s}
+#tvor-link:hover{color:#fff;background:rgba(200,160,40,0.25);border-color:rgba(232,200,74,0.9)}
+@media (max-width:700px){
+  #tvor-link{top:8px;right:10px;font-size:10px;letter-spacing:2px;padding:6px 10px;border-radius:10px}
+}
 #thumbs-btn{position:fixed;right:102px;bottom:26px;z-index:2000;background:rgba(200,160,40,0.18);border:1px solid rgba(200,160,40,0.42);color:rgba(255,245,210,0.94);border-radius:16px;padding:10px 14px;font-family:Georgia;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(8px);box-shadow:0 18px 46px rgba(0,0,0,0.62)}
 #thumbs-btn:hover{background:rgba(200,160,40,0.24)}
 @media (max-width: 700px), (max-height: 520px){
@@ -365,6 +370,7 @@ body{overflow-x:hidden}
 </style></head><body>
 <div id="title">Свет и тишина</div>
 <div id="info">Зал 1 · Комната 1</div>
+<a id="tvor-link" href="tvorchestvo.html">Творчество</a>
 <div id="thumbs-btn" onclick="openThumbsFromGallery()">Миниатюры</div>
 <div id="hall"></div>
 <!-- АНИМИРОВАННЫЕ СВЕТИЛЬНИКИ -->
