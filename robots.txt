@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://irina-photo.github.io/sitemap.xml
