@@ -480,7 +480,7 @@ async function ghRequest(method, path, body){
   if(auth.currentUser){
     try{ return await ghViaWorker(method, path, body); }
     catch(e){
-      if(!canUseGitHub()) throw e;
+      if(!getToken()) throw e;
       console.warn('Worker GitHub недоступен, использую запасной локальный токен:', e.message);
     }
   }
