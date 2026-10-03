@@ -124,6 +124,8 @@ p.subtitle{text-align:center;font-size:11px;opacity:0.5;letter-spacing:2px;margi
 .post-list-item .pli-meta{font-size:11px;opacity:0.5;margin-bottom:10px}
 .post-list-item .pli-btns{display:flex;gap:6px}
 </style>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 </head>
 <body>
 
@@ -132,8 +134,12 @@ p.subtitle{text-align:center;font-size:11px;opacity:0.5;letter-spacing:2px;margi
   <div class="login-box">
     <h1>ТАИНСТВЕННЫЙ ФОТОГРАФ</h1>
     <p>Панель управления галереей</p>
-    <input type="password" id="pwd" placeholder="Пароль" onkeydown="if(event.key==='Enter')doLogin()">
-    <button onclick="doLogin()">ВОЙТИ</button>
+    <input type="email" id="email" placeholder="Электронная почта" autocomplete="email" style="letter-spacing:0">
+    <button onclick="sendEmailLink()">ВОЙТИ ЧЕРЕЗ ПОЧТУ</button>
+    <button onclick="googleLogin()">ВОЙТИ ЧЕРЕЗ GOOGLE</button>
+    <p style="margin:14px 0 6px;opacity:.45">Запасной вход</p>
+    <input type="password" id="pwd" placeholder="Старый пароль" onkeydown="if(event.key==='Enter')doLogin()">
+    <button onclick="doLogin()">ВОЙТИ ПО ПАРОЛЮ</button>
     <div class="login-err" id="login-err"></div>
   </div>
 </div>
@@ -261,6 +267,70 @@ p.subtitle{text-align:center;font-size:11px;opacity:0.5;letter-spacing:2px;margi
 
 <script>
 // Пароль хранится как SHA-256 хеш — в исходном коде plaintext нет.
+const FIREBASE_CONFIG = {
+  apiKey:'AIzaSyB2X3o7KwYFkMfsskKoWpQYBrws8L-Mn9w',
+  authDomain:'photo-gallery-18193.firebaseapp.com',
+  projectId:'photo-gallery-18193',
+  databaseURL:'https://photo-gallery-18193-default-rtdb.firebaseio.com',
+  storageBucket:'photo-gallery-18193.firebasestorage.app',
+  messagingSenderId:'329094770221',
+  appId:'1:329094770221:web:b9d076f195f968668212a4'
+};
+const AUTH_WORKER = 'https://photo-ai-qwen.qerevv.workers.dev/';
+if(!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
+const auth = firebase.auth();
+let adminOpened = false;
+
+function setLoginMsg(msg){ document.getElementById('login-err').textContent = msg || ''; }
+function openAdmin(){
+  if(adminOpened) return;
+  adminOpened = true;
+  document.getElementById('login').style.display='none';
+  document.getElementById('app').style.display='block';
+  init();
+}
+async function verifyOwner(user){
+  const token = await user.getIdToken();
+  const r = await fetch(AUTH_WORKER,{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+    body:JSON.stringify({action:'whoami'})
+  });
+  const j = await r.json();
+  if(!r.ok || !j.isOwner) throw new Error('Нет доступа к этой админке');
+  return j;
+}
+async function googleLogin(){
+  setLoginMsg('');
+  try{
+    await auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+  }catch(e){ setLoginMsg(e.message || 'Ошибка входа через Google'); }
+}
+async function sendEmailLink(){
+  setLoginMsg('');
+  const email = document.getElementById('email').value.trim();
+  if(!email){ setLoginMsg('Введите электронную почту'); return; }
+  try{
+    await auth.sendSignInLinkToEmail(email,{
+      url: location.origin + location.pathname,
+      handleCodeInApp: true
+    });
+    localStorage.setItem('emailForSignIn', email);
+    setLoginMsg('Ссылка для входа отправлена на почту');
+  }catch(e){ setLoginMsg(e.message || 'Не удалось отправить ссылку'); }
+}
+async function finishEmailLink(){
+  if(!auth.isSignInWithEmailLink(location.href)) return;
+  let email = localStorage.getItem('emailForSignIn') || '';
+  if(!email) email = window.prompt('Введите почту, на которую пришла ссылка') || '';
+  if(!email){ setLoginMsg('Нужна почта для подтверждения входа'); return; }
+  try{
+    await auth.signInWithEmailLink(email, location.href);
+    localStorage.removeItem('emailForSignIn');
+    history.replaceState({}, document.title, location.pathname);
+  }catch(e){ setLoginMsg(e.message || 'Ссылка недействительна или устарела'); }
+}
+
 const PASS_HASH = 'd881916cdbdc1855b5c82f12fba3a7aef746fa45aee2def7c920222c79782665';
 const REPO = 'irina-photo/irina-photo.github.io';
 const BRANCH = 'main';
@@ -277,17 +347,30 @@ async function doLogin(){
   const entered = document.getElementById('pwd').value;
   const enteredHash = await sha256Hex(entered);
   if(enteredHash === PASS_HASH){
-    document.getElementById('login').style.display='none';
-    document.getElementById('app').style.display='block';
-    init();
+    openAdmin();
   } else {
-    document.getElementById('login-err').textContent='Неверный пароль';
+    setLoginMsg('Неверный пароль');
   }
 }
-function doLogout(){
+async function doLogout(){
+  adminOpened = false;
+  try{ await auth.signOut(); }catch(e){}
   document.getElementById('login').style.display='flex';
   document.getElementById('app').style.display='none';
 }
+auth.onAuthStateChanged(async user=>{
+  if(!user) return;
+  try{
+    setLoginMsg('Проверяю доступ…');
+    await verifyOwner(user);
+    setLoginMsg('');
+    openAdmin();
+  }catch(e){
+    setLoginMsg(e.message || 'Нет доступа');
+    await auth.signOut().catch(()=>{});
+  }
+});
+finishEmailLink();
 
 // ==================== TOKEN ====================
 function getToken(){ return localStorage.getItem('gh_token')||''; }
