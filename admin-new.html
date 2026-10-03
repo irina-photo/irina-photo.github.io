@@ -124,6 +124,8 @@ p.subtitle{text-align:center;font-size:11px;opacity:0.5;letter-spacing:2px;margi
 .post-list-item .pli-meta{font-size:11px;opacity:0.5;margin-bottom:10px}
 .post-list-item .pli-btns{display:flex;gap:6px}
 </style>
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-auth-compat.js"></script>
 </head>
 <body>
 
@@ -132,8 +134,12 @@ p.subtitle{text-align:center;font-size:11px;opacity:0.5;letter-spacing:2px;margi
   <div class="login-box">
     <h1>ТАИНСТВЕННЫЙ ФОТОГРАФ</h1>
     <p>Панель управления галереей</p>
-    <input type="password" id="pwd" placeholder="Пароль" onkeydown="if(event.key==='Enter')doLogin()">
-    <button onclick="doLogin()">ВОЙТИ</button>
+    <input type="email" id="email" placeholder="Электронная почта" autocomplete="email" style="letter-spacing:0">
+    <button onclick="sendEmailLink()">ВОЙТИ ЧЕРЕЗ ПОЧТУ</button>
+    <button onclick="googleLogin()">ВОЙТИ ЧЕРЕЗ GOOGLE</button>
+    <p style="margin:14px 0 6px;opacity:.45">Запасной вход</p>
+    <input type="password" id="pwd" placeholder="Старый пароль" onkeydown="if(event.key==='Enter')doLogin()">
+    <button onclick="doLogin()">ВОЙТИ ПО ПАРОЛЮ</button>
     <div class="login-err" id="login-err"></div>
   </div>
 </div>
@@ -141,7 +147,7 @@ p.subtitle{text-align:center;font-size:11px;opacity:0.5;letter-spacing:2px;margi
 <!-- APP -->
 <div id="app">
   <span id="logout" onclick="doLogout()">Выйти</span>
-  <h1 class="title">НОВАЯ АДМИНКА · УПРАВЛЕНИЕ ГАЛЕРЕЕЙ</h1>
+  <h1 class="title">УПРАВЛЕНИЕ ГАЛЕРЕЕЙ</h1>
   <p class="subtitle">Таинственный фотограф</p>
 
   <!-- TOKEN -->
@@ -261,6 +267,77 @@ p.subtitle{text-align:center;font-size:11px;opacity:0.5;letter-spacing:2px;margi
 
 <script>
 // Пароль хранится как SHA-256 хеш — в исходном коде plaintext нет.
+const FIREBASE_CONFIG = {
+  apiKey:'AIzaSyB2X3o7KwYFkMfsskKoWpQYBrws8L-Mn9w',
+  authDomain:'photo-gallery-18193.firebaseapp.com',
+  projectId:'photo-gallery-18193',
+  databaseURL:'https://photo-gallery-18193-default-rtdb.firebaseio.com',
+  storageBucket:'photo-gallery-18193.firebasestorage.app',
+  messagingSenderId:'329094770221',
+  appId:'1:329094770221:web:b9d076f195f968668212a4'
+};
+const AUTH_WORKER = 'https://photo-ai-qwen.qerevv.workers.dev/';
+if(!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
+const auth = firebase.auth();
+let adminOpened = false;
+
+function setLoginMsg(msg){ document.getElementById('login-err').textContent = msg || ''; }
+function openAdmin(){
+  if(adminOpened) return;
+  adminOpened = true;
+  document.getElementById('login').style.display='none';
+  document.getElementById('app').style.display='block';
+  init();
+}
+async function verifyOwner(user){
+  const token = await user.getIdToken();
+  const r = await fetch(AUTH_WORKER,{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+    body:JSON.stringify({action:'whoami'})
+  });
+  const j = await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(j.error||j.message||('HTTP '+r.status));
+  if(!j.isOwner) throw new Error(j.error||'Нет доступа к этой админке');
+  return j;
+}
+function googleLogin(){
+  setLoginMsg('');
+  const provider = new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({prompt:'select_account'});
+  const popup = auth.signInWithPopup(provider);
+  popup.then(async result=>{
+    await verifyOwner(result.user);
+    openAdmin();
+  }).catch(e=>{
+    setLoginMsg(e.message || 'Ошибка входа через Google');
+  });
+}
+async function sendEmailLink(){
+  setLoginMsg('');
+  const email = document.getElementById('email').value.trim();
+  if(!email){ setLoginMsg('Введите электронную почту'); return; }
+  try{
+    await auth.sendSignInLinkToEmail(email,{
+      url: location.origin + location.pathname,
+      handleCodeInApp: true
+    });
+    localStorage.setItem('emailForSignIn', email);
+    setLoginMsg('Ссылка для входа отправлена на почту');
+  }catch(e){ setLoginMsg(e.message || 'Не удалось отправить ссылку'); }
+}
+async function finishEmailLink(){
+  if(!auth.isSignInWithEmailLink(location.href)) return;
+  let email = localStorage.getItem('emailForSignIn') || '';
+  if(!email) email = window.prompt('Введите почту, на которую пришла ссылка') || '';
+  if(!email){ setLoginMsg('Нужна почта для подтверждения входа'); return; }
+  try{
+    await auth.signInWithEmailLink(email, location.href);
+    localStorage.removeItem('emailForSignIn');
+    history.replaceState({}, document.title, location.pathname);
+  }catch(e){ setLoginMsg(e.message || 'Ссылка недействительна или устарела'); }
+}
+
 const PASS_HASH = 'd881916cdbdc1855b5c82f12fba3a7aef746fa45aee2def7c920222c79782665';
 const REPO = 'irina-photo/irina-photo.github.io';
 const BRANCH = 'main';
@@ -277,17 +354,30 @@ async function doLogin(){
   const entered = document.getElementById('pwd').value;
   const enteredHash = await sha256Hex(entered);
   if(enteredHash === PASS_HASH){
-    document.getElementById('login').style.display='none';
-    document.getElementById('app').style.display='block';
-    init();
+    openAdmin();
   } else {
-    document.getElementById('login-err').textContent='Неверный пароль';
+    setLoginMsg('Неверный пароль');
   }
 }
-function doLogout(){
+async function doLogout(){
+  adminOpened = false;
+  try{ await auth.signOut(); }catch(e){}
   document.getElementById('login').style.display='flex';
   document.getElementById('app').style.display='none';
 }
+auth.onAuthStateChanged(async user=>{
+  if(!user) return;
+  try{
+    setLoginMsg('Проверяю доступ…');
+    await verifyOwner(user);
+    setLoginMsg('');
+    openAdmin();
+  }catch(e){
+    setLoginMsg(e.message || 'Нет доступа');
+    await auth.signOut().catch(()=>{});
+  }
+});
+finishEmailLink();
 
 // ==================== TOKEN ====================
 function getToken(){ return localStorage.getItem('gh_token')||''; }
@@ -364,23 +454,51 @@ async function putIndexText(text, sha, message){
 function ghHeaders(){
   return {'Authorization':'token '+getToken(),'Content-Type':'application/json'};
 }
-async function ghGet(path){
-  const r = await fetch(API+path, {headers:ghHeaders()});
-  if(!r.ok){ const e=await r.json().catch(()=>({})); throw new Error(e.message||'HTTP '+r.status); }
-  return r.json();
+function canUseGitHub(){
+  return !!(auth.currentUser || getToken());
 }
-async function ghPut(path, body){
-  const r = await fetch(API+path, {method:'PUT', headers:ghHeaders(), body:JSON.stringify(body)});
+async function ghViaWorker(method, path, payload){
+  const user = auth.currentUser;
+  if(!user) throw new Error('Нет Firebase-сессии');
+  const idToken = await user.getIdToken();
+  const r = await fetch(AUTH_WORKER, {
+    method:'POST',
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+idToken},
+    body:JSON.stringify({action:'irinaGithub', method:method, path:path, payload:payload||null})
+  });
   const d = await r.json().catch(()=>({}));
-  if(!r.ok) throw new Error(d.message||'HTTP '+r.status);
+  if(!r.ok) throw new Error(d.error||d.message||('HTTP '+r.status));
   return d;
 }
-async function ghDel(path, body){
-  const r = await fetch(API+path, {method:'DELETE', headers:ghHeaders(), body:JSON.stringify(body)});
+async function ghDirect(method, path, body){
+  const options = {method:method, headers:ghHeaders()};
+  if(method!=='GET') options.body=JSON.stringify(body||{});
+  const r = await fetch(API+path, options);
   const d = await r.json().catch(()=>({}));
-  if(!r.ok) throw new Error(d.message||'HTTP '+r.status);
+  if(!r.ok) throw new Error(d.message||d.error||('HTTP '+r.status));
   return d;
 }
+async function ghRequest(method, path, body){
+  // Основной путь: Firebase -> Worker -> env.GITHUB_TOKEN -> GitHub.
+  // Старый gh_token в браузере остаётся только аварийным резервом.
+  if(auth.currentUser){
+    try{
+      return await ghViaWorker(method, path, body);
+    }catch(e){
+      if(getToken()){
+        console.warn('Worker/GitHub error; fallback to local token:', e.message);
+        try{ log('Worker/GitHub: '+e.message+' — использую запасной токен', true); }catch(_){}
+      }else{
+        throw e; // не скрываем исходную ошибку Worker/GitHub
+      }
+    }
+  }
+  if(getToken()) return ghDirect(method, path, body);
+  throw new Error('Нет доступа к GitHub. Войдите через Google/почту или используйте запасной токен.');
+}
+async function ghGet(path){ return ghRequest('GET', path); }
+async function ghPut(path, body){ return ghRequest('PUT', path, body); }
+async function ghDel(path, body){ return ghRequest('DELETE', path, body); }
 
 // ==================== INIT ====================
 let allImages = [];
@@ -388,18 +506,21 @@ let currentPage = 0;
 let captionsMap = {}; // {filename: caption}
 
 async function init(){
-  const t = getToken();
-  if(t){
-    document.getElementById('token-status').textContent='Токен установлен';
+  if(auth.currentUser){
+    document.getElementById('token-status').textContent='Защищённое подключение через сервер';
+    await loadGallery();
+    await loadPosts();
+  } else if(getToken()){
+    document.getElementById('token-status').textContent='Запасной токен установлен';
     await loadGallery();
     await loadPosts();
   } else {
-    document.getElementById('token-status').textContent='Введи токен выше';
+    document.getElementById('token-status').textContent='Войдите через Google/почту или используйте запасной токен';
   }
 }
 
 async function loadGallery(){
-  if(!getToken()) return;
+  if(!canUseGitHub()) return;
   document.getElementById('gallery-status').innerHTML='<span class="spinner"></span>Загружаю...';
   try {
     const files = await ghGet('/repos/'+REPO+'/contents/images');
@@ -466,7 +587,7 @@ function renderGallery(){
 async function editCaption(idx){
   var img = allImages[idx];
   if(!img) return;
-  if(!getToken()){ toast('Введи токен!','err'); return; }
+  if(!canUseGitHub()){ toast('Войдите через Google/почту или используйте запасной токен','err'); return; }
   var current = captionsMap[img.name] || '';
   var neu = prompt('Подпись к фото «'+img.name+'»:\n(пусто = убрать подпись)', current);
   if(neu === null) return; // отмена
@@ -563,8 +684,7 @@ function renderQueue(){
 function clearQueue(){ queue=[]; renderQueue(); }
 
 async function startUpload(){
-  var t = getToken();
-  if(!t){ toast('Введи токен!','err'); return; }
+  if(!canUseGitHub()){ toast('Войдите через Google/почту или используйте запасной токен','err'); return; }
   var btn = document.getElementById('upload-btn');
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span>Загрузка...';
@@ -617,7 +737,7 @@ async function startUpload(){
 
   if(uploadedItems.length > 0){
     log('Добавляю '+uploadedItems.length+' фото в галерею...');
-    await addToGallery(t, uploadedItems);
+    await addToGallery(uploadedItems);
     await loadGallery();
   }
   toast('Готово! '+uploadedItems.length+' фото');
@@ -625,7 +745,7 @@ async function startUpload(){
 
 // ==================== SMART GALLERY UPDATE ====================
 // Принимает массив {filename, caption}. Корректно работает с русскими подписями.
-async function addToGallery(t, newItems){
+async function addToGallery(newItems){
   try {
     log('Обновляю галерею...');
     var idxFile = await fetchIndexText();
@@ -658,7 +778,7 @@ async function addToGallery(t, newItems){
 // ==================== FULL SYNC ====================
 // Полная пересборка PH из папки images. Старые подписи НЕ удаляются.
 async function syncGallery(){
-  if(!getToken()){ toast('Введи токен!','err'); return; }
+  if(!canUseGitHub()){ toast('Войдите через Google/почту или используйте запасной токен','err'); return; }
   log('Полная синхронизация...');
   document.getElementById('gallery-status').innerHTML='<span class="spinner"></span>Синхронизация...';
   try {
@@ -746,8 +866,8 @@ function formatDateRu(d){
 }
 
 async function loadPosts(){
-  if(!getToken()){
-    document.getElementById('posts-status').textContent='Нужен токен';
+  if(!canUseGitHub()){
+    document.getElementById('posts-status').textContent='Нужен вход';
     return;
   }
   document.getElementById('posts-status').innerHTML='<span class="spinner"></span>Загружаю…';
@@ -891,7 +1011,7 @@ async function uploadOnePostImage(file, postId, seq){
 }
 
 async function savePost(){
-  if(!getToken()){ toast('Введи токен!','err'); return; }
+  if(!canUseGitHub()){ toast('Войдите через Google/почту или используйте запасной токен','err'); return; }
   var date = document.getElementById('pf-date').value || todayStr();
   var title = document.getElementById('pf-title').value.trim();
   var text = document.getElementById('pf-text').value.trim();
