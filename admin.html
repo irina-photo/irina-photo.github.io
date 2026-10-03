@@ -380,7 +380,7 @@ finishEmailLink();
 function getToken(){ return localStorage.getItem('gh_token')||''; }
 function saveToken(){
   const t = document.getElementById('token-input').value.trim();
-  if(!t){ toast('Введи токен!','err'); return; }
+  if(!t){ toast('Войдите через Google/почту или используйте запасной токен','err'); return; }
   localStorage.setItem('gh_token', t);
   document.getElementById('token-input').value='';
   document.getElementById('token-status').textContent='Токен сохранён';
@@ -578,7 +578,7 @@ function renderGallery(){
 async function editCaption(idx){
   var img = allImages[idx];
   if(!img) return;
-  if(!canUseGitHub()){ toast('Введи токен!','err'); return; }
+  if(!canUseGitHub()){ toast('Войдите через Google/почту или используйте запасной токен','err'); return; }
   var current = captionsMap[img.name] || '';
   var neu = prompt('Подпись к фото «'+img.name+'»:\n(пусто = убрать подпись)', current);
   if(neu === null) return; // отмена
@@ -675,8 +675,7 @@ function renderQueue(){
 function clearQueue(){ queue=[]; renderQueue(); }
 
 async function startUpload(){
-  var t = getToken();
-  if(!t){ toast('Введи токен!','err'); return; }
+  if(!canUseGitHub()){ toast('Войдите через Google/почту или используйте запасной токен','err'); return; }
   var btn = document.getElementById('upload-btn');
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span>Загрузка...';
@@ -729,7 +728,7 @@ async function startUpload(){
 
   if(uploadedItems.length > 0){
     log('Добавляю '+uploadedItems.length+' фото в галерею...');
-    await addToGallery(t, uploadedItems);
+    await addToGallery(uploadedItems);
     await loadGallery();
   }
   toast('Готово! '+uploadedItems.length+' фото');
@@ -737,7 +736,7 @@ async function startUpload(){
 
 // ==================== SMART GALLERY UPDATE ====================
 // Принимает массив {filename, caption}. Корректно работает с русскими подписями.
-async function addToGallery(t, newItems){
+async function addToGallery(newItems){
   try {
     log('Обновляю галерею...');
     var idxFile = await fetchIndexText();
@@ -770,7 +769,7 @@ async function addToGallery(t, newItems){
 // ==================== FULL SYNC ====================
 // Полная пересборка PH из папки images. Старые подписи НЕ удаляются.
 async function syncGallery(){
-  if(!canUseGitHub()){ toast('Введи токен!','err'); return; }
+  if(!canUseGitHub()){ toast('Войдите через Google/почту или используйте запасной токен','err'); return; }
   log('Полная синхронизация...');
   document.getElementById('gallery-status').innerHTML='<span class="spinner"></span>Синхронизация...';
   try {
@@ -859,7 +858,7 @@ function formatDateRu(d){
 
 async function loadPosts(){
   if(!canUseGitHub()){
-    document.getElementById('posts-status').textContent='Нужен токен';
+    document.getElementById('posts-status').textContent='Нужен вход';
     return;
   }
   document.getElementById('posts-status').innerHTML='<span class="spinner"></span>Загружаю…';
@@ -1003,7 +1002,7 @@ async function uploadOnePostImage(file, postId, seq){
 }
 
 async function savePost(){
-  if(!canUseGitHub()){ toast('Введи токен!','err'); return; }
+  if(!canUseGitHub()){ toast('Войдите через Google/почту или используйте запасной токен','err'); return; }
   var date = document.getElementById('pf-date').value || todayStr();
   var title = document.getElementById('pf-title').value.trim();
   var text = document.getElementById('pf-text').value.trim();
