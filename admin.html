@@ -451,23 +451,45 @@ async function putIndexText(text, sha, message){
 function ghHeaders(){
   return {'Authorization':'token '+getToken(),'Content-Type':'application/json'};
 }
-async function ghGet(path){
-  const r = await fetch(API+path, {headers:ghHeaders()});
-  if(!r.ok){ const e=await r.json().catch(()=>({})); throw new Error(e.message||'HTTP '+r.status); }
-  return r.json();
+function canUseGitHub(){
+  return !!(auth.currentUser || getToken());
 }
-async function ghPut(path, body){
-  const r = await fetch(API+path, {method:'PUT', headers:ghHeaders(), body:JSON.stringify(body)});
+async function ghViaWorker(method, path, payload){
+  const user = auth.currentUser;
+  if(!user) throw new Error('Нет Firebase-сессии');
+  const idToken = await user.getIdToken();
+  const r = await fetch(AUTH_WORKER, {
+    method:'POST',
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+idToken},
+    body:JSON.stringify({action:'irinaGithub', method:method, path:path, payload:payload||null})
+  });
+  const d = await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(d.message||d.error||'HTTP '+r.status);
+  return d;
+}
+async function ghDirect(method, path, body){
+  const options = {method:method, headers:ghHeaders()};
+  if(method!=='GET') options.body=JSON.stringify(body||{});
+  const r = await fetch(API+path, options);
   const d = await r.json().catch(()=>({}));
   if(!r.ok) throw new Error(d.message||'HTTP '+r.status);
   return d;
 }
-async function ghDel(path, body){
-  const r = await fetch(API+path, {method:'DELETE', headers:ghHeaders(), body:JSON.stringify(body)});
-  const d = await r.json().catch(()=>({}));
-  if(!r.ok) throw new Error(d.message||'HTTP '+r.status);
-  return d;
+async function ghRequest(method, path, body){
+  // Основной путь: защищённый Worker. Старый браузерный токен остаётся запасным.
+  if(auth.currentUser){
+    try{ return await ghViaWorker(method, path, body); }
+    catch(e){
+      if(!canUseGitHub()) throw e;
+      console.warn('Worker GitHub недоступен, использую запасной локальный токен:', e.message);
+    }
+  }
+  if(getToken()) return ghDirect(method, path, body);
+  throw new Error('Нет доступа к GitHub. Войдите через Google/почту или используйте запасной токен.');
 }
+async function ghGet(path){ return ghRequest('GET', path); }
+async function ghPut(path, body){ return ghRequest('PUT', path, body); }
+async function ghDel(path, body){ return ghRequest('DELETE', path, body); }
 
 // ==================== INIT ====================
 let allImages = [];
@@ -475,18 +497,21 @@ let currentPage = 0;
 let captionsMap = {}; // {filename: caption}
 
 async function init(){
-  const t = getToken();
-  if(t){
-    document.getElementById('token-status').textContent='Токен установлен';
+  if(auth.currentUser){
+    document.getElementById('token-status').textContent='Защищённое подключение через сервер';
+    await loadGallery();
+    await loadPosts();
+  } else if(getToken()){
+    document.getElementById('token-status').textContent='Запасной токен установлен';
     await loadGallery();
     await loadPosts();
   } else {
-    document.getElementById('token-status').textContent='Введи токен выше';
+    document.getElementById('token-status').textContent='Войдите через Google/почту или используйте запасной токен';
   }
 }
 
 async function loadGallery(){
-  if(!getToken()) return;
+  if(!canUseGitHub()) return;
   document.getElementById('gallery-status').innerHTML='<span class="spinner"></span>Загружаю...';
   try {
     const files = await ghGet('/repos/'+REPO+'/contents/images');
@@ -553,7 +578,7 @@ function renderGallery(){
 async function editCaption(idx){
   var img = allImages[idx];
   if(!img) return;
-  if(!getToken()){ toast('Введи токен!','err'); return; }
+  if(!canUseGitHub()){ toast('Введи токен!','err'); return; }
   var current = captionsMap[img.name] || '';
   var neu = prompt('Подпись к фото «'+img.name+'»:\n(пусто = убрать подпись)', current);
   if(neu === null) return; // отмена
@@ -745,7 +770,7 @@ async function addToGallery(t, newItems){
 // ==================== FULL SYNC ====================
 // Полная пересборка PH из папки images. Старые подписи НЕ удаляются.
 async function syncGallery(){
-  if(!getToken()){ toast('Введи токен!','err'); return; }
+  if(!canUseGitHub()){ toast('Введи токен!','err'); return; }
   log('Полная синхронизация...');
   document.getElementById('gallery-status').innerHTML='<span class="spinner"></span>Синхронизация...';
   try {
@@ -833,7 +858,7 @@ function formatDateRu(d){
 }
 
 async function loadPosts(){
-  if(!getToken()){
+  if(!canUseGitHub()){
     document.getElementById('posts-status').textContent='Нужен токен';
     return;
   }
@@ -978,7 +1003,7 @@ async function uploadOnePostImage(file, postId, seq){
 }
 
 async function savePost(){
-  if(!getToken()){ toast('Введи токен!','err'); return; }
+  if(!canUseGitHub()){ toast('Введи токен!','err'); return; }
   var date = document.getElementById('pf-date').value || todayStr();
   var title = document.getElementById('pf-title').value.trim();
   var text = document.getElementById('pf-text').value.trim();
