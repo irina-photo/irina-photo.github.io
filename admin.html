@@ -303,8 +303,12 @@ async function verifyOwner(user){
 async function googleLogin(){
   setLoginMsg('');
   try{
-    await auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
-  }catch(e){ setLoginMsg(e.message || 'Ошибка входа через Google'); }
+    const result = await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    await verifyOwner(result.user);
+    openAdmin();
+  }catch(e){
+    setLoginMsg(e.message || 'Ошибка входа через Google');
+  }
 }
 async function sendEmailLink(){
   setLoginMsg('');
