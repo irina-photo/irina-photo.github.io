@@ -124,8 +124,8 @@ p.subtitle{text-align:center;font-size:11px;opacity:0.5;letter-spacing:2px;margi
 .post-list-item .pli-meta{font-size:11px;opacity:0.5;margin-bottom:10px}
 .post-list-item .pli-btns{display:flex;gap:6px}
 </style>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-auth-compat.js"></script>
 </head>
 <body>
 
@@ -304,7 +304,10 @@ async function verifyOwner(user){
 async function googleLogin(){
   setLoginMsg('');
   try{
-    const result = await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({prompt:'select_account'});
+    const result = await auth.signInWithPopup(provider);
     await verifyOwner(result.user);
     openAdmin();
   }catch(e){
